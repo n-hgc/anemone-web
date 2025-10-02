@@ -4,6 +4,7 @@ import SalonCard from '../components/SalonCard.astro';
 import NewsCard from '../components/NewsCard.astro';
 import LocatorFilters from '../components/LocatorFilters.astro';
 import type { Salon, News, Prefecture } from '../types';
+import { TYPOGRAPHY_PRESETS } from '../lib/design-system';
 
 // モックデータをインポート
 import salonsData from '../data/salons.json';
@@ -41,7 +42,6 @@ const salonJsonLd = {
   title="アネモネサロン - 美容室・ヘアサロン"
   description="アネモネサロンは全国展開する美容室・ヘアサロンです。お客様一人ひとりに合ったスタイルをご提案いたします。"
   image="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&h=630&fit=crop"
-  jsonLd={JSON.stringify(salonJsonLd)}
 >
   <!-- ヒーローセクション -->
   <section class="relative overflow-hidden bg-gradient-to-br from-pink-500 via-purple-600 to-indigo-700 py-24 lg:py-32">
@@ -56,13 +56,13 @@ const salonJsonLd = {
     
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="max-w-4xl mx-auto">
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight tracking-tight">
+        <h1 class={`${TYPOGRAPHY_PRESETS.hero} text-white mb-8 tracking-tight`}>
           アネモネサロン
         </h1>
-        <p class="text-xl md:text-2xl lg:text-3xl text-white/90 mb-4 font-light leading-relaxed">
+        <p class="text-xl md:text-2xl lg:text-3xl text-white/90 mb-4 font-light leading-relaxed font-sans">
           あなたにぴったりのスタイルを見つけませんか？
         </p>
-        <p class="text-lg md:text-xl text-white/80 mb-12 font-light">
+        <p class="text-lg md:text-xl text-white/80 mb-12 font-light font-sans">
           全国100店舗でお客様をお待ちしています
         </p>
         
@@ -92,13 +92,13 @@ const salonJsonLd = {
   </section>
 
   <!-- 地域フィルター -->
-  <section class="py-20 bg-gray-50">
+  <section class="py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">
+        <h2 class={`${TYPOGRAPHY_PRESETS.headingLarge} text-gray-900 mb-6`}>
           地域で探す
         </h2>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto font-light">
+        <p class={`${TYPOGRAPHY_PRESETS.bodyLarge} text-gray-600 max-w-2xl mx-auto`}>
           お住まいの地域から最寄りの店舗を見つけましょう
         </p>
       </div>
@@ -107,13 +107,13 @@ const salonJsonLd = {
   </section>
 
   <!-- 店舗一覧 -->
-  <section id="salons" class="py-24 bg-white">
+  <section id="salons" class="py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-20">
-        <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">
+        <h2 class={`${TYPOGRAPHY_PRESETS.headingLarge} text-gray-900 mb-6`}>
           全国の店舗
         </h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+        <p class={`${TYPOGRAPHY_PRESETS.bodyLarge} text-gray-600 max-w-3xl mx-auto`}>
           お客様一人ひとりに合ったスタイルをご提案する美容室・ヘアサロンです
         </p>
       </div>
@@ -132,7 +132,7 @@ const salonJsonLd = {
             </div>
             
             <div class="p-8">
-              <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-pink-600 transition-colors duration-300">
+              <h3 class={`${TYPOGRAPHY_PRESETS.headingMedium} text-gray-900 mb-4 group-hover:text-pink-600 transition-colors duration-300`}>
                 {salon.name}
               </h3>
               
@@ -142,14 +142,14 @@ const salonJsonLd = {
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                   </svg>
-                  <span class="text-sm">{salon.address}</span>
+                  <span class={`${TYPOGRAPHY_PRESETS.bodySmall} text-gray-600`}>{salon.address}</span>
                 </p>
                 
                 <p class="flex items-center text-gray-600">
                   <svg class="w-5 h-5 mr-3 text-pink-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                   </svg>
-                  <a href={`tel:${salon.tel}`} class="text-sm hover:text-pink-600 transition-colors">
+                  <a href={`tel:${salon.tel}`} class={`${TYPOGRAPHY_PRESETS.bodySmall} hover:text-pink-600 transition-colors`}>
                     {salon.tel}
                   </a>
                 </p>
@@ -158,13 +158,13 @@ const salonJsonLd = {
                   <svg class="w-5 h-5 mr-3 text-pink-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
-                  <span class="text-sm">{salon.hours}</span>
+                  <span class={`${TYPOGRAPHY_PRESETS.bodySmall} text-gray-600`}>{salon.hours}</span>
                 </p>
               </div>
               
               <div class="flex flex-wrap gap-2 mb-8">
                 {salon.facilities.map((facility) => (
-                  <span class="px-3 py-1 bg-pink-100 text-pink-700 text-xs font-medium rounded-full">
+                  <span class={`px-3 py-1 bg-pink-100 text-pink-700 ${TYPOGRAPHY_PRESETS.caption} rounded-full`}>
                     {facility}
                   </span>
                 ))}
@@ -173,7 +173,7 @@ const salonJsonLd = {
               <div class="flex space-x-3">
                 <a 
                   href={`/salon/${salon.id}`}
-                  class="flex-1 text-center py-3 px-6 bg-pink-600 text-white rounded-xl font-bold transition-all duration-300 hover:bg-pink-700 hover:scale-105 hover:shadow-lg hover:shadow-pink-500/25"
+                  class={`flex-1 text-center py-3 px-6 bg-pink-600 text-white rounded-xl ${TYPOGRAPHY_PRESETS.button} transition-all duration-300 hover:bg-pink-700 hover:scale-105 hover:shadow-lg hover:shadow-pink-500/25`}
                 >
                   詳細を見る
                 </a>
@@ -182,7 +182,7 @@ const salonJsonLd = {
                     href={salon.reservation_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="flex-1 text-center py-3 px-6 border-2 border-pink-600 text-pink-600 rounded-xl font-bold transition-all duration-300 hover:bg-pink-50 hover:scale-105"
+                    class={`flex-1 text-center py-3 px-6 border-2 border-pink-600 text-pink-600 rounded-xl ${TYPOGRAPHY_PRESETS.button} transition-all duration-300 hover:bg-pink-50 hover:scale-105`}
                   >
                     予約する
                   </a>
@@ -196,13 +196,13 @@ const salonJsonLd = {
   </section>
 
   <!-- 最新ニュース -->
-  <section class="py-24 bg-gray-50">
+  <section class="py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-20">
-        <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">
+        <h2 class={`${TYPOGRAPHY_PRESETS.headingLarge} text-gray-900 mb-6`}>
           最新ニュース
         </h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+        <p class={`${TYPOGRAPHY_PRESETS.bodyLarge} text-gray-600 max-w-3xl mx-auto`}>
           サロンの最新情報やお知らせをお届けします
         </p>
       </div>
@@ -290,10 +290,10 @@ const salonJsonLd = {
   <section class="py-24 bg-gradient-to-br from-pink-500 via-purple-600 to-indigo-700">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="max-w-4xl mx-auto">
-        <h2 class="text-4xl md:text-5xl font-black text-white mb-6">
+        <h2 class={`${TYPOGRAPHY_PRESETS.headingLarge} text-white mb-6`}>
           まずはお気軽にご相談ください
         </h2>
-        <p class="text-xl md:text-2xl text-white/90 mb-12 font-light leading-relaxed">
+        <p class="text-xl md:text-2xl text-white/90 mb-12 font-light leading-relaxed font-sans">
           お客様一人ひとりに合ったスタイルをご提案いたします
         </p>
         <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">

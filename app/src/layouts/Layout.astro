@@ -18,6 +18,11 @@ const { title, description = "アネモネサロン - 美容室・ヘアサロ�
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     
+    <!-- フォント読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -36,7 +41,7 @@ const { title, description = "アネモネサロン - 美容室・ヘアサロ�
     <!-- JSON-LD -->
     {jsonLd && <Fragment set:html={jsonLd} />}
   </head>
-  <body>
+  <body class="bg-beige" style="background-color: #FAF4E8;">
     <header class="bg-white shadow-sm">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -92,6 +97,26 @@ const { title, description = "アネモネサロン - 美容室・ヘアサロ�
   </body>
 </html>
 
-<style>
-  @import '../styles/global.css';
-</style>
+    <style>
+      @import '../styles/global.css';
+      
+      /* フォントファミリーのCSS変数を上書き */
+      :root {
+        --font-sans: 'Zen Kaku Gothic New', 'Hiragino Sans', 'ヒラギノ角ゴシック', 'Yu Gothic', 'Meiryo', sans-serif;
+        --font-serif: 'Yu Mincho', '游明朝', 'Hiragino Mincho ProN', 'MS PMincho', serif;
+        --font-mono: 'Monaco', 'Consolas', 'Courier New', monospace;
+      }
+      
+      /* より確実なフォント適用 */
+      .font-sans {
+        font-family: 'Zen Kaku Gothic New', 'Hiragino Sans', 'ヒラギノ角ゴシック', 'Yu Gothic', 'Meiryo', sans-serif !important;
+      }
+      
+      .font-serif {
+        font-family: 'Yu Mincho', '游明朝', 'Hiragino Mincho ProN', 'MS PMincho', serif !important;
+      }
+      
+      .font-mono {
+        font-family: 'Monaco', 'Consolas', 'Courier New', monospace !important;
+      }
+    </style>

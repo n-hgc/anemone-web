@@ -12,56 +12,12 @@ export const developmentConfig = {
     cacheTimeout: 5 * 60 * 1000, // 5分
   },
   
-  // デザインシステムの設定
+  // デザインシステムの設定（theme.tsから統合）
   design: {
-    // カラーパレット
-    colors: {
-      primary: '#E91E63',
-      secondary: '#9C27B0',
-      accent: '#FF4081',
-      success: '#4CAF50',
-      warning: '#FF9800',
-      error: '#F44336',
-      neutral: {
-        50: '#fafafa',
-        100: '#f5f5f5',
-        200: '#eeeeee',
-        300: '#e0e0e0',
-        400: '#bdbdbd',
-        500: '#9e9e9e',
-        600: '#757575',
-        700: '#616161',
-        800: '#424242',
-        900: '#212121'
-      }
-    },
+    // テーマ設定をインポート
+    ...require('./theme').theme,
     
-    // タイポグラフィ
-    typography: {
-      hero: {
-        fontSize: '3.5rem',
-        fontWeight: '900',
-        lineHeight: '1.1',
-        letterSpacing: '-0.025em'
-      },
-      heading: {
-        fontSize: '2.25rem',
-        fontWeight: '800',
-        lineHeight: '1.2'
-      },
-      subheading: {
-        fontSize: '1.5rem',
-        fontWeight: '700',
-        lineHeight: '1.3'
-      },
-      body: {
-        fontSize: '1rem',
-        fontWeight: '400',
-        lineHeight: '1.6'
-      }
-    },
-    
-    // スペーシング
+    // 追加の設定（theme.tsで定義されていないもの）
     spacing: {
       section: '5rem',
       container: '1.5rem',

@@ -149,6 +149,17 @@ interface News {
 }
 ```
 
+## 📚 ドキュメント
+
+### デザインシステム
+- [デザインシステム設計方針](./docs/DESIGN_SYSTEM.md) - カラーパレット、アーキテクチャ設計
+- [実装ガイド](./docs/IMPLEMENTATION_GUIDE.md) - 具体的な実装手順とトラブルシューティング
+- [タイポグラフィガイド](./docs/TYPOGRAPHY_GUIDE.md) - フォント管理とタイポグラフィの使用方法
+
+### 開発ドキュメント
+- [開発ワークフロー](./docs/DEVELOPMENT_WORKFLOW.md) - 開発手順とベストプラクティス
+- [API仕様](./docs/API.md) - WordPress REST API連携仕様
+
 ## 開発ガイドライン
 
 ### コーディング規約
@@ -156,6 +167,7 @@ interface News {
 - コンポーネントはAstro形式で作成
 - スタイリングはTailwind CSSを使用
 - 型定義は`src/types/`に配置
+- **デザインシステム**: `src/lib/config/theme.ts`でカラー管理
 
 ### コンポーネント作成
 1. `src/components/`に新しいコンポーネントファイルを作成
