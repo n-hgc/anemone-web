@@ -1,0 +1,151 @@
+---
+import type { Prefecture } from '../types';
+
+export interface Props {
+  prefectures: Prefecture[];
+  selectedPrefecture?: string;
+  selectedCity?: string;
+}
+
+const { prefectures, selectedPrefecture, selectedCity } = Astro.props;
+
+// 選択された都道府県の市区町村を取得
+const selectedPref = prefectures.find(p => p.id === selectedPrefecture);
+const cities = selectedPref?.cities || [];
+---
+
+<div class="bg-white p-6 rounded-lg shadow-md mb-8">
+  <h2 class="text-lg font-semibold text-gray-900 mb-4">地域で探す</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- 都道府県選択 -->
+    <div>
+      <label for="prefecture" class="block text-sm font-medium text-gray-700 mb-2">
+        都道府県
+      </label>
+      <select 
+        id="prefecture" 
+        name="prefecture"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+      >
+        <option value="">都道府県を選択</option>
+        {prefectures.map((pref) => (
+          <option value={pref.id} selected={pref.id === selectedPrefecture}>
+            {pref.name}
+          </option>
+        ))}
+      </select>
+    </div>
+    
+    <!-- 市区町村選択 -->
+    <div>
+      <label for="city" class="block text-sm font-medium text-gray-700 mb-2">
+        市区町村
+      </label>
+      <select 
+        id="city" 
+        name="city"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+        disabled={!selectedPrefecture}
+      >
+        <option value="">市区町村を選択</option>
+        {cities.map((city) => (
+          <option value={city} selected={city === selectedCity}>
+            {city}
+          </option>
+        ))}
+      </select>
+    </div>
+  </div>
+  
+  <!-- 検索ボタン -->
+  <div class="mt-4">
+    <button 
+      type="button"
+      id="searchButton"
+      class="w-full bg-pink-600 text-white px-4 py-2 rounded-md hover:bg-pink-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+      disabled={!selectedPrefecture}
+    >
+      検索する
+    </button>
+  </div>
+  
+  <!-- リセットボタン -->
+  <div class="mt-2">
+    <button 
+      type="button"
+      id="resetButton"
+      class="w-full bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors"
+    >
+      リセット
+    </button>
+  </div>
+</div>
+
+<script>
+  // 都道府県が変更された時の処理
+  document.getElementById('prefecture')?.addEventListener('change', function() {
+    const prefectureSelect = this as HTMLSelectElement;
+    const citySelect = document.getElementById('city') as HTMLSelectElement;
+    
+    if (prefectureSelect.value) {
+      // 市区町村の選択肢を更新（実際の実装ではAPIから取得）
+      citySelect.disabled = false;
+      citySelect.innerHTML = '<option value="">市区町村を選択</option>';
+      
+      // ここでAPIから市区町村データを取得して選択肢を追加
+      // 現在は静的なデータを使用
+    } else {
+      citySelect.disabled = true;
+      citySelect.innerHTML = '<option value="">市区町村を選択</option>';
+    }
+  });
+  
+  // 検索ボタンの処理
+  document.getElementById('searchButton')?.addEventListener('click', function() {
+    const prefecture = (document.getElementById('prefecture') as HTMLSelectElement).value;
+    const city = (document.getElementById('city') as HTMLSelectElement).value;
+    
+    if (prefecture) {
+      // 検索処理（実際の実装では店舗データをフィルタリング）
+      console.log('検索条件:', { prefecture, city });
+      
+      // URLパラメータを更新
+      const url = new URL(window.location.href);
+      if (prefecture) url.searchParams.set('prefecture', prefecture);
+      if (city) url.searchParams.set('city', city);
+      window.history.pushState({}, '', url.toString());
+      
+      // 店舗リストを更新（実際の実装では店舗データをフィルタリング）
+      updateSalonList(prefecture, city);
+    }
+  });
+  
+  // リセットボタンの処理
+  document.getElementById('resetButton')?.addEventListener('click', function() {
+    (document.getElementById('prefecture') as HTMLSelectElement).value = '';
+    (document.getElementById('city') as HTMLSelectElement).value = '';
+    (document.getElementById('city') as HTMLSelectElement).disabled = true;
+    
+    // URLパラメータをクリア
+    const url = new URL(window.location.href);
+    url.searchParams.delete('prefecture');
+    url.searchParams.delete('city');
+    window.history.pushState({}, '', url.toString());
+    
+    // 店舗リストをリセット
+    resetSalonList();
+  });
+  
+  // 店舗リストを更新する関数（実際の実装では店舗データをフィルタリング）
+  function updateSalonList(prefecture: string, city: string) {
+    console.log('店舗リストを更新:', { prefecture, city });
+    // ここで実際の店舗フィルタリング処理を実装
+  }
+  
+  // 店舗リストをリセットする関数
+  function resetSalonList() {
+    console.log('店舗リストをリセット');
+    // ここで実際の店舗リストリセット処理を実装
+  }
+</script>

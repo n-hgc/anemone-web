@@ -1,0 +1,97 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  jsonLd?: string;
+}
+
+const { title, description = "アネモネサロン - 美容室・ヘアサロン", image, jsonLd } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {image && <meta property="og:image" content={image} />}
+    <meta property="og:url" content={Astro.url} />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {image && <meta name="twitter:image" content={image} />}
+    
+    <title>{title}</title>
+    
+    <!-- JSON-LD -->
+    {jsonLd && <Fragment set:html={jsonLd} />}
+  </head>
+  <body>
+    <header class="bg-white shadow-sm">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <a href="/" class="text-2xl font-bold text-pink-600">
+              アネモネサロン
+            </a>
+          </div>
+          <div class="flex items-center space-x-8">
+            <a href="/" class="text-gray-700 hover:text-pink-600">店舗一覧</a>
+            <a href="/news" class="text-gray-700 hover:text-pink-600">ニュース</a>
+            <a href="/recruit" class="text-gray-700 hover:text-pink-600">採用情報</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    
+    <main>
+      <slot />
+    </main>
+    
+    <footer class="bg-gray-800 text-white">
+      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-lg font-semibold mb-4">アネモネサロン</h3>
+            <p class="text-gray-300">
+              美容室・ヘアサロンのチェーン店です。<br />
+              お客様一人ひとりに合ったスタイルをご提案いたします。
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">店舗情報</h3>
+            <ul class="space-y-2 text-gray-300">
+              <li><a href="/" class="hover:text-white">店舗一覧</a></li>
+              <li><a href="/news" class="hover:text-white">ニュース</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">採用情報</h3>
+            <ul class="space-y-2 text-gray-300">
+              <li><a href="/recruit" class="hover:text-white">採用情報</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-8 pt-8 border-t border-gray-700">
+          <p class="text-center text-gray-400">
+            © 2024 アネモネサロン. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  @import '../styles/global.css';
+</style>

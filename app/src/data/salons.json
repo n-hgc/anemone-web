@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "name": "渋谷店",
+    "address": "東京都渋谷区渋谷1-1-1",
+    "tel": "03-1234-5678",
+    "hours": "10:00-20:00（定休日：火曜日）",
+    "payment": "現金、クレジットカード、電子マネー",
+    "facilities": ["Wi-Fi", "駐車場", "ペット可"],
+    "geo": {
+      "lat": 35.6581,
+      "lng": 139.7016
+    },
+    "prefecture": "東京都",
+    "city": "渋谷区",
+    "photos": [
+      "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&h=600&fit=crop"
+    ],
+    "reservation_url": "https://example.com/reserve/shibuya",
+    "gmb_place_id": "ChIJd8BlQ2BZwokRAFQEcDlJRAI"
+  },
+  {
+    "id": 2,
+    "name": "新宿店",
+    "address": "東京都新宿区新宿2-2-2",
+    "tel": "03-2345-6789",
+    "hours": "10:00-21:00（定休日：水曜日）",
+    "payment": "現金、クレジットカード、電子マネー、PayPay",
+    "facilities": ["Wi-Fi", "駐車場", "キッズスペース"],
+    "geo": {
+      "lat": 35.6909,
+      "lng": 139.7005
+    },
+    "prefecture": "東京都",
+    "city": "新宿区",
+    "photos": [
+      "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800&h=600&fit=crop"
+    ],
+    "reservation_url": "https://example.com/reserve/shinjuku",
+    "gmb_place_id": "ChIJN1t_tDeuEmsRUsoyG83frY4"
+  },
+  {
+    "id": 3,
+    "name": "表参道店",
+    "address": "東京都渋谷区神宮前3-3-3",
+    "tel": "03-3456-7890",
+    "hours": "10:00-19:00（定休日：月曜日）",
+    "payment": "現金、クレジットカード、電子マネー",
+    "facilities": ["Wi-Fi", "駐車場", "カフェ併設"],
+    "geo": {
+      "lat": 35.6702,
+      "lng": 139.7026
+    },
+    "prefecture": "東京都",
+    "city": "渋谷区",
+    "photos": [
+      "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=800&h=600&fit=crop"
+    ],
+    "reservation_url": "https://example.com/reserve/omotesando",
+    "gmb_place_id": "ChIJKxjxuaNqZ0kRr4H8Y8b5n8s"
+  },
+  {
+    "id": 4,
+    "name": "横浜店",
+    "address": "神奈川県横浜市西区みなとみらい4-4-4",
+    "tel": "045-123-4567",
+    "hours": "10:00-20:00（定休日：火曜日）",
+    "payment": "現金、クレジットカード、電子マネー",
+    "facilities": ["Wi-Fi", "駐車場", "ペット可", "キッズスペース"],
+    "geo": {
+      "lat": 35.4658,
+      "lng": 139.6204
+    },
+    "prefecture": "神奈川県",
+    "city": "横浜市西区",
+    "photos": [
+      "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&h=600&fit=crop"
+    ],
+    "reservation_url": "https://example.com/reserve/yokohama",
+    "gmb_place_id": "ChIJ4V7KqJZqA18R8Y8b5n8s"
+  },
+  {
+    "id": 5,
+    "name": "大阪梅田店",
+    "address": "大阪府大阪市北区梅田5-5-5",
+    "tel": "06-1234-5678",
+    "hours": "10:00-21:00（定休日：水曜日）",
+    "payment": "現金、クレジットカード、電子マネー、PayPay",
+    "facilities": ["Wi-Fi", "駐車場", "カフェ併設"],
+    "geo": {
+      "lat": 34.7054,
+      "lng": 135.4983
+    },
+    "prefecture": "大阪府",
+    "city": "大阪市北区",
+    "photos": [
+      "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800&h=600&fit=crop"
+    ],
+    "reservation_url": "https://example.com/reserve/osaka-umeda",
+    "gmb_place_id": "ChIJ7w8LiVEoA18R8Y8b5n8s"
+  }
+]

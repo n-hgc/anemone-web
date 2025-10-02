@@ -1,0 +1,173 @@
+---
+// Figma MCP統合の使用例コンポーネント
+import { designTokens, componentClasses, responsive } from '../lib/design-system';
+---
+
+<!-- デザインシステムの使用例 -->
+<section class="py-16 bg-gray-50">
+  <div class={componentClasses.container.base}>
+    <h2 class={`${designTokens.typography.heading.xl} text-gray-900 mb-8 text-center`}>
+      デザインシステムの使用例
+    </h2>
+    
+    <!-- カラーパレットの表示 -->
+    <div class="mb-12">
+      <h3 class={`${designTokens.typography.heading.md} text-gray-900 mb-6`}>
+        カラーパレット
+      </h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-pink-600 h-20 rounded-lg flex items-center justify-center text-white font-semibold">
+          Primary
+        </div>
+        <div class="bg-purple-600 h-20 rounded-lg flex items-center justify-center text-white font-semibold">
+          Secondary
+        </div>
+        <div class="bg-gray-600 h-20 rounded-lg flex items-center justify-center text-white font-semibold">
+          Neutral
+        </div>
+        <div class="bg-green-600 h-20 rounded-lg flex items-center justify-center text-white font-semibold">
+          Success
+        </div>
+      </div>
+    </div>
+    
+    <!-- ボタンバリエーションの表示 -->
+    <div class="mb-12">
+      <h3 class={`${designTokens.typography.heading.md} text-gray-900 mb-6`}>
+        ボタンバリエーション
+      </h3>
+      <div class="flex flex-wrap gap-4">
+        <button class={componentClasses.button.primary}>
+          プライマリボタン
+        </button>
+        <button class={componentClasses.button.secondary}>
+          セカンダリボタン
+        </button>
+        <button class={componentClasses.button.outline}>
+          アウトラインボタン
+        </button>
+      </div>
+    </div>
+    
+    <!-- カードコンポーネントの表示 -->
+    <div class="mb-12">
+      <h3 class={`${designTokens.typography.heading.md} text-gray-900 mb-6`}>
+        カードコンポーネント
+      </h3>
+      <div class={responsive.grid['3']}>
+        <div class={componentClasses.card.base}>
+          <div class="h-48 bg-pink-100"></div>
+          <div class="p-6">
+            <h4 class={`${designTokens.typography.heading.sm} text-gray-900 mb-2`}>
+              カードタイトル
+            </h4>
+            <p class={`${designTokens.typography.body.base} text-gray-600 mb-4`}>
+              これはカードコンポーネントの例です。デザインシステムのトークンを使用しています。
+            </p>
+            <button class={componentClasses.button.primary}>
+              詳細を見る
+            </button>
+          </div>
+        </div>
+        
+        <div class={componentClasses.card.elevated}>
+          <div class="h-48 bg-purple-100"></div>
+          <div class="p-6">
+            <h4 class={`${designTokens.typography.heading.sm} text-gray-900 mb-2`}>
+              エレベーテッドカード
+            </h4>
+            <p class={`${designTokens.typography.body.base} text-gray-600 mb-4`}>
+              より高い影を持つカードコンポーネントです。
+            </p>
+            <button class={componentClasses.button.secondary}>
+              アクション
+            </button>
+          </div>
+        </div>
+        
+        <div class={componentClasses.card.base}>
+          <div class="h-48 bg-green-100"></div>
+          <div class="p-6">
+            <h4 class={`${designTokens.typography.heading.sm} text-gray-900 mb-2`}>
+              シンプルカード
+            </h4>
+            <p class={`${designTokens.typography.body.base} text-gray-600 mb-4`}>
+              シンプルなカードコンポーネントです。
+            </p>
+            <button class={componentClasses.button.outline}>
+              ボタン
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- タイポグラフィの表示 -->
+    <div class="mb-12">
+      <h3 class={`${designTokens.typography.heading.md} text-gray-900 mb-6`}>
+        タイポグラフィ
+      </h3>
+      <div class="space-y-4">
+        <h1 class={responsive.text['heading-2xl'] + ' text-gray-900'}>
+          見出し 2XL
+        </h1>
+        <h2 class={responsive.text['heading-xl'] + ' text-gray-900'}>
+          見出し XL
+        </h2>
+        <h3 class={responsive.text['heading-lg'] + ' text-gray-900'}>
+          見出し LG
+        </h3>
+        <p class={`${designTokens.typography.body.lg} text-gray-600`}>
+          これは大きな本文テキストです。デザインシステムのタイポグラフィトークンを使用しています。
+        </p>
+        <p class={`${designTokens.typography.body.base} text-gray-600`}>
+          これは通常の本文テキストです。
+        </p>
+        <p class={`${designTokens.typography.body.sm} text-gray-500`}>
+          これは小さなテキストです。
+        </p>
+      </div>
+    </div>
+    
+    <!-- フォーム要素の表示 -->
+    <div class="mb-12">
+      <h3 class={`${designTokens.typography.heading.md} text-gray-900 mb-6`}>
+        フォーム要素
+      </h3>
+      <div class="max-w-md space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">
+            名前
+          </label>
+          <input 
+            type="text" 
+            class={componentClasses.input.base}
+            placeholder="お名前を入力してください"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">
+            メールアドレス
+          </label>
+          <input 
+            type="email" 
+            class={componentClasses.input.base}
+            placeholder="メールアドレスを入力してください"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">
+            メッセージ
+          </label>
+          <textarea 
+            class={componentClasses.input.base + ' h-24'}
+            placeholder="メッセージを入力してください"
+          ></textarea>
+        </div>
+        <button class={componentClasses.button.primary + ' w-full'}>
+          送信する
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,338 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SalonCard from '../components/SalonCard.astro';
+import NewsCard from '../components/NewsCard.astro';
+import LocatorFilters from '../components/LocatorFilters.astro';
+import type { Salon, News, Prefecture } from '../types';
+
+// モックデータをインポート
+import salonsData from '../data/salons.json';
+import newsData from '../data/news.json';
+import prefecturesData from '../data/prefectures.json';
+
+const salons: Salon[] = salonsData;
+const news: News[] = newsData;
+const prefectures: Prefecture[] = prefecturesData;
+
+// 最新のニュース3件を取得
+const latestNews = news.slice(0, 3);
+
+// 店舗一覧のJSON-LDを生成
+const salonJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": salons.map((salon, index) => ({
+    "@type": "HairSalon",
+    "position": index + 1,
+    "name": `アネモネ ${salon.name}`,
+    "url": `https://anemone-salon.com/salon/${salon.id}`,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": salon.address,
+      "addressRegion": salon.prefecture,
+      "addressCountry": "JP"
+    },
+    "telephone": salon.tel
+  }))
+};
+---
+
+<Layout 
+  title="アネモネサロン - 美容室・ヘアサロン"
+  description="アネモネサロンは全国展開する美容室・ヘアサロンです。お客様一人ひとりに合ったスタイルをご提案いたします。"
+  image="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&h=630&fit=crop"
+  jsonLd={JSON.stringify(salonJsonLd)}
+>
+  <!-- ヒーローセクション -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-pink-500 via-purple-600 to-indigo-700 py-24 lg:py-32">
+    <!-- 背景装飾 -->
+    <div class="absolute inset-0">
+      <div class="absolute top-0 left-0 w-full h-full bg-black opacity-10"></div>
+      <div class="absolute top-20 left-10 w-32 h-32 bg-white opacity-10 rounded-full blur-xl"></div>
+      <div class="absolute top-40 right-20 w-48 h-48 bg-white opacity-5 rounded-full blur-2xl"></div>
+      <div class="absolute bottom-20 left-1/4 w-24 h-24 bg-white opacity-10 rounded-full blur-lg"></div>
+      <div class="absolute top-1/2 right-1/3 w-16 h-16 bg-white opacity-15 rounded-full blur-md"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight tracking-tight">
+          アネモネサロン
+        </h1>
+        <p class="text-xl md:text-2xl lg:text-3xl text-white/90 mb-4 font-light leading-relaxed">
+          あなたにぴったりのスタイルを見つけませんか？
+        </p>
+        <p class="text-lg md:text-xl text-white/80 mb-12 font-light">
+          全国100店舗でお客様をお待ちしています
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <a 
+            href="#salons" 
+            class="group inline-flex items-center justify-center px-8 py-4 bg-white text-pink-600 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/25"
+          >
+            <svg class="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            店舗を探す
+          </a>
+          <a 
+            href="/recruit" 
+            class="group inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white rounded-2xl font-bold text-lg transition-all duration-300 hover:bg-white hover:text-pink-600 hover:scale-105 hover:shadow-2xl"
+          >
+            <svg class="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            採用情報
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 地域フィルター -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">
+          地域で探す
+        </h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto font-light">
+          お住まいの地域から最寄りの店舗を見つけましょう
+        </p>
+      </div>
+      <LocatorFilters prefectures={prefectures} />
+    </div>
+  </section>
+
+  <!-- 店舗一覧 -->
+  <section id="salons" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-20">
+        <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">
+          全国の店舗
+        </h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+          お客様一人ひとりに合ったスタイルをご提案する美容室・ヘアサロンです
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {salons.map((salon) => (
+          <div class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-pink-200 hover:-translate-y-2">
+            <div class="aspect-w-16 aspect-h-9 overflow-hidden">
+              {salon.photos.length > 0 && (
+                <img 
+                  src={salon.photos[0]} 
+                  alt={`${salon.name}の外観`}
+                  class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+              )}
+            </div>
+            
+            <div class="p-8">
+              <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-pink-600 transition-colors duration-300">
+                {salon.name}
+              </h3>
+              
+              <div class="space-y-3 mb-6">
+                <p class="flex items-center text-gray-600">
+                  <svg class="w-5 h-5 mr-3 text-pink-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                  <span class="text-sm">{salon.address}</span>
+                </p>
+                
+                <p class="flex items-center text-gray-600">
+                  <svg class="w-5 h-5 mr-3 text-pink-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                  </svg>
+                  <a href={`tel:${salon.tel}`} class="text-sm hover:text-pink-600 transition-colors">
+                    {salon.tel}
+                  </a>
+                </p>
+                
+                <p class="flex items-center text-gray-600">
+                  <svg class="w-5 h-5 mr-3 text-pink-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  <span class="text-sm">{salon.hours}</span>
+                </p>
+              </div>
+              
+              <div class="flex flex-wrap gap-2 mb-8">
+                {salon.facilities.map((facility) => (
+                  <span class="px-3 py-1 bg-pink-100 text-pink-700 text-xs font-medium rounded-full">
+                    {facility}
+                  </span>
+                ))}
+              </div>
+              
+              <div class="flex space-x-3">
+                <a 
+                  href={`/salon/${salon.id}`}
+                  class="flex-1 text-center py-3 px-6 bg-pink-600 text-white rounded-xl font-bold transition-all duration-300 hover:bg-pink-700 hover:scale-105 hover:shadow-lg hover:shadow-pink-500/25"
+                >
+                  詳細を見る
+                </a>
+                {salon.reservation_url && (
+                  <a 
+                    href={salon.reservation_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex-1 text-center py-3 px-6 border-2 border-pink-600 text-pink-600 rounded-xl font-bold transition-all duration-300 hover:bg-pink-50 hover:scale-105"
+                  >
+                    予約する
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 最新ニュース -->
+  <section class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-20">
+        <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">
+          最新ニュース
+        </h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+          サロンの最新情報やお知らせをお届けします
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {latestNews.map((newsItem, index) => (
+          <div class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-pink-200 hover:-translate-y-2">
+            {newsItem.featured_image && (
+              <div class="aspect-w-16 aspect-h-9 overflow-hidden">
+                <img 
+                  src={newsItem.featured_image} 
+                  alt={newsItem.title}
+                  class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+              </div>
+            )}
+            
+            <div class="p-8">
+              <div class="flex items-center space-x-3 mb-4">
+                <time class="text-sm text-gray-500 font-medium" datetime={newsItem.date}>
+                  {new Date(newsItem.date).toLocaleDateString('ja-JP', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+                {newsItem.categories.length > 0 && (
+                  <span class="px-3 py-1 bg-pink-100 text-pink-700 text-xs font-bold rounded-full">
+                    {newsItem.categories[0]}
+                  </span>
+                )}
+              </div>
+              
+              <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-pink-600 transition-colors duration-300 line-clamp-2">
+                <a href={`/news/${newsItem.id}`} class="hover:text-pink-600">
+                  {newsItem.title}
+                </a>
+              </h3>
+              
+              <p class="text-gray-600 mb-6 line-clamp-3 leading-relaxed">
+                {newsItem.excerpt}
+              </p>
+              
+              <div class="flex items-center justify-between">
+                <a 
+                  href={`/news/${newsItem.id}`}
+                  class="text-pink-600 hover:text-pink-700 font-bold flex items-center group-hover:translate-x-1 transition-transform duration-300"
+                >
+                  続きを読む
+                  <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+                
+                {newsItem.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-1">
+                    {newsItem.tags.slice(0, 2).map((tag) => (
+                      <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div class="text-center mt-16">
+        <a 
+          href="/news" 
+          class="inline-flex items-center justify-center px-8 py-4 bg-pink-600 text-white rounded-2xl font-bold text-lg transition-all duration-300 hover:bg-pink-700 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/25"
+        >
+          すべてのニュースを見る
+          <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTAセクション -->
+  <section class="py-24 bg-gradient-to-br from-pink-500 via-purple-600 to-indigo-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-black text-white mb-6">
+          まずはお気軽にご相談ください
+        </h2>
+        <p class="text-xl md:text-2xl text-white/90 mb-12 font-light leading-relaxed">
+          お客様一人ひとりに合ったスタイルをご提案いたします
+        </p>
+        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <a 
+            href="tel:03-1234-5678" 
+            class="group inline-flex items-center justify-center px-8 py-4 bg-white text-pink-600 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/25"
+          >
+            <svg class="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+            </svg>
+            お電話で予約
+          </a>
+          <a 
+            href="/recruit" 
+            class="group inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white rounded-2xl font-bold text-lg transition-all duration-300 hover:bg-white hover:text-pink-600 hover:scale-105 hover:shadow-2xl"
+          >
+            <svg class="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            スタッフ募集
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

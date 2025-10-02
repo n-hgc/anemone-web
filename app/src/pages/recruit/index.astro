@@ -1,0 +1,288 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { generateRecruitJsonLd } from '../../lib/seo/jsonld';
+
+// 採用ページのJSON-LDを生成
+const jsonLd = generateRecruitJsonLd();
+---
+
+<Layout 
+  title="採用情報 - アネモネサロン"
+  description="アネモネサロンでは美容師・スタイリストを募集しています。お客様に喜んでいただけるサービスを一緒に提供しませんか？"
+  image="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&h=630&fit=crop"
+  jsonLd={JSON.stringify(jsonLd)}
+>
+  <!-- ヒーローセクション -->
+  <section class="bg-gradient-to-r from-pink-500 to-purple-600 text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">
+        採用情報
+      </h1>
+      <p class="text-xl md:text-2xl mb-8">
+        お客様に喜んでいただけるサービスを一緒に提供しませんか？
+      </p>
+      <a 
+        href="#jobs" 
+        class="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+      >
+        求人を見る
+      </a>
+    </div>
+  </section>
+
+  <!-- 会社紹介 -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">アネモネサロンについて</h2>
+          <p class="text-lg text-gray-600 mb-6">
+            アネモネサロンは、お客様一人ひとりに合ったスタイルをご提案する美容室・ヘアサロンです。
+            全国に店舗を展開し、多くのお客様にご愛用いただいています。
+          </p>
+          <p class="text-lg text-gray-600 mb-8">
+            私たちは、お客様の美しさを引き出すお手伝いをしながら、
+            スタッフ一人ひとりが成長できる環境を大切にしています。
+          </p>
+          <div class="grid grid-cols-2 gap-6">
+            <div class="text-center">
+              <div class="text-3xl font-bold text-pink-600 mb-2">100+</div>
+              <div class="text-gray-600">店舗数</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-pink-600 mb-2">500+</div>
+              <div class="text-gray-600">スタッフ数</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <img 
+            src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=800&h=600&fit=crop" 
+            alt="アネモネサロンの店内"
+            class="w-full rounded-lg shadow-md"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 求人情報 -->
+  <section id="jobs" class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">募集職種</h2>
+        <p class="text-lg text-gray-600">
+          あなたのスキルを活かせる職種を見つけてください
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 美容師 -->
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">美容師</h3>
+          <div class="space-y-3 mb-6">
+            <div>
+              <span class="font-medium text-gray-700">雇用形態：</span>
+              <span class="text-gray-600">正社員・パート・アルバイト</span>
+            </div>
+            <div>
+              <span class="font-medium text-gray-700">給与：</span>
+              <span class="text-gray-600">時給1,200円〜（経験により優遇）</span>
+            </div>
+            <div>
+              <span class="font-medium text-gray-700">勤務地：</span>
+              <span class="text-gray-600">全国の店舗</span>
+            </div>
+          </div>
+          <div class="mb-6">
+            <h4 class="font-medium text-gray-700 mb-2">こんな方におすすめ</h4>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• 美容師免許をお持ちの方</li>
+              <li>• お客様とのコミュニケーションが好きな方</li>
+              <li>• 技術向上に意欲的な方</li>
+            </ul>
+          </div>
+          <a 
+            href="https://example.com/apply/hairdresser"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full bg-pink-600 text-white text-center py-2 rounded-lg font-semibold hover:bg-pink-700 transition-colors"
+          >
+            応募する
+          </a>
+        </div>
+
+        <!-- スタイリスト -->
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">スタイリスト</h3>
+          <div class="space-y-3 mb-6">
+            <div>
+              <span class="font-medium text-gray-700">雇用形態：</span>
+              <span class="text-gray-600">正社員・パート</span>
+            </div>
+            <div>
+              <span class="font-medium text-gray-700">給与：</span>
+              <span class="text-gray-600">月給25万円〜（経験により優遇）</span>
+            </div>
+            <div>
+              <span class="font-medium text-gray-700">勤務地：</span>
+              <span class="text-gray-600">東京・大阪・名古屋</span>
+            </div>
+          </div>
+          <div class="mb-6">
+            <h4 class="font-medium text-gray-700 mb-2">こんな方におすすめ</h4>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• 美容師免許をお持ちの方</li>
+              <li>• カット・カラー・パーマの技術をお持ちの方</li>
+              <li>• お客様の要望を理解できる方</li>
+            </ul>
+          </div>
+          <a 
+            href="https://example.com/apply/stylist"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full bg-pink-600 text-white text-center py-2 rounded-lg font-semibold hover:bg-pink-700 transition-colors"
+          >
+            応募する
+          </a>
+        </div>
+
+        <!-- 受付スタッフ -->
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">受付スタッフ</h3>
+          <div class="space-y-3 mb-6">
+            <div>
+              <span class="font-medium text-gray-700">雇用形態：</span>
+              <span class="text-gray-600">パート・アルバイト</span>
+            </div>
+            <div>
+              <span class="font-medium text-gray-700">給与：</span>
+              <span class="text-gray-600">時給1,000円〜</span>
+            </div>
+            <div>
+              <span class="font-medium text-gray-700">勤務地：</span>
+              <span class="text-gray-600">全国の店舗</span>
+            </div>
+          </div>
+          <div class="mb-6">
+            <h4 class="font-medium text-gray-700 mb-2">こんな方におすすめ</h4>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• 接客業の経験がある方</li>
+              <li>• 明るく元気な方</li>
+              <li>• チームワークを大切にできる方</li>
+            </ul>
+          </div>
+          <a 
+            href="https://example.com/apply/reception"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full bg-pink-600 text-white text-center py-2 rounded-lg font-semibold hover:bg-pink-700 transition-colors"
+          >
+            応募する
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 福利厚生 -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">福利厚生</h2>
+        <p class="text-lg text-gray-600">
+          スタッフの皆様に安心して働いていただけるよう、充実した福利厚生をご用意しています
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">給与・賞与</h3>
+          <p class="text-gray-600">経験・スキルに応じた給与体系、年2回の賞与支給</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">社会保険完備</h3>
+          <p class="text-gray-600">健康保険、厚生年金、雇用保険、労災保険</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">研修制度</h3>
+          <p class="text-gray-600">技術向上のための充実した研修制度</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">交通費支給</h3>
+          <p class="text-gray-600">通勤交通費を全額支給</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">有給休暇</h3>
+          <p class="text-gray-600">年次有給休暇制度（入社6ヶ月後から取得可能）</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">教育支援</h3>
+          <p class="text-gray-600">技術向上のための外部研修参加費補助</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTAセクション -->
+  <section class="py-16 bg-pink-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-4">
+        一緒に働きませんか？
+      </h2>
+      <p class="text-xl mb-8">
+        お気軽にお問い合わせください
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="mailto:recruit@anemone-salon.com" 
+          class="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+        >
+          メールで問い合わせ
+        </a>
+        <a 
+          href="tel:03-1234-5678" 
+          class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-pink-600 transition-colors"
+        >
+          電話で問い合わせ
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

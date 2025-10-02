@@ -1,0 +1,196 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import type { Salon } from '../../types';
+import { generateSalonJsonLd } from '../../lib/seo/jsonld';
+
+// モックデータをインポート
+import salonsData from '../../data/salons.json';
+
+const salons: Salon[] = salonsData;
+
+export async function getStaticPaths() {
+  return salons.map((salon) => ({
+    params: { id: salon.id.toString() },
+    props: { salon },
+  }));
+}
+
+const { salon } = Astro.props;
+
+// 店舗のJSON-LDを生成
+const jsonLd = generateSalonJsonLd(salon);
+---
+
+<Layout 
+  title={`${salon.name} - アネモネサロン`}
+  description={`アネモネサロン${salon.name}の詳細情報。住所：${salon.address}、電話：${salon.tel}、営業時間：${salon.hours}`}
+  image={salon.photos[0]}
+  jsonLd={JSON.stringify(jsonLd)}
+>
+  <!-- 店舗ヘッダー -->
+  <section class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- 店舗画像 -->
+        <div class="space-y-4">
+          {salon.photos.map((photo, index) => (
+            <img 
+              src={photo} 
+              alt={`${salon.name}の外観${index + 1}`}
+              class="w-full h-64 object-cover rounded-lg"
+            />
+          ))}
+        </div>
+        
+        <!-- 店舗情報 -->
+        <div class="space-y-6">
+          <div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">
+              {salon.name}
+            </h1>
+            <p class="text-lg text-gray-600">
+              アネモネサロン{salon.name}
+            </p>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <svg class="w-5 h-5 mr-3 mt-1 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <div>
+                <p class="font-medium text-gray-900">住所</p>
+                <p class="text-gray-600">{salon.address}</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <svg class="w-5 h-5 mr-3 mt-1 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+              </svg>
+              <div>
+                <p class="font-medium text-gray-900">電話番号</p>
+                <p class="text-gray-600">
+                  <a href={`tel:${salon.tel}`} class="hover:text-pink-600">
+                    {salon.tel}
+                  </a>
+                </p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <svg class="w-5 h-5 mr-3 mt-1 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <div>
+                <p class="font-medium text-gray-900">営業時間</p>
+                <p class="text-gray-600">{salon.hours}</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <svg class="w-5 h-5 mr-3 mt-1 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+              </svg>
+              <div>
+                <p class="font-medium text-gray-900">お支払い方法</p>
+                <p class="text-gray-600">{salon.payment}</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 施設情報 -->
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">施設情報</h3>
+            <div class="flex flex-wrap gap-2">
+              {salon.facilities.map((facility) => (
+                <span class="px-3 py-1 bg-pink-100 text-pink-800 text-sm rounded-full">
+                  {facility}
+                </span>
+              ))}
+            </div>
+          </div>
+          
+          <!-- CTAボタン -->
+          <div class="flex flex-col sm:flex-row gap-4">
+            {salon.reservation_url && (
+              <a 
+                href={salon.reservation_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 bg-pink-600 text-white px-6 py-3 rounded-lg text-center font-semibold hover:bg-pink-700 transition-colors"
+              >
+                オンライン予約
+              </a>
+            )}
+            <a 
+              href={`tel:${salon.tel}`}
+              class="flex-1 bg-white border border-pink-600 text-pink-600 px-6 py-3 rounded-lg text-center font-semibold hover:bg-pink-50 transition-colors"
+            >
+              電話で予約
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 地図セクション -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">アクセス</h2>
+      
+      <div class="bg-gray-100 rounded-lg p-8 text-center">
+        <div class="mb-4">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Googleマップ</h3>
+          <p class="text-gray-600">
+            地図をクリックするとGoogleマップで詳細を確認できます
+          </p>
+        </div>
+        
+        <a 
+          href={`https://www.google.com/maps/search/?api=1&query=${salon.geo.lat},${salon.geo.lng}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors"
+        >
+          地図で確認する
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 他の店舗へのリンク -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">他の店舗も見る</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {salons.filter(s => s.id !== salon.id).slice(0, 3).map((otherSalon) => (
+          <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">
+              {otherSalon.name}
+            </h3>
+            <p class="text-gray-600 mb-4">{otherSalon.address}</p>
+            <a 
+              href={`/salon/${otherSalon.id}`}
+              class="text-pink-600 hover:text-pink-700 font-medium"
+            >
+              詳細を見る →
+            </a>
+          </div>
+        ))}
+      </div>
+      
+      <div class="text-center mt-8">
+        <a 
+          href="/" 
+          class="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors"
+        >
+          すべての店舗を見る
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

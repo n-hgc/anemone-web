@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import type { News } from '../../types';
+import { generateNewsJsonLd } from '../../lib/seo/jsonld';
+
+// モックデータをインポート
+import newsData from '../../data/news.json';
+
+const news: News[] = newsData;
+
+export async function getStaticPaths() {
+  return news.map((item) => ({
+    params: { id: item.id.toString() },
+    props: { news: item },
+  }));
+}
+
+const { news: newsItem } = Astro.props;
+
+// ニュースのJSON-LDを生成
+const jsonLd = generateNewsJsonLd(newsItem);
+
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('ja-JP', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+---
+
+<Layout 
+  title={`${newsItem.title} - アネモネサロン`}
+  description={newsItem.excerpt}
+  image={newsItem.featured_image}
+  jsonLd={JSON.stringify(jsonLd)}
+>
+  <!-- 記事ヘッダー -->
+  <section class="bg-gray-50 py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <div class="flex items-center justify-center space-x-4 mb-4">
+          <time class="text-sm text-gray-500" datetime={newsItem.date}>
+            {formatDate(newsItem.date)}
+          </time>
+          {newsItem.categories.length > 0 && (
+            <span class="px-3 py-1 bg-pink-100 text-pink-800 text-sm rounded-full">
+              {newsItem.categories[0]}
+            </span>
+          )}
+        </div>
+        
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+          {newsItem.title}
+        </h1>
+        
+        {newsItem.featured_image && (
+          <img 
+            src={newsItem.featured_image} 
+            alt={newsItem.title}
+            class="w-full max-w-2xl mx-auto rounded-lg shadow-md"
+          />
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- 記事本文 -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-none">
+        <div class="whitespace-pre-line text-gray-700 leading-relaxed">
+          {newsItem.content}
+        </div>
+      </div>
+      
+      <!-- タグ -->
+      {newsItem.tags.length > 0 && (
+        <div class="mt-12 pt-8 border-t border-gray-200">
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">タグ</h3>
+          <div class="flex flex-wrap gap-2">
+            {newsItem.tags.map((tag) => (
+              <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- 関連ニュース -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">関連ニュース</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {news
+          .filter(item => item.id !== newsItem.id)
+          .slice(0, 3)
+          .map((relatedNews) => (
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                <a href={`/news/${relatedNews.id}`} class="hover:text-pink-600">
+                  {relatedNews.title}
+                </a>
+              </h3>
+              <p class="text-gray-600 mb-4 line-clamp-3">
+                {relatedNews.excerpt}
+              </p>
+              <div class="flex items-center justify-between">
+                <time class="text-sm text-gray-500">
+                  {formatDate(relatedNews.date)}
+                </time>
+                <a 
+                  href={`/news/${relatedNews.id}`}
+                  class="text-pink-600 hover:text-pink-700 font-medium"
+                >
+                  続きを読む →
+                </a>
+              </div>
+            </div>
+          ))}
+      </div>
+      
+      <div class="text-center mt-8">
+        <a 
+          href="/news" 
+          class="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors"
+        >
+          すべてのニュースを見る
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
