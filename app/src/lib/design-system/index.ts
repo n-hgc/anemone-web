@@ -112,9 +112,9 @@ export const responsive = {
     '4': 'grid-cols-1 pc:grid-cols-2 lg:grid-cols-4'
   },
   text: {
-    'h2': 'text-h2-sp pc:text-h2-pc',
-    'h3': 'text-h3-sp pc:text-h3-pc',
-    'p': 'text-p-sp pc:text-p-pc'
+    'h2': 'text-h2-sp pc:text-h2-pc font-yumincho font-medium',
+    'h3': 'text-h3-sp pc:text-h3-pc font-yumincho font-medium',
+    'p': 'text-p-sp pc:text-p-pc font-zenkaku font-normal'
   },
   spacing: {
     'section': 'py-8 pc:py-16',

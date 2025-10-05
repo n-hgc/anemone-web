@@ -166,3 +166,27 @@ p {
     font-family: var(--font-family-zenkaku) !important;
   }
 }
+
+/* モバイルファーストのレスポンシブ対応 */
+@media (max-width: 767px) {
+  .text-h2-sp {
+    font-size: var(--font-size-h2-sp) !important;
+    line-height: var(--line-height-h2-sp) !important;
+    font-weight: var(--font-weight-medium) !important;
+    font-family: var(--font-family-yumincho) !important;
+  }
+  
+  .text-h3-sp {
+    font-size: var(--font-size-h3-sp) !important;
+    line-height: var(--line-height-h3-sp) !important;
+    font-weight: var(--font-weight-medium) !important;
+    font-family: var(--font-family-yumincho) !important;
+  }
+  
+  .text-p-sp {
+    font-size: var(--font-size-p-sp) !important;
+    line-height: var(--line-height-p-sp) !important;
+    font-weight: var(--font-weight-regular) !important;
+    font-family: var(--font-family-zenkaku) !important;
+  }
+}
