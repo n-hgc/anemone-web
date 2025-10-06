@@ -19,31 +19,31 @@
     <nav class="header__nav pc:block hidden">
       <ul class="header__nav-list">
         <li class="header__nav-item">
-          <a href="/concept" class="header__nav-link">
+          <a href="/concept" class="header__nav-link hover:text-primary">
             <span class="header__nav-en">CONCEPT</span>
             <span class="header__nav-jp">コンセプト</span>
           </a>
         </li>
         <li class="header__nav-item">
-          <a href="/menu" class="header__nav-link">
+          <a href="/menu" class="header__nav-link hover:text-primary">
             <span class="header__nav-en">MENU</span>
             <span class="header__nav-jp">メニュー</span>
           </a>
         </li>
         <li class="header__nav-item">
-          <a href="/style" class="header__nav-link">
+          <a href="/style" class="header__nav-link hover:text-primary">
             <span class="header__nav-en">STYLE</span>
             <span class="header__nav-jp">スタイル</span>
           </a>
         </li>
         <li class="header__nav-item">
-          <a href="/news" class="header__nav-link">
+          <a href="/news" class="header__nav-link hover:text-primary">
             <span class="header__nav-en">NEWS</span>
             <span class="header__nav-jp">お知らせ</span>
           </a>
         </li>
         <li class="header__nav-item">
-          <a href="/recruit" class="header__nav-link">
+          <a href="/recruit" class="header__nav-link hover:text-primary">
             <span class="header__nav-en">RECRUIT</span>
             <span class="header__nav-jp">採用情報</span>
           </a>
@@ -54,7 +54,7 @@
     <!-- アクションボタン -->
     <div class="header__actions">
       <!-- ソーシャルメディアアイコン（PC版のみ表示） -->
-      <div class="header__social pc:flex hidden">
+      <div class="header__social">
         <a href="https://twitter.com/anemone_salon" class="header__social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
           <img src="/images/header/icon_x.png" alt="Twitter" class="header__social-icon" />
         </a>
@@ -67,7 +67,7 @@
       </div>
       
       <!-- ハンバーガーメニュー（SP版のみ表示） -->
-      <button class="header__menu-btn sp:block pc:hidden" aria-label="メニューを開く">
+      <button class="header__menu-btn" aria-label="メニューを開く">
         <span class="header__menu-icon"></span>
         <span class="header__menu-icon"></span>
         <span class="header__menu-icon"></span>
@@ -158,13 +158,8 @@
     flex-direction: column;
     align-items: center;
     padding: 1rem 2rem;
-    color: var(--color-black);
     text-decoration: none;
     transition: color 0.3s ease;
-  }
-
-  .header__nav-link:hover {
-    color: var(--color-brown);
   }
 
   .header__nav-en {
@@ -189,7 +184,7 @@
   }
 
   .header__social {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 0.75rem;
   }
@@ -263,6 +258,14 @@
       font-size: 1rem;
     }
     
+    .header__social {
+      display: flex;
+    }
+    
+    .header__menu-btn {
+      display: none;
+    }
+    
     .header__social-link {
       width: 44px;
       height: 44px;
@@ -285,8 +288,12 @@
       display: none;
     }
     
-    .header__reservation-btn {
+    .header__social {
       display: none;
+    }
+    
+    .header__menu-btn {
+      display: flex;
     }
   }
 </style>

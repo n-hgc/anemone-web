@@ -52,65 +52,97 @@ const salonJsonLd = {
     <Header />
     
     <!-- ヒーローセクション -->
-    <section class="relative overflow-hidden bg-gradient-to-br from-brown via-brown_dark to-black py-16 pc:py-24 lg:py-32">
-      <!-- 背景画像 -->
-      <div class="absolute inset-0">
-        <picture>
-          <source 
-            media="(min-width: 768px)" 
-            srcset="/images/hero/main-desktop.jpg"
-          />
-          <source 
-            media="(max-width: 767px)" 
-            srcset="/images/hero/main-mobile.jpg"
-          />
-          <img 
-            src="/images/hero/main-desktop.jpg" 
-            alt="アネモネサロンの店内風景"
-            class="w-full h-full object-cover opacity-20"
-          />
-        </picture>
-        <div class="absolute inset-0 bg-black opacity-30"></div>
-      </div>
-      
-      <div class={`relative ${responsive.spacing.container} text-center`}>
-        <div class="max-w-4xl mx-auto">
-          <h1 class={`${responsive.text.h2} text-white mb-6 pc:mb-8 leading-tight tracking-tight`}>
-            あなたの美しさを引き出す<br>
-            <span class="text-beige">アネモネサロン</span>
-          </h1>
-          
-          <p class={`${responsive.text.p} text-white/90 mb-4 font-light leading-relaxed`}>
-            プロの技術と心のこもったサービスで<br>
-            理想のスタイルを実現します
-          </p>
-          
-          <p class={`${responsive.text.p} text-white/80 mb-8 pc:mb-12 font-light`}>
-            全国展開する美容室・ヘアサロンで、お客様一人ひとりに合ったスタイルをご提案
-          </p>
-          
-          <div class="flex flex-col sm:flex-row gap-4 pc:gap-6 justify-center items-center">
-            <a 
-              href="#salons"
-              class="group inline-flex items-center justify-center px-6 py-3 pc:px-8 pc:py-4 bg-white text-brown rounded-2xl font-bold text-base pc:text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-brown/25"
-            >
-              <svg class="w-5 h-5 pc:w-6 pc:h-6 mr-2 pc:mr-3 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-              </svg>
-              サロンを探す
-            </a>
+    <section class="hero-section">
+      <div class="hero-container">
+        <!-- メインコンテンツエリア -->
+        <div class="hero-main">
+          <!-- スライドショー -->
+          <div class="hero-slideshow">
+            <div class="hero-slide active">
+              <img 
+                src="/images/hero/slide-1.png" 
+                alt="アネモネサロンのスタイリング" 
+                class="hero-slide-image"
+              />
+              <div class="hero-slide-overlay">
+                <div class="hero-slide-content">
+                  <h1 class="hero-title">
+                    <span class="hero-tagline">髪と、わたしと、生きていく。</span>
+                    <span class="hero-brand">little</span>
+                    <span class="hero-subtitle">- Hair salon -</span>
+                  </h1>
+                  <div class="hero-decorative">
+                    <span class="hero-magic">a little magic</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             
-            <a 
-              href="#about"
-              class="group inline-flex items-center justify-center px-6 py-3 pc:px-8 pc:py-4 border-2 border-white text-white rounded-2xl font-bold text-base pc:text-lg transition-all duration-300 hover:bg-white hover:text-brown hover:scale-105 hover:shadow-2xl"
-            >
-              <svg class="w-5 h-5 pc:w-6 pc:h-6 mr-2 pc:mr-3 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              詳細を見る
-            </a>
+            <div class="hero-slide">
+              <img 
+                src="/images/hero/slide-2.png" 
+                alt="アネモネサロンの店内" 
+                class="hero-slide-image"
+              />
+              <div class="hero-slide-overlay">
+                <div class="hero-slide-content">
+                  <h1 class="hero-title">
+                    <span class="hero-tagline">あなたの美しさを引き出す</span>
+                    <span class="hero-brand">アネモネサロン</span>
+                    <span class="hero-subtitle">- Hair salon -</span>
+                  </h1>
+                  <div class="hero-decorative">
+                    <span class="hero-magic">beautiful hair</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="hero-slide">
+              <img 
+                src="/images/hero/slide-1.png" 
+                alt="アネモネサロンのスタイリング" 
+                class="hero-slide-image"
+              />
+              <div class="hero-slide-overlay">
+                <div class="hero-slide-content">
+                  <h1 class="hero-title">
+                    <span class="hero-tagline">理想のスタイルを実現</span>
+                    <span class="hero-brand">アネモネサロン</span>
+                    <span class="hero-subtitle">- Hair salon -</span>
+                  </h1>
+                  <div class="hero-decorative">
+                    <span class="hero-magic">perfect style</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- スライドショー内のページネーション -->
+          <div class="hero-slide-pagination">
+            <button class="hero-pagination-dot active" data-slide="0"></button>
+            <button class="hero-pagination-dot" data-slide="1"></button>
+            <button class="hero-pagination-dot" data-slide="2"></button>
           </div>
         </div>
+      </div>
+      
+      <!-- Floating Action Button (PC用) -->
+      <div class="hero-fab">
+        <div class="hero-action-text">ネットからがお得</div>
+        <button class="hero-search-btn" aria-label="店舗を選んで予約する">
+          <div class="hero-btn-content">
+            <svg class="hero-search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <div class="hero-btn-text">
+              <div class="hero-btn-line">店舗を選んで</div>
+              <div class="hero-btn-line">予約する</div>
+            </div>
+          </div>
+        </button>
+      </div>
       </div>
     </section>
 
@@ -118,10 +150,10 @@ const salonJsonLd = {
     <section class={`${responsive.spacing.section}`}>
       <div class={responsive.spacing.container}>
         <div class="text-center mb-12 pc:mb-16">
-          <h2 class={`${responsive.text.h2} text-black mb-4 pc:mb-6`}>
+          <h2 class={`${responsive.text.h2} mb-4 pc:mb-6`}>
             アネモネサロンの特徴
           </h2>
-          <p class={`${responsive.text.p} text-grey_medium max-w-2xl mx-auto`}>
+          <p class={`${responsive.text.p} text-secondary max-w-2xl mx-auto`}>
             お客様一人ひとりに寄り添ったサービスで、理想のスタイルを実現します
           </p>
         </div>
@@ -134,10 +166,10 @@ const salonJsonLd = {
               </svg>
             </div>
             <div class="p-6">
-              <h3 class={responsive.text.h3 + ' text-black mb-3'}>
+              <h3 class={`${responsive.text.h3} mb-3`}>
                 プロの技術
               </h3>
-              <p class={responsive.text.p + ' text-grey_medium'}>
+              <p class={`${responsive.text.p} text-secondary`}>
                 経験豊富なスタイリストが、お客様の髪質や骨格に合わせた最適なスタイルをご提案いたします。
               </p>
             </div>
@@ -150,10 +182,10 @@ const salonJsonLd = {
               </svg>
             </div>
             <div class="p-6">
-              <h3 class={responsive.text.h3 + ' text-black mb-3'}>
+              <h3 class={`${responsive.text.h3} mb-3`}>
                 充実の設備
               </h3>
-              <p class={responsive.text.p + ' text-grey_medium'}>
+              <p class={`${responsive.text.p} text-secondary`}>
                 最新の設備と高品質なヘアケア商品で、お客様に最高のサービスをご提供いたします。
               </p>
             </div>
@@ -166,10 +198,10 @@ const salonJsonLd = {
               </svg>
             </div>
             <div class="p-6">
-              <h3 class={responsive.text.h3 + ' text-black mb-3'}>
+              <h3 class={`${responsive.text.h3} mb-3`}>
                 アフターケア
               </h3>
-              <p class={responsive.text.p + ' text-grey_medium'}>
+              <p class={`${responsive.text.p} text-secondary`}>
                 カット後も長く美しいスタイルを保つための、お家でのケア方法も丁寧にご指導いたします。
               </p>
             </div>
@@ -182,10 +214,10 @@ const salonJsonLd = {
     <section id="salons" class={`${responsive.spacing.section}`}>
       <div class={responsive.spacing.container}>
         <div class="text-center mb-12 pc:mb-16">
-          <h2 class={`${responsive.text.h2} text-black mb-4 pc:mb-6`}>
+          <h2 class={`${responsive.text.h2} mb-4 pc:mb-6`}>
             店舗一覧
           </h2>
-          <p class={`${responsive.text.p} text-grey_medium max-w-2xl mx-auto`}>
+          <p class={`${responsive.text.p} text-secondary max-w-2xl mx-auto`}>
             全国100店舗でお客様をお待ちしています。お近くの店舗をお探しください。
           </p>
         </div>
@@ -220,10 +252,10 @@ const salonJsonLd = {
     <section class={`${responsive.spacing.section}`}>
       <div class={responsive.spacing.container}>
         <div class="text-center mb-12 pc:mb-16">
-          <h2 class={`${responsive.text.h2} text-black mb-4 pc:mb-6`}>
+          <h2 class={`${responsive.text.h2} mb-4 pc:mb-6`}>
             最新ニュース
           </h2>
-          <p class={`${responsive.text.p} text-grey_medium max-w-2xl mx-auto`}>
+          <p class={`${responsive.text.p} text-secondary max-w-2xl mx-auto`}>
             アネモネサロンからのお知らせや最新情報をお届けします
           </p>
         </div>
@@ -255,7 +287,7 @@ const salonJsonLd = {
           <h2 class={`${responsive.text.h2} text-white mb-4 pc:mb-6`}>
             今すぐご予約ください
           </h2>
-          <p class={`${responsive.text.p} text-white/90 mb-6 pc:mb-8 max-w-2xl mx-auto`}>
+          <p class={`${responsive.text.p} text-white mb-6 pc:mb-8 max-w-2xl mx-auto opacity-90`}>
             お客様のご来店をお待ちしております。お気軽にお問い合わせください。
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -283,6 +315,397 @@ const salonJsonLd = {
 </Layout>
 
 <style>
+  @import "tailwindcss";
+  
+  /* ヒーローセクションのスタイル */
+  .hero-section {
+    position: relative;
+    background-color: var(--color-beige);
+    min-height: 320px;
+  }
+  
+  .hero-container {
+    display: flex;
+    padding: 24px 55px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    height: 100%;
+    min-height: 500px;
+  }
+  
+  .hero-main {
+    position: relative;
+    width: 100%;
+    height: 636px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    padding: 184px 400px 184px 145px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+  }
+  
+  .hero-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+  }
+  
+  .hero-slide.active {
+    opacity: 1;
+  }
+  
+  .hero-slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .hero-slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
+  }
+  
+  .hero-slide-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .hero-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .hero-tagline {
+    font-family: var(--font-family-yumincho);
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+    line-height: 1.2;
+  }
+  
+  .hero-brand {
+    font-family: var(--font-family-yumincho);
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-black);
+    line-height: 1.0;
+  }
+  
+  .hero-subtitle {
+    font-family: var(--font-family-yumincho);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-black);
+    line-height: 1.2;
+  }
+  
+  .hero-decorative {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+  }
+  
+  .hero-magic {
+    font-family: var(--font-family-yumincho);
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-light);
+    color: var(--color-text-grey-light);
+    font-style: italic;
+    opacity: 0.8;
+  }
+  
+  /* スライドショー内のページネーション */
+  .hero-slide-pagination {
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 15;
+    pointer-events: auto;
+    background-color: rgba(0, 0, 0, 0.3); /* デバッグ用の背景 */
+    padding: 0.5rem;
+    border-radius: 8px;
+  }
+  
+  /* Floating Action Button */
+  .hero-fab {
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    z-index: 20;
+  }
+  
+  /* PC用のFloating Action Button */
+  @media (min-width: 768px) {
+    .hero-fab {
+      position: fixed;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1000;
+    }
+    
+    .hero-slide-pagination {
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      z-index: 15;
+      background-color: rgba(0, 0, 0, 0.3); /* デバッグ用の背景 */
+      padding: 0.5rem;
+      border-radius: 8px;
+    }
+  }
+  
+  
+  .hero-pagination-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .hero-pagination-dot.active {
+    background-color: var(--color-brown);
+    border-color: var(--color-brown);
+    transform: scale(1.3);
+    box-shadow: 0 4px 8px rgba(105, 85, 46, 0.4);
+  }
+  
+  .hero-pagination-dot:hover {
+    background-color: var(--color-brown-light);
+    border-color: var(--color-brown-light);
+    transform: scale(1.2);
+    box-shadow: 0 3px 6px rgba(105, 85, 46, 0.3);
+  }
+  
+  
+  .hero-action-text {
+    font-family: var(--font-family-yumincho);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+  
+  .hero-search-btn {
+    width: 180px;
+    height: 180px;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: var(--color-brown);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(105, 85, 46, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero-search-btn:hover {
+    background-color: var(--color-brown-dark);
+    transform: scale(1.05);
+    box-shadow: 0 12px 32px rgba(105, 85, 46, 0.4);
+  }
+  
+  .hero-btn-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  
+  .hero-search-icon {
+    width: 32px;
+    height: 32px;
+    stroke-width: 2.5;
+  }
+  
+  .hero-btn-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  .hero-btn-line {
+    font-family: var(--font-family-yumincho);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    color: white;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    line-height: 1.2;
+  }
+  
+  /* レスポンシブ対応 */
+  @media (max-width: 767px) {
+    .hero-section {
+      height: 320px;
+    }
+    
+    .hero-container {
+      padding: 0;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      align-self: stretch;
+    }
+    
+    .hero-main {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 0 20px 20px 0;
+      width: 339.456px;
+      height: 320px;
+      flex-shrink: 0;
+      padding: 0;
+      display: block;
+    }
+    
+    .hero-slideshow {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .hero-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(0deg, rgba(121, 104, 79, 0.20) 0%, rgba(121, 104, 79, 0.20) 100%), 
+                  var(--color-grey-light) 50% / cover no-repeat;
+    }
+    
+    .hero-slide-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      mix-blend-mode: multiply;
+    }
+    
+    .hero-slide-pagination {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      top: auto;
+      transform: none;
+      flex-direction: row;
+      gap: 0.5rem;
+      z-index: 15;
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 0.5rem;
+      border-radius: 8px;
+    }
+    
+    .hero-fab {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      right: auto;
+      top: auto;
+      transform: none;
+      flex-direction: row;
+      gap: 0.75rem;
+    }
+    
+    .hero-action-text {
+      writing-mode: horizontal-tb;
+      text-orientation: initial;
+      font-size: 0.75rem;
+    }
+    
+    .hero-search-btn {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .hero-btn-content {
+      gap: 0.25rem;
+    }
+    
+    .hero-search-icon {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .hero-btn-text {
+      display: none; /* SPではテキストを非表示 */
+    }
+    
+    .hero-slide-content {
+      padding: 1rem;
+    }
+    
+    .hero-brand {
+      font-size: 2rem;
+    }
+    
+    .hero-tagline {
+      font-size: 1rem;
+    }
+    
+    .hero-magic {
+      font-size: 1rem;
+    }
+  }
+  
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -297,3 +720,85 @@ const salonJsonLd = {
     overflow: hidden;
   }
 </style>
+
+<script>
+  // ヒーローセクションのスライドショー機能
+  document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.hero-slide');
+    const paginationDots = document.querySelectorAll('.hero-pagination-dot');
+    const searchBtn = document.querySelector('.hero-search-btn');
+    let currentSlide = 0;
+    let slideInterval;
+
+    // デバッグ情報
+    console.log('スライド数:', slides.length);
+    console.log('ページネーションドット数:', paginationDots.length);
+    console.log('検索ボタン:', searchBtn);
+
+    // スライドを切り替える関数
+    function showSlide(index) {
+      console.log('スライド切り替え:', index);
+      // すべてのスライドを非アクティブにする
+      slides.forEach(slide => slide.classList.remove('active'));
+      paginationDots.forEach(dot => dot.classList.remove('active'));
+      
+      // 指定されたスライドをアクティブにする
+      if (slides[index]) {
+        slides[index].classList.add('active');
+        console.log('アクティブスライド:', slides[index]);
+      }
+      if (paginationDots[index]) {
+        paginationDots[index].classList.add('active');
+      }
+      
+      currentSlide = index;
+    }
+
+    // 次のスライドに移動
+    function nextSlide() {
+      const nextIndex = (currentSlide + 1) % slides.length;
+      showSlide(nextIndex);
+    }
+
+    // 自動スライド開始
+    function startSlideShow() {
+      slideInterval = setInterval(nextSlide, 5000); // 5秒間隔
+    }
+
+    // 自動スライド停止
+    function stopSlideShow() {
+      clearInterval(slideInterval);
+    }
+
+    // ページネーションドットのクリックイベント
+    paginationDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        showSlide(index);
+        stopSlideShow();
+        startSlideShow(); // 再開
+      });
+    });
+
+    // 検索ボタンのクリックイベント
+    searchBtn.addEventListener('click', () => {
+      // サロン一覧セクションにスクロール
+      const salonsSection = document.getElementById('salons');
+      if (salonsSection) {
+        salonsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    // マウスホバーで自動スライドを一時停止
+    const heroSection = document.querySelector('.hero-section');
+    heroSection.addEventListener('mouseenter', stopSlideShow);
+    heroSection.addEventListener('mouseleave', startSlideShow);
+
+    // 最初のスライドを表示
+    if (slides.length > 0) {
+      showSlide(0);
+    }
+
+    // 自動スライド開始
+    startSlideShow();
+  });
+</script>

@@ -20,7 +20,7 @@
   --color-text-white: #FFFFFF;
   
   /* フォントファミリー */
-  --font-family-yumincho: 'Shippori Mincho', 'Noto Serif JP', 'YuMincho', 'Yu Mincho', 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', 'HiraMinProN-W3', 'HiraMinProN-W6', serif;
+  --font-family-yumincho: 'YuMincho', 'Yu Mincho', 'Shippori Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', 'HiraMinProN-W3', 'HiraMinProN-W6', serif;
   --font-family-zenkaku: 'Zen Kaku Gothic New', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
   
   /* フォントサイズ */
@@ -83,10 +83,20 @@ p {
 .bg-black { background-color: var(--color-black); }
 .bg-white { background-color: var(--color-white); }
 
+/* テキストカラークラス */
 .text-brown { color: var(--color-brown); }
+.text-brown-dark { color: var(--color-brown-dark); }
+.text-brown-light { color: var(--color-brown-light); }
 .text-black { color: var(--color-black); }
 .text-white { color: var(--color-white); }
 .text-grey-medium { color: var(--color-text-grey-medium); }
+.text-grey-light { color: var(--color-text-grey-light); }
+
+/* よく使用されるテキストカラーの組み合わせ */
+.text-primary { color: var(--color-brown); }
+.text-secondary { color: var(--color-text-grey-medium); }
+.text-muted { color: var(--color-text-grey-light); }
+.text-accent { color: var(--color-brown-dark); }
 
 .border-brown { border-color: var(--color-brown); }
 .border-grey-light { border-color: var(--color-grey-light); }
