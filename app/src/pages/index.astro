@@ -148,7 +148,7 @@ const salonJsonLd = {
 
     <!-- イントロダクションセクション -->
     <section class="intro-section">
-      <div class="intro-container">
+      <div class="intro-container section-container">
         <div class="intro-content">
           <div class="intro-text">
             <h2 class="intro-title">
@@ -175,8 +175,8 @@ const salonJsonLd = {
     <!-- ヘアカタログセクション -->
     <section class="hairstyle-section">
       <div class="hairstyle-container">
-        <h2 class="hairstyle-title">
-          HAIRSTYLE<span class="hairstyle-title-sub"> / ヘアカタログ</span>
+        <h2 class="hairstyle-title section-title text-h1">
+          HAIRSTYLE<span class="hairstyle-title-sub section-title-sub"> / ヘアカタログ</span>
         </h2>
         
         <!-- タブナビゲーション -->
@@ -189,7 +189,7 @@ const salonJsonLd = {
         </div>
         
         <!-- ヘアスタイルグリッド -->
-        <div class="hairstyle-grid">
+        <div class="hairstyle-grid grid-4-cols">
           <div class="hairstyle-item">
             <img src="/images/hero/slide-1.png" alt="ロングヘアスタイル" class="hairstyle-image" />
           </div>
@@ -228,8 +228,8 @@ const salonJsonLd = {
     <!-- 企業様向けヘアメイクセクション -->
     <section class="hairmake-section">
       <div class="hairmake-container">
-        <h2 class="hairmake-title">
-          HAIRMAKE<span class="hairmake-title-sub"> / 企業様向けヘアメイク</span>
+        <h2 class="hairmake-title section-title text-h1">
+          HAIRMAKE<span class="hairmake-title-sub section-title-sub"> / 企業様向けヘアメイク</span>
         </h2>
         
         <div class="hairmake-content">
@@ -294,8 +294,8 @@ const salonJsonLd = {
         <div class="salon-content">
           <!-- 左側: テキストとボタン -->
           <div class="salon-left">
-        <h2 class="salon-title">
-          SALON<span class="salon-title-sub"> / little グループ店舗</span>
+        <h2 class="salon-title section-title text-h1">
+          SALON<span class="salon-title-sub section-title-sub"> / little グループ店舗</span>
         </h2>
             <p class="salon-description">
               littleは、全国に広がる“通いやすくて、頼れる”サロン。店舗ごとの雰囲気や得意なスタイルもぜひチェックしてみてください。
@@ -345,7 +345,7 @@ const salonJsonLd = {
         <!-- 店舗一覧 -->
         <div class="salon-listings">
           <h3 class="salon-area-title">北海道エリア</h3>
-          <div class="salon-cards">
+          <div class="salon-cards grid-2-cols">
             {salons.slice(0, 10).map((salon) => (
               <div class="salon-card">
                 <img src="/images/hero/slide-1.png" alt={salon.name} class="salon-card-image" />
@@ -513,7 +513,7 @@ const salonJsonLd = {
         </h2>
         
         <!-- Instagram投稿グリッド -->
-        <div class="instagram-grid">
+        <div class="instagram-grid grid-3-cols">
           <div class="instagram-item">
             <img src="/images/hero/slide-1.png" alt="Instagram投稿1" class="instagram-image" />
             <div class="instagram-overlay">
@@ -1105,9 +1105,95 @@ const salonJsonLd = {
     padding: 110px 0;
   }
   
-  .intro-container {
+  /* 共通コンテナスタイル */
+  .section-container {
     max-width: 1040px;
     margin: 0 auto;
+  }
+  
+  .section-container-wide {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .intro-container {
+    /* イントロダクション専用の追加スタイルがあればここに */
+  }
+  
+  /* 共通グリッドレイアウト */
+  .grid-4-cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  
+  .grid-3-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  
+  .grid-2-cols {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  
+  /* 共通タイポグラフィ */
+  .text-h1 {
+    font-family: var(--font-family-yumincho);
+    font-size: 64px;
+    font-weight: var(--font-weight-medium);
+    line-height: 100%;
+  }
+  
+  .text-h2 {
+    font-family: var(--font-family-yumincho);
+    font-size: 48px;
+    font-weight: var(--font-weight-medium);
+    line-height: 100%;
+  }
+  
+  .text-h3 {
+    font-family: var(--font-family-yumincho);
+    font-size: 32px;
+    font-weight: var(--font-weight-medium);
+    line-height: 120%;
+  }
+  
+  .text-h4 {
+    font-family: var(--font-family-yumincho);
+    font-size: 24px;
+    font-weight: var(--font-weight-medium);
+    line-height: 120%;
+  }
+  
+  .text-body {
+    font-family: var(--font-family-zenkaku);
+    font-size: 16px;
+    font-weight: var(--font-weight-regular);
+    line-height: 150%;
+  }
+  
+  .text-body-large {
+    font-family: var(--font-family-zenkaku);
+    font-size: 18px;
+    font-weight: var(--font-weight-regular);
+    line-height: 150%;
+  }
+  
+  .text-small {
+    font-family: var(--font-family-zenkaku);
+    font-size: 14px;
+    font-weight: var(--font-weight-regular);
+    line-height: 150%;
+  }
+  
+  .text-caption {
+    font-family: var(--font-family-zenkaku);
+    font-size: 12px;
+    font-weight: var(--font-weight-regular);
+    line-height: 150%;
   }
   
   .intro-content {
@@ -1119,6 +1205,18 @@ const salonJsonLd = {
   .intro-text {
     flex: 1;
     color: var(--color-black);
+  }
+  
+  /* 共通セクションタイトル */
+  .section-title {
+    color: var(--color-black);
+    text-align: left;
+    height: 64px;
+    margin-bottom: 40px;
+  }
+  
+  .section-title-sub {
+    font-size: 24px;
   }
   
   .intro-title {
@@ -1166,15 +1264,7 @@ const salonJsonLd = {
   }
   
   .hairstyle-title {
-    font-family: var(--font-family-yumincho);
-    font-size: 64px;
-    font-weight: var(--font-weight-medium);
-    color: var(--color-black);
-    text-align: left;
-    margin-bottom: 3rem;
-  }
-  .hairstyle-title-sub{
-    font-size: 24px;
+    /* タイポグラフィは共通クラスで管理 */
   }
   
   .hairstyle-tabs {
@@ -1223,9 +1313,6 @@ const salonJsonLd = {
   }
   
   .hairstyle-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
     margin-bottom: 3rem;
   }
   
@@ -1272,15 +1359,7 @@ const salonJsonLd = {
   }
   
   .hairmake-title {
-    font-family: var(--font-family-yumincho);
-    font-size: 64px;
-    font-weight: var(--font-weight-medium);
-    color: var(--color-black);
-    text-align: left;
-    margin-bottom: 3rem;
-  }
-  .hairmake-title-sub{
-    font-size: 24px;
+    /* タイポグラフィは共通クラスで管理 */
   }
   
   .hairmake-content {
@@ -1387,17 +1466,7 @@ const salonJsonLd = {
   }
   
   .salon-title {
-    font-family: var(--font-family-yumincho);
-    font-size: 64px;
-    font-weight: var(--font-weight-medium);
-    color: var(--color-black);
-    text-align: left;
-    height: 64px;
-    line-height: 100%;
-    margin-bottom: 40px;
-  }
-  .salon-title-sub{
-    font-size: 24px;
+    /* タイポグラフィは共通クラスで管理 */
   }
   
   .salon-content {
@@ -1526,9 +1595,7 @@ const salonJsonLd = {
   }
   
   .salon-cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    /* グリッドスタイルは共通クラスで管理 */
   }
   
   .salon-card {
@@ -1889,9 +1956,7 @@ const salonJsonLd = {
   }
   
   .instagram-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    /* グリッドスタイルは共通クラスで管理 */
   }
   
   .instagram-item {
@@ -2142,6 +2207,36 @@ const salonJsonLd = {
   }
   
   /* レスポンシブ対応 */
+  
+  /* タブレット対応 (768px - 1024px) */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .intro-content {
+      gap: 2rem;
+    }
+    
+    .hairstyle-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .salon-content {
+      gap: 2rem;
+    }
+    
+    .salon-regions {
+      gap: 0.75rem;
+    }
+    
+    .salon-cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .instagram-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* モバイル対応 (768px以下) */
   @media (max-width: 768px) {
     .intro-content {
       flex-direction: column;
