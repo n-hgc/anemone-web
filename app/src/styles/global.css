@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme {
+:root {
   /* カラーパレット */
   --color-black: #3D3D3D;
   --color-grey-medium: #A7A7A7;
@@ -42,6 +42,7 @@
   /* フォントウェイト */
   --font-weight-medium: 500;
   --font-weight-regular: 400;
+  --font-weight-bold: 700;
   
   /* ブレークポイント */
   --breakpoint-pc: 768px;
