@@ -163,7 +163,7 @@ const salonJsonLd = {
           </div>
           <div class="intro-image">
             <img 
-              src="/images/hero/slide-1.png" 
+              src="/images/main/salon_intro.png" 
               alt="アネモネサロンの店内" 
               class="intro-image-content"
             />
@@ -289,45 +289,56 @@ const salonJsonLd = {
     <!-- サロン店舗セクション -->
     <section id="salons" class="salon-section">
       <div class="salon-container">
+        
+        <!-- 2列レイアウト -->
+        <div class="salon-content">
+          <!-- 左側: テキストとボタン -->
+          <div class="salon-left">
         <h2 class="salon-title">
           SALON<span class="salon-title-sub"> / little グループ店舗</span>
         </h2>
-        
-        <p class="salon-description">
-          littleグループの美容室は、お客様の利便性を第一に考えた立地に展開しています。
-        </p>
-        
-        <!-- 地域ナビゲーション -->
-        <div class="salon-regions">
-          <button class="region-btn">北海道</button>
-          <button class="region-btn">東北</button>
-          <button class="region-btn">関東</button>
-          <button class="region-btn">中部</button>
-          <button class="region-btn">近畿</button>
-          <button class="region-btn">四国</button>
-          <button class="region-btn">中国</button>
-          <button class="region-btn">九州・沖縄</button>
-        </div>
-        
-        <!-- 検索バー -->
-        <div class="salon-search">
-          <input 
-            type="text" 
-            placeholder="サロン名・地域名で検索" 
-            class="salon-search-input"
-          />
-          <button class="salon-search-btn">
-            <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-          </button>
-        </div>
-        
-        <!-- 日本地図 -->
-        <div class="salon-map">
-          <div class="japan-map">
-            <!-- 日本地図のSVGまたは画像をここに配置 -->
-            <div class="map-placeholder">日本地図</div>
+            <p class="salon-description">
+              littleは、全国に広がる“通いやすくて、頼れる”サロン。店舗ごとの雰囲気や得意なスタイルもぜひチェックしてみてください。
+            </p>
+            
+            <!-- 地域ナビゲーション -->
+            <div class="salon-regions">
+              <button class="region-btn">北海道</button>
+              <button class="region-btn">東北</button>
+              <button class="region-btn">関東</button>
+              <button class="region-btn">中部</button>
+              <button class="region-btn">近畿</button>
+              <button class="region-btn">四国</button>
+              <button class="region-btn">中国</button>
+              <button class="region-btn">九州・沖縄</button>
+            </div>
+            
+            <!-- 検索バー -->
+            <div class="salon-search">
+              <input 
+                type="text" 
+                placeholder="サロン名・地域名で検索" 
+                class="salon-search-input"
+              />
+              <button class="salon-search-btn">
+                <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <!-- 右側: 日本地図 -->
+          <div class="salon-right">
+            <div class="salon-map">
+              <div class="japan-map">
+                <img 
+                  src="/images/main/illust_japan.png" 
+                  alt="日本地図" 
+                  class="japan-map-image"
+                />
+              </div>
+            </div>
           </div>
         </div>
         
@@ -1097,13 +1108,12 @@ const salonJsonLd = {
   .intro-container {
     max-width: 1040px;
     margin: 0 auto;
-    padding: 0 20px;
   }
   
   .intro-content {
     display: flex;
     align-items: center;
-    gap: 60px;
+    gap: 40px;
   }
   
   .intro-text {
@@ -1135,14 +1145,13 @@ const salonJsonLd = {
   }
   
   .intro-image {
-    flex: 1;
   }
   
   .intro-image-content {
-    width: 100%;
-    height: 400px;
+    width: 460px;
+    height: 424px;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 20px;
   }
   
   /* ヘアカタログセクション */
@@ -1154,7 +1163,6 @@ const salonJsonLd = {
   .hairstyle-container {
     max-width: 1040px;
     margin: 0 auto;
-    padding: 0 20px;
   }
   
   .hairstyle-title {
@@ -1171,54 +1179,64 @@ const salonJsonLd = {
   
   .hairstyle-tabs {
     display: flex;
-    justify-content: center;
-    gap: 2rem;
+    gap: 8px;
     margin-bottom: 3rem;
   }
   
   .hairstyle-tab {
     background: none;
     border: none;
-    color: var(--color-black);
+    color: var(--color-grey-light);
     font-family: var(--font-family-zenkaku);
-    font-size: 1rem;
-    font-weight: var(--font-weight-medium);
-    padding: 0.5rem 0;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 1rem 2rem;
     cursor: pointer;
     position: relative;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    flex: 1;
+    text-align: center;
+  }
+  
+  .hairstyle-tab::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: var(--color-grey-light);
   }
   
   .hairstyle-tab.active {
-    color: var(--color-brown-light);
+    color: var(--color-text-black);
   }
   
   .hairstyle-tab.active::after {
     content: '';
     position: absolute;
-    bottom: -4px;
+    bottom: 0;
     left: 0;
     right: 0;
-    height: 2px;
-    background-color: var(--color-brown-light);
+    height: 4px;
+    background-color: var(--color-text-black);
   }
   
   .hairstyle-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+    gap: 24px;
     margin-bottom: 3rem;
   }
   
   .hairstyle-item {
-    aspect-ratio: 1;
-    border-radius: 8px;
+    border-radius: 20px;
     overflow: hidden;
   }
   
   .hairstyle-image {
     width: 100%;
-    height: 100%;
+    height: 300px;
     object-fit: cover;
   }
   
@@ -1251,7 +1269,6 @@ const salonJsonLd = {
   .hairmake-container {
     max-width: 1040px;
     margin: 0 auto;
-    padding: 0 20px;
   }
   
   .hairmake-title {
@@ -1367,7 +1384,6 @@ const salonJsonLd = {
   .salon-container {
     max-width: 1040px;
     margin: 0 auto;
-    padding: 0 20px;
   }
   
   .salon-title {
@@ -1376,42 +1392,67 @@ const salonJsonLd = {
     font-weight: var(--font-weight-medium);
     color: var(--color-black);
     text-align: left;
-    margin-bottom: 3rem;
+    height: 64px;
+    line-height: 100%;
+    margin-bottom: 40px;
   }
   .salon-title-sub{
     font-size: 24px;
   }
   
+  .salon-content {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .salon-left {
+    flex: 1;
+  }
+  
+  .salon-right {
+  }
+  
   .salon-description {
     font-family: var(--font-family-zenkaku);
-    font-size: 1.125rem;
-    line-height: 1.8;
+    font-size: 16px;
+    line-height: 1.5;
     color: var(--color-black);
-    text-align: center;
-    margin-bottom: 3rem;
+    text-align: left;
+    margin-bottom: 40px;
   }
   
   .salon-regions {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
     margin-bottom: 3rem;
   }
   
   .region-btn {
-    background-color: var(--color-grey-medium);
+    display: flex;
+    width: 172px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: 1px solid var(--color-black);
+    background-color: transparent;
     color: var(--color-black);
-    border: none;
-    padding: 1rem;
-    border-radius: 6px;
     font-family: var(--font-family-zenkaku);
     font-size: 0.875rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    padding: 0 1rem;
   }
   
   .region-btn:hover {
-    background-color: var(--color-brown);
+    background-color: #E6DDCA;
+  }
+  
+  .region-btn.selected {
+    background-color: var(--color-black);
+    color: var(--color-white);
   }
   
   .salon-search {
@@ -1453,22 +1494,23 @@ const salonJsonLd = {
   }
   
   .salon-map {
-    margin-bottom: 3rem;
     text-align: center;
   }
   
   .japan-map {
-    background-color: var(--color-grey-light);
-    height: 200px;
+    height: 472px;
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    background-color: var(--color-beige);
   }
   
-  .map-placeholder {
-    color: var(--color-text-grey-medium);
-    font-family: var(--font-family-zenkaku);
+  .japan-map-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
   
   .salon-listings {
@@ -1589,7 +1631,6 @@ const salonJsonLd = {
     z-index: 2;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
   }
   
   .recruit-content {
@@ -1666,7 +1707,6 @@ const salonJsonLd = {
   .news-container {
     max-width: 1040px;
     margin: 0 auto;
-    padding: 0 20px;
   }
   
   .news-title {
@@ -1838,7 +1878,6 @@ const salonJsonLd = {
   .instagram-container {
     max-width: 1040px;
     margin: 0 auto;
-    padding: 0 20px;
   }
   
   .instagram-title {
@@ -1907,7 +1946,6 @@ const salonJsonLd = {
   .footer-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
   }
   
   .footer-brand {
@@ -2133,8 +2171,27 @@ const salonJsonLd = {
       gap: 2rem;
     }
     
+    .salon-content {
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
     .salon-regions {
-      grid-template-columns: repeat(2, 1fr);
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .region-btn {
+      display: flex;
+      padding: 24px;
+      justify-content: center;
+      align-items: center;
+      flex: 1 0 0;
+      align-self: stretch;
+      border-radius: 5px;
+      border: 1px solid var(--color-black);
+      width: 100%;
+      height: auto;
     }
     
     .salon-cards {
