@@ -46,7 +46,7 @@ const salonJsonLd = {
   jsonLd={JSON.stringify(salonJsonLd)}
 >
   <!-- ページ全体の背景をbeigeに設定 -->
-  <div class="min-h-screen bg-beige">
+  <div class="bg-beige">
     
     <!-- ヘッダー -->
     <Header />
@@ -152,16 +152,14 @@ const salonJsonLd = {
         <div class="intro-content">
           <div class="intro-text">
             <h2 class="intro-title">
-              アクセシビリティ × 技術力
+              通いやすさ×技術力<br>全国110店舗の身近で上質なサロン
             </h2>
             <p class="intro-description">
-              全国110店舗で展開するlittleグループは、<br>
-              お客様の利便性を追求したアクセシビリティと、<br>
-              プロの技術力を兼ね備えた美容室です。
+              littleは、全国に110店舗以上を展開するヘアサロンブランドです。<br>
+              一人ひとりの日常に寄り添いながらも、洗練された技術と感性で「いつもの私」を少しだけ特別に。<br>
+              リーズナブルな価格でありながら、高い技術力と丁寧な接客を提供し、リピーターのお客様にも多く選ばれています。<br>
+              あなたの毎日に、ほんの少しのときめきを
             </p>
-            <div class="intro-highlight">
-              全国110店舗
-            </div>
           </div>
           <div class="intro-image">
             <img 
@@ -178,7 +176,7 @@ const salonJsonLd = {
     <section class="hairstyle-section">
       <div class="hairstyle-container">
         <h2 class="hairstyle-title">
-          HAIRSTYLE / ヘアカタログ
+          HAIRSTYLE<span class="hairstyle-title-sub"> / ヘアカタログ</span>
         </h2>
         
         <!-- タブナビゲーション -->
@@ -231,7 +229,7 @@ const salonJsonLd = {
     <section class="hairmake-section">
       <div class="hairmake-container">
         <h2 class="hairmake-title">
-          HAIRMAKE / 企業様向けヘアメイク
+          HAIRMAKE<span class="hairmake-title-sub"> / 企業様向けヘアメイク</span>
         </h2>
         
         <div class="hairmake-content">
@@ -292,7 +290,7 @@ const salonJsonLd = {
     <section id="salons" class="salon-section">
       <div class="salon-container">
         <h2 class="salon-title">
-          SALON / little グループ店舗
+          SALON<span class="salon-title-sub"> / little グループ店舗</span>
         </h2>
         
         <p class="salon-description">
@@ -371,7 +369,7 @@ const salonJsonLd = {
       <div class="recruit-container">
         <div class="recruit-content">
           <h2 class="recruit-title">
-            RECRUIT / 採用情報
+            RECRUIT<span class="recruit-title-sub"> / 採用情報</span>
           </h2>
           
           <div class="recruit-text">
@@ -405,7 +403,7 @@ const salonJsonLd = {
     <section class="news-section">
       <div class="news-container">
         <h2 class="news-title">
-          NEWS / お知らせ
+          NEWS<span class="news-title-sub"> / お知らせ</span>
         </h2>
         
         <!-- タブナビゲーション -->
@@ -496,36 +494,187 @@ const salonJsonLd = {
       </div>
     </section>
 
-    <!-- CTAセクション -->
-    <section class={`${responsive.spacing.section} bg-brown`}>
-      <div class={responsive.spacing.container}>
-        <div class="text-center">
-          <h2 class={`${responsive.text.h2} text-white mb-4 pc:mb-6`}>
-            今すぐご予約ください
-          </h2>
-          <p class={`${responsive.text.p} text-white mb-6 pc:mb-8 max-w-2xl mx-auto opacity-90`}>
-            お客様のご来店をお待ちしております。お気軽にお問い合わせください。
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="tel:03-1234-5678"
-              class="inline-flex items-center justify-center px-6 py-3 pc:px-8 pc:py-4 bg-white text-brown rounded-lg font-bold text-base pc:text-lg transition-all duration-300 hover:scale-105"
-            >
-              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+    <!-- Instagramセクション -->
+    <section class="instagram-section">
+      <div class="instagram-container">
+        <h2 class="instagram-title">
+          / Instagram
+        </h2>
+        
+        <!-- Instagram投稿グリッド -->
+        <div class="instagram-grid">
+          <div class="instagram-item">
+            <img src="/images/hero/slide-1.png" alt="Instagram投稿1" class="instagram-image" />
+            <div class="instagram-overlay">
+              <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
               </svg>
-              03-1234-5678
-            </a>
-            <a 
-              href="/contact"
-              class="inline-flex items-center justify-center px-6 py-3 pc:px-8 pc:py-4 border-2 border-white text-white rounded-lg font-bold text-base pc:text-lg transition-all duration-300 hover:bg-white hover:text-brown hover:scale-105"
-            >
-              お問い合わせ
-            </a>
+            </div>
+          </div>
+          
+          <div class="instagram-item">
+            <img src="/images/hero/slide-2.png" alt="Instagram投稿2" class="instagram-image" />
+            <div class="instagram-overlay">
+              <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="instagram-item">
+            <img src="/images/hero/slide-1.png" alt="Instagram投稿3" class="instagram-image" />
+            <div class="instagram-overlay">
+              <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="instagram-item">
+            <img src="/images/hero/slide-2.png" alt="Instagram投稿4" class="instagram-image" />
+            <div class="instagram-overlay">
+              <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.40s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="instagram-item">
+            <img src="/images/hero/slide-1.png" alt="Instagram投稿5" class="instagram-image" />
+            <div class="instagram-overlay">
+              <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="instagram-item">
+            <img src="/images/hero/slide-2.png" alt="Instagram投稿6" class="instagram-image" />
+            <div class="instagram-overlay">
+              <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="instagram-item">
+            <img src="/images/hero/slide-1.png" alt="Instagram投稿7" class="instagram-image" />
+            <div class="instagram-overlay">
+              <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="instagram-item">
+            <img src="/images/hero/slide-2.png" alt="Instagram投稿8" class="instagram-image" />
+            <div class="instagram-overlay">
+              <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="instagram-item">
+            <img src="/images/hero/slide-1.png" alt="Instagram投稿9" class="instagram-image" />
+            <div class="instagram-overlay">
+              <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- CTAセクション -->
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- ブランドロゴ -->
+        <div class="footer-brand">
+          <h2 class="footer-brand-text">
+            <span class="footer-brand-name">little</span>
+            <span class="footer-brand-tagline">髪と、わたしと、生きていく。</span>
+          </h2>
+        </div>
+        
+        <!-- ナビゲーション -->
+        <nav class="footer-nav">
+          <a href="/" class="footer-nav-link">TOP</a>
+          <div class="footer-nav-separator"></div>
+          <a href="/concept" class="footer-nav-link">コンセプト</a>
+          <div class="footer-nav-separator"></div>
+          <a href="/menu" class="footer-nav-link">メニュー</a>
+          <div class="footer-nav-separator"></div>
+          <a href="/hairstyle" class="footer-nav-link">ヘアカタログ</a>
+          <div class="footer-nav-separator"></div>
+          <a href="/salons" class="footer-nav-link">店舗一覧</a>
+          <div class="footer-nav-separator"></div>
+          <a href="/news" class="footer-nav-link">お知らせ</a>
+        </nav>
+        
+        <!-- 採用サイトボタン -->
+        <div class="footer-recruit">
+          <a href="/recruit" class="footer-recruit-btn">
+            <span class="footer-recruit-text">採用サイト</span>
+            <svg class="footer-recruit-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- SNSアイコンとスポンサー -->
+        <div class="footer-bottom">
+          <div class="footer-social">
+            <a href="https://twitter.com/anemone_salon" class="footer-social-link" target="_blank" rel="noopener noreferrer">
+              <svg class="footer-social-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="https://instagram.com/anemone_salon" class="footer-social-link" target="_blank" rel="noopener noreferrer">
+              <svg class="footer-social-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+            <a href="https://line.me/ti/p/@anemone_salon" class="footer-social-link" target="_blank" rel="noopener noreferrer">
+              <svg class="footer-social-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+              </svg>
+            </a>
+          </div>
+          
+          <!-- スポンサー -->
+          <div class="footer-sponsors">
+            <div class="footer-sponsor">
+              <div class="footer-sponsor-logo">
+                <div class="footer-sponsor-icon">A</div>
+                <div class="footer-sponsor-text">
+                  <div class="footer-sponsor-title">SHIBUYA ABEMAS</div>
+                  <div class="footer-sponsor-subtitle">株式会社anemoneは渋谷ABEMASを応援しています</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="footer-sponsor">
+              <div class="footer-sponsor-logo">
+                <div class="footer-sponsor-icon sun">SUN ROCKERS</div>
+                <div class="footer-sponsor-text">
+                  <div class="footer-sponsor-title">SHIBUYA</div>
+                  <div class="footer-sponsor-subtitle">株式会社anemoneはサンロッカーズ渋谷を応援しています</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- コピーライト -->
+        <div class="footer-copyright">
+          <p>© anemone. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
     
   </div>
 </Layout>
@@ -547,6 +696,8 @@ const salonJsonLd = {
     align-items: flex-start;
     gap: 10px;
     align-self: stretch;
+    max-width: 1440px;
+    margin: 0 auto;
     height: 100%;
     min-height: 500px;
   }
@@ -939,11 +1090,12 @@ const salonJsonLd = {
   /* イントロダクションセクション */
   .intro-section {
     background-color: var(--color-beige);
-    padding: 80px 0;
+    
+    padding: 110px 0;
   }
   
   .intro-container {
-    max-width: 1200px;
+    max-width: 1040px;
     margin: 0 auto;
     padding: 0 20px;
   }
@@ -961,16 +1113,17 @@ const salonJsonLd = {
   
   .intro-title {
     font-family: var(--font-family-yumincho);
-    font-size: 2.5rem;
+    font-size: 24px;
     font-weight: var(--font-weight-medium);
-    line-height: 1.2;
+    line-height: 1.5;
     margin-bottom: 2rem;
   }
   
   .intro-description {
     font-family: var(--font-family-zenkaku);
-    font-size: 1.125rem;
-    line-height: 1.8;
+    font-weight: var(--font-weight-normal);
+    font-size: 16px;
+    line-height: 1.5;
     margin-bottom: 2rem;
   }
   
@@ -999,18 +1152,21 @@ const salonJsonLd = {
   }
   
   .hairstyle-container {
-    max-width: 1200px;
+    max-width: 1040px;
     margin: 0 auto;
     padding: 0 20px;
   }
   
   .hairstyle-title {
     font-family: var(--font-family-yumincho);
-    font-size: 2.5rem;
+    font-size: 64px;
     font-weight: var(--font-weight-medium);
     color: var(--color-black);
-    text-align: center;
+    text-align: left;
     margin-bottom: 3rem;
+  }
+  .hairstyle-title-sub{
+    font-size: 24px;
   }
   
   .hairstyle-tabs {
@@ -1093,18 +1249,21 @@ const salonJsonLd = {
   }
   
   .hairmake-container {
-    max-width: 1200px;
+    max-width: 1040px;
     margin: 0 auto;
     padding: 0 20px;
   }
   
   .hairmake-title {
     font-family: var(--font-family-yumincho);
-    font-size: 2.5rem;
+    font-size: 64px;
     font-weight: var(--font-weight-medium);
     color: var(--color-black);
-    text-align: center;
+    text-align: left;
     margin-bottom: 3rem;
+  }
+  .hairmake-title-sub{
+    font-size: 24px;
   }
   
   .hairmake-content {
@@ -1206,18 +1365,21 @@ const salonJsonLd = {
   }
   
   .salon-container {
-    max-width: 1200px;
+    max-width: 1040px;
     margin: 0 auto;
     padding: 0 20px;
   }
   
   .salon-title {
     font-family: var(--font-family-yumincho);
-    font-size: 2.5rem;
+    font-size: 64px;
     font-weight: var(--font-weight-medium);
     color: var(--color-black);
-    text-align: center;
-    margin-bottom: 2rem;
+    text-align: left;
+    margin-bottom: 3rem;
+  }
+  .salon-title-sub{
+    font-size: 24px;
   }
   
   .salon-description {
@@ -1500,17 +1662,17 @@ const salonJsonLd = {
   }
   
   .news-container {
-    max-width: 1200px;
+    max-width: 1040px;
     margin: 0 auto;
     padding: 0 20px;
   }
   
   .news-title {
     font-family: var(--font-family-yumincho);
-    font-size: 2.5rem;
+    font-size: 64px;
     font-weight: var(--font-weight-medium);
     color: var(--color-black);
-    text-align: center;
+    text-align: left;
     margin-bottom: 3rem;
   }
   
@@ -1557,7 +1719,6 @@ const salonJsonLd = {
   }
   
   .news-list {
-    max-width: 800px;
     margin: 0 auto;
   }
   
@@ -1662,6 +1823,280 @@ const salonJsonLd = {
     height: 16px;
   }
   
+  /* Instagramセクション */
+  .instagram-section {
+    background-color: #D2CABB;
+    padding: 80px 0;
+  }
+  
+  .instagram-container {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .instagram-title {
+    font-family: var(--font-family-yumincho);
+    font-size: 32px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+    margin-bottom: 3rem;
+  }
+  
+  .instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  
+  .instagram-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .instagram-item:hover {
+    transform: scale(1.02);
+  }
+  
+  .instagram-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .instagram-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .instagram-item:hover .instagram-overlay {
+    opacity: 1;
+  }
+  
+  .instagram-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--color-white);
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: #3D3D3D;
+    padding: 60px 0 30px;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .footer-brand {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .footer-brand-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .footer-brand-name {
+    font-family: var(--font-family-yumincho);
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+  }
+  
+  .footer-brand-tagline {
+    font-family: var(--font-family-zenkaku);
+    font-size: 1.125rem;
+    color: var(--color-white);
+  }
+  
+  .footer-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-nav-link {
+    color: var(--color-white);
+    text-decoration: none;
+    font-family: var(--font-family-zenkaku);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-regular);
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-nav-link:hover {
+    color: var(--color-brown-light);
+  }
+  
+  .footer-nav-separator {
+    width: 1px;
+    height: 16px;
+    background-color: var(--color-white);
+    opacity: 0.5;
+  }
+  
+  .footer-recruit {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .footer-recruit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--color-white);
+    border: 1px solid var(--color-white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-family: var(--font-family-zenkaku);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .footer-recruit-btn:hover {
+    background-color: var(--color-white);
+    color: var(--color-grey-medium);
+  }
+  
+  .footer-recruit-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .footer-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-white);
+    border-radius: 50%;
+    color: var(--color-white);
+    transition: all 0.3s ease;
+  }
+  
+  .footer-social-link:hover {
+    background-color: var(--color-white);
+    color: var(--color-grey-medium);
+  }
+  
+  .footer-social-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .footer-sponsors {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .footer-sponsor {
+    background-color: var(--color-white);
+    border-radius: 8px;
+    padding: 1rem;
+    min-width: 200px;
+  }
+  
+  .footer-sponsor-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .footer-sponsor-icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-brown);
+    color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-family-zenkaku);
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-bold);
+    flex-shrink: 0;
+  }
+  
+  .footer-sponsor-icon.sun {
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    color: var(--color-black);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+    line-height: 1.2;
+  }
+  
+  .footer-sponsor-text {
+    flex: 1;
+  }
+  
+  .footer-sponsor-title {
+    font-family: var(--font-family-zenkaku);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-black);
+    margin-bottom: 0.25rem;
+  }
+  
+  .footer-sponsor-subtitle {
+    font-family: var(--font-family-zenkaku);
+    font-size: 0.75rem;
+    color: var(--color-text-grey-medium);
+    line-height: 1.4;
+  }
+  
+  .footer-copyright {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .footer-copyright p {
+    font-family: var(--font-family-zenkaku);
+    font-size: 0.75rem;
+    color: var(--color-white);
+    opacity: 0.8;
+  }
+  
   /* レスポンシブ対応 */
   @media (max-width: 768px) {
     .intro-content {
@@ -1716,6 +2151,45 @@ const salonJsonLd = {
     .recruit-btn {
       padding: 0.875rem 1.5rem;
       font-size: 0.875rem;
+    }
+    
+    .instagram-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+    
+    .instagram-title {
+      font-size: 2rem;
+    }
+    
+    .footer-bottom {
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .footer-sponsors {
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+    
+    .footer-sponsor {
+      min-width: auto;
+      width: 100%;
+    }
+    
+    .footer-nav {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .footer-brand-name {
+      font-size: 2rem;
+    }
+    
+    .footer-brand-tagline {
+      font-size: 1rem;
     }
   }
 </style>
