@@ -13,71 +13,96 @@ const configPath = path.join(__dirname, '..', 'design-system-config.json');
 const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 
 /**
- * Figmaのデザインデータを解析してTailwindクラスを生成
+ * 設定ファイルからTailwindクラスを生成
  */
-function generateTailwindClasses(figmaData) {
-  const classes = {
-    colors: {},
-    spacing: {},
-    typography: {},
-    components: {}
+function generateTailwindClasses() {
+  const designSystem = config.figma.designSystem;
+  
+  return {
+    colors: {
+      ...designSystem.colors.text,
+      ...designSystem.colors.background,
+      ...designSystem.colors.border
+    },
+    spacing: {
+      small: {
+        value: '0.5rem',
+        description: '小さいスペース'
+      },
+      medium: {
+        value: '1rem',
+        description: '中程度のスペース'
+      },
+      large: {
+        value: '2rem',
+        description: '大きいスペース'
+      }
+    },
+    typography: {
+      'h2-pc': {
+        fontSize: designSystem.typography.fontSize.h2_pc,
+        fontWeight: designSystem.typography.fontWeight.medium,
+        lineHeight: designSystem.typography.lineHeight.tight,
+        fontFamily: designSystem.typography.fontFamily.yumincho,
+        description: 'PC用H2見出し'
+      },
+      'h3-pc': {
+        fontSize: designSystem.typography.fontSize.h3_pc,
+        fontWeight: designSystem.typography.fontWeight.medium,
+        lineHeight: designSystem.typography.lineHeight.normal,
+        fontFamily: designSystem.typography.fontFamily.yumincho,
+        description: 'PC用H3見出し'
+      },
+      'p-pc': {
+        fontSize: designSystem.typography.fontSize.p_pc,
+        fontWeight: designSystem.typography.fontWeight.regular,
+        lineHeight: designSystem.typography.lineHeight.normal,
+        fontFamily: designSystem.typography.fontFamily.zenkaku,
+        description: 'PC用本文'
+      },
+      'h2-sp': {
+        fontSize: designSystem.typography.fontSize.h2_sp,
+        fontWeight: designSystem.typography.fontWeight.medium,
+        lineHeight: designSystem.typography.lineHeight.tight,
+        fontFamily: designSystem.typography.fontFamily.yumincho,
+        description: 'SP用H2見出し'
+      },
+      'h3-sp': {
+        fontSize: designSystem.typography.fontSize.h3_sp,
+        fontWeight: designSystem.typography.fontWeight.medium,
+        lineHeight: designSystem.typography.lineHeight.normal,
+        fontFamily: designSystem.typography.fontFamily.yumincho,
+        description: 'SP用H3見出し'
+      },
+      'p-sp': {
+        fontSize: designSystem.typography.fontSize.p_sp,
+        fontWeight: designSystem.typography.fontWeight.regular,
+        lineHeight: designSystem.typography.lineHeight.normal,
+        fontFamily: designSystem.typography.fontFamily.zenkaku,
+        description: 'SP用本文'
+      }
+    }
   };
-
-  // カラーパレットの生成
-  if (figmaData.colors) {
-    figmaData.colors.forEach(color => {
-      const name = color.name.toLowerCase().replace(/\s+/g, '-');
-      classes.colors[name] = {
-        value: color.value,
-        description: color.description || ''
-      };
-    });
-  }
-
-  // スペーシングの生成
-  if (figmaData.spacing) {
-    figmaData.spacing.forEach(space => {
-      const name = space.name.toLowerCase().replace(/\s+/g, '-');
-      classes.spacing[name] = {
-        value: space.value,
-        description: space.description || ''
-      };
-    });
-  }
-
-  // タイポグラフィの生成
-  if (figmaData.typography) {
-    figmaData.typography.forEach(type => {
-      const name = type.name.toLowerCase().replace(/\s+/g, '-');
-      classes.typography[name] = {
-        fontSize: type.fontSize,
-        fontWeight: type.fontWeight,
-        lineHeight: type.lineHeight,
-        letterSpacing: type.letterSpacing,
-        description: type.description || ''
-      };
-    });
-  }
-
-  return classes;
 }
 
 /**
  * コンポーネントクラスを生成
  */
-function generateComponentClasses(figmaComponents) {
-  const components = {};
-
-  figmaComponents.forEach(component => {
-    const name = component.name.toLowerCase().replace(/\s+/g, '-');
-    components[name] = {
-      base: component.styles.base || '',
-      variants: component.styles.variants || {},
-      states: component.styles.states || {}
-    };
-  });
-
-  return components;
+function generateComponentClasses() {
+  const designSystem = config.figma.designSystem;
+  
+  return {
+    button: {
+      primary: designSystem.components.button.primary,
+      secondary: designSystem.components.button.secondary
+    },
+    card: {
+      base: designSystem.components.card
+    },
+    input: {
+      base: designSystem.components.input
+    }
+  };
 }
 
 /**
@@ -86,36 +111,52 @@ function generateComponentClasses(figmaComponents) {
 function updateTailwindConfig(classes) {
   const tailwindConfigPath = path.join(__dirname, '..', 'app', 'tailwind.config.js');
   
-  const config = {
+  const tailwindConfig = {
     content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
     theme: {
       extend: {
         colors: {
-          ...classes.colors,
-          brand: {
-            50: '#fdf2f8',
-            100: '#fce7f3',
-            200: '#fbcfe8',
-            300: '#f9a8d4',
-            400: '#f472b6',
-            500: '#ec4899',
-            600: '#db2777',
-            700: '#be185d',
-            800: '#9d174d',
-            900: '#831843'
-          }
+          // カスタムカラー
+          black: "#3D3D3D",
+          grey_medium: "#A7A7A7",
+          grey_light: "#CFCFCF",
+          brown_dark: "#69552E",
+          brown_light: "#B8AA8C",
+          white: "#FFFFFF",
+          brown: "#69552E",
+          beige: "#FAF4E8",
+          // ネストしたカラー
+          text: config.tailwind.customColors.text,
+          background: config.tailwind.customColors.background,
+          border: config.tailwind.customColors.border
         },
-        spacing: classes.spacing,
-        fontSize: classes.typography,
+        spacing: {
+          small: "0.5rem",
+          medium: "1rem",
+          large: "2rem"
+        },
+        fontSize: {
+          'h2-pc': ['64px', { lineHeight: '100%', fontWeight: '500' }],
+          'h3-pc': ['24px', { lineHeight: '150%', fontWeight: '500' }],
+          'p-pc': ['16px', { lineHeight: '150%', fontWeight: '400' }],
+          'h2-sp': ['36px', { lineHeight: '100%', fontWeight: '500' }],
+          'h3-sp': ['20px', { lineHeight: '150%', fontWeight: '500' }],
+          'p-sp': ['16px', { lineHeight: '150%', fontWeight: '400' }]
+        },
         fontFamily: {
-          sans: ['Inter', 'system-ui', 'sans-serif']
+          yumincho: ['YuMincho', 'serif'],
+          zenkaku: ['ZenKakuGothicNew', 'sans-serif']
+        },
+        screens: {
+          'pc': '768px',
+          'sp': '767px'
         }
       }
     },
     plugins: []
   };
 
-  const configContent = `module.exports = ${JSON.stringify(config, null, 2)};`;
+  const configContent = `module.exports = ${JSON.stringify(tailwindConfig, null, 2)};`;
   fs.writeFileSync(tailwindConfigPath, configContent);
 }
 
@@ -140,15 +181,32 @@ export const componentClasses = ${JSON.stringify(components, null, 2)};
 export const responsive = {
   grid: {
     '1': 'grid-cols-1',
-    '2': 'grid-cols-1 md:grid-cols-2',
-    '3': 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
-    '4': 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
+    '2': 'grid-cols-1 pc:grid-cols-2',
+    '3': 'grid-cols-1 pc:grid-cols-2 lg:grid-cols-3',
+    '4': 'grid-cols-1 pc:grid-cols-2 lg:grid-cols-4'
   },
   text: {
-    'heading-2xl': 'text-2xl md:text-4xl lg:text-6xl',
-    'heading-xl': 'text-xl md:text-3xl lg:text-4xl',
-    'heading-lg': 'text-lg md:text-2xl lg:text-3xl'
+    'h2': 'text-4xl pc:text-6xl font-yumincho font-medium leading-tight',
+    'h3': 'text-xl pc:text-2xl font-yumincho font-medium leading-normal',
+    'p': 'text-base font-zenkaku font-normal leading-normal'
+  },
+  spacing: {
+    'section': 'py-8 pc:py-16',
+    'container': 'px-4 sm:px-6 lg:px-8'
   }
+};
+
+// ユーティリティ関数
+export const createComponentClass = (component: string, variant?: string) => {
+  const base = componentClasses[component]?.base || '';
+  const variantClass = variant ? componentClasses[component]?.[variant] : '';
+  
+  return [base, variantClass].filter(Boolean).join(' ');
+};
+
+// カラーユーティリティ
+export const getColor = (color: string) => {
+  return designTokens.colors[color]?.value || color;
 };
 `;
 
@@ -162,40 +220,9 @@ async function main() {
   try {
     console.log('🎨 Figma MCP統合を開始します...');
     
-    // ここでFigma MCPサーバーからデータを取得
-    // 実際の実装では、MCPサーバーとの通信を行う
-    const mockFigmaData = {
-      colors: [
-        { name: 'Primary', value: '#ec4899', description: 'メインカラー' },
-        { name: 'Secondary', value: '#8b5cf6', description: 'セカンダリカラー' }
-      ],
-      spacing: [
-        { name: 'Small', value: '0.5rem', description: '小さいスペース' },
-        { name: 'Medium', value: '1rem', description: '中程度のスペース' },
-        { name: 'Large', value: '2rem', description: '大きいスペース' }
-      ],
-      typography: [
-        { name: 'Heading Large', fontSize: '2rem', fontWeight: '700', lineHeight: '1.2' },
-        { name: 'Body Medium', fontSize: '1rem', fontWeight: '400', lineHeight: '1.5' }
-      ]
-    };
-
-    const mockComponents = [
-      {
-        name: 'Button Primary',
-        styles: {
-          base: 'px-6 py-3 rounded-lg font-semibold transition-colors',
-          variants: {
-            primary: 'bg-pink-600 text-white hover:bg-pink-700',
-            secondary: 'border border-pink-600 text-pink-600 hover:bg-pink-50'
-          }
-        }
-      }
-    ];
-
-    // Tailwindクラスを生成
-    const classes = generateTailwindClasses(mockFigmaData);
-    const components = generateComponentClasses(mockComponents);
+    // 設定ファイルからクラスを生成
+    const classes = generateTailwindClasses();
+    const components = generateComponentClasses();
 
     // 設定ファイルを更新
     updateTailwindConfig(classes);

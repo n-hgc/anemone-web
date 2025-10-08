@@ -1,1 +1,203 @@
 @import "tailwindcss";
+
+:root {
+  /* カラーパレット */
+  --color-black: #3D3D3D;
+  --color-grey-medium: #A7A7A7;
+  --color-grey-light: #CFCFCF;
+  --color-brown-dark: #69552E;
+  --color-brown-light: #B8AA8C;
+  --color-white: #FFFFFF;
+  --color-brown: #69552E;
+  --color-beige: #FAF4E8;
+  
+  /* テキストカラー */
+  --color-text-black: #3D3D3D;
+  --color-text-grey-medium: #878C92;
+  --color-text-grey-light: #B1B1B1;
+  --color-text-brown-dark: #69552E;
+  --color-text-brown-light: #B8AA8C;
+  --color-text-white: #FFFFFF;
+  
+  /* フォントファミリー */
+  --font-family-yumincho: 'YuMincho', 'Yu Mincho', 'Shippori Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', 'HiraMinProN-W3', 'HiraMinProN-W6', serif;
+  --font-family-zenkaku: 'Zen Kaku Gothic New', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
+  
+  /* フォントサイズ */
+  --font-size-h2-pc: 64px;
+  --font-size-h3-pc: 24px;
+  --font-size-p-pc: 16px;
+  --font-size-h2-sp: 36px;
+  --font-size-h3-sp: 20px;
+  --font-size-p-sp: 16px;
+  
+  /* 行間 */
+  --line-height-h2-pc: 100%;
+  --line-height-h3-pc: 150%;
+  --line-height-p-pc: 150%;
+  --line-height-h2-sp: 100%;
+  --line-height-h3-sp: 150%;
+  --line-height-p-sp: 150%;
+  
+  /* フォントウェイト */
+  --font-weight-medium: 500;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  
+  /* ブレークポイント */
+  --breakpoint-pc: 768px;
+}
+
+/* ベーススタイルのリセット */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-zenkaku);
+  line-height: 1.6;
+  color: var(--color-text-black);
+}
+
+/* デフォルトのh1, h2, h3, pタグのスタイルをリセット */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-family: inherit;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-family: inherit;
+}
+
+/* カスタムユーティリティクラス */
+.bg-brown { background-color: var(--color-brown); }
+.bg-beige { background-color: var(--color-beige); }
+.bg-black { background-color: var(--color-black); }
+.bg-white { background-color: var(--color-white); }
+
+/* テキストカラークラス */
+.text-brown { color: var(--color-brown); }
+.text-brown-dark { color: var(--color-brown-dark); }
+.text-brown-light { color: var(--color-brown-light); }
+.text-black { color: var(--color-black); }
+.text-white { color: var(--color-white); }
+.text-grey-medium { color: var(--color-text-grey-medium); }
+.text-grey-light { color: var(--color-text-grey-light); }
+
+/* よく使用されるテキストカラーの組み合わせ */
+.text-primary { color: var(--color-brown); }
+.text-secondary { color: var(--color-text-grey-medium); }
+.text-muted { color: var(--color-text-grey-light); }
+.text-accent { color: var(--color-brown-dark); }
+
+.border-brown { border-color: var(--color-brown); }
+.border-grey-light { border-color: var(--color-grey-light); }
+
+/* フォントファミリークラス */
+.font-yumincho {
+  font-family: var(--font-family-yumincho) !important;
+}
+
+.font-zenkaku {
+  font-family: var(--font-family-zenkaku) !important;
+}
+
+/* タイポグラフィクラス */
+.text-h2-pc {
+  font-size: var(--font-size-h2-pc) !important;
+  line-height: var(--line-height-h2-pc) !important;
+  font-weight: var(--font-weight-medium) !important;
+  font-family: var(--font-family-yumincho) !important;
+}
+
+.text-h3-pc {
+  font-size: var(--font-size-h3-pc) !important;
+  line-height: var(--line-height-h3-pc) !important;
+  font-weight: var(--font-weight-medium) !important;
+  font-family: var(--font-family-yumincho) !important;
+}
+
+.text-p-pc {
+  font-size: var(--font-size-p-pc) !important;
+  line-height: var(--line-height-p-pc) !important;
+  font-weight: var(--font-weight-regular) !important;
+  font-family: var(--font-family-zenkaku) !important;
+}
+
+.text-h2-sp {
+  font-size: var(--font-size-h2-sp) !important;
+  line-height: var(--line-height-h2-sp) !important;
+  font-weight: var(--font-weight-medium) !important;
+  font-family: var(--font-family-yumincho) !important;
+}
+
+.text-h3-sp {
+  font-size: var(--font-size-h3-sp) !important;
+  line-height: var(--line-height-h3-sp) !important;
+  font-weight: var(--font-weight-medium) !important;
+  font-family: var(--font-family-yumincho) !important;
+}
+
+.text-p-sp {
+  font-size: var(--font-size-p-sp) !important;
+  line-height: var(--line-height-p-sp) !important;
+  font-weight: var(--font-weight-regular) !important;
+  font-family: var(--font-family-zenkaku) !important;
+}
+
+/* レスポンシブ対応 */
+@media (min-width: 768px) {
+  .pc\:text-h2-pc {
+    font-size: var(--font-size-h2-pc) !important;
+    line-height: var(--line-height-h2-pc) !important;
+    font-weight: var(--font-weight-medium) !important;
+    font-family: var(--font-family-yumincho) !important;
+  }
+  
+  .pc\:text-h3-pc {
+    font-size: var(--font-size-h3-pc) !important;
+    line-height: var(--line-height-h3-pc) !important;
+    font-weight: var(--font-weight-medium) !important;
+    font-family: var(--font-family-yumincho) !important;
+  }
+  
+  .pc\:text-p-pc {
+    font-size: var(--font-size-p-pc) !important;
+    line-height: var(--line-height-p-pc) !important;
+    font-weight: var(--font-weight-regular) !important;
+    font-family: var(--font-family-zenkaku) !important;
+  }
+}
+
+/* モバイルファーストのレスポンシブ対応 */
+@media (max-width: 767px) {
+  .text-h2-sp {
+    font-size: var(--font-size-h2-sp) !important;
+    line-height: var(--line-height-h2-sp) !important;
+    font-weight: var(--font-weight-medium) !important;
+    font-family: var(--font-family-yumincho) !important;
+  }
+  
+  .text-h3-sp {
+    font-size: var(--font-size-h3-sp) !important;
+    line-height: var(--line-height-h3-sp) !important;
+    font-weight: var(--font-weight-medium) !important;
+    font-family: var(--font-family-yumincho) !important;
+  }
+  
+  .text-p-sp {
+    font-size: var(--font-size-p-sp) !important;
+    line-height: var(--line-height-p-sp) !important;
+    font-weight: var(--font-weight-regular) !important;
+    font-family: var(--font-family-zenkaku) !important;
+  }
+}

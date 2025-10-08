@@ -138,3 +138,23 @@ export interface SearchFilters {
   service_type?: string;
   query?: string;
 }
+
+// レガシー形式のSalon型定義（JSONデータ用）
+export interface LegacySalon {
+  id: number;
+  name: string;
+  address: string;
+  tel: string;
+  hours: string;
+  payment: string;
+  facilities: string[];
+  geo: {
+    lat: number;
+    lng: number;
+  };
+  prefecture: string;
+  city: string;
+  photos: string[];
+  reservation_url: string;
+  gmb_place_id: string;
+}

@@ -8,17 +8,18 @@
 const http = require('http');
 
 /**
- * Figma MCPサーバーからファイル一覧を取得
+ * Figma MCPサーバーからファイル一覧を取得（SSEエンドポイント使用）
  */
 async function getFigmaFiles() {
   return new Promise((resolve, reject) => {
     const options = {
       hostname: '127.0.0.1',
       port: 3845,
-      path: '/mcp/files',
+      path: '/sse',
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Accept': 'text/event-stream',
+        'Cache-Control': 'no-cache'
       }
     };
 
@@ -31,8 +32,23 @@ async function getFigmaFiles() {
       
       res.on('end', () => {
         try {
-          const result = JSON.parse(data);
-          resolve(result);
+          // SSEデータを解析
+          const lines = data.split('\n');
+          let jsonData = '';
+          
+          for (const line of lines) {
+            if (line.startsWith('data: ')) {
+              jsonData = line.substring(6);
+              break;
+            }
+          }
+          
+          if (jsonData) {
+            const result = JSON.parse(jsonData);
+            resolve(result);
+          } else {
+            resolve([]);
+          }
         } catch (error) {
           reject(new Error(`JSON解析エラー: ${error.message}`));
         }
@@ -48,23 +64,20 @@ async function getFigmaFiles() {
 }
 
 /**
- * 特定のFigmaファイルのデザインデータを取得
+ * 特定のFigmaファイルのデザインデータを取得（SSEエンドポイント使用）
  */
 async function getFigmaDesignData(fileUrl) {
   return new Promise((resolve, reject) => {
     const options = {
       hostname: '127.0.0.1',
       port: 3845,
-      path: '/mcp/design',
-      method: 'POST',
+      path: `/sse?fileUrl=${encodeURIComponent(fileUrl)}`,
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Accept': 'text/event-stream',
+        'Cache-Control': 'no-cache'
       }
     };
-
-    const postData = JSON.stringify({
-      fileUrl: fileUrl
-    });
 
     const req = http.request(options, (res) => {
       let data = '';
@@ -75,8 +88,23 @@ async function getFigmaDesignData(fileUrl) {
       
       res.on('end', () => {
         try {
-          const result = JSON.parse(data);
-          resolve(result);
+          // SSEデータを解析
+          const lines = data.split('\n');
+          let jsonData = '';
+          
+          for (const line of lines) {
+            if (line.startsWith('data: ')) {
+              jsonData = line.substring(6);
+              break;
+            }
+          }
+          
+          if (jsonData) {
+            const result = JSON.parse(jsonData);
+            resolve(result);
+          } else {
+            resolve({});
+          }
         } catch (error) {
           reject(new Error(`JSON解析エラー: ${error.message}`));
         }
@@ -87,7 +115,6 @@ async function getFigmaDesignData(fileUrl) {
       reject(new Error(`リクエストエラー: ${error.message}`));
     });
 
-    req.write(postData);
     req.end();
   });
 }

@@ -3,15 +3,52 @@
     "fileUrl": "https://www.figma.com/design/kRVC29kld4299v1Gyby1Hg/anemone-v1?t=2Ztg5fZZcsdBZleC-0",
     "designSystem": {
       "colors": {
-        "primary": "pink-600",
-        "secondary": "purple-600",
-        "accent": "pink-500"
+        "text": {
+          "black": "#3D3D3D",
+          "grey_medium": "#878C92",
+          "grey_light": "#B1B1B1",
+          "brown_dark": "#69552E",
+          "brown_light": "#B8AA8C",
+          "white": "#FFFFFF"
+        },
+        "background": {
+          "black": "#3D3D3D",
+          "brown": "#69552E",
+          "beige": "#FAF4E8",
+          "white": "#FFFFFF"
+        },
+        "border": {
+          "black": "#3D3D3D",
+          "grey_medium": "#A7A7A7",
+          "grey_light": "#CFCFCF",
+          "white": "#FFFFFF"
+        }
       },
       "typography": {
-        "heading": "text-3xl font-bold",
-        "subheading": "text-xl font-semibold",
-        "body": "text-base",
-        "caption": "text-sm"
+        "fontFamily": {
+          "yumincho": ["YuMincho", "serif"],
+          "zenkaku": ["ZenKakuGothicNew", "sans-serif"]
+        },
+        "fontSize": {
+          "h2_pc": "64px",
+          "h3_pc": "24px",
+          "p_pc": "16px",
+          "h2_sp": "36px",
+          "h3_sp": "20px",
+          "p_sp": "16px"
+        },
+        "fontWeight": {
+          "medium": "500",
+          "regular": "400"
+        },
+        "lineHeight": {
+          "tight": "100%",
+          "normal": "150%"
+        }
+      },
+      "breakpoints": {
+        "pc": "768px",
+        "sp": "767px"
       },
       "spacing": {
         "section": "py-16",
@@ -20,28 +57,36 @@
       },
       "components": {
         "button": {
-          "primary": "bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors",
-          "secondary": "border border-pink-600 text-pink-600 px-6 py-3 rounded-lg font-semibold hover:bg-pink-50 transition-colors"
+          "primary": "bg-brown text-white px-6 py-3 rounded-lg font-medium hover:bg-brown_dark transition-colors",
+          "secondary": "border border-brown text-brown px-6 py-3 rounded-lg font-medium hover:bg-beige transition-colors"
         },
         "card": "bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow",
-        "input": "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+        "input": "w-full px-3 py-2 border border-grey_light rounded-md focus:outline-none focus:ring-2 focus:ring-brown focus:border-brown"
       }
     }
   },
   "tailwind": {
     "configPath": "./app/tailwind.config.js",
     "customColors": {
-      "brand": {
-        "50": "#fdf2f8",
-        "100": "#fce7f3",
-        "200": "#fbcfe8",
-        "300": "#f9a8d4",
-        "400": "#f472b6",
-        "500": "#ec4899",
-        "600": "#db2777",
-        "700": "#be185d",
-        "800": "#9d174d",
-        "900": "#831843"
+      "text": {
+        "black": "#3D3D3D",
+        "grey_medium": "#878C92",
+        "grey_light": "#B1B1B1",
+        "brown_dark": "#69552E",
+        "brown_light": "#B8AA8C",
+        "white": "#FFFFFF"
+      },
+      "background": {
+        "black": "#3D3D3D",
+        "brown": "#69552E",
+        "beige": "#FAF4E8",
+        "white": "#FFFFFF"
+      },
+      "border": {
+        "black": "#3D3D3D",
+        "grey_medium": "#A7A7A7",
+        "grey_light": "#CFCFCF",
+        "white": "#FFFFFF"
       }
     }
   }

@@ -3,114 +3,134 @@
 
 export const designTokens = {
   colors: {
-    primary: {
-      50: '#fdf2f8',
-      100: '#fce7f3',
-      200: '#fbcfe8',
-      300: '#f9a8d4',
-      400: '#f472b6',
-      500: '#E91E63',
-      600: '#db2777',
-      700: '#be185d',
-      800: '#9d174d',
-      900: '#831843'
-    },
-    secondary: {
-      50: '#faf5ff',
-      100: '#f3e8ff',
-      200: '#e9d5ff',
-      300: '#d8b4fe',
-      400: '#c084fc',
-      500: '#9C27B0',
-      600: '#9333ea',
-      700: '#7c3aed',
-      800: '#6b21a8',
-      900: '#581c87'
-    },
-    accent: {
-      50: '#fdf2f8',
-      100: '#fce7f3',
-      200: '#fbcfe8',
-      300: '#f9a8d4',
-      400: '#f472b6',
-      500: '#FF4081',
-      600: '#ec4899',
-      700: '#db2777',
-      800: '#be185d',
-      900: '#9d174d'
-    }
-  },
+  "black": "#3D3D3D",
+  "grey_medium": "#A7A7A7",
+  "grey_light": "#CFCFCF",
+  "brown_dark": "#69552E",
+  "brown_light": "#B8AA8C",
+  "white": "#FFFFFF",
+  "brown": "#69552E",
+  "beige": "#FAF4E8"
+},
   spacing: {
-    xs: '0.5rem',
-    sm: '1rem',
-    md: '1.5rem',
-    lg: '2rem',
-    xl: '3rem',
-    '2xl': '4rem'
+  "small": {
+    "value": "0.5rem",
+    "description": "小さいスペース"
   },
-  typography: {
-    hero: {
-      fontSize: '3.5rem',
-      fontWeight: '900',
-      lineHeight: '1.1',
-      letterSpacing: '-0.025em'
-    },
-    heading: {
-      '2xl': 'text-4xl font-bold',
-      xl: 'text-3xl font-bold',
-      lg: 'text-2xl font-bold',
-      md: 'text-xl font-semibold',
-      sm: 'text-lg font-semibold'
-    },
-    body: {
-      lg: 'text-lg',
-      base: 'text-base',
-      sm: 'text-sm',
-      xs: 'text-xs'
-    }
+  "medium": {
+    "value": "1rem",
+    "description": "中程度のスペース"
+  },
+  "large": {
+    "value": "2rem",
+    "description": "大きいスペース"
   }
+},
+  typography: {
+  "h2-pc": {
+    "fontSize": "64px",
+    "fontWeight": "500",
+    "lineHeight": "100%",
+    "fontFamily": [
+      "YuMincho",
+      "serif"
+    ],
+    "description": "PC用H2見出し"
+  },
+  "h3-pc": {
+    "fontSize": "24px",
+    "fontWeight": "500",
+    "lineHeight": "150%",
+    "fontFamily": [
+      "YuMincho",
+      "serif"
+    ],
+    "description": "PC用H3見出し"
+  },
+  "p-pc": {
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "lineHeight": "150%",
+    "fontFamily": [
+      "ZenKakuGothicNew",
+      "sans-serif"
+    ],
+    "description": "PC用本文"
+  },
+  "h2-sp": {
+    "fontSize": "36px",
+    "fontWeight": "500",
+    "lineHeight": "100%",
+    "fontFamily": [
+      "YuMincho",
+      "serif"
+    ],
+    "description": "SP用H2見出し"
+  },
+  "h3-sp": {
+    "fontSize": "20px",
+    "fontWeight": "500",
+    "lineHeight": "150%",
+    "fontFamily": [
+      "YuMincho",
+      "serif"
+    ],
+    "description": "SP用H3見出し"
+  },
+  "p-sp": {
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "lineHeight": "150%",
+    "fontFamily": [
+      "ZenKakuGothicNew",
+      "sans-serif"
+    ],
+    "description": "SP用本文"
+  }
+}
 };
 
 export const componentClasses = {
-  button: {
-    primary: 'bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2',
-    secondary: 'border border-pink-600 text-pink-600 px-6 py-3 rounded-lg font-semibold hover:bg-pink-50 transition-colors focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2',
-    outline: 'border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-pink-600 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2'
+  "button": {
+    "primary": "bg-brown text-white px-6 py-3 rounded-lg font-medium hover:bg-brown_dark transition-colors",
+    "secondary": "border border-brown text-brown px-6 py-3 rounded-lg font-medium hover:bg-beige transition-colors"
   },
-  card: {
-    base: 'bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow',
-    elevated: 'bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow'
+  "card": {
+    "base": "bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
   },
-  input: {
-    base: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500',
-    error: 'w-full px-3 py-2 border border-red-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500'
-  },
-  container: {
-    base: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
-    narrow: 'max-w-4xl mx-auto px-4 sm:px-6 lg:px-8',
-    wide: 'max-w-full mx-auto px-4 sm:px-6 lg:px-8'
-  },
-  section: {
-    base: 'py-16',
-    small: 'py-8',
-    large: 'py-24'
+  "input": {
+    "base": "w-full px-3 py-2 border border-grey_light rounded-md focus:outline-none focus:ring-2 focus:ring-brown focus:border-brown"
   }
 };
 
+// レスポンシブデザイン用のユーティリティ
 export const responsive = {
   grid: {
     '1': 'grid-cols-1',
-    '2': 'grid-cols-1 md:grid-cols-2',
-    '3': 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
-    '4': 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
+    '2': 'grid-cols-1 pc:grid-cols-2',
+    '3': 'grid-cols-1 pc:grid-cols-2 lg:grid-cols-3',
+    '4': 'grid-cols-1 pc:grid-cols-2 lg:grid-cols-4'
   },
   text: {
-    'heading-2xl': 'text-2xl md:text-4xl lg:text-6xl',
-    'heading-xl': 'text-xl md:text-3xl lg:text-4xl',
-    'heading-lg': 'text-lg md:text-2xl lg:text-3xl'
+    'h2': 'text-h2-sp pc:text-h2-pc font-yumincho font-medium',
+    'h3': 'text-h3-sp pc:text-h3-pc font-yumincho font-medium',
+    'p': 'text-p-sp pc:text-p-pc font-zenkaku font-normal'
   },
   spacing: {
-    'section': 'py-8 md:py-16 lg:py-20',
+    'section': 'py-8 pc:py-16',
     'container': 'px-4 sm:px-6 lg:px-8'
   }
+};
+
+// ユーティリティ関数
+export const createComponentClass = (component: string, variant?: string) => {
+  const base = componentClasses[component]?.base || '';
+  const variantClass = variant ? componentClasses[component]?.[variant] : '';
+  
+  return [base, variantClass].filter(Boolean).join(' ');
+};
+
+// カラーユーティリティ
+export const getColor = (color: string) => {
+  return designTokens.colors[color]?.value || color;
 };
