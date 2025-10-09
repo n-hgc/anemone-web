@@ -437,9 +437,7 @@ const salonJsonLd = {
         <!-- タブナビゲーション -->
         <div class="news-tabs">
           <button class="news-tab active" data-category="information">INFORMATION</button>
-          <div class="news-tab-separator"></div>
           <button class="news-tab" data-category="blog">BLOG</button>
-          <div class="news-tab-separator"></div>
           <button class="news-tab" data-category="movie">MOVIE</button>
         </div>
         
@@ -1808,7 +1806,7 @@ const salonJsonLd = {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 120px 0;
+    padding: 56px 0;
     overflow: hidden;
   }
   
@@ -1826,7 +1824,7 @@ const salonJsonLd = {
   .recruit-container {
     position: relative;
     z-index: 2;
-    max-width: 1200px;
+    max-width: 1040px;
     margin: 0 auto;
   }
   
@@ -1841,23 +1839,24 @@ const salonJsonLd = {
     font-size: 64px;
     font-weight: var(--font-weight-medium);
     color: var(--color-white);
-    margin-bottom: 3rem;
+    margin-bottom: 32px;
     line-height: 1.2;
   }
   .recruit-title-sub{
     font-size: 24px;
   }
   .recruit-text {
-    margin-bottom: 3rem;
+    margin-bottom: 32px;
   }
   
   .recruit-description {
     font-family: var(--font-family-zenkaku);
-    font-size: 1.125rem;
-    line-height: 1.8;
+    font-weight: var(--font-weight-regular);
+    font-size: 16px;
+    line-height: 1.5;
     color: var(--color-white);
-    margin-bottom: 1.5rem;
-    text-align: left;
+    margin-bottom: 16px;
+    text-align: center;
   }
   
   .recruit-cta {
@@ -1875,7 +1874,7 @@ const salonJsonLd = {
     border-radius: 8px;
     font-family: var(--font-family-zenkaku);
     font-size: 1rem;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-light);
     text-decoration: none;
     transition: all 0.3s ease;
     cursor: pointer;
@@ -1912,7 +1911,8 @@ const salonJsonLd = {
     font-weight: var(--font-weight-medium);
     color: var(--color-black);
     text-align: left;
-    margin-bottom: 3rem;
+    margin-bottom: 56px;
+    line-height: 1.0;
   }
 
   .news-title-sub{
@@ -1921,44 +1921,51 @@ const salonJsonLd = {
   
   .news-tabs {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0;
-    margin-bottom: 3rem;
+    gap: 8px;
+    margin-bottom: 28px;
   }
   
   .news-tab {
     background: none;
     border: none;
-    color: var(--color-black);
+    color: var(--color-grey-light);
     font-family: var(--font-family-zenkaku);
-    font-size: 1rem;
-    font-weight: var(--font-weight-medium);
-    padding: 0.75rem 1.5rem;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 1rem 2rem;
     cursor: pointer;
     position: relative;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    flex: 1;
+    text-align: center;
+  }
+  
+  .news-tab::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: var(--color-grey-light);
   }
   
   .news-tab.active {
-    color: var(--color-brown);
+    color: var(--color-text-black);
   }
   
   .news-tab.active::after {
     content: '';
     position: absolute;
-    bottom: -4px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 2px;
-    background-color: var(--color-brown);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: var(--color-text-black);
   }
   
   .news-tab-separator {
-    width: 1px;
-    height: 20px;
-    background-color: var(--color-grey-light);
+    display: none;
   }
   
   .news-list {
@@ -1968,7 +1975,7 @@ const salonJsonLd = {
   .news-item {
     display: flex;
     gap: 1.5rem;
-    padding: 1.5rem 0;
+    padding: 32px 0;
     border-bottom: 1px solid var(--color-grey-light);
   }
   
@@ -1977,10 +1984,9 @@ const salonJsonLd = {
   }
   
   .news-image {
-    width: 120px;
-    height: 120px;
+    width: 240px;
+    height: 134px;
     object-fit: cover;
-    border-radius: 8px;
     flex-shrink: 0;
   }
   
@@ -1997,7 +2003,7 @@ const salonJsonLd = {
   
   .news-date {
     font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
+    font-size: 24px;
     color: var(--color-text-grey-medium);
   }
   
@@ -2009,18 +2015,18 @@ const salonJsonLd = {
   
   .news-category {
     font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-medium);
+    font-size: 24px;
+    font-weight: var(--font-weight-regular);
     color: var(--color-text-grey-medium);
   }
   
   .news-item-title {
     font-family: var(--font-family-zenkaku);
-    font-size: 1.125rem;
+    font-size: 24px;
     font-weight: var(--font-weight-medium);
     color: var(--color-black);
-    margin-bottom: 0.75rem;
-    line-height: 1.4;
+    margin-bottom: 8px;
+    line-height: 1.5;
   }
   
   .news-description {
