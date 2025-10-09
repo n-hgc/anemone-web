@@ -235,12 +235,14 @@ const salonJsonLd = {
         <div class="hairmake-content">
           <div class="hairmake-text">
             <p class="hairmake-description">
-              雑誌・放送・アパレル・撮影・イベントなど、<br>
-              様々なシーンでご活用いただけるヘアメイクサービスを提供しております。
+              雑誌、放送、アパレル、撮影、イベントなど、企業様向けヘアメイクをお探しの担当者様へ。特別な一日にプロのヘアメイクをお届けします。
             </p>
             
             <!-- 料金表 -->
             <div class="hairmake-pricing">
+              <div class="pricing-title">
+                ヘアメイク1名あたりの料金
+              </div>
               <table class="pricing-table">
                 <thead>
                   <tr>
@@ -262,17 +264,26 @@ const salonJsonLd = {
             </div>
             
             <p class="hairmake-note">
-              複数のヘアメイクアーティストのご依頼も可能です。<br>
-              複数回のご依頼の場合は割引がございます。
+              ※ヘアメイク複数人でのご依頼も可能ですので、お問い合わせください。<br>
+              また、複数名でのご依頼の場合は割引のご相談も承りますので、お気軽にお申し付けください。
             </p>
             
-            <!-- メール依頼ボタン -->
-            <button class="hairmake-email-btn">
-              <svg class="email-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-              </svg>
-              メールでのご依頼はこちら
-            </button>
+            <!-- メール依頼フォーム -->
+            <div class="mail-form">
+              <div class="mail-form-content">
+                <p class="mail-form-description">
+                  以下のボタンの先で<br>
+                  「貴社名・お名前・お電話番号・希望人数・依頼場所」を記載の上、<br>
+                  メールでお問い合わせください
+                </p>
+                <button class="mail-form-btn">
+                  メールでのご依頼はこちら
+                  <svg class="mail-form-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
           
           <div class="hairmake-image">
@@ -1364,8 +1375,8 @@ const salonJsonLd = {
   
   .hairmake-content {
     display: flex;
-    align-items: flex-start;
-    gap: 60px;
+    align-items: flex-end;
+    gap: 40px;
   }
   
   .hairmake-text {
@@ -1375,33 +1386,74 @@ const salonJsonLd = {
   
   .hairmake-description {
     font-family: var(--font-family-zenkaku);
-    font-size: 1.125rem;
-    line-height: 1.8;
+    font-size: 16px;
+    line-height: 1.5;
     margin-bottom: 2rem;
   }
   
   .hairmake-pricing {
     margin-bottom: 2rem;
   }
+
+  .pricing-title {
+    display: flex;
+    padding: 4px 8px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    background: rgba(61, 61, 61, 0.20);
+    font-family: var(--font-family-zenkaku);
+    font-size: 1rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+  }
   
   .pricing-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: var(--color-beige);
     border-radius: 8px;
     overflow: hidden;
+    align-self: stretch;
   }
   
   .pricing-table th,
   .pricing-table td {
-    padding: 1rem;
     text-align: left;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .pricing-table td {
+    font-size: 24px;
+  }
+
+  .pricing-table tbody tr:first-child {
+    border-bottom: 0.5px dashed var(--Text-black, #3D3D3D);
+  }
+
+  .pricing-table thead {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
     border-bottom: 1px solid var(--color-grey-light);
+  }
+
+  .pricing-table tbody {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    border-bottom: 1px solid var(--color-grey-light);
+  }
+
+  .pricing-table tr {
+    display: flex;
+    width: 100%;
+    padding: 8px 0 8px 8px;
   }
   
   .pricing-table th {
-    background-color: var(--color-brown);
-    color: var(--color-white);
+    color: var(--color-black);
     font-family: var(--font-family-zenkaku);
     font-weight: var(--font-weight-medium);
   }
@@ -1413,45 +1465,88 @@ const salonJsonLd = {
   
   .hairmake-note {
     font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
+    font-weight: var(--font-weight-regular);
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 24px;
   }
   
-  .hairmake-email-btn {
-    background-color: var(--color-beige);
-    color: var(--color-black);
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    font-family: var(--font-family-zenkaku);
-    font-size: 1rem;
-    font-weight: var(--font-weight-medium);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: background-color 0.3s ease;
+  .mail-form {
+    position: relative;
+    background-image: url('/images/hero/slide-2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 16px;
+    margin-top: 2rem;
+    overflow: hidden;
   }
-  
-  .hairmake-email-btn:hover {
-    background-color: var(--color-brown-light);
+
+  .mail-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(105, 85, 46, 0.9);
+    z-index: 1;
   }
-  
-  .email-icon {
-    width: 20px;
-    height: 20px;
+
+  .mail-form-content {
+    position: relative;
+    z-index: 2;
   }
-  
+
   .hairmake-image {
-    flex: 1;
+    width: 460px;
   }
   
   .hairmake-image-content {
     width: 100%;
-    height: 400px;
+    height: 463px;
     object-fit: cover;
     border-radius: 12px;
+  }
+
+  .mail-form-content {
+    text-align: center;
+  }
+
+  .mail-form-description {
+    color: var(--color-white);
+    font-family: var(--font-family-zenkaku);
+    font-weight: var(--font-weight-regular);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .mail-form-btn {
+    background-color: transparent;
+    color: var(--color-white);
+    border: 1px solid var(--color-white);
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    font-family: var(--font-family-zenkaku);
+    font-size: 1rem;
+    font-weight: var(--font-weight-regular);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+  }
+  
+  .mail-form-btn:hover {
+    background-color: var(--color-white);
+    color: var(--color-black);
+  }
+  
+  .mail-form-icon {
+    width: 20px;
+    height: 20px;
   }
   
   /* サロン店舗セクション */
