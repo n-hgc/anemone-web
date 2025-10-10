@@ -66,14 +66,7 @@ const salonJsonLd = {
               />
               <div class="hero-slide-overlay">
                 <div class="hero-slide-content">
-                  <h1 class="hero-title">
-                    <span class="hero-tagline">髪と、わたしと、生きていく。</span>
-                    <span class="hero-brand">little</span>
-                    <span class="hero-subtitle">- Hair salon -</span>
-                  </h1>
-                  <div class="hero-decorative">
-                    <span class="hero-magic">a little magic</span>
-                  </div>
+                  <img src="/images/header/logo.png" alt="little" class="hero-logo" />
                 </div>
               </div>
             </div>
@@ -86,14 +79,7 @@ const salonJsonLd = {
               />
               <div class="hero-slide-overlay">
                 <div class="hero-slide-content">
-                  <h1 class="hero-title">
-                    <span class="hero-tagline">あなたの美しさを引き出す</span>
-                    <span class="hero-brand">アネモネサロン</span>
-                    <span class="hero-subtitle">- Hair salon -</span>
-                  </h1>
-                  <div class="hero-decorative">
-                    <span class="hero-magic">beautiful hair</span>
-                  </div>
+                  <img src="/images/header/logo.png" alt="little" class="hero-logo" />
                 </div>
               </div>
             </div>
@@ -106,14 +92,7 @@ const salonJsonLd = {
               />
               <div class="hero-slide-overlay">
                 <div class="hero-slide-content">
-                  <h1 class="hero-title">
-                    <span class="hero-tagline">理想のスタイルを実現</span>
-                    <span class="hero-brand">アネモネサロン</span>
-                    <span class="hero-subtitle">- Hair salon -</span>
-                  </h1>
-                  <div class="hero-decorative">
-                    <span class="hero-magic">perfect style</span>
-                  </div>
+                  <img src="/images/header/logo.png" alt="little" class="hero-logo" />
                 </div>
               </div>
             </div>
@@ -235,12 +214,14 @@ const salonJsonLd = {
         <div class="hairmake-content">
           <div class="hairmake-text">
             <p class="hairmake-description">
-              雑誌・放送・アパレル・撮影・イベントなど、<br>
-              様々なシーンでご活用いただけるヘアメイクサービスを提供しております。
+              雑誌、放送、アパレル、撮影、イベントなど、企業様向けヘアメイクをお探しの担当者様へ。特別な一日にプロのヘアメイクをお届けします。
             </p>
             
             <!-- 料金表 -->
             <div class="hairmake-pricing">
+              <div class="pricing-title">
+                ヘアメイク1名あたりの料金
+              </div>
               <table class="pricing-table">
                 <thead>
                   <tr>
@@ -262,17 +243,26 @@ const salonJsonLd = {
             </div>
             
             <p class="hairmake-note">
-              複数のヘアメイクアーティストのご依頼も可能です。<br>
-              複数回のご依頼の場合は割引がございます。
+              ※ヘアメイク複数人でのご依頼も可能ですので、お問い合わせください。<br>
+              また、複数名でのご依頼の場合は割引のご相談も承りますので、お気軽にお申し付けください。
             </p>
             
-            <!-- メール依頼ボタン -->
-            <button class="hairmake-email-btn">
-              <svg class="email-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-              </svg>
-              メールでのご依頼はこちら
-            </button>
+            <!-- メール依頼フォーム -->
+            <div class="mail-form">
+              <div class="mail-form-content">
+                <p class="mail-form-description">
+                  以下のボタンの先で<br>
+                  「貴社名・お名前・お電話番号・希望人数・依頼場所」を記載の上、<br>
+                  メールでお問い合わせください
+                </p>
+                <button class="mail-form-btn">
+                  メールでのご依頼はこちら
+                  <svg class="mail-form-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
           
           <div class="hairmake-image">
@@ -303,24 +293,25 @@ const salonJsonLd = {
             
             <!-- 地域ナビゲーション -->
             <div class="salon-regions">
-              <button class="region-btn">北海道</button>
-              <button class="region-btn">東北</button>
-              <button class="region-btn">関東</button>
-              <button class="region-btn">中部</button>
-              <button class="region-btn">近畿</button>
-              <button class="region-btn">四国</button>
-              <button class="region-btn">中国</button>
-              <button class="region-btn">九州・沖縄</button>
+              <button class="region-btn" data-region="北海道">北海道</button>
+              <button class="region-btn" data-region="東北">東北</button>
+              <button class="region-btn" data-region="関東">関東</button>
+              <button class="region-btn" data-region="中部">中部</button>
+              <button class="region-btn" data-region="近畿">近畿</button>
+              <button class="region-btn" data-region="四国">四国</button>
+              <button class="region-btn" data-region="中国">中国</button>
+              <button class="region-btn" data-region="九州・沖縄">九州・沖縄</button>
             </div>
             
             <!-- 検索バー -->
             <div class="salon-search">
               <input 
                 type="text" 
+                id="salon-search-input"
                 placeholder="サロン名・地域名で検索" 
                 class="salon-search-input"
               />
-              <button class="salon-search-btn">
+              <button class="salon-search-btn" id="salon-search-btn">
                 <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
@@ -344,13 +335,16 @@ const salonJsonLd = {
         
         <!-- 店舗一覧 -->
         <div class="salon-listings">
-          <h3 class="salon-area-title">北海道エリア</h3>
-          <div class="salon-cards grid-2-cols">
+          <div class="salon-area-title">
+            <h3 id="salon-filter-title">「北海道」店舗一覧</h3>
+          </div>
+          <div class="salon-cards grid-3-cols" id="salon-cards-container">
             {salons.slice(0, 10).map((salon) => (
-              <div class="salon-card">
+              <div class="salon-card" data-region="北海道" data-name={salon.name} data-prefecture={salon.prefecture} data-city={salon.city}>
                 <img src="/images/hero/slide-1.png" alt={salon.name} class="salon-card-image" />
                 <div class="salon-card-content">
-                  <h4 class="salon-card-name">lico {salon.name} 【リコ{salon.name}】</h4>
+                  <div class="salon-card-text">
+                    <h4 class="salon-card-name">lico {salon.name} 【リコ{salon.name}】</h4>
                   <div class="salon-card-location">
                     <svg class="location-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
@@ -364,6 +358,8 @@ const salonJsonLd = {
                     </svg>
                     <span>大通駅徒歩1分・すすきの駅徒歩3分</span>
                   </div>
+                  </div>
+                  
                   <button class="salon-card-btn">
                     予約・店舗詳細はこちら
                   </button>
@@ -420,9 +416,7 @@ const salonJsonLd = {
         <!-- タブナビゲーション -->
         <div class="news-tabs">
           <button class="news-tab active" data-category="information">INFORMATION</button>
-          <div class="news-tab-separator"></div>
           <button class="news-tab" data-category="blog">BLOG</button>
-          <div class="news-tab-separator"></div>
           <button class="news-tab" data-category="movie">MOVIE</button>
         </div>
         
@@ -496,7 +490,7 @@ const salonJsonLd = {
         <!-- 詳しく見るボタン -->
         <div class="news-more">
           <a href="/news" class="news-more-btn">
-            <span class="news-more-text">詳しく見る</span>
+            <span class="news-more-text">お知らせ一覧へ</span>
             <svg class="news-more-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
@@ -615,13 +609,11 @@ const salonJsonLd = {
         <nav class="footer-nav">
           <a href="/" class="footer-nav-link">TOP</a>
           <div class="footer-nav-separator"></div>
-          <a href="/concept" class="footer-nav-link">コンセプト</a>
+          <a href="/concept" class="footer-nav-link">ヘアカタログ</a>
           <div class="footer-nav-separator"></div>
-          <a href="/menu" class="footer-nav-link">メニュー</a>
+          <a href="/menu" class="footer-nav-link">企業向けヘアメイク</a>
           <div class="footer-nav-separator"></div>
-          <a href="/hairstyle" class="footer-nav-link">ヘアカタログ</a>
-          <div class="footer-nav-separator"></div>
-          <a href="/salons" class="footer-nav-link">店舗一覧</a>
+          <a href="/hairstyle" class="footer-nav-link">littleグループ店舗</a>
           <div class="footer-nav-separator"></div>
           <a href="/news" class="footer-nav-link">お知らせ</a>
         </nav>
@@ -659,23 +651,11 @@ const salonJsonLd = {
           <!-- スポンサー -->
           <div class="footer-sponsors">
             <div class="footer-sponsor">
-              <div class="footer-sponsor-logo">
-                <div class="footer-sponsor-icon">A</div>
-                <div class="footer-sponsor-text">
-                  <div class="footer-sponsor-title">SHIBUYA ABEMAS</div>
-                  <div class="footer-sponsor-subtitle">株式会社anemoneは渋谷ABEMASを応援しています</div>
-                </div>
-              </div>
+              <img src="/images/footer/abemas.png" alt="SHIBUYA ABEMAS" class="footer-sponsor-image" />
             </div>
             
             <div class="footer-sponsor">
-              <div class="footer-sponsor-logo">
-                <div class="footer-sponsor-icon sun">SUN ROCKERS</div>
-                <div class="footer-sponsor-text">
-                  <div class="footer-sponsor-title">SHIBUYA</div>
-                  <div class="footer-sponsor-subtitle">株式会社anemoneはサンロッカーズ渋谷を応援しています</div>
-                </div>
-              </div>
+              <img src="/images/footer/sunrockers.png" alt="SUN ROCKERS SHIBUYA" class="footer-sponsor-image" />
             </div>
           </div>
         </div>
@@ -766,14 +746,17 @@ const salonJsonLd = {
   
   .hero-slide-content {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    top: 50%;
+    left: 146px;
+    transform: translateY(-50%);
+    text-align: left;
+    z-index: 2;
+  }
+
+  .hero-logo {
+    width: 300px;
+    height: auto;
+    object-fit: contain;
   }
   
   .hero-title {
@@ -1364,8 +1347,8 @@ const salonJsonLd = {
   
   .hairmake-content {
     display: flex;
-    align-items: flex-start;
-    gap: 60px;
+    align-items: flex-end;
+    gap: 40px;
   }
   
   .hairmake-text {
@@ -1375,33 +1358,74 @@ const salonJsonLd = {
   
   .hairmake-description {
     font-family: var(--font-family-zenkaku);
-    font-size: 1.125rem;
-    line-height: 1.8;
+    font-size: 16px;
+    line-height: 1.5;
     margin-bottom: 2rem;
   }
   
   .hairmake-pricing {
     margin-bottom: 2rem;
   }
+
+  .pricing-title {
+    display: flex;
+    padding: 4px 8px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    background: rgba(61, 61, 61, 0.20);
+    font-family: var(--font-family-zenkaku);
+    font-size: 1rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+  }
   
   .pricing-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: var(--color-beige);
     border-radius: 8px;
     overflow: hidden;
+    align-self: stretch;
   }
   
   .pricing-table th,
   .pricing-table td {
-    padding: 1rem;
     text-align: left;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .pricing-table td {
+    font-size: 24px;
+  }
+
+  .pricing-table tbody tr:first-child {
+    border-bottom: 0.5px dashed var(--Text-black, #3D3D3D);
+  }
+
+  .pricing-table thead {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
     border-bottom: 1px solid var(--color-grey-light);
+  }
+
+  .pricing-table tbody {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    border-bottom: 1px solid var(--color-grey-light);
+  }
+
+  .pricing-table tr {
+    display: flex;
+    width: 100%;
+    padding: 8px 0 8px 8px;
   }
   
   .pricing-table th {
-    background-color: var(--color-brown);
-    color: var(--color-white);
+    color: var(--color-black);
     font-family: var(--font-family-zenkaku);
     font-weight: var(--font-weight-medium);
   }
@@ -1413,45 +1437,88 @@ const salonJsonLd = {
   
   .hairmake-note {
     font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
+    font-weight: var(--font-weight-regular);
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 24px;
   }
   
-  .hairmake-email-btn {
-    background-color: var(--color-beige);
-    color: var(--color-black);
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    font-family: var(--font-family-zenkaku);
-    font-size: 1rem;
-    font-weight: var(--font-weight-medium);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: background-color 0.3s ease;
+  .mail-form {
+    position: relative;
+    background-image: url('/images/hero/slide-2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 16px;
+    margin-top: 2rem;
+    overflow: hidden;
   }
-  
-  .hairmake-email-btn:hover {
-    background-color: var(--color-brown-light);
+
+  .mail-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(105, 85, 46, 0.9);
+    z-index: 1;
   }
-  
-  .email-icon {
-    width: 20px;
-    height: 20px;
+
+  .mail-form-content {
+    position: relative;
+    z-index: 2;
   }
-  
+
   .hairmake-image {
-    flex: 1;
+    width: 460px;
   }
   
   .hairmake-image-content {
     width: 100%;
-    height: 400px;
+    height: 463px;
     object-fit: cover;
     border-radius: 12px;
+  }
+
+  .mail-form-content {
+    text-align: center;
+  }
+
+  .mail-form-description {
+    color: var(--color-white);
+    font-family: var(--font-family-zenkaku);
+    font-weight: var(--font-weight-regular);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .mail-form-btn {
+    background-color: transparent;
+    color: var(--color-white);
+    border: 1px solid var(--color-white);
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    font-family: var(--font-family-zenkaku);
+    font-size: 1rem;
+    font-weight: var(--font-weight-regular);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+  }
+  
+  .mail-form-btn:hover {
+    background-color: var(--color-white);
+    color: var(--color-black);
+  }
+  
+  .mail-form-icon {
+    width: 20px;
+    height: 20px;
   }
   
   /* サロン店舗セクション */
@@ -1519,42 +1586,49 @@ const salonJsonLd = {
     background-color: #E6DDCA;
   }
   
-  .region-btn.selected {
+  .region-btn.active {
     background-color: var(--color-black);
     color: var(--color-white);
   }
   
   .salon-search {
     display: flex;
-    gap: 1rem;
     margin-bottom: 3rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #E0E0E0;
+    background-color: var(--color-white);
   }
   
   .salon-search-input {
     flex: 1;
-    background-color: var(--color-beige);
+    background-color: var(--color-white);
     border: none;
     padding: 1rem;
-    border-radius: 8px;
     font-family: var(--font-family-zenkaku);
     font-size: 1rem;
+    outline: none;
   }
   
   .salon-search-input::placeholder {
-    color: var(--color-text-grey-medium);
+    color: #999999;
   }
   
   .salon-search-btn {
-    background-color: var(--color-grey-medium);
-    color: var(--color-black);
+    background-color: #666666;
+    color: var(--color-white);
     border: none;
     padding: 1rem;
-    border-radius: 8px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 60px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .salon-search-btn:hover {
+    background-color: #555555;
   }
   
   .search-icon {
@@ -1587,11 +1661,21 @@ const salonJsonLd = {
   }
   
   .salon-area-title {
+    display: flex;
+    padding-bottom: 16px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    border-bottom: 0.5px solid var(--Text-black, #3D3D3D);
+    margin-bottom: 2rem;
+  }
+
+  .salon-area-title h3 {
     font-family: var(--font-family-yumincho);
     font-size: 1.5rem;
     font-weight: var(--font-weight-medium);
     color: var(--color-black);
-    margin-bottom: 2rem;
+    margin: 0;
   }
   
   .salon-cards {
@@ -1604,6 +1688,7 @@ const salonJsonLd = {
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 364px;
   }
   
   .salon-card:hover {
@@ -1613,33 +1698,41 @@ const salonJsonLd = {
   
   .salon-card-image {
     width: 100%;
-    height: 240px;
+    height: 159px;
     object-fit: cover;
   }
   
   .salon-card-content {
-    padding: 1.5rem;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 159px);
+    justify-content: space-between;
   }
   
+  .salon-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
   .salon-card-name {
     font-family: var(--font-family-zenkaku);
-    font-size: 1.125rem;
-    font-weight: var(--font-weight-medium);
+    font-size: 18px;
+    font-weight: bold;
     color: var(--color-black);
-    margin-bottom: 1rem;
-    line-height: 1.4;
+    line-height: 1.25;
   }
   
   .salon-card-location,
   .salon-card-station {
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-    font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
-    color: var(--color-text-grey-medium);
-    line-height: 1.5;
+    gap: 10px;
+    font-family: var(--font-family-zenkaku); font-size: 16px;
+    font-weight: bold;
+    color: #848383;
+    line-height: 1.0;
   }
   
   .location-icon,
@@ -1654,16 +1747,19 @@ const salonJsonLd = {
     background-color: var(--color-white);
     color: var(--color-black);
     border: 1px solid var(--color-black);
-    padding: 0.75rem 1.5rem;
+    padding: 8px 16px;
     border-radius: 8px;
     font-family: var(--font-family-zenkaku);
     font-size: 0.875rem;
     font-weight: var(--font-weight-medium);
     cursor: pointer;
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 16px;
     transition: all 0.3s ease;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .salon-card-btn:hover {
@@ -1678,7 +1774,7 @@ const salonJsonLd = {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 120px 0;
+    padding: 56px 0;
     overflow: hidden;
   }
   
@@ -1696,7 +1792,7 @@ const salonJsonLd = {
   .recruit-container {
     position: relative;
     z-index: 2;
-    max-width: 1200px;
+    max-width: 1040px;
     margin: 0 auto;
   }
   
@@ -1711,23 +1807,24 @@ const salonJsonLd = {
     font-size: 64px;
     font-weight: var(--font-weight-medium);
     color: var(--color-white);
-    margin-bottom: 3rem;
+    margin-bottom: 32px;
     line-height: 1.2;
   }
   .recruit-title-sub{
     font-size: 24px;
   }
   .recruit-text {
-    margin-bottom: 3rem;
+    margin-bottom: 32px;
   }
   
   .recruit-description {
     font-family: var(--font-family-zenkaku);
-    font-size: 1.125rem;
-    line-height: 1.8;
+    font-weight: var(--font-weight-regular);
+    font-size: 16px;
+    line-height: 1.5;
     color: var(--color-white);
-    margin-bottom: 1.5rem;
-    text-align: left;
+    margin-bottom: 16px;
+    text-align: center;
   }
   
   .recruit-cta {
@@ -1745,7 +1842,7 @@ const salonJsonLd = {
     border-radius: 8px;
     font-family: var(--font-family-zenkaku);
     font-size: 1rem;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-light);
     text-decoration: none;
     transition: all 0.3s ease;
     cursor: pointer;
@@ -1782,7 +1879,8 @@ const salonJsonLd = {
     font-weight: var(--font-weight-medium);
     color: var(--color-black);
     text-align: left;
-    margin-bottom: 3rem;
+    margin-bottom: 56px;
+    line-height: 1.0;
   }
 
   .news-title-sub{
@@ -1791,44 +1889,51 @@ const salonJsonLd = {
   
   .news-tabs {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0;
-    margin-bottom: 3rem;
+    gap: 8px;
+    margin-bottom: 28px;
   }
   
   .news-tab {
     background: none;
     border: none;
-    color: var(--color-black);
+    color: var(--color-grey-light);
     font-family: var(--font-family-zenkaku);
-    font-size: 1rem;
-    font-weight: var(--font-weight-medium);
-    padding: 0.75rem 1.5rem;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 1rem 2rem;
     cursor: pointer;
     position: relative;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    flex: 1;
+    text-align: center;
+  }
+  
+  .news-tab::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: var(--color-grey-light);
   }
   
   .news-tab.active {
-    color: var(--color-brown);
+    color: var(--color-text-black);
   }
   
   .news-tab.active::after {
     content: '';
     position: absolute;
-    bottom: -4px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 2px;
-    background-color: var(--color-brown);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: var(--color-text-black);
   }
   
   .news-tab-separator {
-    width: 1px;
-    height: 20px;
-    background-color: var(--color-grey-light);
+    display: none;
   }
   
   .news-list {
@@ -1838,7 +1943,7 @@ const salonJsonLd = {
   .news-item {
     display: flex;
     gap: 1.5rem;
-    padding: 1.5rem 0;
+    padding: 32px 0;
     border-bottom: 1px solid var(--color-grey-light);
   }
   
@@ -1847,10 +1952,9 @@ const salonJsonLd = {
   }
   
   .news-image {
-    width: 120px;
-    height: 120px;
+    width: 240px;
+    height: 134px;
     object-fit: cover;
-    border-radius: 8px;
     flex-shrink: 0;
   }
   
@@ -1867,7 +1971,7 @@ const salonJsonLd = {
   
   .news-date {
     font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
+    font-size: 24px;
     color: var(--color-text-grey-medium);
   }
   
@@ -1879,52 +1983,59 @@ const salonJsonLd = {
   
   .news-category {
     font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-medium);
+    font-size: 24px;
+    font-weight: var(--font-weight-regular);
     color: var(--color-text-grey-medium);
   }
   
   .news-item-title {
     font-family: var(--font-family-zenkaku);
-    font-size: 1.125rem;
+    font-size: 24px;
     font-weight: var(--font-weight-medium);
     color: var(--color-black);
-    margin-bottom: 0.75rem;
-    line-height: 1.4;
+    margin-bottom: 8px;
+    line-height: 1.5;
   }
   
   .news-description {
     font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: var(--font-weight-regular);
+    font-style: normal;
     color: var(--color-text-grey-medium);
   }
   
   .news-more {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 3rem;
   }
   
   .news-more-btn {
-    display: inline-flex;
+    display: flex;
+    width: 172px;
+    height: 48px;
+    justify-content: center;
     align-items: center;
-    gap: 0.5rem;
-    background-color: var(--color-grey-medium);
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: 1px solid var(--color-black);
+    background-color: transparent;
     color: var(--color-black);
-    border: none;
-    padding: 0.875rem 2rem;
-    border-radius: 8px;
     font-family: var(--font-family-zenkaku);
     font-size: 0.875rem;
     font-weight: var(--font-weight-medium);
     text-decoration: none;
     transition: all 0.3s ease;
     cursor: pointer;
+    padding: 0 1rem;
+    gap: 0.5rem;
   }
   
   .news-more-btn:hover {
-    background-color: var(--color-brown);
-    color: var(--color-white);
+    background-color: #E6DDCA;
   }
   
   .news-more-text {
@@ -1952,17 +2063,16 @@ const salonJsonLd = {
     font-size: 32px;
     font-weight: var(--font-weight-medium);
     color: var(--color-black);
-    margin-bottom: 3rem;
+    margin-bottom: 14px;
   }
   
   .instagram-grid {
     /* グリッドスタイルは共通クラスで管理 */
+    gap: 10px;
   }
   
   .instagram-item {
     position: relative;
-    aspect-ratio: 1;
-    border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -1974,7 +2084,7 @@ const salonJsonLd = {
   
   .instagram-image {
     width: 100%;
-    height: 100%;
+    height: 454px;
     object-fit: cover;
   }
   
@@ -2009,50 +2119,53 @@ const salonJsonLd = {
   }
   
   .footer-container {
-    max-width: 1200px;
+    max-width: 448px;
     margin: 0 auto;
   }
   
   .footer-brand {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 24px;
   }
   
   .footer-brand-text {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: baseline;
+    justify-content: center;
     gap: 0.5rem;
   }
   
   .footer-brand-name {
     font-family: var(--font-family-yumincho);
     font-size: 2.5rem;
+    line-height: 1.0;
     font-weight: var(--font-weight-medium);
     color: var(--color-white);
   }
   
   .footer-brand-tagline {
-    font-family: var(--font-family-zenkaku);
-    font-size: 1.125rem;
+    font-family: var(--font-family-yumincho);
+    font-size: 18px;
+    line-height: 1.0;
     color: var(--color-white);
   }
   
   .footer-nav {
     display: flex;
+    width: 480px;
     justify-content: center;
     align-items: center;
     gap: 0;
-    margin-bottom: 2rem;
+    margin-bottom: 36px;
   }
   
   .footer-nav-link {
     color: var(--color-white);
     text-decoration: none;
     font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
+    font-size: 12px;
     font-weight: var(--font-weight-regular);
-    padding: 0.5rem 1rem;
+    padding: 10px;
     transition: color 0.3s ease;
   }
   
@@ -2075,15 +2188,18 @@ const salonJsonLd = {
   .footer-recruit-btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
+    width: 100%;
     background: transparent;
     color: var(--color-white);
     border: 1px solid var(--color-white);
-    padding: 0.75rem 1.5rem;
+    padding: 24px 24px;
     border-radius: 6px;
     font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-medium);
+    font-size: 18px;
+    line-height: 1.0;
+    font-weight: var(--font-weight-regular);
     text-decoration: none;
     transition: all 0.3s ease;
   }
@@ -2100,7 +2216,7 @@ const salonJsonLd = {
   
   .footer-bottom {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin-bottom: 2rem;
   }
@@ -2116,81 +2232,38 @@ const salonJsonLd = {
     justify-content: center;
     width: 40px;
     height: 40px;
-    border: 1px solid var(--color-white);
     border-radius: 50%;
-    color: var(--color-white);
     transition: all 0.3s ease;
+    background-color: var(--color-white);
+    color: var(--color-black);
   }
   
   .footer-social-link:hover {
-    background-color: var(--color-white);
-    color: var(--color-grey-medium);
+    border: 1px solid var(--color-white);
+    background-color: var(--color-grey-medium);
+    color: var(--color-white);
   }
   
   .footer-social-icon {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
   }
   
   .footer-sponsors {
     display: flex;
-    gap: 2rem;
+    gap: 10px;
   }
   
   .footer-sponsor {
-    background-color: var(--color-white);
-    border-radius: 8px;
-    padding: 1rem;
-    min-width: 200px;
-  }
-  
-  .footer-sponsor-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  
-  .footer-sponsor-icon {
-    width: 40px;
-    height: 40px;
-    background-color: var(--color-brown);
-    color: var(--color-white);
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-family-zenkaku);
-    font-size: 1.25rem;
-    font-weight: var(--font-weight-bold);
-    flex-shrink: 0;
   }
   
-  .footer-sponsor-icon.sun {
-    background: linear-gradient(45deg, #FFD700, #FFA500);
-    color: var(--color-black);
-    font-size: 0.75rem;
-    font-weight: var(--font-weight-bold);
-    text-align: center;
-    line-height: 1.2;
-  }
-  
-  .footer-sponsor-text {
-    flex: 1;
-  }
-  
-  .footer-sponsor-title {
-    font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--color-black);
-    margin-bottom: 0.25rem;
-  }
-  
-  .footer-sponsor-subtitle {
-    font-family: var(--font-family-zenkaku);
-    font-size: 0.75rem;
-    color: var(--color-text-grey-medium);
-    line-height: 1.4;
+  .footer-sponsor-image {
+    height: 77px;
+    width: auto;
+    object-fit: contain;
   }
   
   .footer-copyright {
@@ -2530,5 +2603,92 @@ const salonJsonLd = {
         // 実際の実装では、ここでニュースの表示を切り替える
       });
     });
+
+    // サロンフィルター機能
+    let currentFilter = {
+      region: '北海道',
+      searchTerm: ''
+    };
+
+    // 地域ボタンのクリックイベント
+    const regionButtons = document.querySelectorAll('.region-btn');
+    regionButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // すべてのボタンからactiveクラスを削除
+        regionButtons.forEach(btn => btn.classList.remove('active'));
+        // クリックされたボタンにactiveクラスを追加
+        button.classList.add('active');
+        
+        // フィルターを更新
+        currentFilter.region = button.getAttribute('data-region') || '';
+        applyFilters();
+      });
+    });
+
+    // 検索ボタンのクリックイベント
+    const salonFilterSearchBtn = document.getElementById('salon-search-btn') as HTMLButtonElement;
+    const salonFilterSearchInput = document.getElementById('salon-search-input') as HTMLInputElement;
+    
+    salonFilterSearchBtn?.addEventListener('click', () => {
+      currentFilter.searchTerm = salonFilterSearchInput?.value || '';
+      applyFilters();
+    });
+
+    // 検索入力のEnterキーイベント
+    salonFilterSearchInput?.addEventListener('keypress', (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        currentFilter.searchTerm = salonFilterSearchInput.value || '';
+        applyFilters();
+      }
+    });
+
+    // フィルターを適用する関数
+    function applyFilters() {
+      const salonCards = document.querySelectorAll('.salon-card');
+      const titleElement = document.getElementById('salon-filter-title');
+      
+      let visibleCount = 0;
+      let filterText = '';
+
+      salonCards.forEach(card => {
+        const region = card.getAttribute('data-region') || '';
+        const name = card.getAttribute('data-name') || '';
+        const prefecture = card.getAttribute('data-prefecture') || '';
+        const city = card.getAttribute('data-city') || '';
+        
+        // 地域フィルター
+        const regionMatch = !currentFilter.region || region === currentFilter.region;
+        
+        // 検索フィルター
+        const searchMatch = !currentFilter.searchTerm || 
+          name.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
+          prefecture.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
+          city.toLowerCase().includes(currentFilter.searchTerm.toLowerCase());
+        
+        if (regionMatch && searchMatch) {
+          (card as HTMLElement).style.display = 'block';
+          visibleCount++;
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+
+      // タイトルを更新
+      if (currentFilter.searchTerm) {
+        filterText = `「${currentFilter.searchTerm}」`;
+      } else if (currentFilter.region) {
+        filterText = `「${currentFilter.region}」`;
+      }
+      
+      if (titleElement) {
+        titleElement.textContent = `${filterText}店舗一覧`;
+      }
+    }
+
+    // 初期状態で北海道ボタンをアクティブにする
+    const hokkaidoBtn = document.querySelector('.region-btn[data-region="北海道"]');
+    if (hokkaidoBtn) {
+      hokkaidoBtn.classList.add('active');
+    }
   });
 </script>
