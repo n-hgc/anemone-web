@@ -261,6 +261,9 @@ const salonJsonLd = {
                   「貴社名・お名前・お電話番号・希望人数・依頼場所」を記載の上、<br>
                   メールでお問い合わせください
                 </p>
+                <p class="mail-form-description-mobile">
+                  貴社名・お名前・電話番号・希望人数<br>依頼場所を記載の上、お問い合わせください。
+                </p>
                 <button class="mail-form-btn">
                   メールでのご依頼はこちら
                   <svg class="mail-form-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -388,13 +391,9 @@ const salonJsonLd = {
           <div class="recruit-text">
             <p class="recruit-description">
               littleでは、全国各地のサロンネットワークで、<br>
-              場所や時間にとらわれず、あなたらしく活躍できる環境をご提供します。
-            </p>
-            
-            <p class="recruit-description">
+              場所や時間にとらわれず、あなたらしく活躍できる環境をご提供します。<br>
               育児との両立や独立支援、成長も自立も支える仕組みが整っています。
             </p>
-            
             <p class="recruit-description">
               "美容師をずっと続けたい"という想いに、littleは全力で応えます。
             </p>
@@ -496,10 +495,8 @@ const salonJsonLd = {
         <!-- 詳しく見るボタン -->
         <div class="news-more">
           <a href="/news" class="news-more-btn">
-            <span class="news-more-text">お知らせ一覧へ</span>
-            <svg class="news-more-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-            </svg>
+            <span class="news-more-text">詳しく見る</span>
+            <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="news-more-icon" />
           </a>
         </div>
       </div>
@@ -1601,6 +1598,7 @@ const salonJsonLd = {
     flex: 1;
     display: flex;
     align-items: center;
+    padding: 16px 20px;
   }
 
   .pricing-table td {
@@ -1635,11 +1633,88 @@ const salonJsonLd = {
     color: var(--color-black);
     font-family: var(--font-family-zenkaku);
     font-weight: var(--font-weight-medium);
+    font-size: 16px;
   }
   
   .pricing-table td {
     color: var(--color-black);
     font-family: var(--font-family-zenkaku);
+  }
+
+  /* 料金表のレスポンシブ対応 */
+  @media (max-width: 1023px) {
+    .pricing-table th,
+    .pricing-table td {
+      padding: 14px 16px;
+    }
+    
+    .pricing-table th {
+      font-size: 14px;
+    }
+    
+    .pricing-table td {
+      font-size: 20px;
+    }
+    
+    .pricing-table tr {
+      padding: 6px 0 6px 6px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .pricing-table th,
+    .pricing-table td {
+      padding: 12px 14px;
+    }
+    
+    .pricing-table th {
+      font-size: 13px;
+    }
+    
+    .pricing-table td {
+      font-size: 18px;
+    }
+    
+    .pricing-table tr {
+      padding: 4px 0 4px 4px;
+    }
+
+    /* メールフォームのテキスト切り替え */
+    .mail-form .mail-form-description {
+      display: none !important;
+    }
+    
+    .mail-form .mail-form-description-mobile {
+      display: block !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .pricing-table th,
+    .pricing-table td {
+      padding: 10px 12px;
+    }
+    
+    .pricing-table th {
+      font-size: 16px;
+    }
+    
+    .pricing-table td {
+      font-size: 18px;
+    }
+    
+    .pricing-table tr {
+      padding: 3px 0 3px 3px;
+    }
+
+    /* メールフォームのテキスト切り替え（小画面スマートフォン） */
+    .mail-form .mail-form-description {
+      display: none !important;
+    }
+    
+    .mail-form .mail-form-description-mobile {
+      display: block !important;
+    }
   }
   
   .hairmake-note {
@@ -1693,6 +1768,17 @@ const salonJsonLd = {
   }
 
   .mail-form-description {
+    display: block;
+    color: var(--color-white);
+    font-family: var(--font-family-zenkaku);
+    font-weight: var(--font-weight-regular);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .mail-form-description-mobile {
+    display: none;
     color: var(--color-white);
     font-family: var(--font-family-zenkaku);
     font-weight: var(--font-weight-regular);
@@ -2068,6 +2154,113 @@ const salonJsonLd = {
     width: 20px;
     height: 20px;
   }
+
+  /* 採用情報セクションのレスポンシブ対応 */
+  @media (max-width: 1023px) {
+    .recruit-container {
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    
+    .recruit-content {
+      max-width: 100%;
+    }
+    
+    .recruit-title {
+      font-size: 48px;
+      margin-bottom: 24px;
+    }
+    
+    .recruit-title-sub {
+      font-size: 20px;
+    }
+    
+    .recruit-text {
+      margin-bottom: 24px;
+    }
+    
+    .recruit-description {
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .recruit-section {
+      padding: 60px 0;
+    }
+    
+    .recruit-container {
+      padding: 0 16px;
+    }
+    
+    .recruit-title {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    
+    .recruit-title-sub {
+      font-size: 16px;
+    }
+    
+    .recruit-text {
+      margin-bottom: 20px;
+    }
+    
+    .recruit-description {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+    
+    .recruit-btn {
+      padding: 12px 24px;
+      font-size: 14px;
+    }
+    
+    .recruit-btn-icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .recruit-section {
+      padding: 40px 0;
+    }
+    
+    .recruit-container {
+      padding: 0 12px;
+    }
+    
+    .recruit-title {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+    
+    .recruit-title-sub {
+      font-size: 14px;
+    }
+    
+    .recruit-text {
+      margin-bottom: 16px;
+    }
+    
+    .recruit-description {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    
+    .recruit-btn {
+      padding: 10px 20px;
+      font-size: 13px;
+      gap: 0.5rem;
+    }
+    
+    .recruit-btn-icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
   
   /* ニュースセクション */
   .news-section {
@@ -2092,6 +2285,40 @@ const salonJsonLd = {
 
   .news-title-sub{
     font-size: 24px;
+  }
+
+  /* ニュースセクションのレスポンシブ対応 */
+  @media (max-width: 1023px) {
+    .news-title {
+      font-size: 48px;
+      margin-bottom: 40px;
+    }
+    
+    .news-title-sub {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .news-title {
+      font-size: 36px;
+      margin-bottom: 32px;
+    }
+    
+    .news-title-sub {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .news-title {
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+    
+    .news-title-sub {
+      font-size: 14px;
+    }
   }
   
   .news-tabs {
@@ -2154,9 +2381,6 @@ const salonJsonLd = {
     border-bottom: 1px solid var(--color-grey-light);
   }
   
-  .news-item:last-child {
-    border-bottom: none;
-  }
   
   .news-image {
     width: 240px;
@@ -2184,7 +2408,7 @@ const salonJsonLd = {
   
   .news-separator {
     font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
+    font-size: 24px;
     color: var(--color-text-grey-medium);
   }
   
@@ -2217,41 +2441,44 @@ const salonJsonLd = {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 3rem;
+    margin-top: 54px;
   }
   
   .news-more-btn {
     display: flex;
-    width: 172px;
-    height: 48px;
+    width: 178px;
+    height: 64px;
+    padding: 24px;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
+    gap: 8px;
     border-radius: 5px;
     border: 1px solid var(--color-black);
     background-color: transparent;
     color: var(--color-black);
-    font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-medium);
     text-decoration: none;
     transition: all 0.3s ease;
-    cursor: pointer;
-    padding: 0 1rem;
-    gap: 0.5rem;
   }
   
   .news-more-btn:hover {
-    background-color: #E6DDCA;
+    background-color: var(--color-brown);
+    color: var(--color-white);
+  }
+  
+  .news-more-btn:hover .news-more-icon {
+    filter: brightness(0) invert(1);
   }
   
   .news-more-text {
     font-family: var(--font-family-zenkaku);
+    font-size: 16px;
+    font-weight: var(--font-weight-medium);
   }
   
   .news-more-icon {
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
+    transition: filter 0.3s ease;
   }
   
   /* Instagramセクション */
@@ -2620,12 +2847,13 @@ const salonJsonLd = {
     }
     
     .hairmake-image {
+      width: 100%;
       order: -1;
     }
     
     .hairmake-image-content {
       width: 100%;
-      height: 300px;
+      height: 325px;
       object-fit: cover;
     }
     
@@ -2652,7 +2880,8 @@ const salonJsonLd = {
     .region-btn {
       width: 100%;
       height: 40px;
-      font-size: 12px;
+      font-size: 18px;
+      padding: 0;
     }
     
     .salon-search {
@@ -2665,11 +2894,10 @@ const salonJsonLd = {
     }
     
     .salon-card {
-      height: auto;
     }
     
     .salon-card-image {
-      height: 200px;
+      height: 150px;
     }
     
     /* NEWSセクション */
@@ -2696,13 +2924,13 @@ const salonJsonLd = {
     
     .news-item {
       flex-direction: column;
-      gap: 1rem;
-      padding: 1rem 0;
+      gap: 24px;
+      padding: 32px 0;
     }
     
     .news-image {
       width: 100%;
-      height: 200px;
+      height: 182px;
     }
     
     .news-more-btn {
@@ -2714,18 +2942,22 @@ const salonJsonLd = {
     .instagram-section {
       padding: 40px 0;
     }
+
+    .instagram-title {
+      font-size: 24px;
+    }
     
     .instagram-container {
-      padding: 0 1rem;
+      padding: 0 24px;
     }
     
     .instagram-grid {
       grid-template-columns: repeat(3, 1fr);
-      gap: 4px;
+      gap: 10px;
     }
     
     .instagram-image {
-      height: 120px;
+      height: 154px;
     }
     
     /* フッター */
@@ -2740,35 +2972,43 @@ const salonJsonLd = {
     .footer-brand {
       margin-bottom: 2rem;
     }
+
+    .footer-brand-text {
+      flex-direction: column;
+      align-items: center;
+    }
     
     .footer-brand-name {
-      font-size: 2rem;
+      font-size: 48px;
     }
     
     .footer-nav {
-      flex-direction: column;
-      gap: 1rem;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0px 1rem;
       width: 100%;
     }
     
     .footer-nav-link {
-      font-size: 14px;
+      font-size: 12px;
       padding: 8px;
     }
-    
-    .footer-sponsors {
+    .footer-bottom {
       flex-direction: column;
-      gap: 1rem;
+      gap: 12px;
+    } 
+    .footer-sponsors {
+      flex-direction: row;
       margin-bottom: 2rem;
     }
     
     .footer-sponsor-image {
-      width: 150px;
-      height: 60px;
+      width: auto;
+      height: 72px;
     }
     
     .intro-description {
-      font-size: 1rem;
+      font-size: 16px;
     }
     
   }
