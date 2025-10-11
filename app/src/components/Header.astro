@@ -15,64 +15,130 @@
       </a>
     </div>
 
-    <div>
-    <!-- ナビゲーション（PC版のみ表示） -->
-    <nav class="header__nav">
-      <ul class="header__nav-list pc:block hidden">
-        <li class="header__nav-item">
-          <a href="/concept" class="header__nav-link hover:text-primary">
-            <span class="header__nav-en">HAIRSTYLE</span>
-            <span class="header__nav-jp">ヘアカタログ</span>
+    <!-- 右側グループ（ナビゲーション + アクション） -->
+    <div class="header__right-group">
+      <!-- ナビゲーション（PC版のみ表示） -->
+      <nav class="header__nav">
+        <ul class="header__nav-list">
+          <li class="header__nav-item">
+            <a href="/concept" class="header__nav-link">
+              <span class="header__nav-en">HAIRSTYLE</span>
+              <span class="header__nav-jp">ヘアカタログ</span>
+            </a>
+          </li>
+          <li class="header__nav-item">
+            <a href="/menu" class="header__nav-link">
+              <span class="header__nav-en">HAIRMAKE</span>
+              <span class="header__nav-jp">ヘアメイク</span>
+            </a>
+          </li>
+          <li class="header__nav-item">
+            <a href="/style" class="header__nav-link">
+              <span class="header__nav-en">STYLE</span>
+              <span class="header__nav-jp">スタイル</span>
+            </a>
+          </li>
+          <li class="header__nav-item">
+            <a href="/news" class="header__nav-link">
+              <span class="header__nav-en">NEWS</span>
+              <span class="header__nav-jp">お知らせ</span>
+            </a>
+          </li>
+          <li class="header__nav-item">
+            <a href="/recruit" class="header__nav-link">
+              <span class="header__nav-en">RECRUIT</span>
+              <span class="header__nav-jp">採用情報</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- アクションボタン -->
+      <div class="header__actions">
+        <!-- ソーシャルメディアアイコン（PC版のみ表示） -->
+        <div class="header__social">
+          <a href="https://twitter.com/anemone_salon" class="header__social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <img src="/images/header/icon_x.png" alt="Twitter" class="header__social-icon" />
           </a>
-        </li>
-        <li class="header__nav-item">
-          <a href="/menu" class="header__nav-link hover:text-primary">
-            <span class="header__nav-en">HAIRMAKE</span>
-            <span class="header__nav-jp">ヘアメイク</span>
+          <a href="https://instagram.com/anemone_salon" class="header__social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <img src="/images/header/icon_insta.png" alt="Instagram" class="header__social-icon" />
           </a>
-        </li>
-        <li class="header__nav-item">
-          <a href="/style" class="header__nav-link hover:text-primary">
-            <span class="header__nav-en">STYLE</span>
-            <span class="header__nav-jp">スタイル</span>
+          <a href="https://line.me/R/ti/p/@anemone_salon" class="header__social-link" target="_blank" rel="noopener noreferrer" aria-label="LINE">
+            <img src="/images/header/icon_line.png" alt="LINE" class="header__social-icon" />
           </a>
-        </li>
-        <li class="header__nav-item">
-          <a href="/news" class="header__nav-link hover:text-primary">
-            <span class="header__nav-en">NEWS</span>
-            <span class="header__nav-jp">お知らせ</span>
-          </a>
-        </li>
-        <li class="header__nav-item">
-          <a href="/recruit" class="header__nav-link hover:text-primary">
-            <span class="header__nav-en">RECRUIT</span>
-            <span class="header__nav-jp">採用情報</span>
-          </a>
-        </li>
-      </ul>
-    <!-- アクションボタン -->
-    <div class="header__actions">
-      <!-- ソーシャルメディアアイコン（PC版のみ表示） -->
-      <div class="header__social">
-        <a href="https://twitter.com/anemone_salon" class="header__social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-          <img src="/images/header/icon_x.png" alt="Twitter" class="header__social-icon" />
-        </a>
-        <a href="https://instagram.com/anemone_salon" class="header__social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <img src="/images/header/icon_insta.png" alt="Instagram" class="header__social-icon" />
-        </a>
-        <a href="https://line.me/R/ti/p/@anemone_salon" class="header__social-link" target="_blank" rel="noopener noreferrer" aria-label="LINE">
-          <img src="/images/header/icon_line.png" alt="LINE" class="header__social-icon" />
-        </a>
+        </div>
+        
+        <!-- SP用アクションボタン群 -->
+        <div class="header__sp-actions">
+          <!-- 検索/予約ボタン（SP版のみ表示） -->
+          <button class="header__search-btn" aria-label="店舗を選んで予約する" id="search-toggle">
+            <svg class="header__search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <span class="header__search-text">店舗を選んで予約する</span>
+          </button>
+          
+          <!-- ハンバーガーメニュー（SP版のみ表示） -->
+          <button class="header__menu-btn" aria-label="メニューを開く" id="menu-toggle">
+            <span class="header__menu-icon"></span>
+            <span class="header__menu-icon"></span>
+            <span class="header__menu-icon"></span>
+            <span class="header__menu-text">MENU</span>
+          </button>
+        </div>
       </div>
-      
-      <!-- ハンバーガーメニュー（SP版のみ表示） -->
-      <button class="header__menu-btn" aria-label="メニューを開く">
-        <span class="header__menu-icon"></span>
-        <span class="header__menu-icon"></span>
-        <span class="header__menu-icon"></span>
-      </button>
     </div>
-    </nav>
+
+    <!-- モバイルメニュー -->
+    <div class="header__mobile-menu" id="mobile-menu">
+      <nav class="header__mobile-nav">
+        <ul class="header__mobile-nav-list">
+          <li class="header__mobile-nav-item">
+            <a href="/concept" class="header__mobile-nav-link">
+              <span class="header__mobile-nav-en">HAIRSTYLE</span>
+              <span class="header__mobile-nav-jp">ヘアカタログ</span>
+            </a>
+          </li>
+          <li class="header__mobile-nav-item">
+            <a href="/menu" class="header__mobile-nav-link">
+              <span class="header__mobile-nav-en">HAIRMAKE</span>
+              <span class="header__mobile-nav-jp">ヘアメイク</span>
+            </a>
+          </li>
+          <li class="header__mobile-nav-item">
+            <a href="/style" class="header__mobile-nav-link">
+              <span class="header__mobile-nav-en">STYLE</span>
+              <span class="header__mobile-nav-jp">スタイル</span>
+            </a>
+          </li>
+          <li class="header__mobile-nav-item">
+            <a href="/news" class="header__mobile-nav-link">
+              <span class="header__mobile-nav-en">NEWS</span>
+              <span class="header__mobile-nav-jp">お知らせ</span>
+            </a>
+          </li>
+          <li class="header__mobile-nav-item">
+            <a href="/recruit" class="header__mobile-nav-link">
+              <span class="header__mobile-nav-en">RECRUIT</span>
+              <span class="header__mobile-nav-jp">採用情報</span>
+            </a>
+          </li>
+        </ul>
+        
+        <!-- モバイル用ソーシャルメディアアイコン -->
+        <div class="header__mobile-social">
+          <a href="https://twitter.com/anemone_salon" class="header__mobile-social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <img src="/images/header/icon_x.png" alt="Twitter" class="header__mobile-social-icon" />
+          </a>
+          <a href="https://instagram.com/anemone_salon" class="header__mobile-social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <img src="/images/header/icon_insta.png" alt="Instagram" class="header__mobile-social-icon" />
+          </a>
+          <a href="https://line.me/R/ti/p/@anemone_salon" class="header__mobile-social-link" target="_blank" rel="noopener noreferrer" aria-label="LINE">
+            <img src="/images/header/icon_line.png" alt="LINE" class="header__mobile-social-icon" />
+          </a>
+        </div>
+      </nav>
+    </div>
 
   </div>
 </header>
@@ -87,7 +153,8 @@
   /* SP版の背景色を白に */
   @media (max-width: 767px) {
     .header {
-      background-color: var(--color-white);
+      background-color: #FFFDF8;
+      opacity: 0.9;
     }
   }
 
@@ -95,16 +162,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* PC版 */
     width: 100%;
     max-width: 1440px;
     height: 80px;
     padding: 0 55px;
     margin: 0 auto;
-    /* SP版 */
-    height: 64px;
-    padding-left: 24px;
-    padding-right: 16px;
+    position: relative;
   }
 
   .header__logo {
@@ -126,10 +189,14 @@
     object-fit: contain;
   }
 
-  .header__nav {
-    flex: 1;
+  .header__right-group {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header__nav {
+    display: flex;
   }
 
   .header__nav-list {
@@ -215,38 +282,216 @@
     object-fit: contain;
   }
 
-  .header__menu-btn {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 2rem;
-    height: 2rem;
-    gap: 0.25rem;
-  }
-
   .header__menu-icon {
     width: 1.5rem;
     height: 0.125rem;
-    background-color: var(--color-black);
+    background-color: var(--color-brown);
     transition: all 0.3s ease;
   }
 
-  .header__menu-btn:hover .header__menu-icon {
+  /* SP用アクションボタン群 */
+  .header__sp-actions {
+    display: none;
+    flex-direction: row;
+  }
+
+  .header__search-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
     background-color: var(--color-brown);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: 4px;
+  }
+
+  .header__search-btn:hover {
+    background-color: #8B6F47;
+    transform: translateY(-2px);
+  }
+
+  .header__search-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--color-white);
+  }
+
+  .header__search-text {
+    font-family: var(--font-family-zenkaku);
+    font-size: 10px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .header__menu-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: #FFFDF8;
+    border: 1px solid var(--color-brown);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: 4px;
+  }
+
+  .header__menu-btn:hover {
+    background-color: var(--color-brown);
+    transform: translateY(-2px);
+  }
+
+  .header__menu-btn:hover .header__menu-icon {
+    background-color: var(--color-white);
+  }
+
+  .header__menu-btn:hover .header__menu-text {
+    color: var(--color-white);
+  }
+
+  .header__menu-text {
+    font-family: var(--font-family-zenkaku);
+    font-size: 10px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-brown);
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  /* モバイルメニュー */
+  .header__mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .header__mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .header__mobile-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100%;
+    background-color: #FFFDF8;
+    opacity: 0.9;
+    padding: 80px 24px 24px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .header__mobile-menu.active .header__mobile-nav {
+    transform: translateX(0);
+  }
+
+  .header__mobile-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+  }
+
+  .header__mobile-nav-item {
+    border-bottom: 1px solid var(--color-grey-light);
+  }
+
+  .header__mobile-nav-item:last-child {
+    border-bottom: none;
+  }
+
+  .header__mobile-nav-link {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .header__mobile-nav-link:hover {
+    color: var(--color-brown);
+  }
+
+  .header__mobile-nav-en {
+    font-family: var(--font-family-yumincho);
+    font-weight: var(--font-weight-medium);
+    font-size: 18px;
+    line-height: 1.0;
+    color: var(--color-black);
+  }
+
+  .header__mobile-nav-jp {
+    font-family: var(--font-family-zenkaku);
+    font-weight: var(--font-weight-regular);
+    font-size: 14px;
+    line-height: 1.2;
+    color: var(--color-grey-medium);
+    margin-top: 4px;
+  }
+
+  .header__mobile-social {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .header__mobile-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-beige);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .header__mobile-social-link:hover {
+    background-color: var(--color-brown);
+    transform: translateY(-2px);
+  }
+
+  .header__mobile-social-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
   }
 
   /* レスポンシブ対応 */
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .header__container {
-      max-width: 1440px;
       height: 80px;
-      padding: 0 55px;
-      margin: 0 auto;
+      padding: 0 55hpx;
     }
     
     .header__logo-image {
       height: 62px;
+    }
+    
+    .header__right-group {
+      display: flex;
+      align-items: center;
+      gap: 0px;
+    }
+    
+    .header__nav {
+      display: flex;
     }
     
     .header__nav-link {
@@ -265,22 +510,94 @@
       display: none;
     }
     
+    .header__mobile-menu {
+      display: none;
+    }
+    
     .header__social-link {
       width: 44px;
       height: 44px;
     }
     
     .header__social-icon {
-      width: 22px;
-      height: 22px;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .header__container {
+      height: 75px;
+      padding: 0 40px;
+    }
+    
+    .header__logo-image {
+      height: 55px;
+    }
+    
+    .header__right-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .header__nav {
+      display: flex;
+    }
+    
+    .header__nav-item {
+      width: 120px;
+    }
+    
+    .header__nav-link {
+      gap: 4px;
+    }
+    
+    .header__nav-en {
+      font-size: 16px;
+    }
+    
+    .header__nav-jp {
+      font-size: 11px;
+    }
+    
+    .header__social {
+      display: flex;
+    }
+    
+    .header__menu-btn {
+      display: none;
+    }
+    
+    .header__mobile-menu {
+      display: none;
+    }
+    
+    .header__social-link {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .header__social-icon {
+      width: 20px;
+      height: 20px;
     }
   }
 
   @media (max-width: 767px) {
     .header__container {
       height: 64px;
-      padding-left: 24px;
-      padding-right: 16px;
+      padding: 0 0 0 24px;
+    }
+    
+    .header__logo-image {
+      height: 40px;
+    }
+    
+    .header__right-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
     
     .header__nav {
@@ -291,8 +608,66 @@
       display: none;
     }
     
-    .header__menu-btn {
+    .header__sp-actions {
       display: flex;
+    }
+    
+    .header__mobile-menu {
+      display: block;
     }
   }
 </style>
+
+<script>
+  // モバイルメニューと検索ボタンの制御
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const searchToggle = document.getElementById('search-toggle');
+    const body = document.body;
+
+    // メニューボタンの制御
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', function() {
+        mobileMenu.classList.toggle('active');
+        body.classList.toggle('menu-open');
+      });
+
+      // メニュー外をクリックした時の閉じる処理
+      mobileMenu.addEventListener('click', function(e) {
+        if (e.target === mobileMenu) {
+          mobileMenu.classList.remove('active');
+          body.classList.remove('menu-open');
+        }
+      });
+
+      // メニューリンクをクリックした時の閉じる処理
+      const mobileNavLinks = mobileMenu.querySelectorAll('.header__mobile-nav-link');
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.remove('active');
+          body.classList.remove('menu-open');
+        });
+      });
+
+      // ESCキーでメニューを閉じる
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+          mobileMenu.classList.remove('active');
+          body.classList.remove('menu-open');
+        }
+      });
+    }
+
+    // 検索ボタンの制御
+    if (searchToggle) {
+      searchToggle.addEventListener('click', function() {
+        // サロン一覧セクションにスクロール
+        const salonsSection = document.getElementById('salons');
+        if (salonsSection) {
+          salonsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+  });
+</script>

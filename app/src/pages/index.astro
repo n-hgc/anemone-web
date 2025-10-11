@@ -98,18 +98,17 @@ const salonJsonLd = {
             </div>
           </div>
           
-          <!-- スライドショー内のページネーション -->
+          <!-- ページネーション（右側に独立配置） -->
           <div class="hero-slide-pagination">
-            <button class="hero-pagination-dot active" data-slide="0"></button>
-            <button class="hero-pagination-dot" data-slide="1"></button>
-            <button class="hero-pagination-dot" data-slide="2"></button>
+            <div class="pagination-stripe active" data-slide="0"></div>
+            <div class="pagination-stripe" data-slide="1"></div>
+            <div class="pagination-stripe" data-slide="2"></div>
           </div>
         </div>
       </div>
       
       <!-- Floating Action Button (PC用) -->
       <div class="hero-fab">
-        <div class="hero-action-text">ネットからがお得</div>
         <button class="hero-search-btn" aria-label="店舗を選んで予約する">
           <div class="hero-btn-content">
             <svg class="hero-search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -700,19 +699,16 @@ const salonJsonLd = {
     border-radius: 12px;
     overflow: hidden;
     display: flex;
-    padding: 184px 400px 184px 145px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
     align-self: stretch;
   }
   
   .hero-slideshow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    flex: 1;
     height: 100%;
+    position: relative;
   }
   
   .hero-slide {
@@ -806,101 +802,91 @@ const salonJsonLd = {
   
   /* スライドショー内のページネーション */
   .hero-slide-pagination {
-    position: absolute;
-    right: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
     display: flex;
+    width: 8px;
     flex-direction: column;
-    gap: 0.75rem;
+    align-items: flex-start;
+    gap: 4px;
     z-index: 15;
     pointer-events: auto;
-    background-color: rgba(0, 0, 0, 0.3); /* デバッグ用の背景 */
-    padding: 0.5rem;
-    border-radius: 8px;
+    padding: 12px;
   }
   
   /* Floating Action Button */
   .hero-fab {
     position: absolute;
-    right: 2rem;
-    top: 50%;
+    right: 1rem;
+    top: 85%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
     z-index: 20;
+    background-image: url('/images/fab_bg.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 240px;
+    height: 210px;
   }
   
   /* PC用のFloating Action Button */
   @media (min-width: 768px) {
     .hero-fab {
       position: fixed;
-      right: 2rem;
-      top: 50%;
+      right: 0px;
+      top: 85%;
       transform: translateY(-50%);
       z-index: 1000;
     }
     
     .hero-slide-pagination {
-      position: absolute;
-      right: 2rem;
-      top: 50%;
-      transform: translateY(-50%);
       display: flex;
+      width: 8px;
       flex-direction: column;
-      gap: 0.75rem;
+      align-items: flex-start;
+      gap: 4px;
       z-index: 15;
-      background-color: rgba(0, 0, 0, 0.3); /* デバッグ用の背景 */
-      padding: 0.5rem;
-      border-radius: 8px;
+      padding: 12px;
     }
   }
   
   
-  .hero-pagination-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.8);
-    background-color: rgba(255, 255, 255, 0.4);
+  /* ページネーションストライプ */
+  .pagination-stripe {
+    width: 8px;
+    height: 60px;
+    background-color: #E8DDC7;
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
   }
   
-  .hero-pagination-dot.active {
-    background-color: var(--color-brown);
-    border-color: var(--color-brown);
-    transform: scale(1.3);
-    box-shadow: 0 4px 8px rgba(105, 85, 46, 0.4);
+  .pagination-stripe.active {
+    background-color: #D4C4A8; /* アクティブ時は少し濃い色 */
   }
   
-  .hero-pagination-dot:hover {
-    background-color: var(--color-brown-light);
-    border-color: var(--color-brown-light);
-    transform: scale(1.2);
-    box-shadow: 0 3px 6px rgba(105, 85, 46, 0.3);
+  .pagination-stripe:hover {
+    background-color: #F0E6D0; /* ホバー時の色 */
+  }
+  
+  /* ページネーション区切り線 */
+  .pagination-divider {
+    width: 8px;
+    height: 1px;
+    background-color: #2C2C2C;
+    border-radius: 0.5px;
   }
   
   
-  .hero-action-text {
-    font-family: var(--font-family-yumincho);
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-medium);
-    color: var(--color-black);
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-  }
   
   .hero-search-btn {
-    width: 180px;
-    height: 180px;
+    width: 210px;
+    height: 210px;
     flex-shrink: 0;
     aspect-ratio: 1/1;
     border-radius: 50%;
-    background-color: var(--color-brown);
     color: white;
     border: none;
     cursor: pointer;
@@ -908,46 +894,38 @@ const salonJsonLd = {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 24px rgba(105, 85, 46, 0.3);
     position: relative;
     overflow: hidden;
   }
   
-  .hero-search-btn:hover {
-    background-color: var(--color-brown-dark);
-    transform: scale(1.05);
-    box-shadow: 0 12px 32px rgba(105, 85, 46, 0.4);
-  }
   
   .hero-btn-content {
     display: flex;
+    margin-top: 15px;
     flex-direction: column;
     align-items: center;
+    gap: 4px;
     justify-content: center;
-    gap: 0.75rem;
   }
   
   .hero-search-icon {
-    width: 32px;
-    height: 32px;
-    stroke-width: 2.5;
+    width: 42px;
+    height: 42px;
+    stroke-width: 1;
   }
   
   .hero-btn-text {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.25rem;
   }
   
   .hero-btn-line {
-    font-family: var(--font-family-yumincho);
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-medium);
+    font-family: var(--font-family-zenkaku);
+    font-size: 20px;
+    font-weight: var(--font-weight-regular);
     color: white;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    line-height: 1.2;
+    line-height: 1.25;
   }
   
   /* レスポンシブ対応 */
@@ -975,13 +953,15 @@ const salonJsonLd = {
       height: 320px;
       flex-shrink: 0;
       padding: 0;
-      display: block;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
     }
     
     .hero-slideshow {
-      position: relative;
-      width: 100%;
+      flex: 1;
       height: 100%;
+      position: relative;
     }
     
     .hero-slide {
@@ -1002,18 +982,31 @@ const salonJsonLd = {
     }
     
     .hero-slide-pagination {
-      position: absolute;
-      bottom: 1rem;
-      right: 1rem;
-      top: auto;
-      transform: none;
+      display: flex;
       flex-direction: row;
-      gap: 0.5rem;
+      align-items: flex-start;
+      gap: 4px;
       z-index: 15;
-      background-color: rgba(0, 0, 0, 0.3);
-      padding: 0.5rem;
-      border-radius: 8px;
+      width: 32px;
+      height: 8px;
+      padding: 1rem;
     }
+    
+    .pagination-stripe {
+      height: 8px;
+      width: 8px;
+      border-radius: 4px;
+    }
+    
+    .pagination-stripe.active {
+      height: 8px;
+    }
+    
+    .pagination-divider {
+      height: 8px;
+      width: 1px;
+    }
+    
     
     .hero-fab {
       position: absolute;
@@ -1023,14 +1016,8 @@ const salonJsonLd = {
       top: auto;
       transform: none;
       flex-direction: row;
-      gap: 0.75rem;
     }
     
-    .hero-action-text {
-      writing-mode: horizontal-tb;
-      text-orientation: initial;
-      font-size: 0.75rem;
-    }
     
     .hero-search-btn {
       width: 60px;
@@ -2559,7 +2546,7 @@ const salonJsonLd = {
   // ヒーローセクションのスライドショー機能
   document.addEventListener('DOMContentLoaded', function() {
     const slides = document.querySelectorAll('.hero-slide');
-    const paginationDots = document.querySelectorAll('.hero-pagination-dot');
+    const paginationDots = document.querySelectorAll('.pagination-stripe');
     const searchBtn = document.querySelector('.hero-search-btn');
     let currentSlide = 0;
     let slideInterval: ReturnType<typeof setInterval> | undefined;
@@ -2604,9 +2591,9 @@ const salonJsonLd = {
       clearInterval(slideInterval);
     }
 
-    // ページネーションドットのクリックイベント
-    paginationDots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
+    // ページネーションストライプのクリックイベント
+    paginationDots.forEach((stripe, index) => {
+      stripe.addEventListener('click', () => {
         showSlide(index);
         stopSlideShow();
         startSlideShow(); // 再開
