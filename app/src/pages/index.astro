@@ -53,6 +53,12 @@ const salonJsonLd = {
     
     <!-- ヒーローセクション -->
     <section class="hero-section">
+      <!-- 右上のテキスト画像 -->
+      <img 
+        src="/images/hero/text.svg" 
+        alt="アネモネサロン" 
+        class="hero-text-overlay"
+      />
       <div class="hero-container">
         <!-- メインコンテンツエリア -->
         <div class="hero-main">
@@ -86,7 +92,7 @@ const salonJsonLd = {
             
             <div class="hero-slide">
               <img 
-                src="/images/hero/slide-1.png" 
+                src="/images/hero/slide-3.png" 
                 alt="アネモネサロンのスタイリング" 
                 class="hero-slide-image"
               />
@@ -197,7 +203,8 @@ const salonJsonLd = {
         <!-- 詳しく見るボタン -->
         <div class="hairstyle-more">
           <button class="hairstyle-more-btn">
-            詳しく見る
+            <span class="hairstyle-more-text">詳しく見る</span>
+            <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="hairstyle-more-icon" />
           </button>
         </div>
       </div>
@@ -679,6 +686,15 @@ const salonJsonLd = {
     min-height: 320px;
   }
   
+  .hero-text-overlay {
+    position: absolute;
+    top: 60px;
+    right: 0px;
+    z-index: 10;
+    max-height: 116px;
+    width: auto;
+  }
+  
   .hero-container {
     display: flex;
     padding: 24px 55px;
@@ -737,7 +753,6 @@ const salonJsonLd = {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
   }
   
   .hero-slide-content {
@@ -850,6 +865,13 @@ const salonJsonLd = {
       padding: 12px;
     }
   }
+
+  /* モバイルではFABを非表示 */
+  @media (max-width: 767px) {
+    .hero-fab {
+      display: none;
+    }
+  }
   
   
   /* ページネーションストライプ */
@@ -934,12 +956,18 @@ const salonJsonLd = {
       height: 320px;
     }
     
+    .hero-text-overlay {
+      top: 10px;
+      max-height: 56px;
+    }
+    
     .hero-container {
       padding: 0;
       flex-direction: row;
       justify-content: flex-end;
       align-items: center;
       align-self: stretch;
+      min-height: 100%;
     }
     
     .hero-main {
@@ -949,7 +977,6 @@ const salonJsonLd = {
       right: 0;
       bottom: 0;
       border-radius: 0 20px 20px 0;
-      width: 339.456px;
       height: 320px;
       flex-shrink: 0;
       padding: 0;
@@ -970,15 +997,14 @@ const salonJsonLd = {
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(0deg, rgba(121, 104, 79, 0.20) 0%, rgba(121, 104, 79, 0.20) 100%), 
-                  var(--color-grey-light) 50% / cover no-repeat;
     }
     
     .hero-slide-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      mix-blend-mode: multiply;
+      border-radius: 0 20px 20px 0;
+      /* mix-blend-mode: multiply; */
     }
     
     .hero-slide-pagination {
@@ -1071,7 +1097,6 @@ const salonJsonLd = {
   /* イントロダクションセクション */
   .intro-section {
     background-color: var(--color-beige);
-    
     padding: 110px 0;
   }
   
@@ -1107,6 +1132,45 @@ const salonJsonLd = {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
+  }
+
+  /* グリッドレイアウトのレスポンシブ対応 */
+  @media (max-width: 1023px) {
+    .grid-4-cols {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    
+    .grid-3-cols {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .grid-4-cols {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    
+    .grid-3-cols {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    
+    .grid-2-cols {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .grid-4-cols,
+    .grid-3-cols,
+    .grid-2-cols {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
   }
   
   /* 共通タイポグラフィ */
@@ -1165,6 +1229,81 @@ const salonJsonLd = {
     font-weight: var(--font-weight-regular);
     line-height: 150%;
   }
+
+  /* タイポグラフィのレスポンシブ対応 */
+  @media (max-width: 1023px) {
+    .text-h1 {
+      font-size: 48px;
+    }
+    
+    .text-h2 {
+      font-size: 36px;
+    }
+    
+    .text-h3 {
+      font-size: 28px;
+    }
+    
+    .text-h4 {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .text-h1 {
+      font-size: 36px;
+    }
+    
+    .text-h2 {
+      font-size: 28px;
+    }
+    
+    .text-h3 {
+      font-size: 24px;
+    }
+    
+    .text-h4 {
+      font-size: 18px;
+    }
+    
+    .text-body {
+      font-size: 14px;
+    }
+    
+    .text-body-large {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .text-h1 {
+      font-size: 28px;
+    }
+    
+    .text-h2 {
+      font-size: 24px;
+    }
+    
+    .text-h3 {
+      font-size: 20px;
+    }
+    
+    .text-h4 {
+      font-size: 16px;
+    }
+    
+    .text-body {
+      font-size: 13px;
+    }
+    
+    .text-body-large {
+      font-size: 14px;
+    }
+    
+    .text-small {
+      font-size: 12px;
+    }
+  }
   
   .intro-content {
     display: flex;
@@ -1187,6 +1326,64 @@ const salonJsonLd = {
   
   .section-title-sub {
     font-size: 24px;
+  }
+
+  /* セクション関連のレスポンシブ対応 */
+  @media (max-width: 1023px) {
+    .section-container {
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    
+    .section-container-wide {
+      max-width: 900px;
+      padding: 0 20px;
+    }
+    
+    .section-title {
+      height: auto;
+      margin-bottom: 32px;
+    }
+    
+    .section-title-sub {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .section-container {
+      max-width: 100%;
+      padding: 0 16px;
+    }
+    
+    .section-container-wide {
+      max-width: 100%;
+      padding: 0 16px;
+    }
+    
+    .section-title {
+      height: auto;
+      margin-bottom: 24px;
+    }
+    
+    .section-title-sub {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-container,
+    .section-container-wide {
+      padding: 0 24px;
+    }
+    
+    .section-title {
+      margin-bottom: 20px;
+    }
+    
+    .section-title-sub {
+      font-size: 14px;
+    }
   }
   
   .intro-title {
@@ -1298,23 +1495,46 @@ const salonJsonLd = {
   }
   
   .hairstyle-more {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .hairstyle-more-btn {
-    background-color: var(--color-grey-medium);
+    display: flex;
+    width: 178px;
+    height: 64px;
+    padding: 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 5px;
+    border: 1px solid var(--color-black);
+    background-color: transparent;
     color: var(--color-black);
-    border: none;
-    padding: 0.75rem 2rem;
-    border-radius: 6px;
-    font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
   }
   
   .hairstyle-more-btn:hover {
     background-color: var(--color-brown);
+    color: var(--color-white);
+  }
+  
+  .hairstyle-more-btn:hover .hairstyle-more-icon {
+    filter: brightness(0) invert(1);
+  }
+  
+  .hairstyle-more-text {
+    font-family: var(--font-family-zenkaku);
+    font-size: 16px;
+    font-weight: var(--font-weight-medium);
+  }
+  
+  .hairstyle-more-icon {
+    width: 24px;
+    height: 24px;
+    transition: filter 0.3s ease;
   }
   
   /* 企業様向けヘアメイクセクション */
@@ -2270,6 +2490,11 @@ const salonJsonLd = {
   
   /* タブレット対応 (768px - 1024px) */
   @media (min-width: 769px) and (max-width: 1024px) {
+    .hero-text-overlay {
+      top: 20px;
+      max-height: 100px;
+    }
+    
     .intro-content {
       gap: 2rem;
     }
@@ -2320,7 +2545,6 @@ const salonJsonLd = {
     
     /* ヒーローセクション */
     .hero-section {
-      height: 100vh;
     }
     
     .hero-slide-content {
@@ -2328,9 +2552,13 @@ const salonJsonLd = {
       right: 20px;
       transform: translateY(-50%);
     }
+
+    .intro-section {
+      padding: 40px 0;
+    }
     
     .hero-logo {
-      width: 200px;
+      width: 144px;
     }
     
     .intro-content {
@@ -2339,7 +2567,11 @@ const salonJsonLd = {
     }
     
     .intro-title {
-      font-size: 2rem;
+      font-size: 20px;
+    }
+
+    .intro-image-content {
+      height: 218px;
     }
     
     /* ヘアスタイルセクション */
@@ -2352,25 +2584,25 @@ const salonJsonLd = {
     }
     
     .hairstyle-tabs {
-      flex-wrap: wrap;
       gap: 4px;
-      margin-bottom: 2rem;
+      margin-bottom: 24px;
+      overflow-x: auto;
     }
     
     .hairstyle-tab {
       font-size: 14px;
       padding: 8px 16px;
       flex: 1;
-      min-width: 80px;
+      min-width: 96px;
     }
     
     .hairstyle-grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
+      gap: 12px;
     }
     
     .hairstyle-image {
-      height: 200px;
+      height: 224px;
     }
     
     /* ヘアメイクセクション */
