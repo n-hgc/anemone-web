@@ -1,0 +1,333 @@
+---
+// recruitページ専用ヘッダーコンポーネント
+---
+
+<header class="recruit-header">
+  <div class="recruit-header__container">
+    <!-- ロゴ -->
+    <div class="recruit-header__logo">
+      <a href="/" class="recruit-header__logo-link">
+        <img 
+          src="/images/header/logo.png" 
+          alt="little" 
+          class="recruit-header__logo-image"
+        />
+      </a>
+    </div>
+
+    <!-- 右側グループ（ナビゲーション + アクション） -->
+    <div class="recruit-header__right-group">
+      <!-- ナビゲーション（PC版のみ表示） -->
+      <nav class="recruit-header__nav">
+        <ul class="recruit-header__nav-list">
+          <li class="recruit-header__nav-item">
+            <a href="#about" class="recruit-header__nav-link">
+              <span class="recruit-header__nav-en">CHARM</span>
+              <span class="recruit-header__nav-jp">littleで働く魅力</span>
+            </a>
+          </li>
+          <li class="recruit-header__nav-item">
+            <a href="#appeal" class="recruit-header__nav-link">
+              <span class="recruit-header__nav-en">SALON</span>
+              <span class="recruit-header__nav-jp">サロン・求人を探す</span>
+            </a>
+          </li>
+          <li class="recruit-header__nav-item">
+            <a href="#salon" class="recruit-header__nav-link">
+              <span class="recruit-header__nav-en">INTERVIEW</span>
+              <span class="recruit-header__nav-jp">働くスタッフの声</span>
+            </a>
+          </li>
+          <li class="recruit-header__nav-item">
+            <a href="#faq" class="recruit-header__nav-link">
+              <span class="recruit-header__nav-en">FAQ</span>
+              <span class="recruit-header__nav-jp">よくある質問</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- エントリーボタン -->
+      <div class="recruit-header__actions">
+        <a href="#entry" class="recruit-header__entry-btn">
+          <span class="recruit-header__entry-text">応募・サロン見学はこちら</span>
+          <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-header__entry-icon" />
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  @import "tailwindcss";
+  
+  /* CSS変数の定義（既存のHeader.astroと同じ） */
+  :root {
+    --color-beige: #FFFDF8;
+    --color-brown: #8B4513;
+    --color-brown-light: #A0522D;
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+    --color-grey-light: #E5E5E5;
+    --color-grey-medium: #666666;
+    --font-family-yumincho: 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', 'MS PMincho', serif;
+    --font-family-zenkaku: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+  }
+  
+  .recruit-header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2147483646;
+    opacity: 0.9;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* SP版の背景色を白に */
+  @media (max-width: 767px) {
+    .recruit-header {
+      background-color: #FFFDF8;
+      opacity: 0.9;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  }
+
+  .recruit-header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1440px;
+    height: 80px;
+    padding: 0 55px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .recruit-header__logo {
+    flex-shrink: 0;
+  }
+
+  .recruit-header__logo-link {
+    display: block;
+    transition: opacity 0.3s ease;
+  }
+
+  .recruit-header__logo-link:hover {
+    opacity: 0.8;
+  }
+
+  .recruit-header__logo-image {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .recruit-header__right-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .recruit-header__nav {
+    display: flex;
+  }
+
+  .recruit-header__nav-list {
+    display: flex;
+    gap: 0;
+  }
+
+  .recruit-header__nav-item {
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    width: 160px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .recruit-header__nav-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 100%;
+    background-color: var(--color-grey-light);
+  }
+
+  .recruit-header__nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .recruit-header__nav-en {
+    font-family: var(--font-family-yumincho);
+    font-weight: var(--font-weight-medium);
+    font-size: 18px;
+    line-height: 1.0;
+    color: #3d3d3d;
+  }
+
+  .recruit-header__nav-jp {
+    font-family: var(--font-family-zenkaku);
+    font-weight: var(--font-weight-regular);
+    font-size: 12px;
+    line-height: 1.0;
+    color: #3d3d3d;
+  }
+
+  .recruit-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .recruit-header__entry-btn {
+    display: flex;
+    height: 50px;
+    padding: 10px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 5px;
+    background: #69552E;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .recruit-header__entry-btn:hover {
+    background-color: #8B6F47;
+  }
+
+  .recruit-header__entry-text {
+    color: #FFF;
+    font-family: "Zen Kaku Gothic New";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%; /* 16px */
+  }
+
+  .recruit-header__entry-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* アイコンを白色に */
+  }
+
+  /* レスポンシブ対応 */
+  @media (min-width: 1024px) {
+    .recruit-header__container {
+      height: 80px;
+      padding: 0 55px;
+    }
+    
+    .recruit-header__logo-image {
+      height: 62px;
+    }
+    
+    .recruit-header__right-group {
+      display: flex;
+      align-items: center;
+      gap: 0px;
+    }
+    
+    .recruit-header__nav {
+      display: flex;
+    }
+    
+    .recruit-header__nav-link {
+      gap: 6px;
+    }
+    
+    .recruit-header__nav-jp {
+      font-size: 12px;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .recruit-header__container {
+      height: 75px;
+      padding: 0 40px;
+    }
+    
+    .recruit-header__logo-image {
+      height: 55px;
+    }
+    
+    .recruit-header__right-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .recruit-header__nav {
+      display: flex;
+    }
+    
+    .recruit-header__nav-item {
+      width: 120px;
+    }
+    
+    .recruit-header__nav-link {
+      gap: 4px;
+    }
+    
+    .recruit-header__nav-en {
+      font-size: 16px;
+    }
+    
+    .recruit-header__nav-jp {
+      font-size: 11px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .recruit-header__container {
+      height: 64px;
+      padding: 0 0 0 24px;
+    }
+    
+    .recruit-header__logo-image {
+      height: 40px;
+    }
+    
+    .recruit-header__right-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .recruit-header__nav {
+      display: none;
+    }
+    
+    .recruit-header__entry-btn {
+      height: 45px;
+      padding: 8px 14px;
+    }
+    
+    .recruit-header__entry-text {
+      font-size: 14px;
+    }
+    
+    .recruit-header__entry-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+</style>
