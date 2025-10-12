@@ -1,9 +1,13 @@
 ---
 import RecruitHeader from '../../components/RecruitHeader.astro';
+import RecruitSalonCard from '../../components/RecruitSalonCard.astro';
 import { generateRecruitJsonLd } from '../../lib/seo/jsonld';
+import recruitSalonsData from '../../data/recruit-salons.json';
 
 // 採用ページのJSON-LDを生成
 const jsonLd = generateRecruitJsonLd();
+
+const { salons, icons } = recruitSalonsData;
 
 const title = "採用情報 - little";
 const description = "littleでは美容師・スタイリストを募集しています。お客様に喜んでいただけるサービスを一緒に提供しませんか？";
@@ -146,8 +150,8 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
           </div>
           </div>
         </div>
-      </div>
-    </section>
+    </div>
+  </section>
 
     <!-- 応募CTA（上部） -->
     <section class="recruit-cta-top">
@@ -178,7 +182,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
               <span class="recruit-cta-top__btn-text">公式LINEヘチャット相談</span>
               <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-cta-top__btn-icon" />
             </a>
-          </div>
+            </div>
           
           <!-- お電話 -->
           <div class="recruit-cta-top__column">
@@ -201,16 +205,16 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
             <img 
               src="/images/recruit/hero-image-2.png" 
               alt="littleサロンで働くスタッフの様子" 
-            />
-          </div>
+          />
+        </div>
           <div class="recruit-appeal__text">
             <p>
               全国に広がるlittleは、どこでも変わらず、安心して働けるサロン。<br>指名がなくても安定した集客があり、SNSや独立支援も充実。働き方も、場所も、キャリアも、自分で選んでいい。未来をひらくすべての美容師さんへ。
             </p>
           </div>
-        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <!-- 働く環境・サロン紹介セクション -->
     <section id="salon" class="recruit-environment">
@@ -220,225 +224,98 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
         <!-- 統計データ -->
         <div class="recruit-environment__stats">
           <div class="recruit-environment__stat-item">
-            <div class="recruit-environment__stat-icon">🏪</div>
-            <div class="recruit-environment__stat-number">110</div>
-            <div class="recruit-environment__stat-label">店舗数</div>
+            <img src="/images/recruit/salondata_01.png" alt="全国店舗数" class="recruit-environment__stat-image" />
           </div>
           <div class="recruit-environment__stat-item">
-            <div class="recruit-environment__stat-icon">👥</div>
-            <div class="recruit-environment__stat-number">24</div>
-            <div class="recruit-environment__stat-label">平均スタッフ数</div>
+            <img src="/images/recruit/salondata_02.png" alt="FCオーナー数" class="recruit-environment__stat-image" />
           </div>
           <div class="recruit-environment__stat-item">
-            <div class="recruit-environment__stat-icon">📈</div>
-            <div class="recruit-environment__stat-number">800</div>
-            <div class="recruit-environment__stat-label">月間来店数</div>
+            <img src="/images/recruit/salondata_03.png" alt="スタイリスト数" class="recruit-environment__stat-image" />
           </div>
           <div class="recruit-environment__stat-item">
-            <div class="recruit-environment__stat-icon">💰</div>
-            <div class="recruit-environment__stat-number">40-75%</div>
-            <div class="recruit-environment__stat-label">歩合給</div>
+            <img src="/images/recruit/salondata_04.png" alt="歩合制度" class="recruit-environment__stat-image" />
           </div>
-          <div class="recruit-environment__stat-item">
-            <div class="recruit-environment__stat-icon">📊</div>
-            <div class="recruit-environment__stat-number">35-40%</div>
-            <div class="recruit-environment__stat-label">売上シェア</div>
-          </div>
-          <div class="recruit-environment__stat-item">
-            <div class="recruit-environment__stat-icon">📈</div>
-            <div class="recruit-environment__stat-number">70%</div>
-            <div class="recruit-environment__stat-label">リピート率</div>
-          </div>
-          <div class="recruit-environment__stat-item">
-            <div class="recruit-environment__stat-icon">⭐</div>
-            <div class="recruit-environment__stat-number">100%</div>
-            <div class="recruit-environment__stat-label">満足度</div>
-          </div>
-          <div class="recruit-environment__stat-item">
-            <div class="recruit-environment__stat-icon">🎯</div>
-            <div class="recruit-environment__stat-number">95%</div>
-            <div class="recruit-environment__stat-label">目標達成率</div>
-          </div>
-      </div>
+        </div>
       
-        <!-- サロン検索 -->
+        <!-- 求人検索 -->
+            <h3 class="recruit-environment__search-title">求人募集中の店舗</h3>
         <div class="recruit-environment__search">
-          <div class="recruit-environment__search-form">
-            <div class="recruit-environment__search-row">
-              <select class="recruit-environment__search-select">
-                <option>エリア</option>
-                <option>東京</option>
-                <option>大阪</option>
-                <option>名古屋</option>
-              </select>
-              <select class="recruit-environment__search-select">
-                <option>職種</option>
-                <option>スタイリスト</option>
-                <option>アシスタント</option>
-                <option>レセプション</option>
-              </select>
-              <select class="recruit-environment__search-select">
-                <option>雇用形態</option>
-                <option>正社員</option>
-                <option>パート</option>
-                <option>アルバイト</option>
-              </select>
-              <select class="recruit-environment__search-select">
-                <option>こだわり</option>
-                <option>研修充実</option>
-                <option>昇進制度</option>
-                <option>福利厚生</option>
-              </select>
+          <div class="recruit-environment__search-content">
+            <p class="recruit-environment__search-description">
+              little (リトル)は、全国の店舗ごとにアシスタント・スタイリスト・店長ポジションを目指せる募集枠がございます。店舗見学も可能ですので、ぜひ気軽にご相談ください。
+            </p>
+            
+            <div class="recruit-environment__search-form">
+              <div class="recruit-environment__search-section">
+                <h4 class="recruit-environment__search-section-title">条件検索</h4>
+                <div class="recruit-environment__search-row">
+                  <label class="recruit-environment__search-label">店舗エリア</label>
+                  <select class="recruit-environment__search-select">
+                    <option>選択してください</option>
+                    <option>北海道</option>
+                    <option>東北</option>
+                    <option>関東</option>
+                    <option>中部</option>
+                    <option>関西</option>
+                    <option>中国</option>
+                    <option>四国</option>
+                    <option>九州</option>
+                  </select>
+                </div>
+                <div class="recruit-environment__search-row">
+                  <label class="recruit-environment__search-label">募集職種</label>
+                  <select class="recruit-environment__search-select">
+                    <option>選択してください</option>
+                    <option>アシスタント</option>
+                    <option>スタイリスト</option>
+                    <option>店長</option>
+                  </select>
+                </div>
+                <div class="recruit-environment__search-row">
+                  <label class="recruit-environment__search-label">雇用形態</label>
+                  <select class="recruit-environment__search-select">
+                    <option>選択してください</option>
+                    <option>正社員</option>
+                    <option>業務委託</option>
+                    <option>パート</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="recruit-environment__search-section">
+                <h4 class="recruit-environment__search-section-title">フリーワード検索</h4>
+                <div class="recruit-environment__search-row">
+                  <input 
+                    type="text" 
+                    placeholder="サロン名・地域名で検索" 
+                    class="recruit-environment__search-input"
+                  />
+                </div>
+              </div>
+              
+              <button class="recruit-environment__search-btn">
+                <span>指定した条件で検索する</span>
+                <img src="/images/icons/icn_search.svg" alt="検索" class="recruit-environment__search-btn-icon" />
+              </button>
             </div>
-            <div class="recruit-environment__search-row">
-              <input 
-                type="text" 
-                placeholder="キーワード" 
-                class="recruit-environment__search-input"
-              />
-              <button class="recruit-environment__search-btn">検索</button>
-            </div>
-            </div>
-          <div class="recruit-environment__map">
-            <img 
-              src="https://images.unsplash.com/photo-1519302959554-a75be0afc82a?w=400&h=300&fit=crop" 
-              alt="店舗マップ" 
-            />
           </div>
+          
+          <div class="recruit-environment__search-map">
+            <img src="/images/main/illust_japan.png" alt="日本地図" class="recruit-environment__map-image" />
           </div>
+        </div>
 
         <!-- サロン一覧 -->
         <div class="recruit-environment__salons">
+          <h3 class="recruit-environment__salons-title">北海道エリア募集店舗一覧</h3>
           <div class="recruit-environment__salon-grid">
-            <!-- サロンカード1 -->
-            <div class="recruit-environment__salon-card">
-              <img 
-                src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=300&h=200&fit=crop" 
-                alt="little渋谷店" 
-              />
-              <div class="recruit-environment__salon-info">
-                <h3>little渋谷店</h3>
-                <p>東京都渋谷区</p>
-                <p>スタイリスト募集中</p>
-                <button class="recruit-environment__salon-btn">詳細を見る</button>
-              </div>
-        </div>
-
-            <!-- サロンカード2 -->
-            <div class="recruit-environment__salon-card">
-              <img 
-                src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=300&h=200&fit=crop" 
-                alt="little新宿店" 
-              />
-              <div class="recruit-environment__salon-info">
-                <h3>little新宿店</h3>
-                <p>東京都新宿区</p>
-                <p>アシスタント募集中</p>
-                <button class="recruit-environment__salon-btn">詳細を見る</button>
-            </div>
-            </div>
-            
-            <!-- サロンカード3 -->
-            <div class="recruit-environment__salon-card">
-              <img 
-                src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=300&h=200&fit=crop" 
-                alt="little表参道店" 
-              />
-              <div class="recruit-environment__salon-info">
-                <h3>little表参道店</h3>
-                <p>東京都渋谷区</p>
-                <p>レセプション募集中</p>
-                <button class="recruit-environment__salon-btn">詳細を見る</button>
-            </div>
+            {salons.map(salon => (
+              <RecruitSalonCard salon={salon} icons={icons} />
+            ))}
           </div>
-            
-            <!-- サロンカード4 -->
-            <div class="recruit-environment__salon-card">
-              <img 
-                src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=300&h=200&fit=crop" 
-                alt="little大阪店" 
-              />
-              <div class="recruit-environment__salon-info">
-                <h3>little大阪店</h3>
-                <p>大阪府大阪市</p>
-                <p>スタイリスト募集中</p>
-                <button class="recruit-environment__salon-btn">詳細を見る</button>
-          </div>
-        </div>
-
-            <!-- サロンカード5 -->
-            <div class="recruit-environment__salon-card">
-              <img 
-                src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=300&h=200&fit=crop" 
-                alt="little名古屋店" 
-              />
-              <div class="recruit-environment__salon-info">
-                <h3>little名古屋店</h3>
-                <p>愛知県名古屋市</p>
-                <p>アシスタント募集中</p>
-                <button class="recruit-environment__salon-btn">詳細を見る</button>
-            </div>
-            </div>
-            
-            <!-- サロンカード6 -->
-            <div class="recruit-environment__salon-card">
-              <img 
-                src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=300&h=200&fit=crop" 
-                alt="little横浜店" 
-              />
-              <div class="recruit-environment__salon-info">
-                <h3>little横浜店</h3>
-                <p>神奈川県横浜市</p>
-                <p>レセプション募集中</p>
-                <button class="recruit-environment__salon-btn">詳細を見る</button>
-            </div>
-          </div>
-            
-            <!-- サロンカード7 -->
-            <div class="recruit-environment__salon-card">
-              <img 
-                src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=300&h=200&fit=crop" 
-                alt="little福岡店" 
-              />
-              <div class="recruit-environment__salon-info">
-                <h3>little福岡店</h3>
-                <p>福岡県福岡市</p>
-                <p>スタイリスト募集中</p>
-                <button class="recruit-environment__salon-btn">詳細を見る</button>
-          </div>
-            </div>
-            
-            <!-- サロンカード8 -->
-            <div class="recruit-environment__salon-card">
-              <img 
-                src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=300&h=200&fit=crop" 
-                alt="little仙台店" 
-              />
-              <div class="recruit-environment__salon-info">
-                <h3>little仙台店</h3>
-                <p>宮城県仙台市</p>
-                <p>アシスタント募集中</p>
-                <button class="recruit-environment__salon-btn">詳細を見る</button>
-              </div>
-            </div>
-            
-            <!-- サロンカード9 -->
-            <div class="recruit-environment__salon-card">
-              <img 
-                src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=300&h=200&fit=crop" 
-                alt="little札幌店" 
-              />
-              <div class="recruit-environment__salon-info">
-                <h3>little札幌店</h3>
-                <p>北海道札幌市</p>
-                <p>レセプション募集中</p>
-                <button class="recruit-environment__salon-btn">詳細を見る</button>
-              </div>
-            </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
     <!-- 働くスタッフの声セクション -->
     <section class="recruit-staff-voices">
@@ -1128,66 +1005,145 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-environment__container {
-    max-width: 1440px;
+    max-width: 1040px;
     margin: 0 auto;
-    padding: 0 55px;
   }
 
   .recruit-environment__title {
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 64px;
+    font-family: var(--font-family-yumincho);
+    font-weight: 500;
     color: var(--color-black);
     text-align: center;
     margin-bottom: 60px;
+    z-index: 5;
+    position: relative;
+  }
+
+  .recruit-environment__title::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 413px;
+    height: 114px;
+    background-image: url('/images/recruit/txt_data.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    z-index: -1;
+    opacity: 1.0;
   }
 
   .recruit-environment__stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    gap: 24px;
     margin-bottom: 80px;
   }
 
   .recruit-environment__stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    padding: 30px 20px;
     background-color: white;
     border-radius: 12px;
   }
 
-  .recruit-environment__stat-icon {
-    font-size: 32px;
-    margin-bottom: 10px;
+  .recruit-environment__stat-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .recruit-environment__stat-content {
+    width: 100%;
   }
 
   .recruit-environment__stat-number {
-    font-size: 32px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 600;
     color: var(--color-black);
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    line-height: 1.2;
   }
 
   .recruit-environment__stat-label {
-    font-size: 16px;
+    font-size: 14px;
     color: var(--color-black);
+    margin-bottom: 5px;
+  }
+
+  .recruit-environment__stat-note {
+    font-size: 12px;
+    color: var(--color-grey-medium);
+    font-style: italic;
   }
 
   .recruit-environment__search {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     gap: 40px;
     margin-bottom: 60px;
+    align-items: start;
+  }
+
+  .recruit-environment__search-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .recruit-environment__search-title {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--color-black);
+    margin-bottom: 16px;
+    font-family: var(--font-family-yumincho);
+  }
+
+  .recruit-environment__search-description {
+    font-size: 16px;
+    color: var(--color-black);
+    line-height: 1.6;
+    font-family: var(--font-family-zenkaku);
   }
 
   .recruit-environment__search-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
+  }
+
+  .recruit-environment__search-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .recruit-environment__search-section-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-black);
+    font-family: var(--font-family-zenkaku);
   }
 
   .recruit-environment__search-row {
     display: flex;
-    gap: 15px;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .recruit-environment__search-label {
+    font-size: 18px;
+    color: var(--color-black);
+    font-weight: 300;
+    padding-left: 16px;
+    min-width: 120px;
+    font-family: var(--font-family-zenkaku);
   }
 
   .recruit-environment__search-select,
@@ -1196,97 +1152,79 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     padding: 12px 16px;
     border: 2px solid #E5E5E5;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 18px;
     background-color: white;
+    font-family: var(--font-family-zenkaku);
+  }
+
+  .recruit-environment__search-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 12px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    padding-right: 40px;
   }
 
   .recruit-environment__search-btn {
-    padding: 12px 24px;
-    background-color: var(--color-brown);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 5px 32px;
+    background-color: var(--color-black);
     color: white;
     border: none;
-    border-radius: 8px;
-    font-weight: 600;
+    border-radius: 5px;
+    font-weight: 300;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-family: var(--font-family-zenkaku);
+    font-size: 18px;
+    align-self: flex-start;
+    width: 100%;
   }
 
   .recruit-environment__search-btn:hover {
-    background-color: var(--color-brown-light);
+    background-color: var(--color-grey-medium);
   }
 
-  .recruit-environment__map {
-    width: 100%;
-    height: 300px;
-    border-radius: 12px;
-    overflow: hidden;
+  .recruit-environment__search-btn-icon {
+    width: 40px;
+    height: 40px;
+    filter: brightness(0) invert(1);
   }
 
-  .recruit-environment__map img {
-    width: 100%;
+  .recruit-environment__search-map {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
-    object-fit: cover;
+    min-width: 418px;
+  }
+
+  .recruit-environment__map-image {
+    max-width: 100%;
+    height: auto;
+    opacity: 0.8;
   }
 
   .recruit-environment__salons {
     margin-top: 60px;
   }
 
+  .recruit-environment__salons-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-black);
+    margin-bottom: 30px;
+    font-family: var(--font-family-yumincho);
+  }
+
   .recruit-environment__salon-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-  }
-
-  .recruit-environment__salon-card {
-    background-color: white;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-  }
-
-  .recruit-environment__salon-card:hover {
-    transform: translateY(-5px);
-  }
-
-  .recruit-environment__salon-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-
-  .recruit-environment__salon-info {
-    padding: 20px;
-  }
-
-  .recruit-environment__salon-info h3 {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--color-black);
-    margin-bottom: 10px;
-  }
-
-  .recruit-environment__salon-info p {
-    font-size: 16px;
-    color: var(--color-black);
-    margin-bottom: 8px;
-  }
-
-  .recruit-environment__salon-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--color-brown);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 15px;
-  }
-
-  .recruit-environment__salon-btn:hover {
-    background-color: var(--color-brown-light);
   }
 
   /* 働くスタッフの声セクション */
@@ -1599,9 +1537,17 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       grid-template-columns: repeat(2, 1fr);
     }
 
+    .recruit-environment__salon-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
     .recruit-environment__search {
       grid-template-columns: 1fr;
       gap: 30px;
+    }
+
+    .recruit-environment__search-map {
+      min-height: 300px;
     }
 
     .recruit-environment__salon-grid {
@@ -1694,6 +1640,50 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
     .recruit-appeal__text {
       font-size: 16px;
+    }
+
+    .recruit-environment__title {
+      font-size: 32px;
+    }
+
+    .recruit-environment__title::before {
+      width: 150px;
+      height: 60px;
+      top: -15px;
+    }
+
+    .recruit-environment__stats {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .recruit-environment__salon-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .recruit-environment__search-row {
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .recruit-environment__search-label {
+      min-width: auto;
+    }
+
+    .recruit-environment__search-select,
+    .recruit-environment__search-input {
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .recruit-environment__search-btn {
+      width: 100%;
+      align-self: stretch;
+    }
+
+    .recruit-environment__search-map {
+      min-height: 250px;
     }
 
     .recruit-hero__left {
