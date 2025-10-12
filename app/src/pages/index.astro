@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
 import SalonCard from '../components/SalonCard.astro';
 import NewsCard from '../components/NewsCard.astro';
 import LocatorFilters from '../components/LocatorFilters.astro';
@@ -47,9 +46,6 @@ const salonJsonLd = {
 >
   <!-- ページ全体の背景をbeigeに設定 -->
   <div class="bg-beige">
-    
-    <!-- ヘッダー -->
-    <Header />
     
     <!-- ヒーローセクション -->
     <section class="hero-section">
@@ -681,13 +677,15 @@ const salonJsonLd = {
     position: relative;
     background-color: var(--color-beige);
     min-height: 320px;
+    margin-top: -80px; /* ヘッダーの高さ分を相殺 */
+    padding-top: 80px; /* ヘッダーの高さ分をパディングで補正 */
   }
   
   .hero-text-overlay {
     position: absolute;
-    top: 60px;
+    top: 120px;
     right: 0px;
-    z-index: 10;
+    z-index: 1000;
     max-height: 116px;
     width: auto;
   }
@@ -716,12 +714,14 @@ const salonJsonLd = {
     align-items: center;
     gap: 0;
     align-self: stretch;
+    z-index: 10;
   }
   
   .hero-slideshow {
     flex: 1;
     height: 100%;
     position: relative;
+    z-index: 10;
   }
   
   .hero-slide {
@@ -732,6 +732,7 @@ const salonJsonLd = {
     height: 100%;
     opacity: 0;
     transition: opacity 0.8s ease-in-out;
+    z-index: 5;
   }
   
   .hero-slide.active {
@@ -951,11 +952,14 @@ const salonJsonLd = {
   @media (max-width: 767px) {
     .hero-section {
       height: 320px;
+      margin-top: 64px; /* モバイル版のヘッダー高さ分を相殺 */
+      padding-top: 64px; /* モバイル版のヘッダー高さ分をパディングで補正 */
     }
     
     .hero-text-overlay {
       top: 10px;
       max-height: 56px;
+      z-index: 1000;
     }
     
     .hero-container {
@@ -980,6 +984,48 @@ const salonJsonLd = {
       display: flex;
       flex-direction: row;
       align-items: center;
+    }
+
+    /* モバイル用メニューが開いている時のスタイル */
+    body.menu-open .hero-main {
+      z-index: -1 !important;
+      position: relative !important;
+    }
+
+    body.menu-open .hero-slideshow {
+      z-index: -1 !important;
+      position: relative !important;
+    }
+
+    body.menu-open .hero-slide {
+      z-index: -1 !important;
+      position: relative !important;
+    }
+
+    body.menu-open .hero-slide-pagination {
+      z-index: -1 !important;
+      position: relative !important;
+    }
+
+    body.menu-open .hero-container {
+      z-index: -1 !important;
+      position: relative !important;
+    }
+
+    body.menu-open .hero-section {
+      z-index: -1 !important;
+      position: relative !important;
+    }
+
+    /* モバイル用メニューが開いている時のヘッダー表示 */
+    body.menu-open .header {
+      z-index: 2147483646 !important;
+      position: relative !important;
+    }
+
+    body.menu-open .header__container {
+      z-index: 2147483646 !important;
+      position: relative !important;
     }
     
     .hero-slideshow {
@@ -1129,6 +1175,58 @@ const salonJsonLd = {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
+  }
+
+  /* メニューが開いている時のスタイル */
+  body.menu-open {
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  body.menu-open .hero-slideshow {
+    z-index: -1 !important;
+    position: relative !important;
+  }
+
+  body.menu-open .hero-slide {
+    z-index: -1 !important;
+    position: relative !important;
+  }
+
+  body.menu-open .hero-slide-pagination {
+    z-index: -1 !important;
+    position: relative !important;
+  }
+
+  body.menu-open .hero-fab {
+    z-index: -1 !important;
+    position: relative !important;
+  }
+
+  body.menu-open .hero-main {
+    z-index: -1 !important;
+    position: relative !important;
+  }
+
+  body.menu-open .hero-container {
+    z-index: -1 !important;
+    position: relative !important;
+  }
+
+  body.menu-open .hero-section {
+    z-index: -1 !important;
+    position: relative !important;
+  }
+
+  /* メニューが開いている時のヘッダー表示 */
+  body.menu-open .header {
+    z-index: 2147483646 !important;
+    position: relative !important;
+  }
+
+  body.menu-open .header__container {
+    z-index: 2147483646 !important;
+    position: relative !important;
   }
 
   /* グリッドレイアウトのレスポンシブ対応 */

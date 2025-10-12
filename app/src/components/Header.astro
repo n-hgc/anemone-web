@@ -102,13 +102,13 @@
           <li class="header__mobile-nav-item">
             <a href="/menu" class="header__mobile-nav-link">
               <span class="header__mobile-nav-en">HAIRMAKE</span>
-              <span class="header__mobile-nav-jp">ヘアメイク</span>
+              <span class="header__mobile-nav-jp">企業様向けヘアメイク</span>
             </a>
           </li>
           <li class="header__mobile-nav-item">
-            <a href="/style" class="header__mobile-nav-link">
-              <span class="header__mobile-nav-en">STYLE</span>
-              <span class="header__mobile-nav-jp">スタイル</span>
+            <a href="/salon" class="header__mobile-nav-link">
+              <span class="header__mobile-nav-en">SALON</span>
+              <span class="header__mobile-nav-jp">littleグループ店舗</span>
             </a>
           </li>
           <li class="header__mobile-nav-item">
@@ -148,13 +148,22 @@
   
   .header {
     width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2147483646;
+    opacity: 0.9;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   /* SP版の背景色を白に */
   @media (max-width: 767px) {
     .header {
-      background-color: #FFFDF8;
-      opacity: 0.9;
+    background-color: #FFFDF8;
+    opacity: 0.9;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
   }
 
@@ -286,7 +295,34 @@
     width: 1.5rem;
     height: 0.125rem;
     background-color: var(--color-brown);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .header__menu-icon:nth-child(1) {
+    transform-origin: center;
+  }
+
+  .header__menu-icon:nth-child(2) {
+    transform-origin: center;
+  }
+
+  .header__menu-icon:nth-child(3) {
+    transform-origin: center;
+  }
+
+  /* メニューが開いている時のハンバーガーアイコンのアニメーション */
+  body.menu-open .header__menu-icon:nth-child(1) {
+    transform: translateY(0.375rem) rotate(45deg);
+  }
+
+  body.menu-open .header__menu-icon:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  body.menu-open .header__menu-icon:nth-child(3) {
+    transform: translateY(-0.375rem) rotate(-45deg);
   }
 
   /* SP用アクションボタン群 */
@@ -337,23 +373,12 @@
     width: 64px;
     height: 64px;
     background-color: #FFFDF8;
-    border: 1px solid var(--color-brown);
     cursor: pointer;
     transition: all 0.3s ease;
     gap: 4px;
   }
 
   .header__menu-btn:hover {
-    background-color: var(--color-brown);
-    transform: translateY(-2px);
-  }
-
-  .header__menu-btn:hover .header__menu-icon {
-    background-color: var(--color-white);
-  }
-
-  .header__menu-btn:hover .header__menu-text {
-    color: var(--color-white);
   }
 
   .header__menu-text {
@@ -367,60 +392,118 @@
 
   /* モバイルメニュー */
   .header__mobile-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    position: fixed !important;
+    top: 64px !important; /* ヘッダーの高さ分下に配置 */
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 2147483647 !important;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    pointer-events: none;
   }
 
   .header__mobile-menu.active {
-    opacity: 1;
-    visibility: visible;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
   }
 
   .header__mobile-nav {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 280px;
-    height: 100%;
-    background-color: #FFFDF8;
-    opacity: 0.9;
-    padding: 80px 24px 24px;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: calc(100vh - 64px) !important; /* ヘッダーの高さを除いた高さ */
+    background-color: #FAF4E8 !important;
+    padding: 0px !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    z-index: 2147483647 !important;
   }
 
   .header__mobile-menu.active .header__mobile-nav {
-    transform: translateX(0);
+    opacity: 1 !important;
+  }
+
+  /* モバイルメニューヘッダー部分を削除（通常のヘッダーが常に表示されるため） */
+
+  /* メニューが開いている時のヘッダー表示 */
+  body.menu-open .header {
+    z-index: 2147483648 !important; /* メニューより上に表示 */
+    position: fixed !important;
+  }
+
+  /* メニューが開いている時のbodyスタイル */
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  body.menu-open .hero-slideshow {
+    z-index: 1;
+  }
+
+  body.menu-open .hero-slide {
+    z-index: 1;
+  }
+
+  body.menu-open .hero-slide-pagination {
+    z-index: 1;
+  }
+
+  body.menu-open .hero-fab {
+    z-index: 1;
   }
 
   .header__mobile-nav-list {
     list-style: none;
-    padding: 0;
-    margin: 0 0 2rem 0;
+    padding: 0px 16px; /* 上部にパディングを追加 */
   }
 
   .header__mobile-nav-item {
-    border-bottom: 1px solid var(--color-grey-light);
+    border-bottom: 1px solid #E0E0E0;
+    padding: 24px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .header__mobile-nav-item:last-child {
-    border-bottom: none;
+  .header__mobile-nav-item:nth-child(1) {
+    transition-delay: 0.1s;
+  }
+
+  .header__mobile-nav-item:nth-child(2) {
+    transition-delay: 0.15s;
+  }
+
+  .header__mobile-nav-item:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+
+  .header__mobile-nav-item:nth-child(4) {
+    transition-delay: 0.25s;
+  }
+
+  .header__mobile-nav-item:nth-child(5) {
+    transition-delay: 0.3s;
+  }
+
+
+  .header__mobile-menu.active .header__mobile-nav-item {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .header__mobile-nav-link {
     display: flex;
     flex-direction: column;
-    padding: 1rem 0;
     text-decoration: none;
     transition: color 0.3s ease;
+    text-align: center;
   }
 
   .header__mobile-nav-link:hover {
@@ -430,9 +513,10 @@
   .header__mobile-nav-en {
     font-family: var(--font-family-yumincho);
     font-weight: var(--font-weight-medium);
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.0;
     color: var(--color-black);
+    margin-bottom: 4px;
   }
 
   .header__mobile-nav-jp {
@@ -441,25 +525,34 @@
     font-size: 14px;
     line-height: 1.2;
     color: var(--color-grey-medium);
-    margin-top: 4px;
   }
 
   .header__mobile-social {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 12px;
     justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.35s;
+  }
+
+  .header__mobile-menu.active .header__mobile-social {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .header__mobile-social-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
+    margin-top: 16px;
+    width: 40px;
+    height: 40px;
     background-color: var(--color-beige);
     border-radius: 50%;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .header__mobile-social-link:hover {
@@ -468,8 +561,8 @@
   }
 
   .header__mobile-social-icon {
-    width: 24px;
-    height: 24px;
+    width: 100%;
+    height: auto;
     object-fit: contain;
   }
 
@@ -511,7 +604,7 @@
     }
     
     .header__mobile-menu {
-      display: none;
+      display: none !important;
     }
     
     .header__social-link {
@@ -570,7 +663,7 @@
     }
     
     .header__mobile-menu {
-      display: none;
+      display: none !important;
     }
     
     .header__social-link {
@@ -626,35 +719,66 @@
     const searchToggle = document.getElementById('search-toggle');
     const body = document.body;
 
+    // メニューをbodyの最後に移動して確実に最前面に表示
+    if (mobileMenu && mobileMenu.parentNode !== body) {
+      body.appendChild(mobileMenu);
+    }
+
     // メニューボタンの制御
     if (menuToggle && mobileMenu) {
       menuToggle.addEventListener('click', function() {
+        const isOpening = !mobileMenu.classList.contains('active');
         mobileMenu.classList.toggle('active');
         body.classList.toggle('menu-open');
-      });
-
-      // メニュー外をクリックした時の閉じる処理
-      mobileMenu.addEventListener('click', function(e) {
-        if (e.target === mobileMenu) {
-          mobileMenu.classList.remove('active');
-          body.classList.remove('menu-open');
+        
+        // メニューが開いている時はスライドショーを停止
+        if (isOpening) {
+          // スライドショーのアニメーションを停止
+          const slideshow = document.querySelector('.hero-slideshow') as HTMLElement | null;
+          if (slideshow) {
+            slideshow.style.animationPlayState = 'paused';
+          }
+        } else {
+          // メニューが閉じた時はスライドショーを再開
+          const slideshow = document.querySelector('.hero-slideshow') as HTMLElement | null;
+          if (slideshow) {
+            slideshow.style.animationPlayState = 'running';
+          }
         }
       });
+
+      // メニューを閉じる共通関数
+      function closeMenu() {
+        if (mobileMenu) {
+          mobileMenu.classList.remove('active');
+        }
+        body.classList.remove('menu-open');
+        // スライドショーを再開
+        const slideshow = document.querySelector('.hero-slideshow') as HTMLElement | null;
+        if (slideshow) {
+          slideshow.style.animationPlayState = 'running';
+        }
+      }
+
+      // 閉じるボタンは削除（ハンバーガーメニューボタンで開閉）
+
+      // メニュー外をクリックした時の閉じる処理（オーバーレイがないので削除）
+      // mobileMenu.addEventListener('click', function(e) {
+      //   if (e.target === mobileMenu) {
+      //     closeMenu();
+      //   }
+      // });
 
       // メニューリンクをクリックした時の閉じる処理
       const mobileNavLinks = mobileMenu.querySelectorAll('.header__mobile-nav-link');
       mobileNavLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          mobileMenu.classList.remove('active');
-          body.classList.remove('menu-open');
-        });
+        link.addEventListener('click', closeMenu);
       });
 
       // ESCキーでメニューを閉じる
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-          mobileMenu.classList.remove('active');
-          body.classList.remove('menu-open');
+          closeMenu();
         }
       });
     }

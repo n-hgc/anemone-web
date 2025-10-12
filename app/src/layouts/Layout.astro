@@ -1,4 +1,6 @@
 ---
+import Header from '../components/Header.astro';
+
 export interface Props {
   title: string;
   description: string;
@@ -42,8 +44,33 @@ const { title, description, image, jsonLd } = Astro.props;
     {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
     
     <title>{title}</title>
+    
+    <style>
+      /* ヘッダー固定とメインコンテンツのマージン調整 */
+      .main-content {
+        margin-top: 80px; /* PC版のヘッダー高さ */
+      }
+      
+      @media (max-width: 1023px) {
+        .main-content {
+          margin-top: 75px; /* タブレット版のヘッダー高さ */
+        }
+      }
+      
+      @media (max-width: 767px) {
+        .main-content {
+          margin-top: 64px; /* モバイル版のヘッダー高さ */
+        }
+      }
+    </style>
   </head>
   <body>
-    <slot />
+    <!-- 共通ヘッダー -->
+    <Header />
+    
+    <!-- ページコンテンツ -->
+    <main class="main-content">
+      <slot />
+    </main>
   </body>
 </html>
