@@ -1,13 +1,16 @@
 ---
 import RecruitHeader from '../../components/RecruitHeader.astro';
 import RecruitSalonCard from '../../components/RecruitSalonCard.astro';
+import RecruitStaffCard from '../../components/RecruitStaffCard.astro';
 import { generateRecruitJsonLd } from '../../lib/seo/jsonld';
 import recruitSalonsData from '../../data/recruit-salons.json';
+import recruitStaffData from '../../data/recruit-staff.json';
 
 // 採用ページのJSON-LDを生成
 const jsonLd = generateRecruitJsonLd();
 
 const { salons, icons } = recruitSalonsData;
+const { staff } = recruitStaffData;
 
 const title = "採用情報 - little";
 const description = "littleでは美容師・スタイリストを募集しています。お客様に喜んでいただけるサービスを一緒に提供しませんか？";
@@ -322,62 +325,9 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       <div class="recruit-staff-voices__container">
         <h2 class="recruit-staff-voices__title">働くスタッフの声</h2>
         <div class="recruit-staff-voices__grid">
-          <!-- スタッフ1 -->
-          <div class="recruit-staff-voices__card">
-            <img 
-              src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&h=200&fit=crop" 
-              alt="RINA" 
-              class="recruit-staff-voices__photo"
-            />
-            <div class="recruit-staff-voices__info">
-              <h3>RINA</h3>
-              <p class="recruit-staff-voices__role">スタイリスト / 3年目</p>
-              <p class="recruit-staff-voices__testimonial">
-                littleで働いて3年目になります。お客様の笑顔を見ることができ、
-                技術も日々向上している実感があります。チームワークも良く、
-                働きやすい環境です。
-              </p>
-              <button class="recruit-staff-voices__btn">詳細を見る</button>
-            </div>
-      </div>
-      
-          <!-- スタッフ2 -->
-          <div class="recruit-staff-voices__card">
-            <img 
-              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop" 
-              alt="AYAKA" 
-              class="recruit-staff-voices__photo"
-            />
-            <div class="recruit-staff-voices__info">
-              <h3>AYAKA</h3>
-              <p class="recruit-staff-voices__role">アシスタント / 2年目</p>
-              <p class="recruit-staff-voices__testimonial">
-                未経験からスタートしましたが、先輩スタッフが丁寧に
-                教えてくれるので、安心して働けています。お客様との
-                コミュニケーションも楽しく、充実した毎日です。
-              </p>
-              <button class="recruit-staff-voices__btn">詳細を見る</button>
-          </div>
-        </div>
-        
-          <!-- スタッフ3 -->
-          <div class="recruit-staff-voices__card">
-            <img 
-              src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop" 
-              alt="REINA" 
-              class="recruit-staff-voices__photo"
-            />
-            <div class="recruit-staff-voices__info">
-              <h3>REINA</h3>
-              <p class="recruit-staff-voices__role">レセプション / 1年目</p>
-              <p class="recruit-staff-voices__testimonial">
-                レセプションとして働いていますが、お客様との
-                接客がとても楽しく、やりがいを感じています。
-                スタッフ同士の関係も良く、働きやすい環境です。
-              </p>
-              <button class="recruit-staff-voices__btn">詳細を見る</button>
-          </div>
-        </div>
+          {staff.map(staffMember => (
+            <RecruitStaffCard staff={staffMember} />
+          ))}
         </div>
       </div>
     </section>
@@ -1234,73 +1184,41 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-staff-voices__container {
-    max-width: 1440px;
+    max-width: 1040px;
     margin: 0 auto;
-    padding: 0 55px;
   }
 
   .recruit-staff-voices__title {
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 64px;
+    font-family: var(--font-family-yumincho);
+    font-weight: 500;
     color: var(--color-black);
     text-align: center;
     margin-bottom: 60px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .recruit-staff-voices__title::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 342px;
+    height: 100px;
+    background-image: url('/images/recruit/txt_staff-voices.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    z-index: -1;
+    opacity: 1.0;
   }
 
   .recruit-staff-voices__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-  }
-
-  .recruit-staff-voices__card {
-    background-color: white;
-    border-radius: 12px;
-    padding: 30px;
-    text-align: center;
-  }
-
-  .recruit-staff-voices__photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 auto 20px;
-  }
-
-  .recruit-staff-voices__info h3 {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--color-black);
-    margin-bottom: 10px;
-  }
-
-  .recruit-staff-voices__role {
-    font-size: 16px;
-    color: var(--color-black);
-    margin-bottom: 20px;
-  }
-
-  .recruit-staff-voices__testimonial {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--color-black);
-    margin-bottom: 20px;
-  }
-
-  .recruit-staff-voices__btn {
-    padding: 12px 24px;
-    background-color: var(--color-brown);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .recruit-staff-voices__btn:hover {
-    background-color: var(--color-brown-light);
+    gap: 24px;
   }
 
   /* 募集要項セクション */
@@ -1733,10 +1651,19 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     .recruit-about__title,
     .recruit-appeal__title,
     .recruit-environment__title,
-    .recruit-staff-voices__title,
-    .recruit-requirements__title,
-    .recruit-faq__title {
-      font-size: 36px;
+    .recruit-staff-voices__title {
+      font-size: 32px;
+    }
+
+    .recruit-staff-voices__title::before {
+      width: 150px;
+      height: 60px;
+      top: -15px;
+    }
+
+    .recruit-staff-voices__grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
     }
 
     .recruit-environment__stats {

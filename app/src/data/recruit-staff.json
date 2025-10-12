@@ -1,0 +1,34 @@
+{
+  "staff": [
+    {
+      "id": "erina",
+      "name": "ERINA",
+      "nameReading": "エリナ",
+      "image": "/images/recruit/staff-01.png",
+      "role": "little 小倉店 副店長",
+      "description": "キャリアと私生活の両立! 女性副店長の美容師の楽しみ方",
+      "buttonText": "もっと見る",
+      "buttonLink": "#"
+    },
+    {
+      "id": "kamba",
+      "name": "勘場 恭平",
+      "nameReading": "かんばきょうへい",
+      "image": "/images/recruit/staff-02.png",
+      "role": "little FCオーナー",
+      "description": "地方でも業務委託という働き方を浸透させたい! littleで叶う自由で有意義な美容師ライフ",
+      "buttonText": "もっと見る",
+      "buttonLink": "#"
+    },
+    {
+      "id": "matsubara",
+      "name": "松原 由依",
+      "nameReading": "まつばら ゆい",
+      "image": "/images/recruit/staff-03.png",
+      "role": "LEINA 副店長",
+      "description": "入社2年でアシスタントから副店長へ! 札幌でキャリアを磨く若手の奮闘記",
+      "buttonText": "もっと見る",
+      "buttonLink": "#"
+    }
+  ]
+}
