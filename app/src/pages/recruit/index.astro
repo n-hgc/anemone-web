@@ -199,30 +199,18 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
         <div class="recruit-appeal__content">
           <div class="recruit-appeal__image">
             <img 
-              src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&h=500&fit=crop" 
-              alt="スタッフの様子" 
-          />
-        </div>
+              src="/images/recruit/hero-image-2.png" 
+              alt="littleサロンで働くスタッフの様子" 
+            />
+          </div>
           <div class="recruit-appeal__text">
             <p>
-              littleで働く魅力は、お客様の笑顔を直接見ることができることです。
-              私たちの技術とサービスが、お客様の自信と美しさを引き出し、
-              その瞬間に立ち会えることは、この仕事の最大の喜びです。
-            </p>
-            <p>
-              また、チームワークを大切にし、お互いを支え合いながら
-              成長できる環境があります。経験豊富なスタッフから
-              学べる機会も多く、技術向上のための研修制度も充実しています。
-            </p>
-            <p>
-              働き方も柔軟で、ライフスタイルに合わせた勤務形態を
-              選択することができます。プライベートと仕事の
-              バランスを取りながら、充実したキャリアを築けます。
+              全国に広がるlittleは、どこでも変わらず、安心して働けるサロン。<br>指名がなくても安定した集客があり、SNSや独立支援も充実。働き方も、場所も、キャリアも、自分で選んでいい。未来をひらくすべての美容師さんへ。
             </p>
           </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
     <!-- 働く環境・サロン紹介セクション -->
     <section id="salon" class="recruit-environment">
@@ -1073,29 +1061,47 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-appeal__container {
-    max-width: 1440px;
+    max-width: 1040px;
     margin: 0 auto;
-    padding: 0 55px;
   }
 
   .recruit-appeal__title {
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 64px;
+    font-family: var(--font-family-yumincho);
+    font-weight: 500;
     color: var(--color-black);
     text-align: center;
     margin-bottom: 60px;
+    z-index: 5;
+    position: relative;
+  }
+
+  .recruit-appeal__title::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 286px;
+    height: 100px;
+    background-image: url('/images/recruit/txt_about.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    z-index: -1;
+    opacity: 1.0;
   }
 
   .recruit-appeal__content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 40px;
     align-items: center;
   }
 
   .recruit-appeal__image {
     width: 100%;
-    height: 400px;
+    height: 424px;
     border-radius: 12px;
     overflow: hidden;
   }
@@ -1107,14 +1113,13 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-appeal__text {
-    font-size: 18px;
-    line-height: 1.8;
+    font-size: 24px;
+    line-height: 1.5;
+    font-family: var(--font-family-yumincho);
+    font-weight: 300;
     color: var(--color-black);
   }
 
-  .recruit-appeal__text p {
-    margin-bottom: 20px;
-  }
 
   /* 働く環境・サロン紹介セクション */
   .recruit-environment {
@@ -1675,6 +1680,20 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
     .recruit-cta-top__phone-note {
       font-size: 12px;
+    }
+
+    .recruit-appeal__title {
+      font-size: 32px;
+    }
+
+    .recruit-appeal__title::before {
+      width: 150px;
+      height: 60px;
+      top: -15px;
+    }
+
+    .recruit-appeal__text {
+      font-size: 16px;
     }
 
     .recruit-hero__left {
