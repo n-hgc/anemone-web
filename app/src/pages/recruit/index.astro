@@ -3,10 +3,12 @@ import RecruitHeader from '../../components/RecruitHeader.astro';
 import RecruitSalonCard from '../../components/RecruitSalonCard.astro';
 import RecruitStaffCard from '../../components/RecruitStaffCard.astro';
 import RecruitJobCard from '../../components/RecruitJobCard.astro';
+import RecruitFaqItem from '../../components/RecruitFaqItem.astro';
 import { generateRecruitJsonLd } from '../../lib/seo/jsonld';
 import recruitSalonsData from '../../data/recruit-salons.json';
 import recruitStaffData from '../../data/recruit-staff.json';
 import recruitJobsData from '../../data/recruit-jobs.json';
+import recruitFaqData from '../../data/recruit-faq.json';
 
 // 採用ページのJSON-LDを生成
 const jsonLd = generateRecruitJsonLd();
@@ -14,6 +16,7 @@ const jsonLd = generateRecruitJsonLd();
 const { salons, icons } = recruitSalonsData;
 const { staff } = recruitStaffData;
 const { jobs, applicationProcess } = recruitJobsData;
+const { faqs } = recruitFaqData;
 
 const title = "採用情報 - little";
 const description = "littleでは美容師・スタイリストを募集しています。お客様に喜んでいただけるサービスを一緒に提供しませんか？";
@@ -376,58 +379,12 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       <div class="recruit-faq__container">
         <h2 class="recruit-faq__title">よくある質問</h2>
         <div class="recruit-faq__list">
-          <div class="recruit-faq__item">
-            <div class="recruit-faq__question">
-              <span>Q. 未経験でも応募できますか？</span>
-              <span class="recruit-faq__icon">+</span>
-          </div>
-            <div class="recruit-faq__answer">
-              <p>はい、未経験の方でも応募可能です。研修制度が充実しており、先輩スタッフが丁寧に指導いたします。</p>
-            </div>
-        </div>
-        
-          <div class="recruit-faq__item">
-            <div class="recruit-faq__question">
-              <span>Q. どのような働き方がありますか？</span>
-              <span class="recruit-faq__icon">+</span>
-          </div>
-            <div class="recruit-faq__answer">
-              <p>正社員、パート、アルバイトの3つの働き方があります。ライフスタイルに合わせて選択していただけます。</p>
-            </div>
-        </div>
-        
-          <div class="recruit-faq__item">
-            <div class="recruit-faq__question">
-              <span>Q. どんな人が働いていますか？</span>
-              <span class="recruit-faq__icon">+</span>
-          </div>
-            <div class="recruit-faq__answer">
-              <p>20代から40代まで幅広い年齢層のスタッフが働いています。経験豊富なベテランから新卒まで、多様なメンバーが活躍しています。</p>
-            </div>
-        </div>
-        
-          <div class="recruit-faq__item">
-            <div class="recruit-faq__question">
-              <span>Q. 研修制度はありますか？</span>
-              <span class="recruit-faq__icon">+</span>
-          </div>
-            <div class="recruit-faq__answer">
-              <p>技術向上のための研修制度が充実しています。外部研修への参加費補助もあります。</p>
-            </div>
-          </div>
-          
-          <div class="recruit-faq__item">
-            <div class="recruit-faq__question">
-              <span>Q. 昇進の機会はありますか？</span>
-              <span class="recruit-faq__icon">+</span>
-            </div>
-            <div class="recruit-faq__answer">
-              <p>実力に応じて昇進の機会があります。マネージャーや店長への昇進も可能です。</p>
-            </div>
+          {faqs.map((faq, index) => (
+            <RecruitFaqItem faq={faq} index={index} />
+          ))}
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
     <!-- 応募CTA（下部） -->
     <section id="entry" class="recruit-cta-bottom">
@@ -1316,7 +1273,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
   .recruit-application-process__step-title {
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--color-black);
     margin-bottom: 16px;
     font-family: var(--font-family-zenkaku);
@@ -1337,58 +1294,43 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-faq__container {
-    max-width: 1440px;
+    max-width: 1040px;
     margin: 0 auto;
-    padding: 0 55px;
   }
 
   .recruit-faq__title {
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 64px;
+    font-family: var(--font-family-yumincho);
+    font-weight: 500;
     color: var(--color-black);
     text-align: center;
     margin-bottom: 60px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .recruit-faq__title::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 212px;
+    height: 111px;
+    background-image: url('/images/recruit/txt_faq.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    z-index: -1;
+    opacity: 1.0;
   }
 
   .recruit-faq__list {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .recruit-faq__item {
-    background-color: white;
-    border-radius: 12px;
-    margin-bottom: 20px;
-  }
-
-  .recruit-faq__question {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 30px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--color-black);
+    flex-direction: column;
+    gap: 24px;
   }
 
-  .recruit-faq__icon {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--color-black);
-  }
-
-  .recruit-faq__answer {
-    padding: 0 30px 20px;
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--color-black);
-    display: none;
-  }
-
-  .recruit-faq__answer.active {
-    display: block;
-  }
 
   /* CTA（下部） */
   .recruit-cta-bottom {
@@ -1719,8 +1661,15 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       gap: 30px;
     }
 
-    .recruit-application-process__title {
+    .recruit-application-process__title,
+    .recruit-faq__title {
       font-size: 28px;
+    }
+
+    .recruit-faq__title::before {
+      width: 150px;
+      height: 60px;
+      top: -15px;
     }
 
     .recruit-application-process__steps {
@@ -1782,38 +1731,3 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     }
   }
 </style>
-
-<script>
-  // FAQアコーディオンの動作
-  document.addEventListener('DOMContentLoaded', function() {
-    const faqItems = document.querySelectorAll('.recruit-faq__item');
-    
-    faqItems.forEach(item => {
-      const question = item.querySelector('.recruit-faq__question');
-      const answer = item.querySelector('.recruit-faq__answer');
-      const icon = item.querySelector('.recruit-faq__icon');
-      
-      if (question && answer && icon) {
-        question.addEventListener('click', function() {
-          const isActive = answer.classList.contains('active');
-          
-          // 他のFAQを閉じる
-          faqItems.forEach(otherItem => {
-            const otherAnswer = otherItem.querySelector('.recruit-faq__answer');
-            const otherIcon = otherItem.querySelector('.recruit-faq__icon');
-            if (otherAnswer && otherIcon) {
-              otherAnswer.classList.remove('active');
-              otherIcon.textContent = '+';
-            }
-          });
-          
-          // クリックされたFAQを開く/閉じる
-          if (!isActive) {
-            answer.classList.add('active');
-            icon.textContent = '-';
-          }
-        });
-      }
-    });
-  });
-</script>
