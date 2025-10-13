@@ -2,15 +2,18 @@
 import RecruitHeader from '../../components/RecruitHeader.astro';
 import RecruitSalonCard from '../../components/RecruitSalonCard.astro';
 import RecruitStaffCard from '../../components/RecruitStaffCard.astro';
+import RecruitJobCard from '../../components/RecruitJobCard.astro';
 import { generateRecruitJsonLd } from '../../lib/seo/jsonld';
 import recruitSalonsData from '../../data/recruit-salons.json';
 import recruitStaffData from '../../data/recruit-staff.json';
+import recruitJobsData from '../../data/recruit-jobs.json';
 
 // 採用ページのJSON-LDを生成
 const jsonLd = generateRecruitJsonLd();
 
 const { salons, icons } = recruitSalonsData;
 const { staff } = recruitStaffData;
+const { jobs, applicationProcess } = recruitJobsData;
 
 const title = "採用情報 - little";
 const description = "littleでは美容師・スタイリストを募集しています。お客様に喜んでいただけるサービスを一緒に提供しませんか？";
@@ -113,7 +116,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
             <div class="recruit-hero__image-item">
               <img src="/images/recruit/hero-image-4.png" alt="シャンプーの様子" />
             </div>
-          </div>
+    </div>
   </section>
 
     <!-- littleとはセクション -->
@@ -131,7 +134,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
                 <br>お客様に新しい体験を届けながら、自身も成長できる場所として、心地良さと自由な働き方を叶えられるサロンが little です。
               </p>
             </div>
-          </div>
+            </div>
           
           <!-- 右側：画像コンテンツ -->
           <div class="recruit-about__images-container">
@@ -141,18 +144,18 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
                 src="/images/recruit/hero-image-2.png" 
                 alt="littleサロンのスタイリングエリア" 
               />
-            </div>
-          </div>
-          <div class="recruit-about__images-section">
-            <div class="recruit-about__image">
-              <img 
-                src="/images/recruit/hero-image-3.png" 
-                alt="littleサロンのラウンジエリア" 
-              />
-            </div>
-          </div>
           </div>
         </div>
+          <div class="recruit-about__images-section">
+            <div class="recruit-about__image">
+          <img 
+                src="/images/recruit/hero-image-3.png" 
+                alt="littleサロンのラウンジエリア" 
+          />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -172,8 +175,8 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
               <span class="recruit-cta-top__btn-text">面接・見学応募メール</span>
               <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-cta-top__btn-icon" />
             </a>
-          </div>
-          
+      </div>
+      
           <!-- 公式LINE -->
           <div class="recruit-cta-top__column">
             <h3 class="recruit-cta-top__column-title">公式LINE</h3>
@@ -194,9 +197,9 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
               <p class="recruit-cta-top__phone-number">050-6655-1632</p>
               <p class="recruit-cta-top__phone-text">受付時間 10:00-17:00<br>(年末年始を除く)</p>
             </div>
+            </div>
           </div>
-        </div>
-      </div>
+          </div>
     </section>
 
     <!-- 働く魅力セクション -->
@@ -228,17 +231,17 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
         <div class="recruit-environment__stats">
           <div class="recruit-environment__stat-item">
             <img src="/images/recruit/salondata_01.png" alt="全国店舗数" class="recruit-environment__stat-image" />
-          </div>
+            </div>
           <div class="recruit-environment__stat-item">
             <img src="/images/recruit/salondata_02.png" alt="FCオーナー数" class="recruit-environment__stat-image" />
-          </div>
+            </div>
           <div class="recruit-environment__stat-item">
             <img src="/images/recruit/salondata_03.png" alt="スタイリスト数" class="recruit-environment__stat-image" />
-          </div>
+            </div>
           <div class="recruit-environment__stat-item">
             <img src="/images/recruit/salondata_04.png" alt="歩合制度" class="recruit-environment__stat-image" />
           </div>
-        </div>
+          </div>
       
         <!-- 求人検索 -->
             <h3 class="recruit-environment__search-title">求人募集中の店舗</h3>
@@ -283,8 +286,8 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
                     <option>パート</option>
                   </select>
                 </div>
-              </div>
-              
+        </div>
+
               <div class="recruit-environment__search-section">
                 <h4 class="recruit-environment__search-section-title">フリーワード検索</h4>
                 <div class="recruit-environment__search-row">
@@ -293,8 +296,8 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
                     placeholder="サロン名・地域名で検索" 
                     class="recruit-environment__search-input"
                   />
-                </div>
-              </div>
+            </div>
+            </div>
               
               <button class="recruit-environment__search-btn">
                 <span>指定した条件で検索する</span>
@@ -315,10 +318,10 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
             {salons.map(salon => (
               <RecruitSalonCard salon={salon} icons={icons} />
             ))}
-          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <!-- 働くスタッフの声セクション -->
     <section class="recruit-staff-voices">
@@ -328,101 +331,45 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
           {staff.map(staffMember => (
             <RecruitStaffCard staff={staffMember} />
           ))}
-        </div>
+      </div>
       </div>
     </section>
 
-    <!-- 募集要項セクション -->
-    <section id="requirements" class="recruit-requirements">
-      <div class="recruit-requirements__container">
-        <h2 class="recruit-requirements__title">募集要項</h2>
-        <div class="recruit-requirements__grid">
-          <!-- スタイリスト -->
-          <div class="recruit-requirements__card">
-            <h3 class="recruit-requirements__card-title">スタイリスト</h3>
-            <div class="recruit-requirements__details">
-              <div class="recruit-requirements__detail-item">
-                <span class="recruit-requirements__label">雇用形態：</span>
-                <span class="recruit-requirements__value">正社員・パート・アルバイト</span>
+    <!-- 募集職種セクション -->
+    <section class="recruit-jobs">
+      <div class="recruit-jobs__container">
+        <h2 class="recruit-jobs__title">募集職種</h2>
+        <div class="recruit-jobs__grid">
+          {jobs.map(job => (
+            <RecruitJobCard job={job} />
+          ))}
           </div>
-              <div class="recruit-requirements__detail-item">
-                <span class="recruit-requirements__label">給与：</span>
-                <span class="recruit-requirements__value">時給1,200円〜（経験により優遇）</span>
-              </div>
-              <div class="recruit-requirements__detail-item">
-                <span class="recruit-requirements__label">勤務地：</span>
-                <span class="recruit-requirements__value">全国の店舗</span>
-              </div>
-              <div class="recruit-requirements__detail-item">
-                <span class="recruit-requirements__label">勤務時間：</span>
-                <span class="recruit-requirements__value">10:00-20:00（シフト制）</span>
-              </div>
-              <div class="recruit-requirements__detail-item">
-                <span class="recruit-requirements__label">休日：</span>
-                <span class="recruit-requirements__value">週2日以上</span>
-              </div>
-            </div>
-            <button class="recruit-requirements__btn">詳細を見る</button>
         </div>
-        
-          <!-- アシスタント -->
-          <div class="recruit-requirements__card">
-            <h3 class="recruit-requirements__card-title">アシスタント</h3>
-            <div class="recruit-requirements__details">
-              <div class="recruit-requirements__detail-item">
-                <span class="recruit-requirements__label">雇用形態：</span>
-                <span class="recruit-requirements__value">正社員・パート</span>
-          </div>
-              <div class="recruit-requirements__detail-item">
-                <span class="recruit-requirements__label">給与：</span>
-                <span class="recruit-requirements__value">月給25万円〜（経験により優遇）</span>
+    </section>
+
+    <!-- 応募の流れセクション -->
+    <section class="recruit-application-process">
+      <div class="recruit-application-process__container">
+        <h2 class="recruit-application-process__title">応募の流れ</h2>
+        <div class="recruit-application-process__steps">
+          {applicationProcess.map(step => (
+            <div class="recruit-application-process__step">
+              <div class={`recruit-application-process__step-number recruit-application-process__step-number--step${step.step}`}>
+                <div class="recruit-application-process__step-content-wrapper">
+                  <span class="recruit-application-process__step-text">STEP</span>
+                  <span class="recruit-application-process__step-digit">{step.step}</span>
+                </div>
               </div>
-              <div class="recruit-requirements__detail-item">
-                <span class="recruit-requirements__label">勤務地：</span>
-                <span class="recruit-requirements__value">東京・大阪・名古屋</span>
-              </div>
-              <div class="recruit-requirements__detail-item">
-                <span class="recruit-requirements__label">勤務時間：</span>
-                <span class="recruit-requirements__value">9:00-19:00（シフト制）</span>
-              </div>
-              <div class="recruit-requirements__detail-item">
-                <span class="recruit-requirements__label">休日：</span>
-                <span class="recruit-requirements__value">週2日以上</span>
-              </div>
-            </div>
-            <button class="recruit-requirements__btn">詳細を見る</button>
+              <div class="recruit-application-process__step-content">
+                <h3 class="recruit-application-process__step-title">{step.title}</h3>
+                <p class="recruit-application-process__step-description">{step.description}</p>
         </div>
-        
-          <!-- レセプション -->
-          <div class="recruit-requirements__card">
-            <h3 class="recruit-requirements__card-title">レセプション</h3>
-            <div class="recruit-requirements__details">
-              <div class="recruit-requirements__detail-item">
-                <span class="recruit-requirements__label">雇用形態：</span>
-                <span class="recruit-requirements__value">パート・アルバイト</span>
-          </div>
-              <div class="recruit-requirements__detail-item">
-                <span class="recruit-requirements__label">給与：</span>
-                <span class="recruit-requirements__value">時給1,000円〜</span>
-        </div>
-              <div class="recruit-requirements__detail-item">
-                <span class="recruit-requirements__label">勤務地：</span>
-                <span class="recruit-requirements__value">全国の店舗</span>
-              </div>
-              <div class="recruit-requirements__detail-item">
-                <span class="recruit-requirements__label">勤務時間：</span>
-                <span class="recruit-requirements__value">10:00-18:00（シフト制）</span>
-              </div>
-              <div class="recruit-requirements__detail-item">
-                <span class="recruit-requirements__label">休日：</span>
-                <span class="recruit-requirements__value">週2日以上</span>
-              </div>
             </div>
-            <button class="recruit-requirements__btn">詳細を見る</button>
-          </div>
+          ))}
         </div>
       </div>
     </section>
+    <!-- 募集要項セクション -->
 
     <!-- よくある質問セクション -->
     <section id="faq" class="recruit-faq">
@@ -437,33 +384,33 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
             <div class="recruit-faq__answer">
               <p>はい、未経験の方でも応募可能です。研修制度が充実しており、先輩スタッフが丁寧に指導いたします。</p>
             </div>
-          </div>
-          
+        </div>
+        
           <div class="recruit-faq__item">
             <div class="recruit-faq__question">
               <span>Q. どのような働き方がありますか？</span>
               <span class="recruit-faq__icon">+</span>
-            </div>
+          </div>
             <div class="recruit-faq__answer">
               <p>正社員、パート、アルバイトの3つの働き方があります。ライフスタイルに合わせて選択していただけます。</p>
             </div>
-          </div>
-          
+        </div>
+        
           <div class="recruit-faq__item">
             <div class="recruit-faq__question">
               <span>Q. どんな人が働いていますか？</span>
               <span class="recruit-faq__icon">+</span>
-            </div>
+          </div>
             <div class="recruit-faq__answer">
               <p>20代から40代まで幅広い年齢層のスタッフが働いています。経験豊富なベテランから新卒まで、多様なメンバーが活躍しています。</p>
             </div>
-          </div>
-          
+        </div>
+        
           <div class="recruit-faq__item">
             <div class="recruit-faq__question">
               <span>Q. 研修制度はありますか？</span>
               <span class="recruit-faq__icon">+</span>
-            </div>
+          </div>
             <div class="recruit-faq__answer">
               <p>技術向上のための研修制度が充実しています。外部研修への参加費補助もあります。</p>
             </div>
@@ -1221,80 +1168,167 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     gap: 24px;
   }
 
-  /* 募集要項セクション */
-  .recruit-requirements {
+  /* 募集職種セクション */
+  .recruit-jobs {
     padding: 80px 0;
     background-color: var(--color-beige);
   }
 
-  .recruit-requirements__container {
-    max-width: 1440px;
+  .recruit-jobs__container {
+    max-width: 1040px;
     margin: 0 auto;
-    padding: 0 55px;
   }
 
-  .recruit-requirements__title {
-    font-size: 48px;
-    font-weight: 700;
+  .recruit-jobs__title {
+    font-size: 64px;
+    font-family: var(--font-family-yumincho);
+    font-weight: 500;
     color: var(--color-black);
     text-align: center;
     margin-bottom: 60px;
+    position: relative;
+    z-index: 5;
   }
 
-  .recruit-requirements__grid {
+  .recruit-jobs__title::before {
+    content: '';
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 304px;
+    height: 130px;
+    background-image: url('/images/recruit/txt_jobs.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    z-index: -1;
+    opacity: 1.0;
+  }
+
+  .recruit-jobs__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    gap: 24px;
   }
 
-  .recruit-requirements__card {
-    background-color: white;
-    border-radius: 12px;
-    padding: 30px;
+  /* 応募の流れセクション */
+  .recruit-application-process {
+    padding: 40px 0;
+    background-color: var(--color-beige);
   }
 
-  .recruit-requirements__card-title {
+  .recruit-application-process__container {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 40px 120px;
+    background-color: #EAE2D3;
+    border-radius: 15px;
+  }
+
+  .recruit-application-process__title {
+    font-size: 32px;
+    font-family: var(--font-family-yumincho);
+    font-weight: 500;
+    color: var(--color-black);
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .recruit-application-process__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+  }
+
+  .recruit-application-process__steps::before {
+    content: '';
+    position: absolute;
+    left: 51.5px;
+    top: 60px;
+    bottom: 60px;
+    width: 3px;
+    background-image: radial-gradient(circle, #69552E 1.5px, transparent 1.5px);
+    background-size: 3px 6px;
+    background-repeat: repeat-y;
+  }
+
+  .recruit-application-process__step {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    position: relative;
+  }
+
+  .recruit-application-process__step-number {
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 2;
+  }
+
+  .recruit-application-process__step-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .recruit-application-process__step-number--step1 {
+    background-color: #FCF2DF;
+  }
+
+  .recruit-application-process__step-number--step2 {
+    background-color: #FEEBC8;
+  }
+
+  .recruit-application-process__step-number--step3 {
+    background-color: #F1D49F;
+  }
+
+  .recruit-application-process__step-text {
+    color: #69552E;
+    text-align: center;
+    font-family: var(--font-family-yumincho);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100%;
+  }
+
+  .recruit-application-process__step-digit {
+    color: #69552E;
+    font-family: var(--font-family-yumincho);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100%;
+  }
+
+  .recruit-application-process__step-content {
+    flex: 1;
+  }
+
+  .recruit-application-process__step-title {
     font-size: 24px;
     font-weight: 700;
     color: var(--color-black);
-    margin-bottom: 20px;
-    text-align: center;
+    margin-bottom: 16px;
+    font-family: var(--font-family-zenkaku);
   }
 
-  .recruit-requirements__details {
-    margin-bottom: 30px;
-  }
-
-  .recruit-requirements__detail-item {
-    display: flex;
-    margin-bottom: 15px;
-  }
-
-  .recruit-requirements__label {
-    font-weight: 600;
+  .recruit-application-process__step-description {
+    font-size: 16px;
+    line-height: 1.6;
     color: var(--color-black);
-    min-width: 100px;
+    font-family: var(--font-family-zenkaku);
   }
 
-  .recruit-requirements__value {
-    color: var(--color-black);
-  }
-
-  .recruit-requirements__btn {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--color-brown);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .recruit-requirements__btn:hover {
-    background-color: var(--color-brown-light);
-  }
 
   /* よくある質問セクション */
   .recruit-faq {
@@ -1476,6 +1510,11 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       grid-template-columns: repeat(2, 1fr);
     }
 
+    .recruit-jobs__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
     .recruit-requirements__grid {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -1487,6 +1526,8 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     .recruit-appeal,
     .recruit-environment,
     .recruit-staff-voices,
+    .recruit-jobs,
+    .recruit-application-process,
     .recruit-requirements,
     .recruit-faq {
       padding: 60px 0;
@@ -1651,7 +1692,8 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     .recruit-about__title,
     .recruit-appeal__title,
     .recruit-environment__title,
-    .recruit-staff-voices__title {
+    .recruit-staff-voices__title,
+    .recruit-jobs__title {
       font-size: 32px;
     }
 
@@ -1661,9 +1703,60 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       top: -15px;
     }
 
+    .recruit-jobs__title::before {
+      width: 150px;
+      height: 60px;
+      top: -15px;
+    }
+
     .recruit-staff-voices__grid {
       grid-template-columns: 1fr;
       gap: 30px;
+    }
+
+    .recruit-jobs__grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .recruit-application-process__title {
+      font-size: 28px;
+    }
+
+    .recruit-application-process__steps {
+      gap: 30px;
+    }
+
+    .recruit-application-process__step {
+      gap: 20px;
+    }
+
+    .recruit-application-process__step-number {
+      width: 50px;
+      height: 50px;
+    }
+
+    .recruit-application-process__steps::before {
+      left: 25px;
+      top: 50px;
+      bottom: 50px;
+      background-size: 3px 10px;
+    }
+
+    .recruit-application-process__step-text {
+      font-size: 18px;
+    }
+
+    .recruit-application-process__step-digit {
+      font-size: 24px;
+    }
+
+    .recruit-application-process__step-title {
+      font-size: 20px;
+    }
+
+    .recruit-application-process__step-description {
+      font-size: 14px;
     }
 
     .recruit-environment__stats {

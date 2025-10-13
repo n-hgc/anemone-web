@@ -1,0 +1,308 @@
+---
+export interface Props {
+  job: {
+    id: string;
+    number: string;
+    title: string;
+    tags: Array<{
+      type: string;
+      label: string;
+    }>;
+    jobDescription: string;
+    requirements: string;
+    salary: {
+      fullTime?: string;
+      contractor?: string;
+      partTime?: string;
+    };
+    buttonText: string;
+    buttonLink: string;
+  };
+}
+
+const { job } = Astro.props;
+---
+
+<div class="recruit-jobs__card">
+  <div class="recruit-jobs__card-header">
+    <h3 class="recruit-jobs__card-title">
+      <img src={`/images/recruit/${job.number}.svg`} alt={job.number} class="recruit-jobs__card-number" />
+      {job.title}
+    </h3>
+    <div class="recruit-jobs__card-tags">
+      {job.tags.map(tag => (
+        <span class={`recruit-jobs__card-tag recruit-jobs__card-tag--${tag.type}`}>{tag.label}</span>
+      ))}
+    </div>
+  </div>
+  
+  <div class="recruit-jobs__card-content">
+    <div class="recruit-jobs__card-section">
+      <h4 class="recruit-jobs__card-section-title">業務内容</h4>
+      <p class="recruit-jobs__card-section-text">{job.jobDescription}</p>
+    </div>
+    
+    <div class="recruit-jobs__card-section">
+      <h4 class="recruit-jobs__card-section-title">応募資格</h4>
+      <p class="recruit-jobs__card-section-text">{job.requirements}</p>
+    </div>
+    
+    <div class="recruit-jobs__card-section">
+      <h4 class="recruit-jobs__card-section-title">給与</h4>
+      <div class="recruit-jobs__card-salary">
+        {Object.entries(job.salary).map(([key, value]) => {
+          const tagConfig = {
+            fullTime: { class: 'full-time', label: '正社員' },
+            contractor: { class: 'contractor', label: '業務委託' },
+            partTime: { class: 'part-time', label: 'パート' }
+          };
+          const config = tagConfig[key as keyof typeof tagConfig];
+          
+          return (
+            <div class="recruit-jobs__card-salary-item">
+              <span class={`recruit-jobs__card-salary-tag recruit-jobs__card-salary-tag--${config.class}`}>
+                {config.label}
+              </span>
+              <span class="recruit-jobs__card-salary-text">{value}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+  
+  <div class="recruit-jobs__card-footer">
+    <button class="recruit-jobs__card-btn">
+      <a href={job.buttonLink}>
+        {job.buttonText}
+        <img src="/images/icons/icn_right_arrow.svg" alt="矢印" class="recruit-jobs__card-btn-icon" />
+      </a>
+    </button>
+  </div>
+</div>
+
+<style>
+  .recruit-jobs__card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+
+  .recruit-jobs__card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 16px;
+  }
+
+  .recruit-jobs__card-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--color-black);
+    font-family: var(--font-family-zenkaku);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.25;
+    word-break: auto-phrase;
+    height: 60px;
+  }
+
+  .recruit-jobs__card-number {
+    width: 60px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+
+  .recruit-jobs__card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .recruit-jobs__card-tag {
+    padding: 0px 4px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 300;
+    font-family: var(--font-family-zenkaku);
+    color: var(--color-black);
+  }
+
+  .recruit-jobs__card-tag--new-graduate {
+    background-color: #E3F3F5;
+  }
+
+  .recruit-jobs__card-tag--mid-career {
+    background-color: #FFF1E4;
+  }
+
+  .recruit-jobs__card-tag--full-time {
+    background-color: #FAF4E8;
+  }
+
+  .recruit-jobs__card-tag--part-time {
+    background-color: #EFFAE8;
+  }
+
+  .recruit-jobs__card-tag--contractor {
+    background-color: #F0F8FF;
+  }
+
+  .recruit-jobs__card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+  }
+
+  .recruit-jobs__card-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .recruit-jobs__card-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-black);
+    font-family: var(--font-family-zenkaku);
+  }
+
+  .recruit-jobs__card-section-text {
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--color-black);
+    font-family: var(--font-family-zenkaku);
+    font-weight: 300;
+  }
+
+  .recruit-jobs__card-salary {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .recruit-jobs__card-salary-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .recruit-jobs__card-salary-tag {
+    padding: 0px 4px;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 200;
+    font-family: var(--font-family-zenkaku);
+    color: var(--color-black);
+    flex-shrink: 0;
+  }
+
+  .recruit-jobs__card-salary-tag--full-time {
+    background-color: #FAF4E8;
+  }
+
+  .recruit-jobs__card-salary-tag--contractor {
+    background-color: #F0F8FF;
+  }
+
+  .recruit-jobs__card-salary-tag--part-time {
+    background-color: #EFFAE8;
+  }
+
+  .recruit-jobs__card-salary-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-black);
+    font-family: var(--font-family-zenkaku);
+    font-weight: 200;
+  }
+
+  .recruit-jobs__card-footer {
+    margin-top: auto;
+  }
+
+  .recruit-jobs__card-btn {
+    background-color: var(--color-brown);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: var(--font-family-zenkaku);
+    font-size: 18px;
+    font-weight: 300;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .recruit-jobs__card-btn:hover {
+    background-color: var(--color-brown-light);
+  }
+
+  .recruit-jobs__card-btn a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .recruit-jobs__card-btn-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+  }
+
+  @media (max-width: 768px) {
+    .recruit-jobs__card {
+      padding: 20px;
+      gap: 16px;
+    }
+
+    .recruit-jobs__card-title {
+      font-size: 20px;
+    }
+
+    .recruit-jobs__card-number {
+      width: 28px;
+      height: 28px;
+    }
+
+    .recruit-jobs__card-tag {
+      font-size: 12px;
+      padding: 3px 6px;
+    }
+
+    .recruit-jobs__card-section-title {
+      font-size: 14px;
+    }
+
+    .recruit-jobs__card-section-text {
+      font-size: 13px;
+    }
+
+    .recruit-jobs__card-salary-tag {
+      font-size: 12px;
+      padding: 0px 3px;
+    }
+
+    .recruit-jobs__card-salary-text {
+      font-size: 14px;
+    }
+
+    .recruit-jobs__card-btn {
+      font-size: 14px;
+      padding: 10px 20px;
+    }
+  }
+</style>
