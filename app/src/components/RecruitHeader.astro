@@ -4,15 +4,24 @@
 
 <header class="recruit-header">
   <div class="recruit-header__container">
-    <!-- ロゴ -->
-    <div class="recruit-header__logo">
-      <a href="/" class="recruit-header__logo-link">
-        <img 
-          src="/images/header/logo.png" 
-          alt="little" 
-          class="recruit-header__logo-image"
-        />
-      </a>
+    <!-- 左側グループ（ロゴ + .Recruit） -->
+    <div class="recruit-header__left-group">
+      <!-- ロゴ -->
+      <div class="recruit-header__logo">
+        <a href="/" class="recruit-header__logo-link">
+          <img 
+            src="/images/header/logo.png" 
+            alt="little" 
+            class="recruit-header__logo-image"
+          />
+        </a>
+      </div>
+      
+      <!-- .Recruitテキスト（モバイル版のみ表示） -->
+      <div class="recruit-header__recruit-text">
+        <span class="recruit-header__recruit-dot">.</span>
+        <span class="recruit-header__recruit-label">Recruit</span>
+      </div>
     </div>
 
     <!-- 右側グループ（ナビゲーション + アクション） -->
@@ -47,7 +56,7 @@
         </ul>
       </nav>
 
-      <!-- エントリーボタン -->
+      <!-- エントリーボタン（PC版のみ表示） -->
       <div class="recruit-header__actions">
         <a href="#entry" class="recruit-header__entry-btn">
           <span class="recruit-header__entry-text">応募・サロン見学はこちら</span>
@@ -55,12 +64,27 @@
         </a>
       </div>
 
-      <!-- ハンバーガーメニューボタン（モバイル版のみ表示） -->
-      <button class="recruit-header__menu-btn" id="recruit-menu-btn" aria-label="メニューを開く">
-        <span class="recruit-header__menu-line"></span>
-        <span class="recruit-header__menu-line"></span>
-        <span class="recruit-header__menu-line"></span>
-      </button>
+      <!-- モバイル用アクションボタン群 -->
+      <div class="recruit-header__mobile-actions">
+        <!-- 応募ボタン（モバイル版のみ表示） -->
+        <button class="recruit-header__mobile-apply-btn" aria-label="応募・サロン見学">
+          <svg class="recruit-header__mobile-apply-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+          <div class="recruit-header__mobile-apply-text">
+            <div class="recruit-header__mobile-apply-line">応募</div>
+            <div class="recruit-header__mobile-apply-line">サロン見学</div>
+          </div>
+        </button>
+        
+        <!-- ハンバーガーメニューボタン（モバイル版のみ表示） -->
+        <button class="recruit-header__menu-btn" id="recruit-menu-btn" aria-label="メニューを開く">
+          <span class="recruit-header__menu-line"></span>
+          <span class="recruit-header__menu-line"></span>
+          <span class="recruit-header__menu-line"></span>
+          <span class="recruit-header__menu-text">MENU</span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -163,6 +187,12 @@
     position: relative;
   }
 
+  .recruit-header__left-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   .recruit-header__logo {
     flex-shrink: 0;
   }
@@ -180,6 +210,26 @@
     height: 40px;
     width: auto;
     object-fit: contain;
+  }
+
+  .recruit-header__recruit-text {
+    display: none;
+    align-items: baseline;
+    gap: 2px;
+  }
+
+  .recruit-header__recruit-dot {
+    font-family: var(--font-family-yumincho);
+    font-weight: var(--font-weight-medium);
+    font-size: 18px;
+    color: var(--color-brown);
+  }
+
+  .recruit-header__recruit-label {
+    font-family: var(--font-family-yumincho);
+    font-weight: var(--font-weight-medium);
+    font-size: 18px;
+    color: var(--color-brown);
   }
 
   .recruit-header__right-group {
@@ -281,6 +331,51 @@
     filter: brightness(0) invert(1); /* アイコンを白色に */
   }
 
+  /* モバイル用アクションボタン群 */
+  .recruit-header__mobile-actions {
+    display: none;
+    flex-direction: row;
+  }
+
+  .recruit-header__mobile-apply-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: var(--color-brown);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: 4px;
+  }
+
+  .recruit-header__mobile-apply-btn:hover {
+    background-color: #8B6F47;
+    transform: translateY(-2px);
+  }
+
+  .recruit-header__mobile-apply-icon {
+    width: 21px;
+    height: 20px;
+    color: var(--color-white);
+  }
+
+  .recruit-header__mobile-apply-text {
+    font-family: var(--font-family-zenkaku);
+    font-size: 10px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .recruit-header__mobile-apply-line {
+    line-height: 1.25;
+    font-size: 8px;
+  }
+
   /* ハンバーガーメニューボタン */
   .recruit-header__menu-btn {
     display: none;
@@ -291,14 +386,15 @@
     height: 64px;
     background-color: #FFFDF8;
     cursor: pointer;
+    padding: 4px 12px;
     transition: all 0.3s ease;
-    gap: 4px;
+    gap: 8px;
     border: none;
   }
 
   .recruit-header__menu-line {
-    width: 1.5rem;
-    height: 0.125rem;
+    width: 100%;
+    height: 2px;
     background-color: var(--color-brown);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
@@ -316,9 +412,18 @@
     transform-origin: center;
   }
 
+  .recruit-header__menu-text {
+    font-family: var(--font-family-yumincho);
+    font-size: 12px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-brown);
+    line-height: 1.0;
+    text-align: center;
+  }
+
   /* メニューが開いている時のハンバーガーアイコンのアニメーション */
   body.recruit-menu-open .recruit-header__menu-line:nth-child(1) {
-    transform: translateY(0.375rem) rotate(45deg);
+    transform: translateY(0.575rem) rotate(25deg);
   }
 
   body.recruit-menu-open .recruit-header__menu-line:nth-child(2) {
@@ -327,7 +432,7 @@
   }
 
   body.recruit-menu-open .recruit-header__menu-line:nth-child(3) {
-    transform: translateY(-0.375rem) rotate(-45deg);
+    transform: translateY(-0.7em) rotate(-25deg);
   }
 
   /* モバイルメニュー */
@@ -372,7 +477,8 @@
 
   .recruit-header__mobile-nav-list {
     list-style: none;
-    padding: 0px 16px;
+    padding: 40px 16px 0px 16px; /* 上部にパディングを追加 */
+    margin: 0 0 40px 0;
   }
 
   .recruit-header__mobile-nav-item {
@@ -558,7 +664,7 @@
   @media (max-width: 767px) {
     .recruit-header__container {
       height: 64px;
-      padding: 0 16px;
+      padding: 0 0 0 16px;
       max-width: none;
     }
     
@@ -566,10 +672,14 @@
       height: 40px;
     }
     
+    .recruit-header__recruit-text {
+      display: flex;
+    }
+    
     .recruit-header__right-group {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
     }
     
     .recruit-header__nav {
@@ -578,6 +688,10 @@
 
     .recruit-header__actions {
       display: none;
+    }
+
+    .recruit-header__mobile-actions {
+      display: flex;
     }
 
     .recruit-header__menu-btn {
