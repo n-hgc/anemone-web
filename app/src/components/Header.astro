@@ -292,8 +292,8 @@
   }
 
   .header__menu-icon {
-    width: 1.5rem;
-    height: 0.125rem;
+    width: 100%;
+    height: 2px;
     background-color: var(--color-brown);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
@@ -313,7 +313,7 @@
 
   /* メニューが開いている時のハンバーガーアイコンのアニメーション */
   body.menu-open .header__menu-icon:nth-child(1) {
-    transform: translateY(0.375rem) rotate(45deg);
+    transform: translateY(0.7rem) rotate(25deg);
   }
 
   body.menu-open .header__menu-icon:nth-child(2) {
@@ -322,7 +322,7 @@
   }
 
   body.menu-open .header__menu-icon:nth-child(3) {
-    transform: translateY(-0.375rem) rotate(-45deg);
+    transform: translateY(-0.5rem) rotate(-25deg);
   }
 
   /* SP用アクションボタン群 */
@@ -338,11 +338,12 @@
     justify-content: center;
     width: 64px;
     height: 64px;
+    padding: 4px 12px;
     background-color: var(--color-brown);
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    gap: 4px;
+    gap: 8px;
   }
 
   .header__search-btn:hover {
@@ -358,7 +359,7 @@
 
   .header__search-text {
     font-family: var(--font-family-zenkaku);
-    font-size: 10px;
+    font-size: 8px;
     font-weight: var(--font-weight-medium);
     color: var(--color-white);
     line-height: 1.2;
@@ -372,18 +373,19 @@
     justify-content: center;
     width: 64px;
     height: 64px;
+    padding: 4px 12px;
     background-color: #FFFDF8;
     cursor: pointer;
     transition: all 0.3s ease;
-    gap: 4px;
+    gap: 8px;
   }
 
   .header__menu-btn:hover {
   }
 
   .header__menu-text {
-    font-family: var(--font-family-zenkaku);
-    font-size: 10px;
+    font-family: var(--font-family-yumincho);
+    font-size: 12px;
     font-weight: var(--font-weight-medium);
     color: var(--color-brown);
     line-height: 1.2;
