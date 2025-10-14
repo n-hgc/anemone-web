@@ -1,10 +1,10 @@
-import type { MiddlewareHandler } from 'astro';
-
-// Basic認証のミドルウェア
-export const onRequest: MiddlewareHandler = (context, next) => {
-  // 認証が有効かどうかを環境変数で制御
-  const authEnabled = import.meta.env.BASIC_AUTH_ENABLED === 'true';
-  const basicAuth = import.meta.env.BASIC_AUTH_CREDENTIALS;
+// Cloudflare Pages Functions でのBasic認証実装
+export async function onRequest(context: EventContext) {
+  const { request, next } = context;
+  
+  // 環境変数から認証設定を取得
+  const authEnabled = context.env.BASIC_AUTH_ENABLED === 'true';
+  const basicAuth = context.env.BASIC_AUTH_CREDENTIALS;
   
   // 認証が無効の場合はスキップ
   if (!authEnabled) {
@@ -17,7 +17,7 @@ export const onRequest: MiddlewareHandler = (context, next) => {
     return next();
   }
   
-  const authHeader = context.request.headers.get('authorization');
+  const authHeader = request.headers.get('authorization');
   
   if (!authHeader || !authHeader.startsWith('Basic ')) {
     return new Response('Authentication required', {
@@ -55,4 +55,4 @@ export const onRequest: MiddlewareHandler = (context, next) => {
   }
   
   return next();
-};
+}

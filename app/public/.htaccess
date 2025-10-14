@@ -1,0 +1,12 @@
+# Basic認証の設定
+AuthType Basic
+AuthName "Anemone Salon - Restricted"
+AuthUserFile /var/www/.htpasswd
+
+# すべてのファイルに認証を適用
+Require valid-user
+
+# 認証をスキップするファイル（オプション）
+<Files "favicon.ico">
+    Require all granted
+</Files>
