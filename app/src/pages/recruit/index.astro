@@ -126,41 +126,77 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     <section id="about" class="recruit-about">
       <div class="recruit-about__container">
         <div class="recruit-about__content">
-          <!-- 左側：テキストコンテンツ -->
-          <div class="recruit-about__text-section">
-            <h2 class="recruit-about__title">littleとは</h2>
-            <p class="recruit-about__subtitle">全国展開で「わたしらしさ」が活きるサロン</p>
-            <div class="recruit-about__text">
+          <!-- デスクトップ用：左側テキスト、右側画像 -->
+          <div class="recruit-about__desktop-layout">
+            <!-- 左側：テキストコンテンツ -->
+            <div class="recruit-about__text-section">
+              <h2 class="recruit-about__title">littleとは</h2>
+              <p class="recruit-about__subtitle">全国展開で「わたしらしさ」が活きるサロン</p>
+              <div class="recruit-about__text">
+                <p>
+                  little (リトル)は、全国100店舗以上を展開する美容室ブランドです。
+                  <br>スタイリスト一人ひとりが自分らしく活躍できる環境を整え、ヘアケア商材、美容機器など最新のアイテムやトレンドも積極的に取り入れています。
+                  <br>お客様に新しい体験を届けながら、自身も成長できる場所として、心地良さと自由な働き方を叶えられるサロンが little です。
+                </p>
+              </div>
+            </div>
+            
+            <!-- 右側：画像コンテンツ -->
+            <div class="recruit-about__images-container">
+              <div class="recruit-about__images-section">
+                <div class="recruit-about__image">
+                  <img 
+                    src="/images/recruit/hero-image-2.png" 
+                    alt="littleサロンのスタイリングエリア" 
+                  />
+                </div>
+              </div>
+              <div class="recruit-about__images-section">
+                <div class="recruit-about__image">
+                  <img 
+                    src="/images/recruit/hero-image-3.png" 
+                    alt="littleサロンのラウンジエリア" 
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- スマホ用：title -> subtitle -> images -> text の順番 -->
+          <div class="recruit-about__mobile-layout">
+            <h2 class="recruit-about__mobile-title">littleとは</h2>
+            <p class="recruit-about__mobile-subtitle">全国展開で「わたしらしさ」が活きるサロン</p>
+            
+            <div class="recruit-about__mobile-images-container">
+              <div class="recruit-about__images-section">
+                <div class="recruit-about__image">
+                  <img 
+                    src="/images/recruit/hero-image-2.png" 
+                    alt="littleサロンのスタイリングエリア" 
+                  />
+                </div>
+              </div>
+              <div class="recruit-about__images-section">
+                <div class="recruit-about__image">
+                  <img 
+                    src="/images/recruit/hero-image-3.png" 
+                    alt="littleサロンのラウンジエリア" 
+                  />
+                </div>
+              </div>
+            </div>
+            
+            <div class="recruit-about__mobile-text">
               <p>
                 little (リトル)は、全国100店舗以上を展開する美容室ブランドです。
                 <br>スタイリスト一人ひとりが自分らしく活躍できる環境を整え、ヘアケア商材、美容機器など最新のアイテムやトレンドも積極的に取り入れています。
                 <br>お客様に新しい体験を届けながら、自身も成長できる場所として、心地良さと自由な働き方を叶えられるサロンが little です。
               </p>
             </div>
-            </div>
-          
-          <!-- 右側：画像コンテンツ -->
-          <div class="recruit-about__images-container">
-          <div class="recruit-about__images-section">
-            <div class="recruit-about__image">
-              <img 
-                src="/images/recruit/hero-image-2.png" 
-                alt="littleサロンのスタイリングエリア" 
-              />
-          </div>
-        </div>
-          <div class="recruit-about__images-section">
-            <div class="recruit-about__image">
-          <img 
-                src="/images/recruit/hero-image-3.png" 
-                alt="littleサロンのラウンジエリア" 
-          />
-            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
     <!-- 応募CTA（上部） -->
     <section class="recruit-cta-top">
@@ -505,13 +541,20 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     <div class="recruit-fixed-actions">
       <div class="recruit-fixed-actions__container">
         <a href="#entry" class="recruit-fixed-actions__btn recruit-fixed-actions__btn--form">
-          <span class="recruit-fixed-actions__btn-text">フォームからエントリー</span>
+          <span class="recruit-fixed-actions__btn-text recruit-fixed-actions__btn-text--desktop">
+            <span class="recruit-fixed-actions__btn-line1">フォームからエントリー</span>
+          </span>
+          <span class="recruit-fixed-actions__btn-text--mobile">
+            <span class="recruit-fixed-actions__btn-line1">フォームから</span>
+            <span class="recruit-fixed-actions__btn-line2">エントリー</span>
+          </span>
         </a>
         <a href="https://line.me/R/ti/p/@little-salon" class="recruit-fixed-actions__btn recruit-fixed-actions__btn--line">
-          <span class="recruit-fixed-actions__btn-text">公式LINEで相談</span>
+          <span class="recruit-fixed-actions__btn-text">公式LINE</span>
         </a>
         <a href="tel:050-6655-1632" class="recruit-fixed-actions__btn recruit-fixed-actions__btn--phone">
-          <span class="recruit-fixed-actions__btn-text">お電話から問い合わせ</span>
+          <span class="recruit-fixed-actions__btn-text recruit-fixed-actions__btn-text--desktop">お電話から問い合わせ</span>
+          <img src="/images/icons/icn_phone_fill.svg" alt="電話" class="recruit-fixed-actions__btn-icon recruit-fixed-actions__btn-icon--mobile" />
         </a>
       </div>
     </div>
@@ -544,6 +587,11 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   .bg-beige {
     background-color: var(--color-beige);
     min-height: 100vh;
+  }
+
+  /* メニューが開いている時のボディ制御 */
+  body.recruit-menu-open {
+    overflow: hidden;
   }
 
   /* ヒーローセクション */
@@ -662,6 +710,18 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     gap: 40px;
     height: 100%;
     align-items: center;
+  }
+
+  .recruit-about__desktop-layout {
+    display: flex;
+    gap: 40px;
+    height: 100%;
+    align-items: center;
+    width: 100%;
+  }
+
+  .recruit-about__mobile-layout {
+    display: none;
   }
 
   .recruit-about__text-section {
@@ -1060,6 +1120,9 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     display: flex;
     flex-direction: column;
     gap: 40px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .recruit-environment__search-title {
@@ -1506,21 +1569,184 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   /* レスポンシブ対応 */
   @media (max-width: 1024px) {
     .recruit-hero__container {
-      grid-template-columns: 1fr;
+      flex-direction: column;
       gap: 40px;
+      padding: 0 20px;
     }
 
-    .recruit-about__content {
-      grid-template-columns: 1fr;
-      gap: 40px;
+    .recruit-hero__left {
+      padding: 20px 0;
+      align-items: center;
+      text-align: center;
+    }
+
+    .recruit-hero__right {
+      order: -1;
+    }
+
+    .recruit-hero__images {
+      position: static;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .recruit-hero {
+      padding: 64px 0;
+    }
+
+    .recruit-hero__container {
+      padding: 0 0 0 16px;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      min-height: 400px;
+    }
+
+    .recruit-hero__left {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      z-index: 10;
+      padding: 20px;
+      background-color: rgba(250, 244, 232, 0.9);
+      border-radius: 16px;
+      text-align: left;
+      width: auto;
+      box-sizing: border-box;
+    }
+
+    .recruit-hero__right {
+      order: -1;
+      position: relative;
+      width: 100%;
+    }
+
+    .recruit-hero__main-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .recruit-hero__overlay {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .recruit-hero__overlay-text {
+      max-width: 120px;
+      height: auto;
+    }
+
+    .recruit-hero__images {
+      display: none;
+    }
+
+    .recruit-hero__logo img {
+      height: 60px;
+    }
+
+    .recruit-hero__description {
+      font-size: 16px;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .recruit-about__desktop-layout {
+      display: none;
+    }
+
+    .recruit-about__mobile-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .recruit-about__mobile-title {
+      font-size: 64px;
+      color: var(--color-black);
+      font-family: var(--font-family-yumincho);
+      font-weight: 500;
+      line-height: 1.0;
+      margin: 0;
+      position: relative;
+      z-index: 5;
+    }
+
+    .recruit-about__mobile-title::before {
+      content: '';
+      position: absolute;
+      top: -80%;
+      left: -5%;
+      height: 100px;
+      width: 286px;
+      background-image: url('/images/recruit/txt_about.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      opacity: 1.0;
+      z-index: -1;
+    }
+
+    .recruit-about__mobile-subtitle {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--color-black);
+      font-family: var(--font-family-yumincho);
+      margin: 0;
+    }
+
+    .recruit-about__mobile-images-container {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      height: 250px;
+      justify-content: center;
+    }
+
+    .recruit-about__mobile-image {
+      flex: 1;
+      height: 215px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .recruit-about__mobile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .recruit-about__mobile-text {
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--color-black);
+      font-family: var(--font-family-zenkaku);
+      font-weight: 300;
+    }
+
+    .recruit-about__mobile-text p {
+      margin-bottom: 16px;
+    }
+
+    .recruit-about__mobile-text p:last-child {
+      margin-bottom: 0;
     }
 
     .recruit-about__images-section {
-      gap: 20px;
+      flex: 1;
+      display: flex;
+      gap: 0;
     }
 
     .recruit-about__image {
-      height: 250px;
+      height: 200px;
+      width: 100%;
+      flex: 1;
     }
 
     .recruit-cta-top__content {
@@ -1535,7 +1761,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
     .recruit-appeal__content {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 16px;
     }
 
     .recruit-environment__stats {
@@ -1553,10 +1779,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
     .recruit-environment__search-map {
       min-height: 300px;
-    }
-
-    .recruit-environment__salon-grid {
-      grid-template-columns: repeat(2, 1fr);
+      min-width: 100%;
     }
 
     .recruit-staff-voices__grid {
@@ -1567,36 +1790,33 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       grid-template-columns: repeat(2, 1fr);
       gap: 30px;
     }
-
-    .recruit-requirements__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
   }
 
   @media (max-width: 768px) {
-    .recruit-hero,
+    .recruit-hero {
+      padding: 64px 0;
+    }
     .recruit-about,
     .recruit-appeal,
     .recruit-environment,
     .recruit-staff-voices,
     .recruit-jobs,
     .recruit-application-process,
-    .recruit-requirements,
     .recruit-faq {
-      padding: 60px 0;
+      padding: 32px 0;
     }
 
     .recruit-cta-top {
-      padding: 60px 0;
+      padding: 32px 24px;
     }
 
     .recruit-cta-top__container {
-      padding: 0 20px;
+      padding: 24px;
     }
 
     .recruit-cta-top__title {
       font-size: 24px;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
 
     .recruit-cta-top__content {
@@ -1604,89 +1824,137 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     }
 
     .recruit-cta-top__column {
-      padding: 0 10px;
+      padding: 0 24px 24px 24px;
+      border-bottom: 1px solid #B2B2B2;
+    }
+
+    .recruit-cta-top__column:last-child {
+      border-bottom: none;
+      padding-right: 0;
+      padding-left: 0;
+      padding-bottom: 0;
     }
 
     .recruit-cta-top__column-title {
-      font-size: 18px;
-      margin-bottom: 15px;
+      font-size: 24px;
+      margin-bottom: 12px;
     }
 
     .recruit-cta-top__column-description {
-      font-size: 14px;
-      margin-bottom: 20px;
+      font-size: 16px;
+      margin-bottom: 12px;
     }
 
     .recruit-cta-top__btn {
-      padding: 14px 20px;
-      font-size: 14px;
-      max-width: 240px;
+      padding: 14px 16px;
+      font-size: 16px;
+      width: 100%;
     }
 
     .recruit-cta-top__btn-icon {
-      width: 16px;
-      height: 16px;
+      width: 24px;
+      height: 24px;
     }
 
     .recruit-cta-top__phone-number {
-      font-size: 24px;
+      font-size: 42px;
+      margin-bottom: 0px;
     }
 
-    .recruit-cta-top__phone-hours {
-      font-size: 14px;
+    .recruit-cta-top__phone-text {
+      font-size: 16px;
     }
 
-    .recruit-cta-top__phone-note {
-      font-size: 12px;
+    .recruit-appeal__container {
+      padding: 0 24px;
     }
 
     .recruit-appeal__title {
-      font-size: 32px;
+      font-size: 36px;
+      text-align: left;
+      margin-bottom: 32px;
     }
 
     .recruit-appeal__title::before {
-      width: 150px;
-      height: 60px;
-      top: -15px;
+      width: 131px;
+      height: 54px;
+      top: -10px;
+      left: 64px;
     }
 
     .recruit-appeal__text {
       font-size: 16px;
+      line-height: 1.5;
+      font-family: var(--font-family-zenkaku);
+      font-weight: 300;
+    }
+
+    .recruit-appeal__image {
+      width: 100%;
+      height: 100%;
+    }
+
+    .recruit-environment__container {
+      padding: 0 24px;
     }
 
     .recruit-environment__title {
-      font-size: 32px;
+      font-size: 36px;
+      text-align: left;
+      margin-bottom: 32px;
+      width: 180px;
+      line-height: 1.0;
+      word-break: break-word;
     }
 
     .recruit-environment__title::before {
-      width: 150px;
-      height: 60px;
-      top: -15px;
+      width: 232px;
+      height: 64px;
+      top: -40px;
+      left: 106px;
     }
 
     .recruit-environment__stats {
-      grid-template-columns: 1fr;
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .recruit-environment__search-title {
+      font-size: 20px;
+      font-weight: 400;
+    }
+
+    .recruit-environment__search {
+      gap: 16px;
+    }
+
+    .recruit-environment__search-content {
+      gap: 16px;
     }
 
     .recruit-environment__salon-grid {
       grid-template-columns: 1fr;
+      gap: 24px;
     }
 
     .recruit-environment__search-row {
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       align-items: flex-start;
     }
 
     .recruit-environment__search-label {
       min-width: auto;
+      font-size: 18px;
+      padding-left: 0;
     }
 
     .recruit-environment__search-select,
     .recruit-environment__search-input {
       max-width: 100%;
       width: 100%;
+      font-size: 16px;
     }
 
     .recruit-environment__search-btn {
@@ -1695,150 +1963,156 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     }
 
     .recruit-environment__search-map {
-      min-height: 250px;
+      min-height: 200px;
     }
 
-    .recruit-hero__left {
-      padding: 20px 0 20px 20px;
-    }
-
-    .recruit-hero__catchphrase {
+    .recruit-environment__salons-title {
       font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 32px;
     }
 
-    .recruit-hero__description {
-      font-size: 14px;
-    }
+    /* 既存の768px以下のスタイルは上記の新しいスタイルで上書きされる */
 
-    .recruit-hero__logo img {
-      height: 60px;
-    }
-
-    .recruit-hero__images {
-      position: static;
-      transform: none;
-      margin-top: 20px;
-      justify-content: center;
-    }
-
-    .recruit-hero__image-item {
-      width: 80px;
-      height: 80px;
-    }
-
-    .recruit-hero__main-image {
-      height: 400px;
-    }
-
-    .recruit-hero__overlay-text {
-      max-width: 150px;
+    .recruit-about__container {
+      padding: 0 16px;
     }
 
     .recruit-about__title {
-      font-size: 36px;
+      font-size: 28px;
+    }
+
+    .recruit-about__title::before {
+      width: 120px;
+      height: 50px;
+      top: -10px;
     }
 
     .recruit-about__subtitle {
-      max-width: 400px;
     }
 
-    .recruit-about__title,
-    .recruit-appeal__title,
-    .recruit-environment__title,
+    .recruit-about__text {
+      font-size: 14px;
+    }
+
+    .recruit-about__image {
+      height: 215px;
+    }
+
+    .recruit-staff-voices__container {
+      padding: 0 24px;
+    }
+
     .recruit-staff-voices__title,
     .recruit-jobs__title {
       font-size: 32px;
+      text-align: left;
+      margin-bottom: 32px;
+      line-height: 1.0;
+      word-break: break-word;
     }
 
     .recruit-staff-voices__title::before {
-      width: 150px;
-      height: 60px;
-      top: -15px;
+      width: 192px;
+      height: 56px;
+      top: -30px;
+      left: 106px;
+    }
+
+    .recruit-jobs__container {
+      padding: 0 24px;
     }
 
     .recruit-jobs__title::before {
-      width: 150px;
-      height: 60px;
-      top: -15px;
+      width: 171px;
+      height: 73px;
+      top: -35px;
+      left: 86px;
     }
+
 
     .recruit-staff-voices__grid {
       grid-template-columns: 1fr;
-      gap: 30px;
+      gap: 20px;
     }
 
     .recruit-jobs__grid {
       grid-template-columns: 1fr;
-      gap: 30px;
+      gap: 20px;
     }
 
-    .recruit-application-process__title,
+    .recruit-application-process {
+      padding: 0 24px;
+    }
+
+    .recruit-application-process__container {
+      padding: 40px 24px;
+    }
+
+
+    .recruit-application-process__title {
+      font-size: 32px;
+      margin-bottom: 24px;
+    }
+
+    .recruit-faq__container {
+      padding: 0 24px;
+    }
+
     .recruit-faq__title {
-      font-size: 28px;
+      font-size: 36px;
+      text-align: left;
+      margin-bottom: 32px;
     }
 
     .recruit-faq__title::before {
-      width: 150px;
-      height: 60px;
-      top: -15px;
+      width: 119px;
+      height: 62px;
+      top: -10px;
+      left: 64px;
     }
 
     .recruit-application-process__steps {
-      gap: 30px;
+      gap: 20px;
     }
 
     .recruit-application-process__step {
-      gap: 20px;
+      gap: 16px;
     }
 
     .recruit-application-process__step-number {
-      width: 50px;
-      height: 50px;
+      width: 69px;
+      height: 69px;
     }
 
     .recruit-application-process__steps::before {
-      left: 25px;
-      top: 50px;
-      bottom: 50px;
-      background-size: 3px 10px;
+      left: 35px;
+      top: 40px;
+      bottom: 85px;
+      background-size: 2px 8px;
+    }
+
+    .recruit-application-process__step-content-wrapper {
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      margin-top: 4px;
     }
 
     .recruit-application-process__step-text {
-      font-size: 18px;
+      font-size: 17px;
     }
 
     .recruit-application-process__step-digit {
-      font-size: 24px;
+      font-size: 26px;
     }
 
     .recruit-application-process__step-title {
-      font-size: 20px;
+      font-size: 24px;
     }
 
     .recruit-application-process__step-description {
-      font-size: 14px;
-    }
-
-    .recruit-environment__stats {
-      grid-template-columns: 1fr;
-    }
-
-    .recruit-environment__salon-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .recruit-staff-voices__grid {
-      grid-template-columns: 1fr;
-    }
-
-    .recruit-requirements__grid {
-      grid-template-columns: 1fr;
-    }
-
-    .recruit-cta-top__buttons,
-    .recruit-cta-bottom__buttons {
-      flex-direction: column;
-      gap: 20px;
+      font-size: 16px;
     }
   }
 
@@ -2068,6 +2342,8 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     border-top: 1px solid var(--color-grey-light);
     padding: 24px 0;
     z-index: 1000;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
 
   .recruit-fixed-actions__container {
@@ -2076,25 +2352,33 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     display: flex;
     gap: 20px;
     justify-content: center;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .recruit-fixed-actions__container {
+      max-width: none;
+      width: 100%;
+      margin: 0;
+    }
   }
 
   .recruit-fixed-actions__btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 34px 0;
+    padding: 20px 16px;
     text-decoration: none;
     font-family: var(--font-family-zenkaku);
     font-size: 24px;
     font-weight: 500;
-    line-height: 1;
-    border-radius: 5px;
-    border: 2px solid #FFF;
-    color: var(--color-white);
-    box-shadow: 0 4px 0 0 rgba(105, 85, 46, 0.30);
+    line-height: 1.2;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     flex: 1;
+    min-height: 60px;
   }
 
   .recruit-fixed-actions__btn--form {
@@ -2102,8 +2386,9 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-fixed-actions__btn--form:hover {
-    background-color: #E91E63;
+    background-color: #FF1493;
     transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
   }
 
   .recruit-fixed-actions__btn--line {
@@ -2111,66 +2396,258 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-fixed-actions__btn--line:hover {
-    background-color: #45A049;
     transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 195, 0, 0.3);
   }
 
   .recruit-fixed-actions__btn--phone {
-    background-color: #3d3d3d;
+    background-color: #3D3D3D;
   }
 
   .recruit-fixed-actions__btn--phone:hover {
-    background-color: #303030;
+    background-color: #2D2D2D;
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-
-  .recruit-fixed-actions__btn-icon {
-    width: 20px;
-    height: 20px;
-    filter: brightness(0) invert(1);
+    box-shadow: 0 4px 8px rgba(61, 61, 61, 0.3);
   }
 
   .recruit-fixed-actions__btn-text {
     white-space: nowrap;
+    text-align: center;
+  }
+
+  .recruit-fixed-actions__btn-text--mobile {
+    display: none;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  /* デスクトップ用のテキストをデフォルトで表示 */
+  .recruit-fixed-actions__btn-text--desktop {
+    display: block;
+  }
+
+  .recruit-fixed-actions__btn-line1,
+  .recruit-fixed-actions__btn-line2 {
+    display: block;
+    line-height: 1.1;
+  }
+
+  .recruit-fixed-actions__btn-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+  }
+
+  /* デスクトップ版ではアイコンを非表示 */
+  .recruit-fixed-actions__btn-icon--mobile {
+    display: none;
   }
 
   /* 固定アクションボタンのレスポンシブ対応 */
   @media (max-width: 768px) {
+    .recruit-fixed-actions {
+      padding: 16px 0;
+    }
+
     .recruit-fixed-actions__container {
       padding: 0 16px;
       gap: 8px;
+      flex-direction: row;
+      justify-content: center;
+      box-sizing: border-box;
     }
 
     .recruit-fixed-actions__btn {
-      padding: 12px 16px;
-      font-size: 12px;
-      max-width: none;
+      padding: 10px 4px;
+      min-height: 50px;
+      border-radius: 5px;
+      flex: auto;
+      width: auto;
     }
 
     .recruit-fixed-actions__btn-icon {
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
     }
 
     .recruit-fixed-actions__btn-text {
-      font-size: 11px;
+      font-size: 14px;
+    }
+
+    .recruit-fixed-actions__btn-line1,
+    .recruit-fixed-actions__btn-line2 {
+      font-size: 20px;
+    }
+
+    /* モバイル版ではアイコンを表示、テキストを非表示 */
+    .recruit-fixed-actions__btn-text--desktop {
+      display: none;
+    }
+
+    .recruit-fixed-actions__btn-text--mobile {
+      display: block;
+    }
+
+    .recruit-fixed-actions__btn-icon--mobile {
+      display: block;
     }
   }
 
   @media (max-width: 480px) {
+    .recruit-hero {
+      padding: 64px 0 32px 0; 
+    }
+
+    .recruit-hero__container {
+      padding: 0 0 0 36px;
+      min-height: 320px;
+    }
+
+    .recruit-hero__left {
+      width: auto;
+      padding: 12px 12px 12px 0;
+      border-radius: 0 15px 15px 0;
+      left: 32px;
+      align-items: flex-start;
+      max-width: 145px;
+      gap: 10px;
+    }
+
+    .recruit-hero__logo img {
+      height: 50px;
+    }
+
+    .recruit-hero__description {
+      font-size: 12px;
+      width: 100%;
+      align-self: stretch;
+      line-height: 1.5;
+    }
+
+    .recruit-hero__main-image {
+      height: 350px;
+      border-radius: 20px 0 0 20px;
+    }
+
+    .recruit-hero__overlay {
+      bottom: 16px;
+      right: 16px;
+    }
+
+    .recruit-hero__overlay-text {
+      max-width: 202px;
+    }
+
+    .recruit-about__container {
+      padding: 0 24px;
+      height: 100%;
+    }
+
+    .recruit-about__mobile-layout {
+      gap: 20px;
+    }
+
+    .recruit-about__mobile-title {
+      font-size: 36px;
+    }
+
+    .recruit-about__mobile-title::before {
+      width: 161px;
+      height: 57px;
+      top: -20px;
+    }
+
+    .recruit-about__mobile-subtitle {
+      font-size: 20px;
+    }
+
+    .recruit-about__mobile-images-container {
+      gap: 12px;
+    }
+
+    .recruit-about__mobile-image {
+    }
+
+    .recruit-about__mobile-text {
+      font-size: 16px;
+    }
+
+    .recruit-about__title {
+      font-size: 36px;
+    }
+
+    .recruit-about__title::before {
+      width: 161px;
+      height: 57px;
+      top: -20px;
+    }
+    .recruit-cta-top{
+      padding: 32px 24px;
+    }
+
+    .recruit-appeal__title,
+    .recruit-environment__title,
+    .recruit-staff-voices__title,
+    .recruit-jobs__title {
+    }
+
+    .recruit-appeal__title::before,
+    .recruit-environment__title::before,
+    .recruit-staff-voices__title::before,
+    .recruit-jobs__title::before {
+    }
+
+
+
+
+    .recruit-fixed-actions {
+      padding: 12px 0;
+    }
+
     .recruit-fixed-actions__container {
-      flex-direction: column;
-      gap: 8px;
+      padding: 0 8px;
+      gap: 4px;
+      flex-direction: row;
+      justify-content: center;
+      max-width: none;
+      width: 100%;
+      margin: 0;
+      box-sizing: border-box;
     }
 
     .recruit-fixed-actions__btn {
-      padding: 14px 20px;
-      font-size: 13px;
+      padding: 10px 4px;
+      font-size: 20px;
+      min-height: 45px;
+      width: auto;
+      box-sizing: border-box;
     }
 
     .recruit-fixed-actions__btn-text {
-      font-size: 12px;
+       font-size: 20px;
+    }
+
+    .recruit-fixed-actions__btn-line1,
+    .recruit-fixed-actions__btn-line2 {
+     
+    }
+
+    .recruit-fixed-actions__btn-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    /* 小さな画面でもアイコンを表示、テキストを非表示 */
+    .recruit-fixed-actions__btn-text--desktop {
+      display: none;
+    }
+
+    .recruit-fixed-actions__btn-text--mobile {
+      display: block;
+    }
+
+    .recruit-fixed-actions__btn-icon--mobile {
+      display: block;
     }
   }
 </style>

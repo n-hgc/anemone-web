@@ -54,7 +54,59 @@
           <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-header__entry-icon" />
         </a>
       </div>
+
+      <!-- ハンバーガーメニューボタン（モバイル版のみ表示） -->
+      <button class="recruit-header__menu-btn" id="recruit-menu-btn" aria-label="メニューを開く">
+        <span class="recruit-header__menu-line"></span>
+        <span class="recruit-header__menu-line"></span>
+        <span class="recruit-header__menu-line"></span>
+      </button>
     </div>
+  </div>
+
+  <!-- モバイルメニュー -->
+  <div class="recruit-header__mobile-menu" id="recruit-mobile-menu">
+    <nav class="recruit-header__mobile-nav">
+      <ul class="recruit-header__mobile-nav-list">
+        <li class="recruit-header__mobile-nav-item">
+          <a href="#about" class="recruit-header__mobile-nav-link">
+            <span class="recruit-header__mobile-nav-en">CHARM</span>
+            <span class="recruit-header__mobile-nav-jp">littleで働く魅力</span>
+          </a>
+        </li>
+        <li class="recruit-header__mobile-nav-item">
+          <a href="#appeal" class="recruit-header__mobile-nav-link">
+            <span class="recruit-header__mobile-nav-en">SALON</span>
+            <span class="recruit-header__mobile-nav-jp">サロン・求人を探す</span>
+          </a>
+        </li>
+        <li class="recruit-header__mobile-nav-item">
+          <a href="#salon" class="recruit-header__mobile-nav-link">
+            <span class="recruit-header__mobile-nav-en">INTERVIEW</span>
+            <span class="recruit-header__mobile-nav-jp">働くスタッフの声</span>
+          </a>
+        </li>
+        <li class="recruit-header__mobile-nav-item">
+          <a href="#faq" class="recruit-header__mobile-nav-link">
+            <span class="recruit-header__mobile-nav-en">FAQ</span>
+            <span class="recruit-header__mobile-nav-jp">よくある質問</span>
+          </a>
+        </li>
+      </ul>
+      
+      <!-- モバイル用ソーシャルメディアアイコン -->
+      <div class="recruit-header__mobile-social">
+        <a href="https://twitter.com/anemone_salon" class="recruit-header__mobile-social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+          <img src="/images/header/icon_x.png" alt="Twitter" class="recruit-header__mobile-social-icon" />
+        </a>
+        <a href="https://instagram.com/anemone_salon" class="recruit-header__mobile-social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <img src="/images/header/icon_insta.png" alt="Instagram" class="recruit-header__mobile-social-icon" />
+        </a>
+        <a href="https://line.me/R/ti/p/@anemone_salon" class="recruit-header__mobile-social-link" target="_blank" rel="noopener noreferrer" aria-label="LINE">
+          <img src="/images/header/icon_line.png" alt="LINE" class="recruit-header__mobile-social-icon" />
+        </a>
+      </div>
+    </nav>
   </div>
 </header>
 
@@ -229,6 +281,197 @@
     filter: brightness(0) invert(1); /* アイコンを白色に */
   }
 
+  /* ハンバーガーメニューボタン */
+  .recruit-header__menu-btn {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: #FFFDF8;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: 4px;
+    border: none;
+  }
+
+  .recruit-header__menu-line {
+    width: 1.5rem;
+    height: 0.125rem;
+    background-color: var(--color-brown);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .recruit-header__menu-line:nth-child(1) {
+    transform-origin: center;
+  }
+
+  .recruit-header__menu-line:nth-child(2) {
+    transform-origin: center;
+  }
+
+  .recruit-header__menu-line:nth-child(3) {
+    transform-origin: center;
+  }
+
+  /* メニューが開いている時のハンバーガーアイコンのアニメーション */
+  body.recruit-menu-open .recruit-header__menu-line:nth-child(1) {
+    transform: translateY(0.375rem) rotate(45deg);
+  }
+
+  body.recruit-menu-open .recruit-header__menu-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  body.recruit-menu-open .recruit-header__menu-line:nth-child(3) {
+    transform: translateY(-0.375rem) rotate(-45deg);
+  }
+
+  /* モバイルメニュー */
+  .recruit-header__mobile-menu {
+    position: fixed !important;
+    top: 64px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 2147483647 !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .recruit-header__mobile-menu.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .recruit-header__mobile-nav {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: calc(100vh - 64px) !important;
+    background-color: #FAF4E8 !important;
+    padding: 0px !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    z-index: 2147483647 !important;
+  }
+
+  .recruit-header__mobile-menu.active .recruit-header__mobile-nav {
+    opacity: 1 !important;
+  }
+
+  .recruit-header__mobile-nav-list {
+    list-style: none;
+    padding: 0px 16px;
+  }
+
+  .recruit-header__mobile-nav-item {
+    border-bottom: 1px solid #E0E0E0;
+    padding: 24px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .recruit-header__mobile-nav-item:nth-child(1) {
+    transition-delay: 0.1s;
+  }
+
+  .recruit-header__mobile-nav-item:nth-child(2) {
+    transition-delay: 0.15s;
+  }
+
+  .recruit-header__mobile-nav-item:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+
+  .recruit-header__mobile-nav-item:nth-child(4) {
+    transition-delay: 0.25s;
+  }
+
+  .recruit-header__mobile-menu.active .recruit-header__mobile-nav-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .recruit-header__mobile-nav-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    text-align: center;
+  }
+
+  .recruit-header__mobile-nav-link:hover {
+    color: var(--color-brown);
+  }
+
+  .recruit-header__mobile-nav-en {
+    font-family: var(--font-family-yumincho);
+    font-weight: var(--font-weight-medium);
+    font-size: 20px;
+    line-height: 1.0;
+    color: var(--color-black);
+    margin-bottom: 4px;
+  }
+
+  .recruit-header__mobile-nav-jp {
+    font-family: var(--font-family-zenkaku);
+    font-weight: var(--font-weight-regular);
+    font-size: 14px;
+    line-height: 1.2;
+    color: var(--color-grey-medium);
+  }
+
+  .recruit-header__mobile-social {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.35s;
+  }
+
+  .recruit-header__mobile-menu.active .recruit-header__mobile-social {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .recruit-header__mobile-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-beige);
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .recruit-header__mobile-social-link:hover {
+    background-color: var(--color-brown);
+    transform: translateY(-2px);
+  }
+
+  .recruit-header__mobile-social-icon {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
   /* レスポンシブ対応 */
   @media (min-width: 1024px) {
     .recruit-header__container {
@@ -256,6 +499,14 @@
     
     .recruit-header__nav-jp {
       font-size: 12px;
+    }
+
+    .recruit-header__menu-btn {
+      display: none;
+    }
+
+    .recruit-header__mobile-menu {
+      display: none;
     }
   }
 
@@ -294,12 +545,21 @@
     .recruit-header__nav-jp {
       font-size: 11px;
     }
+
+    .recruit-header__menu-btn {
+      display: none;
+    }
+
+    .recruit-header__mobile-menu {
+      display: none;
+    }
   }
 
   @media (max-width: 767px) {
     .recruit-header__container {
       height: 64px;
-      padding: 0 0 0 24px;
+      padding: 0 16px;
+      max-width: none;
     }
     
     .recruit-header__logo-image {
@@ -309,25 +569,65 @@
     .recruit-header__right-group {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 12px;
     }
     
     .recruit-header__nav {
       display: none;
     }
-    
-    .recruit-header__entry-btn {
-      height: 45px;
-      padding: 8px 14px;
+
+    .recruit-header__actions {
+      display: none;
     }
-    
-    .recruit-header__entry-text {
-      font-size: 14px;
+
+    .recruit-header__menu-btn {
+      display: flex;
     }
-    
-    .recruit-header__entry-icon {
-      width: 20px;
-      height: 20px;
+
+    .recruit-header__mobile-menu {
+      display: block;
     }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('recruit-menu-btn');
+    const mobileMenu = document.getElementById('recruit-mobile-menu');
+    const body = document.body;
+
+    // メニューをbodyの最後に移動して確実に最前面に表示
+    if (mobileMenu && mobileMenu.parentNode !== body) {
+      body.appendChild(mobileMenu);
+    }
+
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener('click', function() {
+        const isOpening = !mobileMenu.classList.contains('active');
+        mobileMenu.classList.toggle('active');
+        body.classList.toggle('recruit-menu-open');
+      });
+
+      // メニューを閉じる共通関数
+      function closeMenu() {
+        if (mobileMenu) {
+          mobileMenu.classList.remove('active');
+        }
+        body.classList.remove('recruit-menu-open');
+      }
+
+      // モバイルメニューのリンクをクリックした時にメニューを閉じる
+      const mobileNavLinks = mobileMenu.querySelectorAll('.recruit-header__mobile-nav-link');
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      // ESCキーでメニューを閉じる
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+          closeMenu();
+        }
+      });
+    }
+  });
+</script>
