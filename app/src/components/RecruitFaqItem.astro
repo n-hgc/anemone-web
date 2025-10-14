@@ -1,0 +1,161 @@
+---
+export interface Props {
+  faq: {
+    id: string;
+    question: string;
+    answer: string;
+  };
+  index: number;
+}
+
+const { faq, index } = Astro.props;
+---
+
+<div class="recruit-faq__item" data-faq-id={faq.id}>
+  <div class="recruit-faq__question" data-faq-index={index}>
+    <span class="recruit-faq__question-text">Q. {faq.question}</span>
+    <span class="recruit-faq__icon">
+      <img src="/images/icons/icn_toggle_on.svg" alt="展開" class="recruit-faq__icon-img" />
+    </span>
+  </div>
+  <div class="recruit-faq__answer">
+    <p class="recruit-faq__answer-text">{faq.answer}</p>
+  </div>
+</div>
+
+<style>
+  .recruit-faq__item {
+    padding: 24px;
+    background-color: var(--color-white);
+    border-radius: 10px;
+  }
+
+  .recruit-faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .recruit-faq__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .recruit-faq__question:hover {
+    opacity: 0.8;
+  }
+
+  .recruit-faq__question-text {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--color-black);
+    font-family: var(--font-family-zenkaku);
+    line-height: 1.0;
+    flex: 1;
+  }
+
+  .recruit-faq__icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+
+  .recruit-faq__icon-img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease;
+  }
+
+  .recruit-faq__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    margin-top: 0;
+  }
+
+  .recruit-faq__answer.active {
+    max-height: 200px;
+    margin-top: 16px;
+  }
+
+  .recruit-faq__answer-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-black);
+    font-family: var(--font-family-zenkaku);
+    margin: 0;
+    font-weight: 200;
+  }
+
+  @media (max-width: 768px) {
+    .recruit-faq__item {
+      padding: 24px;
+    }
+
+    .recruit-faq__question-text {
+      font-size: 20px;
+      line-height: 1.5;
+      padding-right: 8px;
+    }
+
+    .recruit-faq__icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .recruit-faq__icon-img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .recruit-faq__answer-text {
+      font-size: 16px;
+    }
+  }
+</style>
+
+<script>
+  // FAQ アコーディオンの動作
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.recruit-faq__item');
+    
+    faqItems.forEach(item => {
+      const question = item.querySelector('.recruit-faq__question');
+      const answer = item.querySelector('.recruit-faq__answer');
+      const iconImg = item.querySelector('.recruit-faq__icon-img');
+      
+      if (question && answer && iconImg) {
+        question.addEventListener('click', function() {
+          const isActive = answer.classList.contains('active');
+          
+          // 他のFAQを閉じる
+          faqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              const otherAnswer = otherItem.querySelector('.recruit-faq__answer');
+              const otherIconImg = otherItem.querySelector('.recruit-faq__icon-img');
+              if (otherAnswer && otherIconImg) {
+                otherAnswer.classList.remove('active');
+                otherIconImg.src = '/images/icons/icn_toggle_on.svg';
+              }
+            }
+          });
+          
+          // 現在のFAQを切り替え
+          if (isActive) {
+            answer.classList.remove('active');
+            iconImg.src = '/images/icons/icn_toggle_on.svg';
+          } else {
+            answer.classList.add('active');
+            iconImg.src = '/images/icons/icn_toggle_off.svg';
+          }
+        });
+      }
+    });
+  });
+</script>

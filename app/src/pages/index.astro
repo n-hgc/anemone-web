@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
 import SalonCard from '../components/SalonCard.astro';
 import NewsCard from '../components/NewsCard.astro';
 import LocatorFilters from '../components/LocatorFilters.astro';
+import Footer from '../components/Footer.astro';
 import { componentClasses, responsive } from '../lib/design-system';
 import type { LegacySalon, News, Prefecture } from '../types';
 
@@ -48,11 +48,14 @@ const salonJsonLd = {
   <!-- ページ全体の背景をbeigeに設定 -->
   <div class="bg-beige">
     
-    <!-- ヘッダー -->
-    <Header />
-    
     <!-- ヒーローセクション -->
     <section class="hero-section">
+      <!-- 右上のテキスト画像 -->
+      <img 
+        src="/images/hero/text.svg" 
+        alt="アネモネサロン" 
+        class="hero-text-overlay"
+      />
       <div class="hero-container">
         <!-- メインコンテンツエリア -->
         <div class="hero-main">
@@ -86,7 +89,7 @@ const salonJsonLd = {
             
             <div class="hero-slide">
               <img 
-                src="/images/hero/slide-1.png" 
+                src="/images/hero/slide-3.png" 
                 alt="アネモネサロンのスタイリング" 
                 class="hero-slide-image"
               />
@@ -98,18 +101,17 @@ const salonJsonLd = {
             </div>
           </div>
           
-          <!-- スライドショー内のページネーション -->
+          <!-- ページネーション（右側に独立配置） -->
           <div class="hero-slide-pagination">
-            <button class="hero-pagination-dot active" data-slide="0"></button>
-            <button class="hero-pagination-dot" data-slide="1"></button>
-            <button class="hero-pagination-dot" data-slide="2"></button>
+            <div class="pagination-stripe active" data-slide="0"></div>
+            <div class="pagination-stripe" data-slide="1"></div>
+            <div class="pagination-stripe" data-slide="2"></div>
           </div>
         </div>
       </div>
       
       <!-- Floating Action Button (PC用) -->
       <div class="hero-fab">
-        <div class="hero-action-text">ネットからがお得</div>
         <button class="hero-search-btn" aria-label="店舗を選んで予約する">
           <div class="hero-btn-content">
             <svg class="hero-search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -155,7 +157,7 @@ const salonJsonLd = {
     <section class="hairstyle-section">
       <div class="hairstyle-container">
         <h2 class="hairstyle-title section-title text-h1">
-          HAIRSTYLE<span class="hairstyle-title-sub section-title-sub"> / ヘアカタログ</span>
+          HAIRSTYLE<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="hairstyle-title-sub section-title-sub">ヘアカタログ</span>
         </h2>
         
         <!-- タブナビゲーション -->
@@ -170,35 +172,36 @@ const salonJsonLd = {
         <!-- ヘアスタイルグリッド -->
         <div class="hairstyle-grid grid-4-cols">
           <div class="hairstyle-item">
-            <img src="/images/hero/slide-1.png" alt="ロングヘアスタイル" class="hairstyle-image" />
+            <img src="/images/main/hairstyle-01.png" alt="ヘアスタイル1" class="hairstyle-image" />
           </div>
           <div class="hairstyle-item">
-            <img src="/images/hero/slide-2.png" alt="ミディアムヘアスタイル" class="hairstyle-image" />
+            <img src="/images/main/hairstyle-02.png" alt="ヘアスタイル2" class="hairstyle-image" />
           </div>
           <div class="hairstyle-item">
-            <img src="/images/hero/slide-1.png" alt="ショートヘアスタイル" class="hairstyle-image" />
+            <img src="/images/main/hairstyle-03.png" alt="ヘアスタイル3" class="hairstyle-image" />
           </div>
           <div class="hairstyle-item">
-            <img src="/images/hero/slide-2.png" alt="メンズヘアスタイル" class="hairstyle-image" />
+            <img src="/images/main/hairstyle-04.png" alt="ヘアスタイル4" class="hairstyle-image" />
           </div>
           <div class="hairstyle-item">
-            <img src="/images/hero/slide-1.png" alt="ロングヘアスタイル" class="hairstyle-image" />
+            <img src="/images/main/hairstyle-05.png" alt="ヘアスタイル5" class="hairstyle-image" />
           </div>
           <div class="hairstyle-item">
-            <img src="/images/hero/slide-2.png" alt="ミディアムヘアスタイル" class="hairstyle-image" />
+            <img src="/images/main/hairstyle-06.png" alt="ヘアスタイル6" class="hairstyle-image" />
           </div>
           <div class="hairstyle-item">
-            <img src="/images/hero/slide-1.png" alt="ショートヘアスタイル" class="hairstyle-image" />
+            <img src="/images/main/hairstyle-07.png" alt="ヘアスタイル7" class="hairstyle-image" />
           </div>
           <div class="hairstyle-item">
-            <img src="/images/hero/slide-2.png" alt="メンズヘアスタイル" class="hairstyle-image" />
+            <img src="/images/main/hairstyle-08.png" alt="ヘアスタイル8" class="hairstyle-image" />
           </div>
         </div>
         
         <!-- 詳しく見るボタン -->
         <div class="hairstyle-more">
           <button class="hairstyle-more-btn">
-            詳しく見る
+            <span class="hairstyle-more-text">詳しく見る</span>
+            <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="hairstyle-more-icon" />
           </button>
         </div>
       </div>
@@ -208,7 +211,7 @@ const salonJsonLd = {
     <section class="hairmake-section">
       <div class="hairmake-container">
         <h2 class="hairmake-title section-title text-h1">
-          HAIRMAKE<span class="hairmake-title-sub section-title-sub"> / 企業様向けヘアメイク</span>
+          HAIRMAKE<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="hairmake-title-sub section-title-sub">企業様向けヘアメイク</span>
         </h2>
         
         <div class="hairmake-content">
@@ -255,6 +258,9 @@ const salonJsonLd = {
                   「貴社名・お名前・お電話番号・希望人数・依頼場所」を記載の上、<br>
                   メールでお問い合わせください
                 </p>
+                <p class="mail-form-description-mobile">
+                  貴社名・お名前・電話番号・希望人数<br>依頼場所を記載の上、お問い合わせください。
+                </p>
                 <button class="mail-form-btn">
                   メールでのご依頼はこちら
                   <svg class="mail-form-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -267,7 +273,7 @@ const salonJsonLd = {
           
           <div class="hairmake-image">
             <img 
-              src="/images/hero/slide-2.png" 
+              src="/images/main/hairmake.png" 
               alt="ヘアメイクサービス" 
               class="hairmake-image-content"
             />
@@ -280,47 +286,51 @@ const salonJsonLd = {
     <section id="salons" class="salon-section">
       <div class="salon-container">
         
-        <!-- 2列レイアウト -->
-        <div class="salon-content">
-          <!-- 左側: テキストとボタン -->
-          <div class="salon-left">
-        <h2 class="salon-title section-title text-h1">
-          SALON<span class="salon-title-sub section-title-sub"> / little グループ店舗</span>
-        </h2>
+        <!-- メインコンテンツエリア -->
+        <div class="salon-main-content">
+          <!-- タイトルとテキスト -->
+          <div class="salon-header">
+            <h2 class="salon-title section-title text-h1">
+              SALON<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="salon-title-sub section-title-sub">little グループ店舗</span>
+            </h2>
             <p class="salon-description">
-              littleは、全国に広がる“通いやすくて、頼れる”サロン。店舗ごとの雰囲気や得意なスタイルもぜひチェックしてみてください。
+              littleは、全国に広がる"通いやすくて、頼れる"サロン。店舗ごとの雰囲気や得意なスタイルもぜひチェックしてみてください。
             </p>
-            
-            <!-- 地域ナビゲーション -->
-            <div class="salon-regions">
-              <button class="region-btn" data-region="北海道">北海道</button>
-              <button class="region-btn" data-region="東北">東北</button>
-              <button class="region-btn" data-region="関東">関東</button>
-              <button class="region-btn" data-region="中部">中部</button>
-              <button class="region-btn" data-region="近畿">近畿</button>
-              <button class="region-btn" data-region="四国">四国</button>
-              <button class="region-btn" data-region="中国">中国</button>
-              <button class="region-btn" data-region="九州・沖縄">九州・沖縄</button>
-            </div>
-            
-            <!-- 検索バー -->
-            <div class="salon-search">
-              <input 
-                type="text" 
-                id="salon-search-input"
-                placeholder="サロン名・地域名で検索" 
-                class="salon-search-input"
-              />
-              <button class="salon-search-btn" id="salon-search-btn">
-                <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-              </button>
-            </div>
           </div>
           
-          <!-- 右側: 日本地図 -->
-          <div class="salon-right">
+          <!-- PC用: 2列レイアウト -->
+          <div class="salon-content-pc">
+            <!-- 左側: フィルター -->
+            <div class="salon-filters">
+              <!-- 地域ナビゲーション -->
+              <div class="salon-regions">
+                <button class="region-btn" data-region="北海道">北海道</button>
+                <button class="region-btn" data-region="東北">東北</button>
+                <button class="region-btn" data-region="関東">関東</button>
+                <button class="region-btn" data-region="中部">中部</button>
+                <button class="region-btn" data-region="近畿">近畿</button>
+                <button class="region-btn" data-region="四国">四国</button>
+                <button class="region-btn" data-region="中国">中国</button>
+                <button class="region-btn" data-region="九州・沖縄">九州・沖縄</button>
+              </div>
+              
+              <!-- 検索バー -->
+              <div class="salon-search">
+                <input 
+                  type="text" 
+                  id="salon-search-input"
+                  placeholder="サロン名・地域名で検索" 
+                  class="salon-search-input"
+                />
+                <button class="salon-search-btn" id="salon-search-btn">
+                  <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+            <!-- 右側: 日本地図 -->
             <div class="salon-map">
               <div class="japan-map">
                 <img 
@@ -328,6 +338,50 @@ const salonJsonLd = {
                   alt="日本地図" 
                   class="japan-map-image"
                 />
+              </div>
+            </div>
+          </div>
+          
+          <!-- SP用: 縦並びレイアウト -->
+          <div class="salon-content-sp">
+            <!-- 日本地図 -->
+            <div class="salon-map">
+              <div class="japan-map">
+                <img 
+                  src="/images/main/illust_japan.png" 
+                  alt="日本地図" 
+                  class="japan-map-image"
+                />
+              </div>
+            </div>
+            
+            <!-- フィルター -->
+            <div class="salon-filters">
+              <!-- 地域ナビゲーション -->
+              <div class="salon-regions">
+                <button class="region-btn" data-region="北海道">北海道</button>
+                <button class="region-btn" data-region="東北">東北</button>
+                <button class="region-btn" data-region="関東">関東</button>
+                <button class="region-btn" data-region="中部">中部</button>
+                <button class="region-btn" data-region="近畿">近畿</button>
+                <button class="region-btn" data-region="四国">四国</button>
+                <button class="region-btn" data-region="中国">中国</button>
+                <button class="region-btn" data-region="九州・沖縄">九州・沖縄</button>
+              </div>
+              
+              <!-- 検索バー -->
+              <div class="salon-search">
+                <input 
+                  type="text" 
+                  id="salon-search-input-sp"
+                  placeholder="サロン名・地域名で検索" 
+                  class="salon-search-input"
+                />
+                <button class="salon-search-btn" id="salon-search-btn-sp">
+                  <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
@@ -339,9 +393,9 @@ const salonJsonLd = {
             <h3 id="salon-filter-title">「北海道」店舗一覧</h3>
           </div>
           <div class="salon-cards grid-3-cols" id="salon-cards-container">
-            {salons.slice(0, 10).map((salon) => (
+            {salons.slice(0, 10).map((salon, index) => (
               <div class="salon-card" data-region="北海道" data-name={salon.name} data-prefecture={salon.prefecture} data-city={salon.city}>
-                <img src="/images/hero/slide-1.png" alt={salon.name} class="salon-card-image" />
+                <img src={`/images/salon/salon-image-${String(index + 1).padStart(2, '0')}.png`} alt={salon.name} class="salon-card-image" />
                 <div class="salon-card-content">
                   <div class="salon-card-text">
                     <h4 class="salon-card-name">lico {salon.name} 【リコ{salon.name}】</h4>
@@ -376,19 +430,15 @@ const salonJsonLd = {
       <div class="recruit-container">
         <div class="recruit-content">
           <h2 class="recruit-title">
-            RECRUIT<span class="recruit-title-sub"> / 採用情報</span>
+            RECRUIT<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="recruit-title-sub">採用情報</span>
           </h2>
           
           <div class="recruit-text">
             <p class="recruit-description">
               littleでは、全国各地のサロンネットワークで、<br>
-              場所や時間にとらわれず、あなたらしく活躍できる環境をご提供します。
-            </p>
-            
-            <p class="recruit-description">
+              場所や時間にとらわれず、あなたらしく活躍できる環境をご提供します。<br>
               育児との両立や独立支援、成長も自立も支える仕組みが整っています。
             </p>
-            
             <p class="recruit-description">
               "美容師をずっと続けたい"という想いに、littleは全力で応えます。
             </p>
@@ -409,8 +459,8 @@ const salonJsonLd = {
     <!-- ニュースセクション -->
     <section class="news-section">
       <div class="news-container">
-        <h2 class="news-title">
-          NEWS<span class="news-title-sub"> / お知らせ</span>
+        <h2 class="news-title section-title text-h0">
+          NEWS<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="news-title-sub">お知らせ</span>
         </h2>
         
         <!-- タブナビゲーション -->
@@ -423,7 +473,7 @@ const salonJsonLd = {
         <!-- ニュース一覧 -->
         <div class="news-list">
           <div class="news-item">
-            <img src="/images/hero/slide-1.png" alt="川嶋美晴さんご来店" class="news-image" />
+            <img src="/images/news/news-01.png" alt="川嶋美晴さんご来店" class="news-image" />
             <div class="news-content">
               <div class="news-meta">
                 <span class="news-date">2025.03.13</span>
@@ -439,7 +489,7 @@ const salonJsonLd = {
           </div>
           
           <div class="news-item">
-            <img src="/images/hero/slide-2.png" alt="アビスパ福岡・重見柾斗選手ご来店" class="news-image" />
+            <img src="/images/news/news-02.png" alt="アビスパ福岡・重見柾斗選手ご来店" class="news-image" />
             <div class="news-content">
               <div class="news-meta">
                 <span class="news-date">2025.01.31</span>
@@ -455,7 +505,7 @@ const salonJsonLd = {
           </div>
           
           <div class="news-item">
-            <img src="/images/hero/slide-1.png" alt="村田倫子さんご来店" class="news-image" />
+            <img src="/images/news/news-03.png" alt="村田倫子さんご来店" class="news-image" />
             <div class="news-content">
               <div class="news-meta">
                 <span class="news-date">2022.08.30</span>
@@ -471,7 +521,7 @@ const salonJsonLd = {
           </div>
           
           <div class="news-item">
-            <img src="/images/hero/slide-2.png" alt="水崎綾女さんご来店" class="news-image" />
+            <img src="/images/news/news-04.png" alt="水崎綾女さんご来店" class="news-image" />
             <div class="news-content">
               <div class="news-meta">
                 <span class="news-date">2022.06.13</span>
@@ -490,10 +540,8 @@ const salonJsonLd = {
         <!-- 詳しく見るボタン -->
         <div class="news-more">
           <a href="/news" class="news-more-btn">
-            <span class="news-more-text">お知らせ一覧へ</span>
-            <svg class="news-more-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-            </svg>
+            <span class="news-more-text">詳しく見る</span>
+            <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="news-more-icon" />
           </a>
         </div>
       </div>
@@ -509,7 +557,7 @@ const salonJsonLd = {
         <!-- Instagram投稿グリッド -->
         <div class="instagram-grid grid-3-cols">
           <div class="instagram-item">
-            <img src="/images/hero/slide-1.png" alt="Instagram投稿1" class="instagram-image" />
+            <img src="/images/main/instagram-01.png" alt="Instagram投稿1" class="instagram-image" />
             <div class="instagram-overlay">
               <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -518,7 +566,7 @@ const salonJsonLd = {
           </div>
           
           <div class="instagram-item">
-            <img src="/images/hero/slide-2.png" alt="Instagram投稿2" class="instagram-image" />
+            <img src="/images/main/instagram-02.png" alt="Instagram投稿2" class="instagram-image" />
             <div class="instagram-overlay">
               <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -527,7 +575,7 @@ const salonJsonLd = {
           </div>
           
           <div class="instagram-item">
-            <img src="/images/hero/slide-1.png" alt="Instagram投稿3" class="instagram-image" />
+            <img src="/images/main/instagram-03.png" alt="Instagram投稿3" class="instagram-image" />
             <div class="instagram-overlay">
               <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -536,7 +584,7 @@ const salonJsonLd = {
           </div>
           
           <div class="instagram-item">
-            <img src="/images/hero/slide-2.png" alt="Instagram投稿4" class="instagram-image" />
+            <img src="/images/main/instagram-04.png" alt="Instagram投稿4" class="instagram-image" />
             <div class="instagram-overlay">
               <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.40s-.644-1.44-1.439-1.44z"/>
@@ -545,7 +593,7 @@ const salonJsonLd = {
           </div>
           
           <div class="instagram-item">
-            <img src="/images/hero/slide-1.png" alt="Instagram投稿5" class="instagram-image" />
+            <img src="/images/main/instagram-05.png" alt="Instagram投稿5" class="instagram-image" />
             <div class="instagram-overlay">
               <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -554,7 +602,7 @@ const salonJsonLd = {
           </div>
           
           <div class="instagram-item">
-            <img src="/images/hero/slide-2.png" alt="Instagram投稿6" class="instagram-image" />
+            <img src="/images/main/instagram-06.png" alt="Instagram投稿6" class="instagram-image" />
             <div class="instagram-overlay">
               <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -563,7 +611,7 @@ const salonJsonLd = {
           </div>
           
           <div class="instagram-item">
-            <img src="/images/hero/slide-1.png" alt="Instagram投稿7" class="instagram-image" />
+            <img src="/images/main/instagram-07.png" alt="Instagram投稿7" class="instagram-image" />
             <div class="instagram-overlay">
               <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -572,7 +620,7 @@ const salonJsonLd = {
           </div>
           
           <div class="instagram-item">
-            <img src="/images/hero/slide-2.png" alt="Instagram投稿8" class="instagram-image" />
+            <img src="/images/main/instagram-08.png" alt="Instagram投稿8" class="instagram-image" />
             <div class="instagram-overlay">
               <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -581,7 +629,7 @@ const salonJsonLd = {
           </div>
           
           <div class="instagram-item">
-            <img src="/images/hero/slide-1.png" alt="Instagram投稿9" class="instagram-image" />
+            <img src="/images/main/instagram-09.png" alt="Instagram投稿9" class="instagram-image" />
             <div class="instagram-overlay">
               <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -595,77 +643,7 @@ const salonJsonLd = {
     <!-- CTAセクション -->
 
     <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-container">
-        <!-- ブランドロゴ -->
-        <div class="footer-brand">
-          <h2 class="footer-brand-text">
-            <span class="footer-brand-name">little</span>
-            <span class="footer-brand-tagline">髪と、わたしと、生きていく。</span>
-          </h2>
-        </div>
-        
-        <!-- ナビゲーション -->
-        <nav class="footer-nav">
-          <a href="/" class="footer-nav-link">TOP</a>
-          <div class="footer-nav-separator"></div>
-          <a href="/concept" class="footer-nav-link">ヘアカタログ</a>
-          <div class="footer-nav-separator"></div>
-          <a href="/menu" class="footer-nav-link">企業向けヘアメイク</a>
-          <div class="footer-nav-separator"></div>
-          <a href="/hairstyle" class="footer-nav-link">littleグループ店舗</a>
-          <div class="footer-nav-separator"></div>
-          <a href="/news" class="footer-nav-link">お知らせ</a>
-        </nav>
-        
-        <!-- 採用サイトボタン -->
-        <div class="footer-recruit">
-          <a href="/recruit" class="footer-recruit-btn">
-            <span class="footer-recruit-text">採用サイト</span>
-            <svg class="footer-recruit-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-            </svg>
-          </a>
-        </div>
-        
-        <!-- SNSアイコンとスポンサー -->
-        <div class="footer-bottom">
-          <div class="footer-social">
-            <a href="https://twitter.com/anemone_salon" class="footer-social-link" target="_blank" rel="noopener noreferrer">
-              <svg class="footer-social-icon" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-            <a href="https://instagram.com/anemone_salon" class="footer-social-link" target="_blank" rel="noopener noreferrer">
-              <svg class="footer-social-icon" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-            <a href="https://line.me/ti/p/@anemone_salon" class="footer-social-link" target="_blank" rel="noopener noreferrer">
-              <svg class="footer-social-icon" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
-              </svg>
-            </a>
-          </div>
-          
-          <!-- スポンサー -->
-          <div class="footer-sponsors">
-            <div class="footer-sponsor">
-              <img src="/images/footer/abemas.png" alt="SHIBUYA ABEMAS" class="footer-sponsor-image" />
-            </div>
-            
-            <div class="footer-sponsor">
-              <img src="/images/footer/sunrockers.png" alt="SUN ROCKERS SHIBUYA" class="footer-sponsor-image" />
-            </div>
-          </div>
-        </div>
-        
-        <!-- コピーライト -->
-        <div class="footer-copyright">
-          <p>© anemone. All Rights Reserved.</p>
-        </div>
-      </div>
-    </footer>
+    <Footer />
     
   </div>
 </Layout>
@@ -678,6 +656,16 @@ const salonJsonLd = {
     position: relative;
     background-color: var(--color-beige);
     min-height: 320px;
+    padding-top: 80px; /* ヘッダーの高さ分をパディングで補正 */
+  }
+  
+  .hero-text-overlay {
+    position: absolute;
+    top: 120px;
+    right: 0px;
+    z-index: 1000;
+    max-height: 116px;
+    width: auto;
   }
   
   .hero-container {
@@ -700,19 +688,18 @@ const salonJsonLd = {
     border-radius: 12px;
     overflow: hidden;
     display: flex;
-    padding: 184px 400px 184px 145px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
     align-self: stretch;
+    z-index: 10;
   }
   
   .hero-slideshow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    flex: 1;
     height: 100%;
+    position: relative;
+    z-index: 10;
   }
   
   .hero-slide {
@@ -723,6 +710,7 @@ const salonJsonLd = {
     height: 100%;
     opacity: 0;
     transition: opacity 0.8s ease-in-out;
+    z-index: 5;
   }
   
   .hero-slide.active {
@@ -741,7 +729,6 @@ const salonJsonLd = {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
   }
   
   .hero-slide-content {
@@ -806,101 +793,98 @@ const salonJsonLd = {
   
   /* スライドショー内のページネーション */
   .hero-slide-pagination {
-    position: absolute;
-    right: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
     display: flex;
+    width: 8px;
     flex-direction: column;
-    gap: 0.75rem;
+    align-items: flex-start;
+    gap: 4px;
     z-index: 15;
     pointer-events: auto;
-    background-color: rgba(0, 0, 0, 0.3); /* デバッグ用の背景 */
-    padding: 0.5rem;
-    border-radius: 8px;
+    padding: 12px;
   }
   
   /* Floating Action Button */
   .hero-fab {
     position: absolute;
-    right: 2rem;
-    top: 50%;
+    right: 1rem;
+    top: 85%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
     z-index: 20;
+    background-image: url('/images/fab_bg.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 240px;
+    height: 210px;
   }
   
   /* PC用のFloating Action Button */
   @media (min-width: 768px) {
     .hero-fab {
       position: fixed;
-      right: 2rem;
-      top: 50%;
+      right: 0px;
+      top: 85%;
       transform: translateY(-50%);
       z-index: 1000;
     }
     
     .hero-slide-pagination {
-      position: absolute;
-      right: 2rem;
-      top: 50%;
-      transform: translateY(-50%);
       display: flex;
+      width: 8px;
       flex-direction: column;
-      gap: 0.75rem;
+      align-items: flex-start;
+      gap: 4px;
       z-index: 15;
-      background-color: rgba(0, 0, 0, 0.3); /* デバッグ用の背景 */
-      padding: 0.5rem;
-      border-radius: 8px;
+      padding: 12px;
+    }
+  }
+
+  /* モバイルではFABを非表示 */
+  @media (max-width: 767px) {
+    .hero-fab {
+      display: none;
     }
   }
   
   
-  .hero-pagination-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.8);
-    background-color: rgba(255, 255, 255, 0.4);
+  /* ページネーションストライプ */
+  .pagination-stripe {
+    width: 8px;
+    height: 60px;
+    background-color: #E8DDC7;
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
   }
   
-  .hero-pagination-dot.active {
-    background-color: var(--color-brown);
-    border-color: var(--color-brown);
-    transform: scale(1.3);
-    box-shadow: 0 4px 8px rgba(105, 85, 46, 0.4);
+  .pagination-stripe.active {
+    background-color: #D4C4A8; /* アクティブ時は少し濃い色 */
   }
   
-  .hero-pagination-dot:hover {
-    background-color: var(--color-brown-light);
-    border-color: var(--color-brown-light);
-    transform: scale(1.2);
-    box-shadow: 0 3px 6px rgba(105, 85, 46, 0.3);
+  .pagination-stripe:hover {
+    background-color: #F0E6D0; /* ホバー時の色 */
+  }
+  
+  /* ページネーション区切り線 */
+  .pagination-divider {
+    width: 8px;
+    height: 1px;
+    background-color: #2C2C2C;
+    border-radius: 0.5px;
   }
   
   
-  .hero-action-text {
-    font-family: var(--font-family-yumincho);
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-medium);
-    color: var(--color-black);
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-  }
   
   .hero-search-btn {
-    width: 180px;
-    height: 180px;
+    width: 210px;
+    height: 210px;
     flex-shrink: 0;
     aspect-ratio: 1/1;
     border-radius: 50%;
-    background-color: var(--color-brown);
     color: white;
     border: none;
     cursor: pointer;
@@ -908,52 +892,52 @@ const salonJsonLd = {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 24px rgba(105, 85, 46, 0.3);
     position: relative;
     overflow: hidden;
   }
   
-  .hero-search-btn:hover {
-    background-color: var(--color-brown-dark);
-    transform: scale(1.05);
-    box-shadow: 0 12px 32px rgba(105, 85, 46, 0.4);
-  }
   
   .hero-btn-content {
     display: flex;
+    margin-top: 15px;
     flex-direction: column;
     align-items: center;
+    gap: 4px;
     justify-content: center;
-    gap: 0.75rem;
   }
   
   .hero-search-icon {
-    width: 32px;
-    height: 32px;
-    stroke-width: 2.5;
+    width: 42px;
+    height: 42px;
+    stroke-width: 1;
   }
   
   .hero-btn-text {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.25rem;
   }
   
   .hero-btn-line {
-    font-family: var(--font-family-yumincho);
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-medium);
+    font-family: var(--font-family-zenkaku);
+    font-size: 20px;
+    font-weight: var(--font-weight-regular);
     color: white;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    line-height: 1.2;
+    line-height: 1.25;
   }
   
   /* レスポンシブ対応 */
   @media (max-width: 767px) {
     .hero-section {
       height: 320px;
+      margin-top: 64px; /* モバイル版のヘッダー高さ分を相殺 */
+      padding-top: 64px; /* モバイル版のヘッダー高さ分をパディングで補正 */
+    }
+    
+    .hero-text-overlay {
+      top: 10px;
+      max-height: 56px;
+      z-index: 1000;
     }
     
     .hero-container {
@@ -962,6 +946,7 @@ const salonJsonLd = {
       justify-content: flex-end;
       align-items: center;
       align-self: stretch;
+      min-height: 100%;
     }
     
     .hero-main {
@@ -971,17 +956,60 @@ const salonJsonLd = {
       right: 0;
       bottom: 0;
       border-radius: 0 20px 20px 0;
-      width: 339.456px;
       height: 320px;
       flex-shrink: 0;
       padding: 0;
-      display: block;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    /* モバイル用メニューが開いている時のスタイル */
+    body.menu-open .hero-main {
+      z-index: -1 !important;
+      position: relative !important;
+    }
+
+    body.menu-open .hero-slideshow {
+      z-index: -1 !important;
+      position: relative !important;
+    }
+
+    body.menu-open .hero-slide {
+      z-index: -1 !important;
+      position: relative !important;
+    }
+
+    body.menu-open .hero-slide-pagination {
+      z-index: -1 !important;
+      position: relative !important;
+    }
+
+    body.menu-open .hero-container {
+      z-index: -1 !important;
+      position: relative !important;
+    }
+
+    body.menu-open .hero-section {
+      z-index: -1 !important;
+      position: relative !important;
+    }
+
+    /* モバイル用メニューが開いている時のヘッダー表示 */
+    body.menu-open .header {
+      z-index: 2147483646 !important;
+      position: relative !important;
+    }
+
+    body.menu-open .header__container {
+      z-index: 2147483646 !important;
+      position: relative !important;
     }
     
     .hero-slideshow {
-      position: relative;
-      width: 100%;
+      flex: 1;
       height: 100%;
+      position: relative;
     }
     
     .hero-slide {
@@ -990,30 +1018,42 @@ const salonJsonLd = {
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(0deg, rgba(121, 104, 79, 0.20) 0%, rgba(121, 104, 79, 0.20) 100%), 
-                  var(--color-grey-light) 50% / cover no-repeat;
     }
     
     .hero-slide-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      mix-blend-mode: multiply;
+      border-radius: 0 20px 20px 0;
+      /* mix-blend-mode: multiply; */
     }
     
     .hero-slide-pagination {
-      position: absolute;
-      bottom: 1rem;
-      right: 1rem;
-      top: auto;
-      transform: none;
+      display: flex;
       flex-direction: row;
-      gap: 0.5rem;
+      align-items: flex-start;
+      gap: 4px;
       z-index: 15;
-      background-color: rgba(0, 0, 0, 0.3);
-      padding: 0.5rem;
-      border-radius: 8px;
+      width: 32px;
+      height: 8px;
+      padding: 1rem;
     }
+    
+    .pagination-stripe {
+      height: 8px;
+      width: 8px;
+      border-radius: 4px;
+    }
+    
+    .pagination-stripe.active {
+      height: 8px;
+    }
+    
+    .pagination-divider {
+      height: 8px;
+      width: 1px;
+    }
+    
     
     .hero-fab {
       position: absolute;
@@ -1023,14 +1063,8 @@ const salonJsonLd = {
       top: auto;
       transform: none;
       flex-direction: row;
-      gap: 0.75rem;
     }
     
-    .hero-action-text {
-      writing-mode: horizontal-tb;
-      text-orientation: initial;
-      font-size: 0.75rem;
-    }
     
     .hero-search-btn {
       width: 60px;
@@ -1084,7 +1118,6 @@ const salonJsonLd = {
   /* イントロダクションセクション */
   .intro-section {
     background-color: var(--color-beige);
-    
     padding: 110px 0;
   }
   
@@ -1120,6 +1153,97 @@ const salonJsonLd = {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
+  }
+
+  /* メニューが開いている時のスタイル */
+  body.menu-open {
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  body.menu-open .hero-slideshow {
+    z-index: -1 !important;
+    position: relative !important;
+  }
+
+  body.menu-open .hero-slide {
+    z-index: -1 !important;
+    position: relative !important;
+  }
+
+  body.menu-open .hero-slide-pagination {
+    z-index: -1 !important;
+    position: relative !important;
+  }
+
+  body.menu-open .hero-fab {
+    z-index: -1 !important;
+    position: relative !important;
+  }
+
+  body.menu-open .hero-main {
+    z-index: -1 !important;
+    position: relative !important;
+  }
+
+  body.menu-open .hero-container {
+    z-index: -1 !important;
+    position: relative !important;
+  }
+
+  body.menu-open .hero-section {
+    z-index: -1 !important;
+    position: relative !important;
+  }
+
+  /* メニューが開いている時のヘッダー表示 */
+  body.menu-open .header {
+    z-index: 2147483646 !important;
+    position: relative !important;
+  }
+
+  body.menu-open .header__container {
+    z-index: 2147483646 !important;
+    position: relative !important;
+  }
+
+  /* グリッドレイアウトのレスポンシブ対応 */
+  @media (max-width: 1023px) {
+    .grid-4-cols {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    
+    .grid-3-cols {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .grid-4-cols {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    
+    .grid-3-cols {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    
+    .grid-2-cols {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .grid-4-cols,
+    .grid-3-cols,
+    .grid-2-cols {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
   }
   
   /* 共通タイポグラフィ */
@@ -1178,6 +1302,81 @@ const salonJsonLd = {
     font-weight: var(--font-weight-regular);
     line-height: 150%;
   }
+
+  /* タイポグラフィのレスポンシブ対応 */
+  @media (max-width: 1023px) {
+    .text-h1 {
+      font-size: 48px;
+    }
+    
+    .text-h2 {
+      font-size: 36px;
+    }
+    
+    .text-h3 {
+      font-size: 28px;
+    }
+    
+    .text-h4 {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .text-h1 {
+      font-size: 36px;
+    }
+    
+    .text-h2 {
+      font-size: 28px;
+    }
+    
+    .text-h3 {
+      font-size: 24px;
+    }
+    
+    .text-h4 {
+      font-size: 18px;
+    }
+    
+    .text-body {
+      font-size: 14px;
+    }
+    
+    .text-body-large {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .text-h1 {
+      font-size: 28px;
+    }
+    
+    .text-h2 {
+      font-size: 24px;
+    }
+    
+    .text-h3 {
+      font-size: 20px;
+    }
+    
+    .text-h4 {
+      font-size: 16px;
+    }
+    
+    .text-body {
+      font-size: 13px;
+    }
+    
+    .text-body-large {
+      font-size: 14px;
+    }
+    
+    .text-small {
+      font-size: 12px;
+    }
+  }
   
   .intro-content {
     display: flex;
@@ -1200,6 +1399,99 @@ const salonJsonLd = {
   
   .section-title-sub {
     font-size: 24px;
+    vertical-align: middle;
+  }
+
+  /* タイトルスラッシュのスタイル */
+  .title-slash {
+    height: 28px;
+    width: auto;
+    margin: 0 0.5rem;
+    display: inline-block;
+  }
+
+  /* モバイル用のタイトルレイアウト */
+  @media (max-width: 767px) {
+    .section-title {
+      display: flex;
+      align-items: baseline;
+      align-content: flex-start;
+      gap: 6px 11px;
+      flex-wrap: wrap;
+      display: flex;
+      width: 200px;
+      height: 75px;
+      align-items: flex-start;
+      align-content: flex-start;
+      gap: 6px 11px;
+      flex-wrap: wrap;
+    }
+    
+    .title-slash {
+      margin: 0;
+    }
+    
+    .section-title-sub {
+      margin: 0;
+    }
+  }
+
+  /* セクション関連のレスポンシブ対応 */
+  @media (max-width: 1023px) {
+    .section-container {
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    
+    .section-container-wide {
+      max-width: 900px;
+      padding: 0 20px;
+    }
+    
+    .section-title {
+      height: auto;
+      margin-bottom: 32px;
+    }
+    
+    .section-title-sub {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .section-container {
+      max-width: 100%;
+      padding: 0 16px;
+    }
+    
+    .section-container-wide {
+      max-width: 100%;
+      padding: 0 16px;
+    }
+    
+    .section-title {
+      height: auto;
+      margin-bottom: 24px;
+    }
+    
+    .section-title-sub {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-container,
+    .section-container-wide {
+      padding: 0 24px;
+    }
+    
+    .section-title {
+      margin-bottom: 20px;
+    }
+    
+    .section-title-sub {
+      font-size: 14px;
+    }
   }
   
   .intro-title {
@@ -1311,23 +1603,46 @@ const salonJsonLd = {
   }
   
   .hairstyle-more {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .hairstyle-more-btn {
-    background-color: var(--color-grey-medium);
+    display: flex;
+    width: 178px;
+    height: 64px;
+    padding: 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 5px;
+    border: 1px solid var(--color-black);
+    background-color: transparent;
     color: var(--color-black);
-    border: none;
-    padding: 0.75rem 2rem;
-    border-radius: 6px;
-    font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
   }
   
   .hairstyle-more-btn:hover {
     background-color: var(--color-brown);
+    color: var(--color-white);
+  }
+  
+  .hairstyle-more-btn:hover .hairstyle-more-icon {
+    filter: brightness(0) invert(1);
+  }
+  
+  .hairstyle-more-text {
+    font-family: var(--font-family-zenkaku);
+    font-size: 16px;
+    font-weight: var(--font-weight-medium);
+  }
+  
+  .hairstyle-more-icon {
+    width: 24px;
+    height: 24px;
+    transition: filter 0.3s ease;
   }
   
   /* 企業様向けヘアメイクセクション */
@@ -1394,6 +1709,7 @@ const salonJsonLd = {
     flex: 1;
     display: flex;
     align-items: center;
+    padding: 16px 20px;
   }
 
   .pricing-table td {
@@ -1428,11 +1744,88 @@ const salonJsonLd = {
     color: var(--color-black);
     font-family: var(--font-family-zenkaku);
     font-weight: var(--font-weight-medium);
+    font-size: 16px;
   }
   
   .pricing-table td {
     color: var(--color-black);
     font-family: var(--font-family-zenkaku);
+  }
+
+  /* 料金表のレスポンシブ対応 */
+  @media (max-width: 1023px) {
+    .pricing-table th,
+    .pricing-table td {
+      padding: 14px 16px;
+    }
+    
+    .pricing-table th {
+      font-size: 14px;
+    }
+    
+    .pricing-table td {
+      font-size: 20px;
+    }
+    
+    .pricing-table tr {
+      padding: 6px 0 6px 6px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .pricing-table th,
+    .pricing-table td {
+      padding: 12px 14px;
+    }
+    
+    .pricing-table th {
+      font-size: 13px;
+    }
+    
+    .pricing-table td {
+      font-size: 18px;
+    }
+    
+    .pricing-table tr {
+      padding: 4px 0 4px 4px;
+    }
+
+    /* メールフォームのテキスト切り替え */
+    .mail-form .mail-form-description {
+      display: none !important;
+    }
+    
+    .mail-form .mail-form-description-mobile {
+      display: block !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .pricing-table th,
+    .pricing-table td {
+      padding: 10px 12px;
+    }
+    
+    .pricing-table th {
+      font-size: 16px;
+    }
+    
+    .pricing-table td {
+      font-size: 18px;
+    }
+    
+    .pricing-table tr {
+      padding: 3px 0 3px 3px;
+    }
+
+    /* メールフォームのテキスト切り替え（小画面スマートフォン） */
+    .mail-form .mail-form-description {
+      display: none !important;
+    }
+    
+    .mail-form .mail-form-description-mobile {
+      display: block !important;
+    }
   }
   
   .hairmake-note {
@@ -1486,6 +1879,17 @@ const salonJsonLd = {
   }
 
   .mail-form-description {
+    display: block;
+    color: var(--color-white);
+    font-family: var(--font-family-zenkaku);
+    font-weight: var(--font-weight-regular);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .mail-form-description-mobile {
+    display: none;
     color: var(--color-white);
     font-family: var(--font-family-zenkaku);
     font-weight: var(--font-weight-regular);
@@ -1536,16 +1940,33 @@ const salonJsonLd = {
     /* タイポグラフィは共通クラスで管理 */
   }
   
-  .salon-content {
-    display: flex;
-    align-items: flex-start;
+  /* サロンセクションのメインコンテンツ */
+  .salon-main-content {
+    margin-bottom: 3rem;
   }
   
-  .salon-left {
+  .salon-header {
+    margin-bottom: 2rem;
+  }
+  
+  /* PC用レイアウト */
+  .salon-content-pc {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+  
+  .salon-filters {
     flex: 1;
   }
   
-  .salon-right {
+  .salon-map {
+    flex: 0 0 auto;
+  }
+  
+  /* SP用レイアウト（デフォルトで非表示） */
+  .salon-content-sp {
+    display: none;
   }
   
   .salon-description {
@@ -1861,6 +2282,113 @@ const salonJsonLd = {
     width: 20px;
     height: 20px;
   }
+
+  /* 採用情報セクションのレスポンシブ対応 */
+  @media (max-width: 1023px) {
+    .recruit-container {
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    
+    .recruit-content {
+      max-width: 100%;
+    }
+    
+    .recruit-title {
+      font-size: 48px;
+      margin-bottom: 24px;
+    }
+    
+    .recruit-title-sub {
+      font-size: 20px;
+    }
+    
+    .recruit-text {
+      margin-bottom: 24px;
+    }
+    
+    .recruit-description {
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .recruit-section {
+      padding: 60px 0;
+    }
+    
+    .recruit-container {
+      padding: 0 16px;
+    }
+    
+    .recruit-title {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    
+    .recruit-title-sub {
+      font-size: 16px;
+    }
+    
+    .recruit-text {
+      margin-bottom: 20px;
+    }
+    
+    .recruit-description {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+    
+    .recruit-btn {
+      padding: 12px 24px;
+      font-size: 14px;
+    }
+    
+    .recruit-btn-icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .recruit-section {
+      padding: 40px 0;
+    }
+    
+    .recruit-container {
+      padding: 0 12px;
+    }
+    
+    .recruit-title {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+    
+    .recruit-title-sub {
+      font-size: 14px;
+    }
+    
+    .recruit-text {
+      margin-bottom: 16px;
+    }
+    
+    .recruit-description {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    
+    .recruit-btn {
+      padding: 10px 20px;
+      font-size: 13px;
+      gap: 0.5rem;
+    }
+    
+    .recruit-btn-icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
   
   /* ニュースセクション */
   .news-section {
@@ -1885,6 +2413,41 @@ const salonJsonLd = {
 
   .news-title-sub{
     font-size: 24px;
+  }
+
+  /* ニュースセクションのレスポンシブ対応 */
+  @media (max-width: 1023px) {
+    .news-title {
+      font-size: 48px;
+      margin-bottom: 40px;
+    }
+    
+    .news-title-sub {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .news-title {
+      font-size: 36px;
+      margin-bottom: 32px;
+      width: 170px;
+    }
+    
+    .news-title-sub {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .news-title {
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+    
+    .news-title-sub {
+      font-size: 14px;
+    }
   }
   
   .news-tabs {
@@ -1947,9 +2510,6 @@ const salonJsonLd = {
     border-bottom: 1px solid var(--color-grey-light);
   }
   
-  .news-item:last-child {
-    border-bottom: none;
-  }
   
   .news-image {
     width: 240px;
@@ -1977,7 +2537,7 @@ const salonJsonLd = {
   
   .news-separator {
     font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
+    font-size: 24px;
     color: var(--color-text-grey-medium);
   }
   
@@ -2010,41 +2570,44 @@ const salonJsonLd = {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 3rem;
+    margin-top: 54px;
   }
   
   .news-more-btn {
     display: flex;
-    width: 172px;
-    height: 48px;
+    width: 178px;
+    height: 64px;
+    padding: 24px;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
+    gap: 8px;
     border-radius: 5px;
     border: 1px solid var(--color-black);
     background-color: transparent;
     color: var(--color-black);
-    font-family: var(--font-family-zenkaku);
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-medium);
     text-decoration: none;
     transition: all 0.3s ease;
-    cursor: pointer;
-    padding: 0 1rem;
-    gap: 0.5rem;
   }
   
   .news-more-btn:hover {
-    background-color: #E6DDCA;
+    background-color: var(--color-brown);
+    color: var(--color-white);
+  }
+  
+  .news-more-btn:hover .news-more-icon {
+    filter: brightness(0) invert(1);
   }
   
   .news-more-text {
     font-family: var(--font-family-zenkaku);
+    font-size: 16px;
+    font-weight: var(--font-weight-medium);
   }
   
   .news-more-icon {
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
+    transition: filter 0.3s ease;
   }
   
   /* Instagramセクション */
@@ -2112,177 +2675,16 @@ const salonJsonLd = {
     color: var(--color-white);
   }
   
-  /* Footer */
-  .footer {
-    background-color: #3D3D3D;
-    padding: 60px 0 30px;
-  }
-  
-  .footer-container {
-    max-width: 448px;
-    margin: 0 auto;
-  }
-  
-  .footer-brand {
-    text-align: center;
-    margin-bottom: 24px;
-  }
-  
-  .footer-brand-text {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-  
-  .footer-brand-name {
-    font-family: var(--font-family-yumincho);
-    font-size: 2.5rem;
-    line-height: 1.0;
-    font-weight: var(--font-weight-medium);
-    color: var(--color-white);
-  }
-  
-  .footer-brand-tagline {
-    font-family: var(--font-family-yumincho);
-    font-size: 18px;
-    line-height: 1.0;
-    color: var(--color-white);
-  }
-  
-  .footer-nav {
-    display: flex;
-    width: 480px;
-    justify-content: center;
-    align-items: center;
-    gap: 0;
-    margin-bottom: 36px;
-  }
-  
-  .footer-nav-link {
-    color: var(--color-white);
-    text-decoration: none;
-    font-family: var(--font-family-zenkaku);
-    font-size: 12px;
-    font-weight: var(--font-weight-regular);
-    padding: 10px;
-    transition: color 0.3s ease;
-  }
-  
-  .footer-nav-link:hover {
-    color: var(--color-brown-light);
-  }
-  
-  .footer-nav-separator {
-    width: 1px;
-    height: 16px;
-    background-color: var(--color-white);
-    opacity: 0.5;
-  }
-  
-  .footer-recruit {
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-  
-  .footer-recruit-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    width: 100%;
-    background: transparent;
-    color: var(--color-white);
-    border: 1px solid var(--color-white);
-    padding: 24px 24px;
-    border-radius: 6px;
-    font-family: var(--font-family-zenkaku);
-    font-size: 18px;
-    line-height: 1.0;
-    font-weight: var(--font-weight-regular);
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-  
-  .footer-recruit-btn:hover {
-    background-color: var(--color-white);
-    color: var(--color-grey-medium);
-  }
-  
-  .footer-recruit-icon {
-    width: 16px;
-    height: 16px;
-  }
-  
-  .footer-bottom {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
-  
-  .footer-social {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .footer-social-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    background-color: var(--color-white);
-    color: var(--color-black);
-  }
-  
-  .footer-social-link:hover {
-    border: 1px solid var(--color-white);
-    background-color: var(--color-grey-medium);
-    color: var(--color-white);
-  }
-  
-  .footer-social-icon {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .footer-sponsors {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .footer-sponsor {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .footer-sponsor-image {
-    height: 77px;
-    width: auto;
-    object-fit: contain;
-  }
-  
-  .footer-copyright {
-    text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-  }
-  
-  .footer-copyright p {
-    font-family: var(--font-family-zenkaku);
-    font-size: 0.75rem;
-    color: var(--color-white);
-    opacity: 0.8;
-  }
   
   /* レスポンシブ対応 */
   
   /* タブレット対応 (768px - 1024px) */
   @media (min-width: 769px) and (max-width: 1024px) {
+    .hero-text-overlay {
+      top: 100px;
+      max-height: 100px;
+    }
+    
     .intro-content {
       gap: 2rem;
     }
@@ -2311,27 +2713,95 @@ const salonJsonLd = {
   
   /* モバイル対応 (768px以下) */
   @media (max-width: 768px) {
+    /* ヘッダー */
+    .header {
+      padding: 1rem;
+    }
+    
+    .header-brand {
+      font-size: 1.5rem;
+    }
+    
+    .header-menu-btn {
+      width: 60px;
+      height: 60px;
+      font-size: 0.75rem;
+    }
+    
+    .header-menu-icon {
+      width: 24px;
+      height: 24px;
+    }
+    
+    /* ヒーローセクション */
+    .hero-section {
+    }
+    
+    .hero-slide-content {
+      left: 20px;
+      right: 20px;
+      transform: translateY(-50%);
+    }
+
+    .intro-section {
+      padding: 40px 0;
+    }
+    
+    .hero-logo {
+      width: 144px;
+    }
+    
     .intro-content {
       flex-direction: column;
       gap: 2rem;
     }
     
     .intro-title {
-      font-size: 2rem;
+      font-size: 20px;
+    }
+
+    .intro-image-content {
+      height: 218px;
     }
     
-    .intro-description {
-      font-size: 1rem;
+    /* ヘアスタイルセクション */
+    .hairstyle-section {
+      padding: 40px 0;
+    }
+    
+    .hairstyle-container {
+      padding: 0 1rem;
+    }
+    
+    .hairstyle-tabs {
+      gap: 4px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+    }
+    
+    .hairstyle-tab {
+      font-size: 14px;
+      padding: 8px 16px;
+      flex: 1;
+      min-width: 96px;
     }
     
     .hairstyle-grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
+      gap: 12px;
     }
     
-    .hairstyle-tabs {
-      flex-wrap: wrap;
-      gap: 1rem;
+    .hairstyle-image {
+      height: 224px;
+    }
+    
+    /* ヘアメイクセクション */
+    .hairmake-section {
+      padding: 40px 0;
+    }
+    
+    .hairmake-container {
+      padding: 0 1rem;
     }
     
     .hairmake-content {
@@ -2339,89 +2809,133 @@ const salonJsonLd = {
       gap: 2rem;
     }
     
-    .salon-content {
-      flex-direction: column;
-      gap: 2rem;
+    .hairmake-image {
+      width: 100%;
+      order: -1;
+    }
+    
+    .hairmake-image-content {
+      width: 100%;
+      height: 325px;
+      object-fit: cover;
+    }
+    
+    /* サロンセクション */
+    .salon-section {
+      padding: 40px 0;
+    }
+    
+    .salon-container {
+      padding: 0 1rem;
+    }
+    
+    /* モバイル用レイアウト */
+    .salon-content-pc {
+      display: none;
+    }
+    
+    .salon-content-sp {
+      display: block;
+    }
+    
+    .salon-content-sp .salon-map {
+      margin-bottom: 2rem;
     }
     
     .salon-regions {
-      flex-direction: column;
-      gap: 0.75rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
     }
     
     .region-btn {
-      display: flex;
-      padding: 24px;
-      justify-content: center;
-      align-items: center;
-      flex: 1 0 0;
-      align-self: stretch;
-      border-radius: 5px;
-      border: 1px solid var(--color-black);
       width: 100%;
-      height: auto;
+      height: 40px;
+      font-size: 18px;
+      padding: 0;
+    }
+    
+    .salon-search {
+      margin-bottom: 2rem;
     }
     
     .salon-cards {
       grid-template-columns: 1fr;
+      gap: 1rem;
     }
     
-    .recruit-section {
-      padding: 80px 0;
+    .salon-card {
     }
     
-    .recruit-title {
-      font-size: 2.5rem;
+    .salon-card-image {
+      height: 150px;
     }
     
-    .recruit-description {
-      font-size: 1rem;
-      text-align: center;
+    /* NEWSセクション */
+    .news-section {
+      padding: 40px 0;
     }
     
-    .recruit-btn {
-      padding: 0.875rem 1.5rem;
-      font-size: 0.875rem;
+    .news-container {
+      padding: 0 1rem;
+    }
+    
+    .news-tabs {
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 0;
+    }
+    
+    .news-tab {
+      font-size: 14px;
+      padding: 8px 16px;
+      flex: 1;
+      min-width: 80px;
+    }
+    
+    .news-item {
+      flex-direction: column;
+      gap: 24px;
+      padding: 32px 0;
+    }
+    
+    .news-image {
+      width: 100%;
+      height: 182px;
+    }
+    
+    .news-more-btn {
+      width: 100%;
+      max-width: 200px;
+    }
+    
+    /* Instagramセクション */
+    .instagram-section {
+      padding: 40px 0;
+    }
+
+    .instagram-title {
+      font-size: 24px;
+    }
+    
+    .instagram-container {
+      padding: 0 24px;
     }
     
     .instagram-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.75rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
     }
     
-    .instagram-title {
-      font-size: 2rem;
+    .instagram-image {
+      height: 154px;
     }
     
-    .footer-bottom {
-      flex-direction: column;
-      gap: 2rem;
-      align-items: center;
+    
+    .intro-description {
+      font-size: 16px;
     }
     
-    .footer-sponsors {
-      flex-direction: column;
-      gap: 1rem;
-      width: 100%;
-    }
-    
-    .footer-sponsor {
-      min-width: auto;
-      width: 100%;
-    }
-    
-    .footer-nav {
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    
-    .footer-brand-name {
-      font-size: 2rem;
-    }
-    
-    .footer-brand-tagline {
-      font-size: 1rem;
-    }
   }
 </style>
 
@@ -2429,7 +2943,7 @@ const salonJsonLd = {
   // ヒーローセクションのスライドショー機能
   document.addEventListener('DOMContentLoaded', function() {
     const slides = document.querySelectorAll('.hero-slide');
-    const paginationDots = document.querySelectorAll('.hero-pagination-dot');
+    const paginationDots = document.querySelectorAll('.pagination-stripe');
     const searchBtn = document.querySelector('.hero-search-btn');
     let currentSlide = 0;
     let slideInterval: ReturnType<typeof setInterval> | undefined;
@@ -2474,9 +2988,9 @@ const salonJsonLd = {
       clearInterval(slideInterval);
     }
 
-    // ページネーションドットのクリックイベント
-    paginationDots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
+    // ページネーションストライプのクリックイベント
+    paginationDots.forEach((stripe, index) => {
+      stripe.addEventListener('click', () => {
         showSlide(index);
         stopSlideShow();
         startSlideShow(); // 再開
@@ -2625,7 +3139,7 @@ const salonJsonLd = {
       });
     });
 
-    // 検索ボタンのクリックイベント
+    // 検索ボタンのクリックイベント（PC用）
     const salonFilterSearchBtn = document.getElementById('salon-search-btn') as HTMLButtonElement;
     const salonFilterSearchInput = document.getElementById('salon-search-input') as HTMLInputElement;
     
@@ -2634,10 +3148,27 @@ const salonJsonLd = {
       applyFilters();
     });
 
-    // 検索入力のEnterキーイベント
+    // 検索入力のEnterキーイベント（PC用）
     salonFilterSearchInput?.addEventListener('keypress', (e: KeyboardEvent) => {
       if (e.key === 'Enter') {
         currentFilter.searchTerm = salonFilterSearchInput.value || '';
+        applyFilters();
+      }
+    });
+
+    // 検索ボタンのクリックイベント（SP用）
+    const salonFilterSearchBtnSp = document.getElementById('salon-search-btn-sp') as HTMLButtonElement;
+    const salonFilterSearchInputSp = document.getElementById('salon-search-input-sp') as HTMLInputElement;
+    
+    salonFilterSearchBtnSp?.addEventListener('click', () => {
+      currentFilter.searchTerm = salonFilterSearchInputSp?.value || '';
+      applyFilters();
+    });
+
+    // 検索入力のEnterキーイベント（SP用）
+    salonFilterSearchInputSp?.addEventListener('keypress', (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        currentFilter.searchTerm = salonFilterSearchInputSp.value || '';
         applyFilters();
       }
     });

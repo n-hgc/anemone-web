@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import NewsCard from '../../components/NewsCard.astro';
+import Footer from '../../components/Footer.astro';
 import type { News } from '../../types';
 
 // モックデータをインポート
@@ -19,36 +20,462 @@ const newsJsonLd = {
     "datePublished": item.date,
     "author": {
       "@type": "Organization",
-      "name": "Anemone"
+      "name": "little"
     },
-    "url": `https://anemone-salon.com/news/${item.id}`
+    "url": `https://little-salon.com/news/${item.id}`
   }))
 };
 ---
 
 <Layout 
-  title="ニュース - アネモネサロン"
-  description="アネモネサロンの最新ニュースやお知らせをお届けします。新店舗オープン、キャンペーン情報、スタッフブログなど。"
+  title="NEWS / お知らせ - little"
+  description="littleの最新ニュースやお知らせをお届けします。"
   jsonLd={JSON.stringify(newsJsonLd)}
 >
-  <!-- ページヘッダー -->
-  <section class="bg-gradient-to-r from-pink-500 to-purple-600 text-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl font-bold mb-4">ニュース</h1>
-      <p class="text-xl">
-        アネモネサロンの最新情報をお届けします
-      </p>
-    </div>
-  </section>
-
-  <!-- ニュース一覧 -->
-  <section class="py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {news.map((newsItem) => (
-          <NewsCard news={newsItem} />
-        ))}
+  <!-- ページ全体の背景をbeigeに設定 -->
+  <div class="bg-beige">
+    
+    <!-- パンくずリスト -->
+    <div class="breadcrumb">
+      <div class="breadcrumb__container">
+        <nav class="breadcrumb__nav">
+          <a href="/" class="breadcrumb__link">ホーム</a>
+          <span class="breadcrumb__separator">/</span>
+          <span class="breadcrumb__current">NEWS</span>
+        </nav>
       </div>
     </div>
-  </section>
+
+    <!-- メインコンテンツ -->
+    <main class="news-main">
+      <div class="news-container">
+        
+        <!-- ページタイトル -->
+        <h2 class="news-title section-title text-h1">
+          NEWS<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="news-title-sub section-title-sub">お知らせ</span>
+        </h2>
+        
+        <!-- タブナビゲーション -->
+        <div class="news-tabs">
+          <button class="news-tab active" data-category="information">INFORMATION</button>
+          <button class="news-tab" data-category="blog">BLOG</button>
+          <button class="news-tab" data-category="movie">MOVIE</button>
+        </div>
+        
+        <!-- ニュース一覧 -->
+        <div class="news-list">
+          {news.map((newsItem) => (
+            <div class="news-item">
+              <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
+              <div class="news-content">
+                <div class="news-meta">
+                  <span class="news-date">{newsItem.date.replace(/-/g, '.').substring(0, 10)}</span>
+                  <span class="news-separator">|</span>
+                  <span class="news-category">{newsItem.categories[0]}</span>
+                </div>
+                <h3 class="news-item-title">
+                  <a href={`/news/${newsItem.id}`} class="news-item-link">{newsItem.title}</a>
+                </h3>
+                <p class="news-description">
+                  {newsItem.excerpt}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- ページネーション -->
+        <div class="news-pagination">
+          <nav class="pagination">
+            <a href="#" class="pagination__link pagination__link--active">1</a>
+            <a href="#" class="pagination__link">2</a>
+            <a href="#" class="pagination__link">3</a>
+            <span class="pagination__dots">...</span>
+            <a href="#" class="pagination__link">N</a>
+            <a href="#" class="pagination__next">
+              <svg class="pagination__arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </nav>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- フッター -->
+    <Footer />
+
+  </div>
 </Layout>
+
+<style>
+  @import "tailwindcss";
+  
+  /* パンくずリスト */
+  .breadcrumb {
+    background-color: var(--color-beige);
+    padding: 92px 0 12px 0;
+  }
+
+  .breadcrumb__container {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 55px;
+  }
+
+  .breadcrumb__nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .breadcrumb__link {
+    font-family: var(--font-family-zenkaku);
+    font-size: 14px;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-grey-dark);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .breadcrumb__link:hover {
+    color: var(--color-brown);
+  }
+
+  .breadcrumb__separator {
+    font-family: var(--font-family-zenkaku);
+    font-size: 14px;
+    color: var(--color-grey-dark);
+  }
+
+  .breadcrumb__current {
+    font-family: var(--font-family-zenkaku);
+    font-size: 14px;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-grey-dark);
+  }
+
+  /* メインコンテンツ */
+  .news-main {
+    background-color: var(--color-beige);
+    min-height: calc(100vh - 80px - 24px); /* ヘッダーとパンくずリストの高さを除く */
+    padding: 80px 0;
+  }
+
+  .news-container {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 55px;
+  }
+
+  /* 共通セクションタイトル */
+  .section-title {
+    font-family: var(--font-family-yumincho);
+    color: var(--color-black);
+    text-align: left;
+    height: 64px;
+    font-size: 64px;
+    line-height: 1.0;
+    margin-bottom: 40px;
+  }
+  
+  .section-title-sub {
+    font-size: 24px;
+    vertical-align: middle;
+  }
+
+  /* タイトルスラッシュのスタイル */
+  .title-slash {
+    height: 28px;
+    width: auto;
+    margin: 0 0.5rem;
+    display: inline-block;
+  }
+
+  /* タブナビゲーション */
+  .news-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .news-tab {
+    background: none;
+    border: none;
+    color: var(--color-grey-light);
+    font-family: var(--font-family-zenkaku);
+    font-size: 24px;
+    font-weight: 500;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    flex: 1;
+    text-align: center;
+  }
+
+  .news-tab::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: var(--color-grey-light);
+  }
+
+  .news-tab.active {
+    color: var(--color-text-black);
+  }
+
+  .news-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: var(--color-text-black);
+  }
+
+  /* ニュース一覧 */
+  .news-list {
+    margin: 0 auto;
+  }
+
+  .news-item {
+    display: flex;
+    gap: 1.5rem;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--color-grey-light);
+  }
+
+  .news-image {
+    width: 240px;
+    height: 134px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .news-content {
+    flex: 1;
+  }
+
+  .news-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .news-date {
+    font-family: var(--font-family-zenkaku);
+    font-size: 24px;
+    color: var(--color-text-grey-medium);
+  }
+
+  .news-separator {
+    font-family: var(--font-family-zenkaku);
+    font-size: 24px;
+    color: var(--color-text-grey-medium);
+  }
+
+  .news-category {
+    font-family: var(--font-family-zenkaku);
+    font-size: 24px;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text-grey-medium);
+  }
+
+  .news-item-title {
+    font-family: var(--font-family-zenkaku);
+    font-size: 24px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .news-item-link {
+    color: var(--color-black);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .news-item-link:hover {
+    color: var(--color-brown);
+  }
+
+  .news-description {
+    font-family: var(--font-family-zenkaku);
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: var(--font-weight-regular);
+    font-style: normal;
+    color: var(--color-text-grey-medium);
+  }
+
+  /* ページネーション */
+  .news-pagination {
+    display: flex;
+    justify-content: center;
+    padding-top: 56px;
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pagination__link {
+    font-family: var(--font-family-zenkaku);
+    font-size: 16px;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-grey-dark);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .pagination__link--active {
+    color: var(--color-black);
+    text-decoration: underline;
+  }
+
+  .pagination__link:hover {
+    color: var(--color-black);
+    background-color: var(--color-grey-light);
+  }
+
+  .pagination__dots {
+    font-family: var(--font-family-zenkaku);
+    font-size: 16px;
+    color: var(--color-grey-dark);
+    padding: 8px 4px;
+  }
+
+  .pagination__next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: var(--color-grey-dark);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .pagination__next:hover {
+    color: var(--color-black);
+    background-color: var(--color-grey-light);
+  }
+
+  .pagination__arrow {
+    width: 16px;
+    height: 16px;
+  }
+
+
+  /* レスポンシブ対応 */
+  @media (max-width: 1023px) {
+    .news-container {
+      padding: 0 40px;
+    }
+
+    .section-title {
+      height: auto;
+      margin-bottom: 32px;
+    }
+    
+    .section-title-sub {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .breadcrumb__container {
+      padding: 0 24px;
+    }
+
+    .news-main {
+      padding: 40px 0;
+    }
+
+    .news-container {
+      padding: 0 24px;
+    }
+
+    .section-title {
+      display: flex;
+      width: 180px;
+      height: 75px;
+      font-size: 36px;
+      align-items: baseline;
+      align-content: flex-start;
+      gap: 6px 11px;
+      flex-wrap: wrap;
+    }
+    
+    .title-slash {
+      margin: 0;
+    }
+    
+    .section-title-sub {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .news-tabs {
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .news-tab {
+      font-size: 18px;
+      padding: 0.75rem 1rem;
+    }
+
+    .news-item {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .news-image {
+      width: 100%;
+      height: 200px;
+    }
+
+    .news-date,
+    .news-separator,
+    .news-category {
+      font-size: 18px;
+    }
+
+    .news-item-title {
+      font-size: 20px;
+    }
+
+    .news-description {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-title {
+      margin-bottom: 20px;
+    }
+    
+    .section-title-sub {
+      font-size: 14px;
+    }
+
+    .news-tab {
+      font-size: 16px;
+      padding: 0.5rem 0.75rem;
+    }
+  }
+</style>

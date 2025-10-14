@@ -1,0 +1,148 @@
+---
+export interface Props {
+  staff: {
+    id: string;
+    name: string;
+    nameReading: string;
+    image: string;
+    role: string;
+    description: string;
+    buttonText: string;
+    buttonLink: string;
+  };
+}
+
+const { staff } = Astro.props;
+---
+
+<div class="recruit-staff-voices__card">
+  <img 
+    src={staff.image} 
+    alt={staff.name} 
+    class="recruit-staff-voices__photo"
+  />
+  <div class="recruit-staff-voices__content">
+    <div class="recruit-staff-voices__info">
+      <h3 class="recruit-staff-voices__name">
+        {staff.name}
+      </h3>
+      <p class="recruit-staff-voices__name-reading">({staff.nameReading})</p>
+      <p class="recruit-staff-voices__role">{staff.role}</p>
+      <p class="recruit-staff-voices__description">{staff.description}</p>
+    </div>
+    <button class="recruit-staff-voices__btn">
+      <a href={staff.buttonLink}>
+        <span>{staff.buttonText}</span>
+        <img src="/images/icons/icn_right_arrow.svg" alt="詳細" class="recruit-staff-voices__btn-icon" />
+      </a>
+    </button>
+  </div>
+</div>
+
+<style>
+  .recruit-staff-voices__card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-top: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .recruit-staff-voices__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .recruit-staff-voices__photo {
+    width: 100%;
+    height: 272px;
+    border-radius: 5px;
+    padding: 0 16px;
+    object-fit: cover;
+  }
+
+  .recruit-staff-voices__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    padding-top: 16px;
+  }
+
+  .recruit-staff-voices__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 16px 24px 16px;
+    text-align: center;
+  }
+
+  .recruit-staff-voices__name {
+    font-size: 28px;
+    font-weight: 500;
+    color: #69552E;
+    font-family: var(--font-family-yumincho);
+    line-height: 1.0;
+  }
+
+  .recruit-staff-voices__name-reading {
+    font-size: 28px;
+    font-weight: 500;
+    color: #69552E;
+    font-family: var(--font-family-yumincho);
+    line-height: 1.0;
+    margin-bottom: 16px;
+  }
+
+  .recruit-staff-voices__role {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--color-black);
+    margin-bottom: 8px;
+    line-height: 1.0;
+    font-family: var(--font-family-zenkaku);
+  }
+
+  .recruit-staff-voices__description {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-black);
+    font-family: var(--font-family-zenkaku);
+  }
+
+  .recruit-staff-voices__btn {
+    background-color: #7A623D;
+    color: white;
+    border: none;
+    border-radius: 8px 0 0 0;
+    padding: 13px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: var(--font-family-zenkaku);
+    font-size: 19px;
+    line-height: 1.0;
+    font-weight: 300;
+    margin-top: auto;
+    align-self: flex-end;
+  }
+
+  .recruit-staff-voices__btn:hover {
+    background-color: var(--color-brown-light);
+  }
+
+  .recruit-staff-voices__btn a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .recruit-staff-voices__btn-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+  }
+</style>

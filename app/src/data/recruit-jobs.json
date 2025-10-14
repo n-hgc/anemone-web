@@ -1,0 +1,78 @@
+{
+  "jobs": [
+    {
+      "id": "assistant",
+      "number": "01",
+      "title": "アシスタント",
+      "tags": [
+        {"type": "new-graduate", "label": "新卒"},
+        {"type": "mid-career", "label": "中途"},
+        {"type": "full-time", "label": "正社員"},
+        {"type": "part-time", "label": "パート"}
+      ],
+      "jobDescription": "スタイリストのサポート業務全般 (シャンプー、カラー、ブロー等)。基礎から丁寧に学べる教育制度あり。",
+      "requirements": "美容師免許をお持ちの方 (取得予定含む)",
+      "salary": {
+        "fullTime": "月給220,000円~+手当",
+        "partTime": "時給1,250円~ (地域により異なる)"
+      },
+      "buttonText": "募集中の店舗を探す",
+      "buttonLink": "#"
+    },
+    {
+      "id": "stylist",
+      "number": "02",
+      "title": "スタイリスト",
+      "tags": [
+        {"type": "mid-career", "label": "中途"},
+        {"type": "full-time", "label": "正社員"},
+        {"type": "part-time", "label": "パート"},
+        {"type": "contractor", "label": "業務委託"}
+      ],
+      "jobDescription": "カット・カラー・パーマなどの施術全般。SNS活用や集客支援あり。指名なしでも安定収入。",
+      "requirements": "美容師免許をお持ちの方/実務経験者優遇",
+      "salary": {
+        "fullTime": "月給230,000円~+手当・歩合",
+        "contractor": "完全歩合 (フリー40%~/指名50%~75%)",
+        "partTime": "時給1,250円~ (地域により異なる)"
+      },
+      "buttonText": "募集中の店舗を探す",
+      "buttonLink": "#"
+    },
+    {
+      "id": "eyelist",
+      "number": "03",
+      "title": "アイリスト/アイブロウリスト",
+      "tags": [
+        {"type": "mid-career", "label": "中途"},
+        {"type": "part-time", "label": "パート"},
+        {"type": "contractor", "label": "業務委託"}
+      ],
+      "jobDescription": "まつげエクステ・パーマ、アイブロウ施術。トレンド技術を学びながらキャリアアップ可能。",
+      "requirements": "美容師免許をお持ちの方/未経験OK(研修あり)",
+      "salary": {
+        "contractor": "完全歩合 (フリー40%指名50%~75%)",
+        "partTime": "時給1,250円~ (地域により異なる)"
+      },
+      "buttonText": "募集中の店舗を探す",
+      "buttonLink": "#"
+    }
+  ],
+  "applicationProcess": [
+    {
+      "step": "1",
+      "title": "ご応募",
+      "description": "本サイトの応募フォーム、LINE、電話のいづれかでご応募をお願い致します。応募には履歴書をメールか郵送・直接持ち込みなど、店舗指定の方法で提出ください。※希望エリアや希望店舗を悩んでいる場合は、お気軽にご相談下さい。"
+    },
+    {
+      "step": "2",
+      "title": "サロン見学or面接",
+      "description": "随時、サロン見学&ご面接お受けしております♪店舗担当者と日程を調整いただき、予定日になりましたら直接サロンへご来店ください。"
+    },
+    {
+      "step": "3",
+      "title": "合否連絡",
+      "description": "面接終了後1週間以内に、合否連絡をいたします。合格・不合格どちらの場合でも連絡をいたします。"
+    }
+  ]
+}

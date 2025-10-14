@@ -1,0 +1,74 @@
+{
+  "salons": [
+    {
+      "id": "lico-odori",
+      "name": "lico 大通",
+      "nameReading": "リコオオドオリ",
+      "image": "/images/recruit/salon-image-01.png",
+      "tags": [
+        {"type": "new-graduate", "label": "新卒"},
+        {"type": "mid-career", "label": "中途"},
+        {"type": "full-time", "label": "正社員"},
+        {"type": "part-time", "label": "パート"}
+      ],
+      "jobType": "アシスタント・スタイリスト",
+      "location": "北海道・札幌市",
+      "access": "大通駅徒歩1分・すすきの駅徒歩3分",
+      "buttonText": "求人に応募する",
+      "buttonLink": "#"
+    },
+    {
+      "id": "lico-sapporo",
+      "name": "lico 札幌",
+      "nameReading": "リコサッポロ",
+      "image": "/images/recruit/salon-image-02.png",
+      "tags": [
+        {"type": "new-graduate", "label": "新卒"},
+        {"type": "mid-career", "label": "中途"},
+        {"type": "full-time", "label": "正社員"}
+      ],
+      "jobType": "アシスタント・スタイリスト",
+      "location": "北海道・札幌市",
+      "access": "札幌駅徒歩5分",
+      "buttonText": "求人に応募する",
+      "buttonLink": "#"
+    },
+    {
+      "id": "lico-hakodate",
+      "name": "lico 函館",
+      "nameReading": "リコハコダテ",
+      "image": "/images/recruit/salon-image-03.png",
+      "tags": [
+        {"type": "mid-career", "label": "中途"},
+        {"type": "full-time", "label": "正社員"},
+        {"type": "part-time", "label": "パート"}
+      ],
+      "jobType": "アシスタント・スタイリスト",
+      "location": "北海道・函館市",
+      "access": "函館駅徒歩3分",
+      "buttonText": "求人に応募する",
+      "buttonLink": "#"
+    },
+    {
+      "id": "lico-asahikawa",
+      "name": "lico 旭川",
+      "nameReading": "リコアサヒカワ",
+      "image": "/images/recruit/salon-image-04.png",
+      "tags": [
+        {"type": "new-graduate", "label": "新卒"},
+        {"type": "mid-career", "label": "中途"},
+        {"type": "full-time", "label": "正社員"}
+      ],
+      "jobType": "アシスタント・スタイリスト",
+      "location": "北海道・旭川市",
+      "access": "旭川駅徒歩2分",
+      "buttonText": "求人に応募する",
+      "buttonLink": "#"
+    }
+  ],
+  "icons": {
+    "jobType": "/images/icons/icn_content_cut.svg",
+    "location": "/images/icons/icn_location_on.svg",
+    "access": "/images/icons/icn_directions_railway.svg"
+  }
+}

@@ -1,4 +1,7 @@
 ---
+import Header from '../components/Header.astro';
+import '../styles/global.css';
+
 export interface Props {
   title: string;
   description: string;
@@ -17,9 +20,6 @@ const { title, description, image, jsonLd } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    
-    <!-- グローバルCSSの読み込み -->
-    <link rel="stylesheet" href="/src/styles/global.css">
     
     <!-- フォントの読み込み -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,8 +42,18 @@ const { title, description, image, jsonLd } = Astro.props;
     {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
     
     <title>{title}</title>
+    
+    <style>
+      /* ヘッダー固定のためのスタイル */
+    </style>
   </head>
   <body>
-    <slot />
+    <!-- 共通ヘッダー -->
+    <Header />
+    
+    <!-- ページコンテンツ -->
+    <main class="main-content">
+      <slot />
+    </main>
   </body>
 </html>

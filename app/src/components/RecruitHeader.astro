@@ -1,0 +1,747 @@
+---
+// recruitページ専用ヘッダーコンポーネント
+---
+
+<header class="recruit-header">
+  <div class="recruit-header__container">
+    <!-- 左側グループ（ロゴ + .Recruit） -->
+    <div class="recruit-header__left-group">
+      <!-- ロゴ -->
+      <div class="recruit-header__logo">
+        <a href="/" class="recruit-header__logo-link">
+          <img 
+            src="/images/header/logo.png" 
+            alt="little" 
+            class="recruit-header__logo-image"
+          />
+        </a>
+      </div>
+      
+      <!-- .Recruitテキスト（モバイル版のみ表示） -->
+      <div class="recruit-header__recruit-text">
+        <span class="recruit-header__recruit-dot">.</span>
+        <span class="recruit-header__recruit-label">Recruit</span>
+      </div>
+    </div>
+
+    <!-- 右側グループ（ナビゲーション + アクション） -->
+    <div class="recruit-header__right-group">
+      <!-- ナビゲーション（PC版のみ表示） -->
+      <nav class="recruit-header__nav">
+        <ul class="recruit-header__nav-list">
+          <li class="recruit-header__nav-item">
+            <a href="#about" class="recruit-header__nav-link">
+              <span class="recruit-header__nav-en">CHARM</span>
+              <span class="recruit-header__nav-jp">littleで働く魅力</span>
+            </a>
+          </li>
+          <li class="recruit-header__nav-item">
+            <a href="#appeal" class="recruit-header__nav-link">
+              <span class="recruit-header__nav-en">SALON</span>
+              <span class="recruit-header__nav-jp">サロン・求人を探す</span>
+            </a>
+          </li>
+          <li class="recruit-header__nav-item">
+            <a href="#salon" class="recruit-header__nav-link">
+              <span class="recruit-header__nav-en">INTERVIEW</span>
+              <span class="recruit-header__nav-jp">働くスタッフの声</span>
+            </a>
+          </li>
+          <li class="recruit-header__nav-item">
+            <a href="#faq" class="recruit-header__nav-link">
+              <span class="recruit-header__nav-en">FAQ</span>
+              <span class="recruit-header__nav-jp">よくある質問</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- エントリーボタン（PC版のみ表示） -->
+      <div class="recruit-header__actions">
+        <a href="#entry" class="recruit-header__entry-btn">
+          <span class="recruit-header__entry-text">応募・サロン見学はこちら</span>
+          <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-header__entry-icon" />
+        </a>
+      </div>
+
+      <!-- モバイル用アクションボタン群 -->
+      <div class="recruit-header__mobile-actions">
+        <!-- 応募ボタン（モバイル版のみ表示） -->
+        <button class="recruit-header__mobile-apply-btn" aria-label="応募・サロン見学">
+          <svg class="recruit-header__mobile-apply-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+          <div class="recruit-header__mobile-apply-text">
+            <div class="recruit-header__mobile-apply-line">応募</div>
+            <div class="recruit-header__mobile-apply-line">サロン見学</div>
+          </div>
+        </button>
+        
+        <!-- ハンバーガーメニューボタン（モバイル版のみ表示） -->
+        <button class="recruit-header__menu-btn" id="recruit-menu-btn" aria-label="メニューを開く">
+          <span class="recruit-header__menu-line"></span>
+          <span class="recruit-header__menu-line"></span>
+          <span class="recruit-header__menu-line"></span>
+          <span class="recruit-header__menu-text">MENU</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- モバイルメニュー -->
+  <div class="recruit-header__mobile-menu" id="recruit-mobile-menu">
+    <nav class="recruit-header__mobile-nav">
+      <ul class="recruit-header__mobile-nav-list">
+        <li class="recruit-header__mobile-nav-item">
+          <a href="#about" class="recruit-header__mobile-nav-link">
+            <span class="recruit-header__mobile-nav-en">CHARM</span>
+            <span class="recruit-header__mobile-nav-jp">littleで働く魅力</span>
+          </a>
+        </li>
+        <li class="recruit-header__mobile-nav-item">
+          <a href="#appeal" class="recruit-header__mobile-nav-link">
+            <span class="recruit-header__mobile-nav-en">SALON</span>
+            <span class="recruit-header__mobile-nav-jp">サロン・求人を探す</span>
+          </a>
+        </li>
+        <li class="recruit-header__mobile-nav-item">
+          <a href="#salon" class="recruit-header__mobile-nav-link">
+            <span class="recruit-header__mobile-nav-en">INTERVIEW</span>
+            <span class="recruit-header__mobile-nav-jp">働くスタッフの声</span>
+          </a>
+        </li>
+        <li class="recruit-header__mobile-nav-item">
+          <a href="#faq" class="recruit-header__mobile-nav-link">
+            <span class="recruit-header__mobile-nav-en">FAQ</span>
+            <span class="recruit-header__mobile-nav-jp">よくある質問</span>
+          </a>
+        </li>
+      </ul>
+      
+      <!-- モバイル用ソーシャルメディアアイコン -->
+      <div class="recruit-header__mobile-social">
+        <a href="https://twitter.com/anemone_salon" class="recruit-header__mobile-social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+          <img src="/images/header/icon_x.png" alt="Twitter" class="recruit-header__mobile-social-icon" />
+        </a>
+        <a href="https://instagram.com/anemone_salon" class="recruit-header__mobile-social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <img src="/images/header/icon_insta.png" alt="Instagram" class="recruit-header__mobile-social-icon" />
+        </a>
+        <a href="https://line.me/R/ti/p/@anemone_salon" class="recruit-header__mobile-social-link" target="_blank" rel="noopener noreferrer" aria-label="LINE">
+          <img src="/images/header/icon_line.png" alt="LINE" class="recruit-header__mobile-social-icon" />
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  @import "tailwindcss";
+  
+  /* CSS変数の定義（既存のHeader.astroと同じ） */
+  :root {
+    --color-beige: #FFFDF8;
+    --color-brown: #8B4513;
+    --color-brown-light: #A0522D;
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+    --color-grey-light: #E5E5E5;
+    --color-grey-medium: #666666;
+    --font-family-yumincho: 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', 'MS PMincho', serif;
+    --font-family-zenkaku: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+  }
+  
+  .recruit-header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2147483646;
+    opacity: 0.9;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* SP版の背景色を白に */
+  @media (max-width: 767px) {
+    .recruit-header {
+      background-color: #FFFDF8;
+      opacity: 0.9;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  }
+
+  .recruit-header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1440px;
+    height: 80px;
+    padding: 0 55px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .recruit-header__left-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .recruit-header__logo {
+    flex-shrink: 0;
+  }
+
+  .recruit-header__logo-link {
+    display: block;
+    transition: opacity 0.3s ease;
+  }
+
+  .recruit-header__logo-link:hover {
+    opacity: 0.8;
+  }
+
+  .recruit-header__logo-image {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .recruit-header__recruit-text {
+    display: none;
+    align-items: baseline;
+    gap: 2px;
+  }
+
+  .recruit-header__recruit-dot {
+    font-family: var(--font-family-yumincho);
+    font-weight: var(--font-weight-medium);
+    font-size: 18px;
+    color: var(--color-brown);
+  }
+
+  .recruit-header__recruit-label {
+    font-family: var(--font-family-yumincho);
+    font-weight: var(--font-weight-medium);
+    font-size: 18px;
+    color: var(--color-brown);
+  }
+
+  .recruit-header__right-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .recruit-header__nav {
+    display: flex;
+  }
+
+  .recruit-header__nav-list {
+    display: flex;
+    gap: 0;
+  }
+
+  .recruit-header__nav-item {
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    width: 160px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .recruit-header__nav-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 100%;
+    background-color: var(--color-grey-light);
+  }
+
+  .recruit-header__nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .recruit-header__nav-en {
+    font-family: var(--font-family-yumincho);
+    font-weight: var(--font-weight-medium);
+    font-size: 18px;
+    line-height: 1.0;
+    color: #3d3d3d;
+  }
+
+  .recruit-header__nav-jp {
+    font-family: var(--font-family-zenkaku);
+    font-weight: var(--font-weight-regular);
+    font-size: 12px;
+    line-height: 1.0;
+    color: #3d3d3d;
+  }
+
+  .recruit-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .recruit-header__entry-btn {
+    display: flex;
+    height: 50px;
+    padding: 10px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 5px;
+    background: #69552E;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .recruit-header__entry-btn:hover {
+    background-color: #8B6F47;
+  }
+
+  .recruit-header__entry-text {
+    color: #FFF;
+    font-family: "Zen Kaku Gothic New";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%; /* 16px */
+  }
+
+  .recruit-header__entry-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* アイコンを白色に */
+  }
+
+  /* モバイル用アクションボタン群 */
+  .recruit-header__mobile-actions {
+    display: none;
+    flex-direction: row;
+  }
+
+  .recruit-header__mobile-apply-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: var(--color-brown);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: 4px;
+  }
+
+  .recruit-header__mobile-apply-btn:hover {
+    background-color: #8B6F47;
+    transform: translateY(-2px);
+  }
+
+  .recruit-header__mobile-apply-icon {
+    width: 21px;
+    height: 20px;
+    color: var(--color-white);
+  }
+
+  .recruit-header__mobile-apply-text {
+    font-family: var(--font-family-zenkaku);
+    font-size: 10px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .recruit-header__mobile-apply-line {
+    line-height: 1.25;
+    font-size: 8px;
+  }
+
+  /* ハンバーガーメニューボタン */
+  .recruit-header__menu-btn {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: #FFFDF8;
+    cursor: pointer;
+    padding: 4px 12px;
+    transition: all 0.3s ease;
+    gap: 8px;
+    border: none;
+  }
+
+  .recruit-header__menu-line {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-brown);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .recruit-header__menu-line:nth-child(1) {
+    transform-origin: center;
+  }
+
+  .recruit-header__menu-line:nth-child(2) {
+    transform-origin: center;
+  }
+
+  .recruit-header__menu-line:nth-child(3) {
+    transform-origin: center;
+  }
+
+  .recruit-header__menu-text {
+    font-family: var(--font-family-yumincho);
+    font-size: 12px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-brown);
+    line-height: 1.0;
+    text-align: center;
+  }
+
+  /* メニューが開いている時のハンバーガーアイコンのアニメーション */
+  body.recruit-menu-open .recruit-header__menu-line:nth-child(1) {
+    transform: translateY(0.575rem) rotate(25deg);
+  }
+
+  body.recruit-menu-open .recruit-header__menu-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  body.recruit-menu-open .recruit-header__menu-line:nth-child(3) {
+    transform: translateY(-0.7em) rotate(-25deg);
+  }
+
+  /* モバイルメニュー */
+  .recruit-header__mobile-menu {
+    position: fixed !important;
+    top: 64px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 2147483647 !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .recruit-header__mobile-menu.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .recruit-header__mobile-nav {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: calc(100vh - 64px) !important;
+    background-color: #FAF4E8 !important;
+    padding: 0px !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    z-index: 2147483647 !important;
+  }
+
+  .recruit-header__mobile-menu.active .recruit-header__mobile-nav {
+    opacity: 1 !important;
+  }
+
+  .recruit-header__mobile-nav-list {
+    list-style: none;
+    padding: 40px 16px 0px 16px; /* 上部にパディングを追加 */
+    margin: 0 0 40px 0;
+  }
+
+  .recruit-header__mobile-nav-item {
+    border-bottom: 1px solid #E0E0E0;
+    padding: 24px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .recruit-header__mobile-nav-item:nth-child(1) {
+    transition-delay: 0.1s;
+  }
+
+  .recruit-header__mobile-nav-item:nth-child(2) {
+    transition-delay: 0.15s;
+  }
+
+  .recruit-header__mobile-nav-item:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+
+  .recruit-header__mobile-nav-item:nth-child(4) {
+    transition-delay: 0.25s;
+  }
+
+  .recruit-header__mobile-menu.active .recruit-header__mobile-nav-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .recruit-header__mobile-nav-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    text-align: center;
+  }
+
+  .recruit-header__mobile-nav-link:hover {
+    color: var(--color-brown);
+  }
+
+  .recruit-header__mobile-nav-en {
+    font-family: var(--font-family-yumincho);
+    font-weight: var(--font-weight-medium);
+    font-size: 20px;
+    line-height: 1.0;
+    color: var(--color-black);
+    margin-bottom: 4px;
+  }
+
+  .recruit-header__mobile-nav-jp {
+    font-family: var(--font-family-zenkaku);
+    font-weight: var(--font-weight-regular);
+    font-size: 14px;
+    line-height: 1.2;
+    color: var(--color-grey-medium);
+  }
+
+  .recruit-header__mobile-social {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.35s;
+  }
+
+  .recruit-header__mobile-menu.active .recruit-header__mobile-social {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .recruit-header__mobile-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-beige);
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .recruit-header__mobile-social-link:hover {
+    background-color: var(--color-brown);
+    transform: translateY(-2px);
+  }
+
+  .recruit-header__mobile-social-icon {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* レスポンシブ対応 */
+  @media (min-width: 1024px) {
+    .recruit-header__container {
+      height: 80px;
+      padding: 0 55px;
+    }
+    
+    .recruit-header__logo-image {
+      height: 62px;
+    }
+    
+    .recruit-header__right-group {
+      display: flex;
+      align-items: center;
+      gap: 0px;
+    }
+    
+    .recruit-header__nav {
+      display: flex;
+    }
+    
+    .recruit-header__nav-link {
+      gap: 6px;
+    }
+    
+    .recruit-header__nav-jp {
+      font-size: 12px;
+    }
+
+    .recruit-header__menu-btn {
+      display: none;
+    }
+
+    .recruit-header__mobile-menu {
+      display: none;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .recruit-header__container {
+      height: 75px;
+      padding: 0 40px;
+    }
+    
+    .recruit-header__logo-image {
+      height: 55px;
+    }
+    
+    .recruit-header__right-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .recruit-header__nav {
+      display: flex;
+    }
+    
+    .recruit-header__nav-item {
+      width: 120px;
+    }
+    
+    .recruit-header__nav-link {
+      gap: 4px;
+    }
+    
+    .recruit-header__nav-en {
+      font-size: 16px;
+    }
+    
+    .recruit-header__nav-jp {
+      font-size: 11px;
+    }
+
+    .recruit-header__menu-btn {
+      display: none;
+    }
+
+    .recruit-header__mobile-menu {
+      display: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .recruit-header__container {
+      height: 64px;
+      padding: 0 0 0 16px;
+      max-width: none;
+    }
+    
+    .recruit-header__logo-image {
+      height: 40px;
+    }
+    
+    .recruit-header__recruit-text {
+      display: flex;
+    }
+    
+    .recruit-header__right-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .recruit-header__nav {
+      display: none;
+    }
+
+    .recruit-header__actions {
+      display: none;
+    }
+
+    .recruit-header__mobile-actions {
+      display: flex;
+    }
+
+    .recruit-header__menu-btn {
+      display: flex;
+    }
+
+    .recruit-header__mobile-menu {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('recruit-menu-btn');
+    const mobileMenu = document.getElementById('recruit-mobile-menu');
+    const body = document.body;
+
+    // メニューをbodyの最後に移動して確実に最前面に表示
+    if (mobileMenu && mobileMenu.parentNode !== body) {
+      body.appendChild(mobileMenu);
+    }
+
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener('click', function() {
+        const isOpening = !mobileMenu.classList.contains('active');
+        mobileMenu.classList.toggle('active');
+        body.classList.toggle('recruit-menu-open');
+      });
+
+      // メニューを閉じる共通関数
+      function closeMenu() {
+        if (mobileMenu) {
+          mobileMenu.classList.remove('active');
+        }
+        body.classList.remove('recruit-menu-open');
+      }
+
+      // モバイルメニューのリンクをクリックした時にメニューを閉じる
+      const mobileNavLinks = mobileMenu.querySelectorAll('.recruit-header__mobile-nav-link');
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      // ESCキーでメニューを閉じる
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+          closeMenu();
+        }
+      });
+    }
+  });
+</script>

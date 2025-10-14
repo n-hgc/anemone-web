@@ -1,11 +1,11 @@
-import type { Salon, News } from '../../types';
+import type { Salon, LegacySalon, News } from '../../types';
 
 // JSON-LDを生成するユーティリティ関数
 export const jsonld = (obj: object) => 
   `\n<script type="application/ld+json">\n${JSON.stringify(obj, null, 2)}\n</script>`;
 
 // 店舗用のJSON-LDを生成
-export const generateSalonJsonLd = (salon: Salon) => {
+export const generateSalonJsonLd = (salon: LegacySalon) => {
   return {
     "@context": "https://schema.org",
     "@type": "HairSalon",

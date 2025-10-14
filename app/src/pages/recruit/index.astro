@@ -1,288 +1,2845 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import RecruitHeader from '../../components/RecruitHeader.astro';
+import RecruitSalonCard from '../../components/RecruitSalonCard.astro';
+import RecruitStaffCard from '../../components/RecruitStaffCard.astro';
+import RecruitJobCard from '../../components/RecruitJobCard.astro';
+import RecruitFaqItem from '../../components/RecruitFaqItem.astro';
 import { generateRecruitJsonLd } from '../../lib/seo/jsonld';
+import recruitSalonsData from '../../data/recruit-salons.json';
+import recruitStaffData from '../../data/recruit-staff.json';
+import recruitJobsData from '../../data/recruit-jobs.json';
+import recruitFaqData from '../../data/recruit-faq.json';
 
 // 採用ページのJSON-LDを生成
 const jsonLd = generateRecruitJsonLd();
+
+const { salons, icons } = recruitSalonsData;
+const { staff } = recruitStaffData;
+const { jobs, applicationProcess } = recruitJobsData;
+const { faqs } = recruitFaqData;
+
+const title = "採用情報 - little";
+const description = "littleでは美容師・スタイリストを募集しています。お客様に喜んでいただけるサービスを一緒に提供しませんか？";
+const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&h=630&fit=crop";
 ---
 
-<Layout 
-  title="採用情報 - アネモネサロン"
-  description="アネモネサロンでは美容師・スタイリストを募集しています。お客様に喜んでいただけるサービスを一緒に提供しませんか？"
-  image="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&h=630&fit=crop"
-  jsonLd={JSON.stringify(jsonLd)}
->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- グローバルCSSの読み込み -->
+    <link rel="stylesheet" href="/src/styles/global.css">
+    
+    <!-- フォントの読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;700&family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    
+    <title>{title}</title>
+    
+    <style>
+      /* ヘッダー固定とメインコンテンツのマージン調整 */
+      .main-content {
+        margin-top: 80px; /* PC版のヘッダー高さ */
+      }
+      
+      @media (max-width: 1023px) {
+        .main-content {
+          margin-top: 75px; /* タブレット版のヘッダー高さ */
+        }
+      }
+      
+      @media (max-width: 767px) {
+        .main-content {
+          margin-top: 64px; /* モバイル版のヘッダー高さ */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- recruitページ専用ヘッダー -->
+    <RecruitHeader />
+  
+  <!-- ページ全体の背景をbeigeに設定 -->
+  <div class="bg-beige">
+    
   <!-- ヒーローセクション -->
-  <section class="bg-gradient-to-r from-pink-500 to-purple-600 text-white py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl md:text-6xl font-bold mb-6">
-        採用情報
-      </h1>
-      <p class="text-xl md:text-2xl mb-8">
-        お客様に喜んでいただけるサービスを一緒に提供しませんか？
-      </p>
-      <a 
-        href="#jobs" 
-        class="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-      >
-        求人を見る
-      </a>
+    <section id="title" class="recruit-hero">
+      <div class="recruit-hero__container">
+        <!-- 左側コンテンツ -->
+        <div class="recruit-hero__left">
+          <div class="recruit-hero__logo">
+            <img src="/images/header/logo.png" alt="little" />
+          </div>
+          <div class="recruit-hero__text">
+            <p class="recruit-hero__description">
+              “自分らしく働ける”<br>全国展開なのに個性が活きる自由なサロン</p>
+          </div>
+        </div>
+        
+        <!-- 右側画像 -->
+        <div class="recruit-hero__right">
+          <img 
+            src="/images/recruit/hero-image-1.png" 
+            alt="littleサロンの店内" 
+            class="recruit-hero__main-image"
+          />
+          <div class="recruit-hero__overlay">
+            <img src="/images/recruit/hero-text.svg" alt="Be yourself" class="recruit-hero__overlay-text" />
+          </div>
+        </div>
+    </div>
+          <div class="recruit-hero__images">
+            <div class="recruit-hero__image-item">
+              <img src="/images/recruit/hero-image-2.png" alt="スタイリストの様子" />
+            </div>
+            <div class="recruit-hero__image-item">
+              <img src="/images/recruit/hero-image-3.png" alt="カットの様子" />
+            </div>
+            <div class="recruit-hero__image-item">
+              <img src="/images/recruit/hero-image-4.png" alt="シャンプーの様子" />
+            </div>
     </div>
   </section>
 
-  <!-- 会社紹介 -->
-  <section class="py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 class="text-3xl font-bold text-gray-900 mb-6">アネモネサロンについて</h2>
-          <p class="text-lg text-gray-600 mb-6">
-            アネモネサロンは、お客様一人ひとりに合ったスタイルをご提案する美容室・ヘアサロンです。
-            全国に店舗を展開し、多くのお客様にご愛用いただいています。
-          </p>
-          <p class="text-lg text-gray-600 mb-8">
-            私たちは、お客様の美しさを引き出すお手伝いをしながら、
-            スタッフ一人ひとりが成長できる環境を大切にしています。
-          </p>
-          <div class="grid grid-cols-2 gap-6">
-            <div class="text-center">
-              <div class="text-3xl font-bold text-pink-600 mb-2">100+</div>
-              <div class="text-gray-600">店舗数</div>
+    <!-- littleとはセクション -->
+    <section id="about" class="recruit-about">
+      <div class="recruit-about__container">
+        <div class="recruit-about__content">
+          <!-- デスクトップ用：左側テキスト、右側画像 -->
+          <div class="recruit-about__desktop-layout">
+            <!-- 左側：テキストコンテンツ -->
+            <div class="recruit-about__text-section">
+              <h2 class="recruit-about__title">littleとは</h2>
+              <p class="recruit-about__subtitle">全国展開で「わたしらしさ」が活きるサロン</p>
+              <div class="recruit-about__text">
+                <p>
+                  little (リトル)は、全国100店舗以上を展開する美容室ブランドです。
+                  <br>スタイリスト一人ひとりが自分らしく活躍できる環境を整え、ヘアケア商材、美容機器など最新のアイテムやトレンドも積極的に取り入れています。
+                  <br>お客様に新しい体験を届けながら、自身も成長できる場所として、心地良さと自由な働き方を叶えられるサロンが little です。
+                </p>
+              </div>
             </div>
-            <div class="text-center">
-              <div class="text-3xl font-bold text-pink-600 mb-2">500+</div>
-              <div class="text-gray-600">スタッフ数</div>
+            
+            <!-- 右側：画像コンテンツ -->
+            <div class="recruit-about__images-container">
+              <div class="recruit-about__images-section">
+                <div class="recruit-about__image">
+                  <img 
+                    src="/images/recruit/hero-image-2.png" 
+                    alt="littleサロンのスタイリングエリア" 
+                  />
+                </div>
+              </div>
+              <div class="recruit-about__images-section">
+                <div class="recruit-about__image">
+                  <img 
+                    src="/images/recruit/hero-image-3.png" 
+                    alt="littleサロンのラウンジエリア" 
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- スマホ用：title -> subtitle -> images -> text の順番 -->
+          <div class="recruit-about__mobile-layout">
+            <h2 class="recruit-about__mobile-title">littleとは</h2>
+            <p class="recruit-about__mobile-subtitle">全国展開で「わたしらしさ」が活きるサロン</p>
+            
+            <div class="recruit-about__mobile-images-container">
+              <div class="recruit-about__images-section">
+                <div class="recruit-about__image">
+                  <img 
+                    src="/images/recruit/hero-image-2.png" 
+                    alt="littleサロンのスタイリングエリア" 
+                  />
+                </div>
+              </div>
+              <div class="recruit-about__images-section">
+                <div class="recruit-about__image">
+                  <img 
+                    src="/images/recruit/hero-image-3.png" 
+                    alt="littleサロンのラウンジエリア" 
+                  />
+                </div>
+              </div>
+            </div>
+            
+            <div class="recruit-about__mobile-text">
+              <p>
+                little (リトル)は、全国100店舗以上を展開する美容室ブランドです。
+                <br>スタイリスト一人ひとりが自分らしく活躍できる環境を整え、ヘアケア商材、美容機器など最新のアイテムやトレンドも積極的に取り入れています。
+                <br>お客様に新しい体験を届けながら、自身も成長できる場所として、心地良さと自由な働き方を叶えられるサロンが little です。
+              </p>
             </div>
           </div>
         </div>
-        <div>
-          <img 
-            src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=800&h=600&fit=crop" 
-            alt="アネモネサロンの店内"
-            class="w-full rounded-lg shadow-md"
+      </div>
+    </section>
+
+    <!-- 応募CTA（上部） -->
+    <section class="recruit-cta-top">
+      <div class="recruit-cta-top__container">
+        <h2 class="recruit-cta-top__title">応募やサロン見学はこちらから</h2>
+        <div class="recruit-cta-top__content">
+          <!-- メール -->
+          <div class="recruit-cta-top__column">
+            <h3 class="recruit-cta-top__column-title">メール</h3>
+            <p class="recruit-cta-top__column-description">
+              サロン見学・面接を<br>
+              すぐにご希望の方はこちら
+            </p>
+            <a href="mailto:recruit@little-salon.com" class="recruit-cta-top__btn recruit-cta-top__btn--mail">
+              <span class="recruit-cta-top__btn-text">面接・見学応募メール</span>
+              <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-cta-top__btn-icon" />
+            </a>
+      </div>
+      
+          <!-- 公式LINE -->
+          <div class="recruit-cta-top__column">
+            <h3 class="recruit-cta-top__column-title">公式LINE</h3>
+            <p class="recruit-cta-top__column-description">
+              まずは詳細を知りたい<br>
+              気軽に相談したい方はこちら
+            </p>
+            <a href="https://line.me/R/ti/p/@little-salon" class="recruit-cta-top__btn recruit-cta-top__btn--line">
+              <span class="recruit-cta-top__btn-text">公式LINEヘチャット相談</span>
+              <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-cta-top__btn-icon" />
+            </a>
+            </div>
+          
+          <!-- お電話 -->
+          <div class="recruit-cta-top__column">
+            <h3 class="recruit-cta-top__column-title">お電話</h3>
+            <div class="recruit-cta-top__phone-info">
+              <p class="recruit-cta-top__phone-number">050-6655-1632</p>
+              <p class="recruit-cta-top__phone-text">受付時間 10:00-17:00<br>(年末年始を除く)</p>
+            </div>
+            </div>
+          </div>
+          </div>
+    </section>
+
+    <!-- 働く魅力セクション -->
+    <section id="appeal" class="recruit-appeal">
+      <div class="recruit-appeal__container">
+        <h2 class="recruit-appeal__title">littleで働く魅力</h2>
+        <div class="recruit-appeal__content">
+          <div class="recruit-appeal__image">
+            <img 
+              src="/images/recruit/appeal-01.jpg" 
+              alt="littleサロンで働くスタッフの様子" 
           />
         </div>
+          <div class="recruit-appeal__text">
+            <p>
+              全国に広がるlittleは、どこでも変わらず、安心して働けるサロン。<br>指名がなくても安定した集客があり、SNSや独立支援も充実。働き方も、場所も、キャリアも、自分で選んでいい。未来をひらくすべての美容師さんへ。
+            </p>
+          </div>
       </div>
     </div>
   </section>
 
-  <!-- 求人情報 -->
-  <section id="jobs" class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">募集職種</h2>
-        <p class="text-lg text-gray-600">
-          あなたのスキルを活かせる職種を見つけてください
-        </p>
+    <!-- 働く環境・サロン紹介セクション -->
+    <section id="salon" class="recruit-environment">
+      <div class="recruit-environment__container">
+        <h2 class="recruit-environment__title">働く環境・サロン紹介</h2>
+        
+        <!-- 統計データ -->
+        <div class="recruit-environment__stats">
+          <div class="recruit-environment__stat-item">
+            <img src="/images/recruit/salondata_01.png" alt="全国店舗数" class="recruit-environment__stat-image" />
+            </div>
+          <div class="recruit-environment__stat-item">
+            <img src="/images/recruit/salondata_02.png" alt="FCオーナー数" class="recruit-environment__stat-image" />
+            </div>
+          <div class="recruit-environment__stat-item">
+            <img src="/images/recruit/salondata_03.png" alt="スタイリスト数" class="recruit-environment__stat-image" />
+            </div>
+          <div class="recruit-environment__stat-item">
+            <img src="/images/recruit/salondata_04.png" alt="歩合制度" class="recruit-environment__stat-image" />
+          </div>
+          <div class="recruit-environment__stat-item">
+            <img src="/images/recruit/salondata_05.png" alt="データ5" class="recruit-environment__stat-image" />
+          </div>
+          <div class="recruit-environment__stat-item">
+            <img src="/images/recruit/salondata_06.png" alt="データ6" class="recruit-environment__stat-image" />
+          </div>
+          <div class="recruit-environment__stat-item">
+            <img src="/images/recruit/salondata_07.png" alt="データ7" class="recruit-environment__stat-image" />
+          </div>
+          <div class="recruit-environment__stat-item">
+            <img src="/images/recruit/salondata_08.png" alt="データ8" class="recruit-environment__stat-image" />
+          </div>
+          </div>
+      
+        <!-- 求人検索 -->
+        <div class="recruit-environment__search">
+          <!-- デスクトップ用：左側検索フォーム、右側日本地図 -->
+          <div class="recruit-environment__desktop-layout">
+            <div class="recruit-environment__search-content">
+              <h3 class="recruit-environment__search-title">求人募集中の店舗</h3>
+              <p class="recruit-environment__search-description">
+                little (リトル)は、全国の店舗ごとにアシスタント・スタイリスト・店長ポジションを目指せる募集枠がございます。店舗見学も可能ですので、ぜひ気軽にご相談ください。
+              </p>
+              
+              <div class="recruit-environment__search-form">
+                <div class="recruit-environment__search-section">
+                  <h4 class="recruit-environment__search-section-title">条件検索</h4>
+                  <div class="recruit-environment__search-row">
+                    <label class="recruit-environment__search-label">店舗エリア</label>
+                    <select class="recruit-environment__search-select">
+                      <option>選択してください</option>
+                      <option>北海道</option>
+                      <option>東北</option>
+                      <option>関東</option>
+                      <option>中部</option>
+                      <option>関西</option>
+                      <option>中国</option>
+                      <option>四国</option>
+                      <option>九州</option>
+                    </select>
+                  </div>
+                  <div class="recruit-environment__search-row">
+                    <label class="recruit-environment__search-label">募集職種</label>
+                    <select class="recruit-environment__search-select">
+                      <option>選択してください</option>
+                      <option>アシスタント</option>
+                      <option>スタイリスト</option>
+                      <option>店長</option>
+                    </select>
+                  </div>
+                  <div class="recruit-environment__search-row">
+                    <label class="recruit-environment__search-label">雇用形態</label>
+                    <select class="recruit-environment__search-select">
+                      <option>選択してください</option>
+                      <option>正社員</option>
+                      <option>業務委託</option>
+                      <option>パート</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="recruit-environment__search-section">
+                  <h4 class="recruit-environment__search-section-title">フリーワード検索</h4>
+                  <div class="recruit-environment__search-row">
+                    <input 
+                      type="text" 
+                      placeholder="サロン名・地域名で検索" 
+                      class="recruit-environment__search-input"
+                    />
+                  </div>
+                </div>
+                
+                <button class="recruit-environment__search-btn">
+                  <span>指定した条件で検索する</span>
+                  <img src="/images/icons/icn_search.svg" alt="検索" class="recruit-environment__search-btn-icon" />
+                </button>
+              </div>
+            </div>
+            
+            <div class="recruit-environment__search-map">
+              <img src="/images/main/illust_japan.png" alt="日本地図" class="recruit-environment__map-image" />
+            </div>
+          </div>
+
+          <!-- スマホ用：タイトル → 説明文 → 日本地図 → 検索フォーム -->
+          <div class="recruit-environment__mobile-layout">
+            <h3 class="recruit-environment__mobile-search-title">求人募集中の店舗</h3>
+            <p class="recruit-environment__mobile-search-description">
+              little (リトル)は、全国の店舗ごとにアシスタント・スタイリスト・店長ポジションを目指せる募集枠がございます。店舗見学も可能ですので、ぜひ気軽にご相談ください。
+            </p>
+            
+            <div class="recruit-environment__mobile-search-map">
+              <img src="/images/main/illust_japan.png" alt="日本地図" class="recruit-environment__mobile-map-image" />
+            </div>
+            
+            <div class="recruit-environment__mobile-search-form">
+              <div class="recruit-environment__mobile-search-section">
+                <h4 class="recruit-environment__mobile-search-section-title">条件検索</h4>
+                <div class="recruit-environment__mobile-search-row">
+                  <label class="recruit-environment__mobile-search-label">店舗エリア</label>
+                  <select class="recruit-environment__mobile-search-select">
+                    <option>選択してください</option>
+                    <option>北海道</option>
+                    <option>東北</option>
+                    <option>関東</option>
+                    <option>中部</option>
+                    <option>関西</option>
+                    <option>中国</option>
+                    <option>四国</option>
+                    <option>九州</option>
+                  </select>
+                </div>
+                <div class="recruit-environment__mobile-search-row">
+                  <label class="recruit-environment__mobile-search-label">募集職種</label>
+                  <select class="recruit-environment__mobile-search-select">
+                    <option>選択してください</option>
+                    <option>アシスタント</option>
+                    <option>スタイリスト</option>
+                    <option>店長</option>
+                  </select>
+                </div>
+                <div class="recruit-environment__mobile-search-row">
+                  <label class="recruit-environment__mobile-search-label">雇用形態</label>
+                  <select class="recruit-environment__mobile-search-select">
+                    <option>選択してください</option>
+                    <option>正社員</option>
+                    <option>業務委託</option>
+                    <option>パート</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="recruit-environment__mobile-search-section">
+                <h4 class="recruit-environment__mobile-search-section-title">フリーワード検索</h4>
+                <div class="recruit-environment__mobile-search-row">
+                  <input 
+                    type="text" 
+                    placeholder="サロン名・地域名で検索" 
+                    class="recruit-environment__mobile-search-input"
+                  />
+                </div>
+              </div>
+              
+              <button class="recruit-environment__mobile-search-btn">
+                <span>指定した条件で検索する</span>
+                <img src="/images/icons/icn_search.svg" alt="検索" class="recruit-environment__mobile-search-btn-icon" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- サロン一覧 -->
+        <div class="recruit-environment__salons">
+          <h3 class="recruit-environment__salons-title">北海道エリア募集店舗一覧</h3>
+          <div class="recruit-environment__salon-grid">
+            {salons.map(salon => (
+              <RecruitSalonCard salon={salon} icons={icons} />
+            ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- 働くスタッフの声セクション -->
+    <section class="recruit-staff-voices">
+      <div class="recruit-staff-voices__container">
+        <h2 class="recruit-staff-voices__title">働くスタッフの声</h2>
+        <div class="recruit-staff-voices__grid">
+          {staff.map(staffMember => (
+            <RecruitStaffCard staff={staffMember} />
+          ))}
+      </div>
+      </div>
+    </section>
+
+    <!-- 募集職種セクション -->
+    <section class="recruit-jobs">
+      <div class="recruit-jobs__container">
+        <h2 class="recruit-jobs__title">募集職種</h2>
+        <div class="recruit-jobs__grid">
+          {jobs.map(job => (
+            <RecruitJobCard job={job} />
+          ))}
+          </div>
+        </div>
+    </section>
+
+    <!-- 応募の流れセクション -->
+    <section class="recruit-application-process">
+      <div class="recruit-application-process__container">
+        <h2 class="recruit-application-process__title">応募の流れ</h2>
+        <div class="recruit-application-process__steps">
+          {applicationProcess.map(step => (
+            <div class="recruit-application-process__step">
+              <div class={`recruit-application-process__step-number recruit-application-process__step-number--step${step.step}`}>
+                <div class="recruit-application-process__step-content-wrapper">
+                  <span class="recruit-application-process__step-text">STEP</span>
+                  <span class="recruit-application-process__step-digit">{step.step}</span>
+                </div>
+              </div>
+              <div class="recruit-application-process__step-content">
+                <h3 class="recruit-application-process__step-title">{step.title}</h3>
+                <p class="recruit-application-process__step-description">{step.description}</p>
+        </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    <!-- 募集要項セクション -->
+
+    <!-- よくある質問セクション -->
+    <section id="faq" class="recruit-faq">
+      <div class="recruit-faq__container">
+        <h2 class="recruit-faq__title">よくある質問</h2>
+        <div class="recruit-faq__list">
+          {faqs.map((faq, index) => (
+            <RecruitFaqItem faq={faq} index={index} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="recruit-cta-top">
+      <div class="recruit-cta-top__container">
+        <h2 class="recruit-cta-top__title">応募やサロン見学はこちらから</h2>
+        <div class="recruit-cta-top__content">
+          <!-- メール -->
+          <div class="recruit-cta-top__column">
+            <h3 class="recruit-cta-top__column-title">メール</h3>
+            <p class="recruit-cta-top__column-description">
+              サロン見学・面接を<br>
+              すぐにご希望の方はこちら
+            </p>
+            <a href="mailto:recruit@little-salon.com" class="recruit-cta-top__btn recruit-cta-top__btn--mail">
+              <span class="recruit-cta-top__btn-text">面接・見学応募メール</span>
+              <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-cta-top__btn-icon" />
+            </a>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- 美容師 -->
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">美容師</h3>
-          <div class="space-y-3 mb-6">
-            <div>
-              <span class="font-medium text-gray-700">雇用形態：</span>
-              <span class="text-gray-600">正社員・パート・アルバイト</span>
+          <!-- 公式LINE -->
+          <div class="recruit-cta-top__column">
+            <h3 class="recruit-cta-top__column-title">公式LINE</h3>
+            <p class="recruit-cta-top__column-description">
+              まずは詳細を知りたい<br>
+              気軽に相談したい方はこちら
+            </p>
+            <a href="https://line.me/R/ti/p/@little-salon" class="recruit-cta-top__btn recruit-cta-top__btn--line">
+              <span class="recruit-cta-top__btn-text">公式LINEヘチャット相談</span>
+              <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-cta-top__btn-icon" />
+            </a>
             </div>
-            <div>
-              <span class="font-medium text-gray-700">給与：</span>
-              <span class="text-gray-600">時給1,200円〜（経験により優遇）</span>
+          
+          <!-- お電話 -->
+          <div class="recruit-cta-top__column">
+            <h3 class="recruit-cta-top__column-title">お電話</h3>
+            <div class="recruit-cta-top__phone-info">
+              <p class="recruit-cta-top__phone-number">050-6655-1632</p>
+              <p class="recruit-cta-top__phone-text">受付時間 10:00-17:00<br>(年末年始を除く)</p>
             </div>
-            <div>
-              <span class="font-medium text-gray-700">勤務地：</span>
-              <span class="text-gray-600">全国の店舗</span>
             </div>
           </div>
-          <div class="mb-6">
-            <h4 class="font-medium text-gray-700 mb-2">こんな方におすすめ</h4>
-            <ul class="text-sm text-gray-600 space-y-1">
-              <li>• 美容師免許をお持ちの方</li>
-              <li>• お客様とのコミュニケーションが好きな方</li>
-              <li>• 技術向上に意欲的な方</li>
-            </ul>
           </div>
-          <a 
-            href="https://example.com/apply/hairdresser"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="block w-full bg-pink-600 text-white text-center py-2 rounded-lg font-semibold hover:bg-pink-700 transition-colors"
-          >
-            応募する
-          </a>
-        </div>
+    </section>
 
-        <!-- スタイリスト -->
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">スタイリスト</h3>
-          <div class="space-y-3 mb-6">
-            <div>
-              <span class="font-medium text-gray-700">雇用形態：</span>
-              <span class="text-gray-600">正社員・パート</span>
-            </div>
-            <div>
-              <span class="font-medium text-gray-700">給与：</span>
-              <span class="text-gray-600">月給25万円〜（経験により優遇）</span>
-            </div>
-            <div>
-              <span class="font-medium text-gray-700">勤務地：</span>
-              <span class="text-gray-600">東京・大阪・名古屋</span>
-            </div>
-          </div>
-          <div class="mb-6">
-            <h4 class="font-medium text-gray-700 mb-2">こんな方におすすめ</h4>
-            <ul class="text-sm text-gray-600 space-y-1">
-              <li>• 美容師免許をお持ちの方</li>
-              <li>• カット・カラー・パーマの技術をお持ちの方</li>
-              <li>• お客様の要望を理解できる方</li>
-            </ul>
-          </div>
-          <a 
-            href="https://example.com/apply/stylist"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="block w-full bg-pink-600 text-white text-center py-2 rounded-lg font-semibold hover:bg-pink-700 transition-colors"
-          >
-            応募する
-          </a>
-        </div>
 
-        <!-- 受付スタッフ -->
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">受付スタッフ</h3>
-          <div class="space-y-3 mb-6">
-            <div>
-              <span class="font-medium text-gray-700">雇用形態：</span>
-              <span class="text-gray-600">パート・アルバイト</span>
-            </div>
-            <div>
-              <span class="font-medium text-gray-700">給与：</span>
-              <span class="text-gray-600">時給1,000円〜</span>
-            </div>
-            <div>
-              <span class="font-medium text-gray-700">勤務地：</span>
-              <span class="text-gray-600">全国の店舗</span>
-            </div>
-          </div>
-          <div class="mb-6">
-            <h4 class="font-medium text-gray-700 mb-2">こんな方におすすめ</h4>
-            <ul class="text-sm text-gray-600 space-y-1">
-              <li>• 接客業の経験がある方</li>
-              <li>• 明るく元気な方</li>
-              <li>• チームワークを大切にできる方</li>
-            </ul>
-          </div>
-          <a 
-            href="https://example.com/apply/reception"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="block w-full bg-pink-600 text-white text-center py-2 rounded-lg font-semibold hover:bg-pink-700 transition-colors"
-          >
-            応募する
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 福利厚生 -->
-  <section class="py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">福利厚生</h2>
-        <p class="text-lg text-gray-600">
-          スタッフの皆様に安心して働いていただけるよう、充実した福利厚生をご用意しています
-        </p>
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- ブランドロゴ -->
+      <div class="footer-brand">
+        <h2 class="footer-brand-text">
+          <span class="footer-brand-name">little</span>
+          <span class="footer-brand-tagline">.Recruit</span>
+        </h2>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="text-center">
-          <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+      <!-- ナビゲーション -->
+      <nav class="footer-nav">
+        <a href="/" class="footer-nav-link">TOP</a>
+        <div class="footer-nav-separator"></div>
+        <a href="#" class="footer-nav-link">littleで働く魅力</a>
+        <div class="footer-nav-separator"></div>
+        <a href="#" class="footer-nav-link">サロン・求人を探す</a>
+        <div class="footer-nav-separator"></div>
+        <a href="#" class="footer-nav-link">働くスタッフの声</a>
+        <div class="footer-nav-separator"></div>
+        <a href="/news" class="footer-nav-link">よくある質問</a>
+      </nav>
+      
+      <!-- 採用サイトボタン -->
+      <div class="footer-recruit">
+        <a href="/" class="footer-recruit-btn">
+          <span class="footer-recruit-text">公式サイト</span>
+          <svg class="footer-recruit-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
+        </a>
+      </div>
+      
+      <!-- SNSアイコンとスポンサー -->
+      <div class="footer-bottom">
+        <div class="footer-social">
+          <a href="https://twitter.com/anemone_salon" class="footer-social-link" target="_blank" rel="noopener noreferrer">
+            <svg class="footer-social-icon" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
             </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">給与・賞与</h3>
-          <p class="text-gray-600">経験・スキルに応じた給与体系、年2回の賞与支給</p>
+          </a>
+          <a href="https://instagram.com/anemone_salon" class="footer-social-link" target="_blank" rel="noopener noreferrer">
+            <svg class="footer-social-icon" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+          <a href="https://line.me/ti/p/@anemone_salon" class="footer-social-link" target="_blank" rel="noopener noreferrer">
+            <svg class="footer-social-icon" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+            </svg>
+          </a>
         </div>
         
-        <div class="text-center">
-          <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
+        <!-- スポンサー -->
+        <div class="footer-sponsors">
+          <div class="footer-sponsor">
+            <img src="/images/footer/abemas.png" alt="SHIBUYA ABEMAS" class="footer-sponsor-image" />
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">社会保険完備</h3>
-          <p class="text-gray-600">健康保険、厚生年金、雇用保険、労災保険</p>
-        </div>
-        
-        <div class="text-center">
-          <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-            </svg>
+          
+          <div class="footer-sponsor">
+            <img src="/images/footer/sunrockers.png" alt="SUN ROCKERS SHIBUYA" class="footer-sponsor-image" />
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">研修制度</h3>
-          <p class="text-gray-600">技術向上のための充実した研修制度</p>
-        </div>
-        
-        <div class="text-center">
-          <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">交通費支給</h3>
-          <p class="text-gray-600">通勤交通費を全額支給</p>
-        </div>
-        
-        <div class="text-center">
-          <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">有給休暇</h3>
-          <p class="text-gray-600">年次有給休暇制度（入社6ヶ月後から取得可能）</p>
-        </div>
-        
-        <div class="text-center">
-          <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">教育支援</h3>
-          <p class="text-gray-600">技術向上のための外部研修参加費補助</p>
         </div>
       </div>
+      
+      <!-- コピーライト -->
+      <div class="footer-copyright">
+        <p>© anemone. All Rights Reserved.</p>
+      </div>
     </div>
-  </section>
+  </footer>
 
-  <!-- CTAセクション -->
-  <section class="py-16 bg-pink-600 text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold mb-4">
-        一緒に働きませんか？
-      </h2>
-      <p class="text-xl mb-8">
-        お気軽にお問い合わせください
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a 
-          href="mailto:recruit@anemone-salon.com" 
-          class="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-        >
-          メールで問い合わせ
+    <!-- 固定アクションボタン -->
+    <div class="recruit-fixed-actions">
+      <div class="recruit-fixed-actions__container">
+        <a href="#entry" class="recruit-fixed-actions__btn recruit-fixed-actions__btn--form">
+          <span class="recruit-fixed-actions__btn-text recruit-fixed-actions__btn-text--desktop">
+            <span class="recruit-fixed-actions__btn-line1">フォームからエントリー</span>
+          </span>
+          <span class="recruit-fixed-actions__btn-text--mobile">
+            <span class="recruit-fixed-actions__btn-line1">フォームから</span>
+            <span class="recruit-fixed-actions__btn-line2">エントリー</span>
+          </span>
         </a>
-        <a 
-          href="tel:03-1234-5678" 
-          class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-pink-600 transition-colors"
-        >
-          電話で問い合わせ
+        <a href="https://line.me/R/ti/p/@little-salon" class="recruit-fixed-actions__btn recruit-fixed-actions__btn--line">
+          <span class="recruit-fixed-actions__btn-text">公式LINE</span>
+        </a>
+        <a href="tel:050-6655-1632" class="recruit-fixed-actions__btn recruit-fixed-actions__btn--phone">
+          <span class="recruit-fixed-actions__btn-text recruit-fixed-actions__btn-text--desktop">お電話から問い合わせ</span>
+          <img src="/images/icons/icn_phone_fill.svg" alt="電話" class="recruit-fixed-actions__btn-icon recruit-fixed-actions__btn-icon--mobile" />
         </a>
       </div>
     </div>
-  </section>
-</Layout>
+  </div>
+  
+  </body>
+</html>
+
+<style>
+  @import "tailwindcss";
+  
+  /* CSS変数の定義 */
+  :root {
+    --color-beige: #FAF4E8;
+    --color-brown: #69552E;
+    --color-brown-light: #8B6F47;
+    --color-white: #FFFFFF;
+    --color-black: #3D3D3D;
+    --color-grey-light: #E5E5E5;
+    --color-grey-medium: #666666;
+    --font-family-yumincho: 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', 'MS PMincho', serif;
+    --font-family-zenkaku: 'Zen Kaku Gothic New', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+  }
+  
+  /* ページ全体の背景 */
+  .bg-beige {
+    background-color: var(--color-beige);
+    min-height: 100vh;
+  }
+
+  /* メニューが開いている時のボディ制御 */
+  body.recruit-menu-open {
+    overflow: hidden;
+  }
+
+  /* ヒーローセクション */
+  .recruit-hero {
+    padding: 104px 0 24px 0;
+    background-color: var(--color-beige);
+  }
+
+  .recruit-hero__container {
+    max-width: 1480px;
+    min-height: 695px;
+    margin: 0 auto;
+    padding: 0 0 0 55px;
+    display: flex;
+    gap: 35px;
+    align-items: start;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .recruit-hero__left {
+    display: flex;
+    padding: 145px 0 24px 55px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 50px;
+    flex: none;
+    align-self: start;
+  }
+
+  .recruit-hero__logo img {
+    height: 128px;
+    width: auto;
+  }
+
+  .recruit-hero__text {
+    margin-top: 0;
+  }
+
+  .recruit-hero__catchphrase {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .recruit-hero__description {
+    font-size: 24px;
+    font-family: var(--font-family-yumincho);
+    font-weight: var(--font-weight-normal);
+    color: var(--color-black);
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+
+  .recruit-hero__images {
+    position: absolute;
+    left: 55px;
+    bottom: 0;
+    display: flex;
+    gap: 20px;
+    z-index: 10;
+  }
+
+  .recruit-hero__image-item {
+    width: 214px;
+    height: 214px;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .recruit-hero__image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .recruit-hero__right {
+    position: relative;
+  }
+
+  .recruit-hero__main-image {
+    width: 100%;
+    max-height: 622px;
+    object-fit: cover;
+    border-radius: 20px 0 0 20px;
+  }
+
+  .recruit-hero__overlay {
+    position: absolute;
+    bottom: 10px;
+    right: 0px;
+  }
+
+  .recruit-hero__overlay-text {
+    width: auto;
+    height: 236px;
+    object-fit: contain;
+  }
+
+  /* littleとはセクション */
+  .recruit-about {
+    padding: 80px 0;
+    background-color: var(--color-beige);
+  }
+
+  .recruit-about__container {
+    max-width: 1040px;
+    height: 529px;
+    margin: 0 auto;
+  }
+
+  .recruit-about__content {
+    display: flex;
+    gap: 40px;
+    height: 100%;
+    align-items: center;
+  }
+
+  .recruit-about__desktop-layout {
+    display: flex;
+    gap: 40px;
+    height: 100%;
+    align-items: center;
+    width: 100%;
+  }
+
+  .recruit-about__mobile-layout {
+    display: none;
+  }
+
+  .recruit-about__text-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .recruit-about__title {
+    font-size: 64px;
+    color: var(--color-black);
+    font-family: var(--font-family-yumincho);
+    font-weight: 500;
+    line-height: 1.0;
+    margin: 0;
+    position: relative;
+    z-index: 5;
+  }
+
+  .recruit-about__title::before {
+    content: '';
+    position: absolute;
+    top: -80%;
+    left: -5%;
+    height: 100px;
+    width: 286px;
+    background-image: url('/images/recruit/txt_about.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 1.0;
+    z-index: -1;
+  }
+
+  .recruit-about__subtitle {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--color-black);
+    font-family: var(--font-family-yumincho);
+    margin: 0;
+  }
+
+  .recruit-about__text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-black);
+    font-family: var(--font-family-zenkaku);
+    font-weight: 300;
+  }
+
+  .recruit-about__text p {
+    margin-bottom: 16px;
+  }
+
+  .recruit-about__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .recruit-about__images-container {
+    display: flex;
+    gap: 40px;
+    height: 100%;
+  }
+
+  .recruit-about__images-section {
+    height: 100%;
+    display: flex;
+    gap: 40px;
+  }
+  
+  .recruit-about__images-section:first-child {
+    align-items: flex-end;
+  }
+
+  .recruit-about__image {
+    width: 100%;
+    height: 456px;
+    width: 214px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .recruit-about__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* CTA（上部） */
+  .recruit-cta-top {
+    padding: 80px 0;
+  }
+
+  .recruit-cta-top__container {
+    max-width: 1040px;
+    background-color: #FFFCF7;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 15px;
+  }
+
+  .recruit-cta-top__title {
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--color-black);
+    text-align: center;
+    line-height: 1.0;
+    margin-bottom: 24px;
+    font-family: var(--font-family-yumincho);
+  }
+
+  .recruit-cta-top__content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0px;
+    position: relative;
+  }
+
+  .recruit-cta-top__content::before,
+  .recruit-cta-top__content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: var(--color-grey-light);
+  }
+
+  .recruit-cta-top__content::before {
+    left: calc(33.333%);
+  }
+
+  .recruit-cta-top__content::after {
+    right: calc(33.333%);
+  }
+
+  .recruit-cta-top__column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .recruit-cta-top__column-title {
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--color-black);
+    margin-bottom: 12px;
+    font-family: var(--font-family-zenkaku);
+  }
+
+  .recruit-cta-top__column-description {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-black);
+    margin-bottom: 12px;
+    font-family: var(--font-family-zenkaku);
+    font-weight: 300;
+  }
+
+  .recruit-cta-top__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    width: auto;
+  }
+
+  .recruit-cta-top__btn--mail {
+    background-color: var(--color-brown);
+    color: var(--color-white);
+  }
+
+  .recruit-cta-top__btn--mail:hover {
+    background-color: var(--color-brown-light);
+  }
+
+  .recruit-cta-top__btn--line {
+    background-color: #00B900;
+    color: var(--color-white);
+  }
+
+  .recruit-cta-top__btn--line:hover {
+    background-color: #00A000;
+  }
+
+  .recruit-cta-top__btn-text {
+    text-align: center;
+  }
+
+  .recruit-cta-top__btn-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+  }
+
+  .recruit-cta-top__phone-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .recruit-cta-top__phone-number {
+    font-size: 42px;
+    font-weight: 500;
+    color: #DAA520;
+    line-height: 1.0;
+    margin-bottom: 16px;
+    font-family: var(--font-family-zenkaku);
+  }
+
+  .recruit-cta-top__phone-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-black);
+    margin: 0;
+    font-family: var(--font-family-zenkaku);
+  }
+
+  .recruit-cta-top__phone-note {
+    font-size: 14px;
+    color: var(--color-black);
+    margin: 0;
+    font-family: var(--font-family-zenkaku);
+  }
+
+  /* 働く魅力セクション */
+  .recruit-appeal {
+    padding: 80px 0;
+    background-color: var(--color-beige);
+  }
+
+  .recruit-appeal__container {
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  .recruit-appeal__title {
+    font-size: 64px;
+    font-family: var(--font-family-yumincho);
+    font-weight: 500;
+    color: var(--color-black);
+    text-align: center;
+    margin-bottom: 60px;
+    z-index: 5;
+    position: relative;
+  }
+
+  .recruit-appeal__title::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 286px;
+    height: 100px;
+    background-image: url('/images/recruit/txt_about.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    z-index: -1;
+    opacity: 1.0;
+  }
+
+  .recruit-appeal__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .recruit-appeal__image {
+    width: 100%;
+    height: 424px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .recruit-appeal__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .recruit-appeal__text {
+    font-size: 24px;
+    line-height: 1.5;
+    font-family: var(--font-family-yumincho);
+    font-weight: 300;
+    color: var(--color-black);
+  }
+
+
+  /* 働く環境・サロン紹介セクション */
+  .recruit-environment {
+    padding: 80px 0;
+    background-color: var(--color-beige);
+  }
+
+  .recruit-environment__container {
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  .recruit-environment__title {
+    font-size: 64px;
+    font-family: var(--font-family-yumincho);
+    font-weight: 500;
+    color: var(--color-black);
+    text-align: center;
+    margin-bottom: 60px;
+    z-index: 5;
+    position: relative;
+  }
+
+  .recruit-environment__title::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 413px;
+    height: 114px;
+    background-image: url('/images/recruit/txt_data.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    z-index: -1;
+    opacity: 1.0;
+  }
+
+  .recruit-environment__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 80px;
+  }
+
+  .recruit-environment__stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    border-radius: 12px;
+  }
+
+  .recruit-environment__stat-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .recruit-environment__stat-content {
+    width: 100%;
+  }
+
+  .recruit-environment__stat-number {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-black);
+    margin-bottom: 5px;
+    line-height: 1.2;
+  }
+
+  .recruit-environment__stat-label {
+    font-size: 14px;
+    color: var(--color-black);
+    margin-bottom: 5px;
+  }
+
+  .recruit-environment__stat-note {
+    font-size: 12px;
+    color: var(--color-grey-medium);
+    font-style: italic;
+  }
+
+  .recruit-environment__search {
+    margin-bottom: 60px;
+  }
+
+  .recruit-environment__desktop-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .recruit-environment__mobile-layout {
+    display: none;
+  }
+
+  .recruit-environment__search-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .recruit-environment__search-title {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--color-black);
+    margin-bottom: 16px;
+    font-family: var(--font-family-yumincho);
+  }
+
+    .recruit-environment__search-description {
+      font-size: 14px;
+      color: var(--color-black);
+      line-height: 1.5;
+      font-family: var(--font-family-zenkaku);
+      margin-bottom: 16px;
+    }
+
+  .recruit-environment__search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .recruit-environment__search-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .recruit-environment__search-section-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-black);
+    font-family: var(--font-family-zenkaku);
+  }
+
+  .recruit-environment__search-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .recruit-environment__search-label {
+    font-size: 18px;
+    color: var(--color-black);
+    font-weight: 300;
+    padding-left: 16px;
+    min-width: 120px;
+    font-family: var(--font-family-zenkaku);
+  }
+
+  .recruit-environment__search-select,
+  .recruit-environment__search-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #E5E5E5;
+    border-radius: 8px;
+    font-size: 18px;
+    background-color: white;
+    font-family: var(--font-family-zenkaku);
+  }
+
+  .recruit-environment__search-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 12px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    padding-right: 40px;
+  }
+
+  .recruit-environment__search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 5px 32px;
+    background-color: var(--color-black);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: var(--font-family-zenkaku);
+    font-size: 18px;
+    align-self: flex-start;
+    width: 100%;
+  }
+
+  .recruit-environment__search-btn:hover {
+    background-color: var(--color-grey-medium);
+  }
+
+  .recruit-environment__search-btn-icon {
+    width: 40px;
+    height: 40px;
+    filter: brightness(0) invert(1);
+  }
+
+  .recruit-environment__search-map {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-width: 418px;
+  }
+
+  .recruit-environment__map-image {
+    max-width: 100%;
+    height: auto;
+    opacity: 0.8;
+  }
+
+  .recruit-environment__salons {
+    margin-top: 60px;
+  }
+
+  .recruit-environment__salons-title {
+    display: flex;
+    padding-bottom: 16px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    border-bottom: 0.5px solid var(--Text-black, #3D3D3D);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-black);
+    margin-bottom: 30px;
+    font-family: var(--font-family-yumincho);
+  }
+
+  .recruit-environment__salon-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  /* 働くスタッフの声セクション */
+  .recruit-staff-voices {
+    padding: 80px 0;
+    background-color: var(--color-beige);
+  }
+
+  .recruit-staff-voices__container {
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  .recruit-staff-voices__title {
+    font-size: 64px;
+    font-family: var(--font-family-yumincho);
+    font-weight: 500;
+    color: var(--color-black);
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .recruit-staff-voices__title::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 342px;
+    height: 100px;
+    background-image: url('/images/recruit/txt_staff-voices.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    z-index: -1;
+    opacity: 1.0;
+  }
+
+  .recruit-staff-voices__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  /* 募集職種セクション */
+  .recruit-jobs {
+    padding: 80px 0;
+    background-color: var(--color-beige);
+  }
+
+  .recruit-jobs__container {
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  .recruit-jobs__title {
+    font-size: 64px;
+    font-family: var(--font-family-yumincho);
+    font-weight: 500;
+    color: var(--color-black);
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .recruit-jobs__title::before {
+    content: '';
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 304px;
+    height: 130px;
+    background-image: url('/images/recruit/txt_jobs.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    z-index: -1;
+    opacity: 1.0;
+  }
+
+  .recruit-jobs__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  /* 応募の流れセクション */
+  .recruit-application-process {
+    padding: 40px 0;
+    background-color: var(--color-beige);
+  }
+
+  .recruit-application-process__container {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 40px 120px;
+    background-color: #EAE2D3;
+    border-radius: 15px;
+  }
+
+  .recruit-application-process__title {
+    font-size: 32px;
+    font-family: var(--font-family-yumincho);
+    font-weight: 500;
+    color: var(--color-black);
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .recruit-application-process__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+  }
+
+  .recruit-application-process__steps::before {
+    content: '';
+    position: absolute;
+    left: 51.5px;
+    top: 60px;
+    bottom: 60px;
+    width: 3px;
+    background-image: radial-gradient(circle, #69552E 1.5px, transparent 1.5px);
+    background-size: 3px 6px;
+    background-repeat: repeat-y;
+  }
+
+  .recruit-application-process__step {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    position: relative;
+  }
+
+  .recruit-application-process__step-number {
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 2;
+  }
+
+  .recruit-application-process__step-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .recruit-application-process__step-number--step1 {
+    background-color: #FCF2DF;
+  }
+
+  .recruit-application-process__step-number--step2 {
+    background-color: #FEEBC8;
+  }
+
+  .recruit-application-process__step-number--step3 {
+    background-color: #F1D49F;
+  }
+
+  .recruit-application-process__step-text {
+    color: #69552E;
+    text-align: center;
+    font-family: var(--font-family-yumincho);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100%;
+  }
+
+  .recruit-application-process__step-digit {
+    color: #69552E;
+    font-family: var(--font-family-yumincho);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100%;
+  }
+
+  .recruit-application-process__step-content {
+    flex: 1;
+  }
+
+  .recruit-application-process__step-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--color-black);
+    margin-bottom: 16px;
+    font-family: var(--font-family-zenkaku);
+  }
+
+  .recruit-application-process__step-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-black);
+    font-family: var(--font-family-zenkaku);
+  }
+
+
+  /* よくある質問セクション */
+  .recruit-faq {
+    padding: 80px 0;
+    background-color: var(--color-beige);
+  }
+
+  .recruit-faq__container {
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  .recruit-faq__title {
+    font-size: 64px;
+    font-family: var(--font-family-yumincho);
+    font-weight: 500;
+    color: var(--color-black);
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .recruit-faq__title::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 212px;
+    height: 111px;
+    background-image: url('/images/recruit/txt_faq.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    z-index: -1;
+    opacity: 1.0;
+  }
+
+  .recruit-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+
+  /* CTA（下部） */
+  .recruit-cta-bottom {
+    padding: 60px 0;
+    background-color: var(--color-beige);
+  }
+
+  .recruit-cta-bottom__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 55px;
+    text-align: center;
+  }
+
+  .recruit-cta-bottom__title {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: 40px;
+  }
+
+  .recruit-cta-bottom__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .recruit-cta-bottom__btn {
+    padding: 16px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    transition: all 0.3s ease;
+  }
+
+  .recruit-cta-bottom__btn--entry {
+    background-color: var(--color-brown);
+    color: white;
+  }
+
+  .recruit-cta-bottom__btn--entry:hover {
+    background-color: var(--color-brown-light);
+  }
+
+  .recruit-cta-bottom__btn--line {
+    background-color: #00B900;
+    color: white;
+  }
+
+  .recruit-cta-bottom__btn--line:hover {
+    background-color: #00A000;
+  }
+
+  .recruit-cta-bottom__phone {
+    font-size: 24px;
+    font-weight: 700;
+    color: #DAA520;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 1024px) {
+    .recruit-hero__container {
+      flex-direction: column;
+      gap: 40px;
+      padding: 0 20px;
+    }
+
+    .recruit-hero__left {
+      padding: 20px 0;
+      align-items: center;
+      text-align: center;
+    }
+
+    .recruit-hero__right {
+      order: -1;
+    }
+
+    .recruit-hero__images {
+      position: static;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .recruit-hero {
+      padding: 64px 0;
+    }
+
+    .recruit-hero__container {
+      padding: 0 0 0 16px;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      min-height: 400px;
+    }
+
+    .recruit-hero__left {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      z-index: 10;
+      padding: 20px;
+      background-color: rgba(250, 244, 232, 0.9);
+      border-radius: 16px;
+      text-align: left;
+      width: auto;
+      box-sizing: border-box;
+    }
+
+    .recruit-hero__right {
+      order: -1;
+      position: relative;
+      width: 100%;
+    }
+
+    .recruit-hero__main-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .recruit-hero__overlay {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .recruit-hero__overlay-text {
+      max-width: 120px;
+      height: auto;
+    }
+
+    .recruit-hero__images {
+      display: none;
+    }
+
+    .recruit-hero__logo img {
+      height: 60px;
+    }
+
+    .recruit-hero__description {
+      font-size: 16px;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .recruit-about__desktop-layout {
+      display: none;
+    }
+
+    .recruit-about__mobile-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .recruit-about__mobile-title {
+      font-size: 64px;
+      color: var(--color-black);
+      font-family: var(--font-family-yumincho);
+      font-weight: 500;
+      line-height: 1.0;
+      margin: 0;
+      position: relative;
+      z-index: 5;
+    }
+
+    .recruit-about__mobile-title::before {
+      content: '';
+      position: absolute;
+      top: -80%;
+      left: -5%;
+      height: 100px;
+      width: 286px;
+      background-image: url('/images/recruit/txt_about.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      opacity: 1.0;
+      z-index: -1;
+    }
+
+    .recruit-about__mobile-subtitle {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--color-black);
+      font-family: var(--font-family-yumincho);
+      margin: 0;
+    }
+
+    .recruit-about__mobile-images-container {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      height: 250px;
+      justify-content: center;
+    }
+
+    .recruit-about__mobile-image {
+      flex: 1;
+      height: 215px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .recruit-about__mobile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .recruit-about__mobile-text {
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--color-black);
+      font-family: var(--font-family-zenkaku);
+      font-weight: 300;
+    }
+
+    .recruit-about__mobile-text p {
+      margin-bottom: 16px;
+    }
+
+    .recruit-about__mobile-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .recruit-about__images-section {
+      flex: 1;
+      display: flex;
+      gap: 0;
+    }
+
+    .recruit-about__image {
+      height: 200px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .recruit-cta-top__content {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .recruit-cta-top__content::before,
+    .recruit-cta-top__content::after {
+      display: none;
+    }
+
+    .recruit-appeal__content {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .recruit-environment__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .recruit-environment__salon-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .recruit-environment__search {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .recruit-environment__search-map {
+      min-height: 300px;
+      min-width: 100%;
+    }
+
+    .recruit-staff-voices__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .recruit-jobs__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .recruit-hero {
+      padding: 64px 0;
+    }
+    .recruit-about,
+    .recruit-appeal,
+    .recruit-environment,
+    .recruit-staff-voices,
+    .recruit-jobs,
+    .recruit-application-process,
+    .recruit-faq {
+      padding: 32px 0;
+    }
+
+    .recruit-cta-top {
+      padding: 32px 24px;
+    }
+
+    .recruit-cta-top__container {
+      padding: 24px;
+    }
+
+    .recruit-cta-top__title {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    .recruit-cta-top__content {
+      gap: 30px;
+    }
+
+    .recruit-cta-top__column {
+      padding: 0 24px 24px 24px;
+      border-bottom: 1px solid #B2B2B2;
+    }
+
+    .recruit-cta-top__column:last-child {
+      border-bottom: none;
+      padding-right: 0;
+      padding-left: 0;
+      padding-bottom: 0;
+    }
+
+    .recruit-cta-top__column-title {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .recruit-cta-top__column-description {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .recruit-cta-top__btn {
+      padding: 14px 16px;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .recruit-cta-top__btn-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .recruit-cta-top__phone-number {
+      font-size: 42px;
+      margin-bottom: 0px;
+    }
+
+    .recruit-cta-top__phone-text {
+      font-size: 16px;
+    }
+
+    .recruit-appeal__container {
+      padding: 0 24px;
+    }
+
+    .recruit-appeal__title {
+      font-size: 36px;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+
+    .recruit-appeal__title::before {
+      width: 131px;
+      height: 54px;
+      top: -10px;
+      left: 64px;
+    }
+
+    .recruit-appeal__text {
+      font-size: 16px;
+      line-height: 1.5;
+      font-family: var(--font-family-zenkaku);
+      font-weight: 300;
+    }
+
+    .recruit-appeal__image {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 1/1;
+    }
+
+    .recruit-environment__container {
+      padding: 0 24px;
+    }
+
+    .recruit-environment__title {
+      font-size: 36px;
+      text-align: left;
+      margin-bottom: 32px;
+      width: 180px;
+      line-height: 1.0;
+      word-break: break-word;
+    }
+
+    .recruit-environment__title::before {
+      width: 232px;
+      height: 64px;
+      top: -40px;
+      left: 106px;
+    }
+
+    .recruit-environment__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .recruit-environment__search-title {
+      font-size: 20px;
+      font-weight: 400;
+    }
+
+    .recruit-environment__desktop-layout {
+      display: none;
+    }
+
+    .recruit-environment__mobile-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .recruit-environment__mobile-search-title {
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+
+    .recruit-environment__mobile-search-description {
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .recruit-environment__mobile-search-map {
+      margin: 16px 0;
+    }
+
+    .recruit-environment__mobile-map-image {
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+      object-fit: contain;
+    }
+
+    .recruit-environment__mobile-search-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .recruit-environment__mobile-search-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .recruit-environment__mobile-search-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .recruit-environment__mobile-search-label {
+      font-size: 18px !important;
+      font-weight: 500 !important;
+      color: var(--color-black) !important;
+      margin-bottom: 4px !important;
+    }
+
+    .recruit-environment__mobile-search-select,
+    .recruit-environment__mobile-search-input {
+      width: 100% !important;
+      padding: 12px 16px !important;
+      border: 1px solid #ddd !important;
+      border-radius: 4px !important;
+      font-size: 16px !important;
+      background-color: white !important;
+      appearance: none !important;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e") !important;
+      background-position: right 12px center !important;
+      background-repeat: no-repeat !important;
+      background-size: 16px !important;
+    }
+
+    .recruit-environment__mobile-search-input {
+      background-image: none !important;
+    }
+
+    .recruit-environment__mobile-search-btn {
+      width: 100% !important;
+      padding: 6px 24px !important;
+      background-color: var(--color-black) !important;
+      color: white !important;
+      border: none !important;
+      border-radius: 4px !important;
+      font-size: 16px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      margin-top: 8px !important;
+      cursor: pointer !important;
+    }
+
+    .recruit-environment__mobile-search-btn:hover {
+      background-color: #8B6F47 !important;
+    }
+
+    .recruit-environment__salon-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .recruit-environment__search-row {
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .recruit-environment__search-label {
+      min-width: auto;
+      font-size: 18px;
+      padding-left: 0;
+    }
+
+    .recruit-environment__search-select,
+    .recruit-environment__search-input {
+      max-width: 100%;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    .recruit-environment__search-btn {
+      width: 100%;
+      align-self: stretch;
+      margin-top: 8px;
+      padding: 16px 24px;
+      font-size: 16px;
+    }
+
+
+    .recruit-environment__salons-title {
+      display: flex;
+      padding-bottom: 16px;
+      justify-content: space-between;
+      align-items: center;
+      align-self: stretch;
+      border-bottom: 0.5px solid var(--Text-black, #3D3D3D);
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+
+    /* 既存の768px以下のスタイルは上記の新しいスタイルで上書きされる */
+
+    .recruit-about__container {
+      padding: 0 16px;
+    }
+
+    .recruit-about__title {
+      font-size: 28px;
+    }
+
+    .recruit-about__title::before {
+      width: 120px;
+      height: 50px;
+      top: -10px;
+    }
+
+    .recruit-about__subtitle {
+    }
+
+    .recruit-about__text {
+      font-size: 14px;
+    }
+
+    .recruit-about__image {
+      height: 215px;
+    }
+
+    .recruit-staff-voices__container {
+      padding: 0 24px;
+    }
+
+    .recruit-staff-voices__title,
+    .recruit-jobs__title {
+      font-size: 32px;
+      text-align: left;
+      margin-bottom: 32px;
+      line-height: 1.0;
+      word-break: break-word;
+    }
+
+    .recruit-staff-voices__title::before {
+      width: 192px;
+      height: 56px;
+      top: -30px;
+      left: 106px;
+    }
+
+    .recruit-jobs__container {
+      padding: 0 24px;
+    }
+
+    .recruit-jobs__title::before {
+      width: 171px;
+      height: 73px;
+      top: -35px;
+      left: 86px;
+    }
+
+
+    .recruit-staff-voices__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .recruit-jobs__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .recruit-application-process {
+      padding: 0 24px;
+    }
+
+    .recruit-application-process__container {
+      padding: 40px 24px;
+    }
+
+
+    .recruit-application-process__title {
+      font-size: 32px;
+      margin-bottom: 24px;
+    }
+
+    .recruit-faq__container {
+      padding: 0 24px;
+    }
+
+    .recruit-faq__title {
+      font-size: 36px;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+
+    .recruit-faq__title::before {
+      width: 119px;
+      height: 62px;
+      top: -10px;
+      left: 64px;
+    }
+
+    .recruit-application-process__steps {
+      gap: 20px;
+    }
+
+    .recruit-application-process__step {
+      gap: 16px;
+    }
+
+    .recruit-application-process__step-number {
+      width: 69px;
+      height: 69px;
+    }
+
+    .recruit-application-process__steps::before {
+      left: 35px;
+      top: 40px;
+      bottom: 85px;
+      background-size: 2px 8px;
+    }
+
+    .recruit-application-process__step-content-wrapper {
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      margin-top: 4px;
+    }
+
+    .recruit-application-process__step-text {
+      font-size: 17px;
+    }
+
+    .recruit-application-process__step-digit {
+      font-size: 26px;
+    }
+
+    .recruit-application-process__step-title {
+      font-size: 24px;
+    }
+
+    .recruit-application-process__step-description {
+      font-size: 16px;
+    }
+  }
+
+  /* Footer */
+  .footer {
+    background-color: #3D3D3D;
+    padding: 60px 0 30px;
+  }
+  
+  .footer-container {
+    max-width: 484px;
+    margin: 0 auto;
+  }
+  
+  .footer-brand {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .footer-brand-text {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .footer-brand-name {
+    font-family: var(--font-family-yumincho);
+    font-size: 2.5rem;
+    line-height: 1.0;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+  }
+  
+  .footer-brand-tagline {
+    font-family: var(--font-family-yumincho);
+    font-size: 18px;
+    line-height: 1.0;
+    color: var(--color-white);
+  }
+  
+  .footer-nav {
+    display: flex;
+    width: 480px;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 36px;
+  }
+  
+  .footer-nav-link {
+    color: var(--color-white);
+    text-decoration: none;
+    font-family: var(--font-family-zenkaku);
+    font-size: 12px;
+    font-weight: var(--font-weight-regular);
+    padding: 8px;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-nav-link:hover {
+    color: var(--color-brown-light);
+  }
+  
+  .footer-nav-separator {
+    width: 1px;
+    height: 16px;
+    background-color: var(--color-white);
+    opacity: 0.5;
+  }
+  
+  .footer-recruit {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .footer-recruit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: transparent;
+    color: var(--color-white);
+    border: 1px solid var(--color-white);
+    padding: 24px 24px;
+    border-radius: 6px;
+    font-family: var(--font-family-zenkaku);
+    font-size: 18px;
+    line-height: 1.0;
+    font-weight: var(--font-weight-regular);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .footer-recruit-btn:hover {
+    background-color: var(--color-white);
+    color: var(--color-grey-medium);
+  }
+  
+  .footer-recruit-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .footer-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background-color: var(--color-white);
+    color: var(--color-black);
+  }
+  
+  .footer-social-link:hover {
+    border: 1px solid var(--color-white);
+    background-color: var(--color-grey-medium);
+    color: var(--color-white);
+  }
+  
+  .footer-social-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .footer-sponsors {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .footer-sponsor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .footer-sponsor-image {
+    height: 77px;
+    width: auto;
+    object-fit: contain;
+  }
+  
+  .footer-copyright {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .footer-copyright p {
+    font-family: var(--font-family-zenkaku);
+    font-size: 0.75rem;
+    color: var(--color-white);
+    opacity: 0.8;
+  }
+
+  /* Footer レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .footer {
+      padding: 40px 0 20px;
+    }
+    
+    .footer-container {
+      padding: 0 1rem;
+    }
+    
+    .footer-brand {
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand-text {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .footer-brand-name {
+      font-size: 48px;
+    }
+    
+    .footer-nav {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0px 1rem;
+      width: 100%;
+    }
+    
+    .footer-nav-link {
+      font-size: 12px;
+      padding: 8px;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      gap: 12px;
+    } 
+    .footer-sponsors {
+      flex-direction: row;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-sponsor-image {
+      width: auto;
+      height: 72px;
+    }
+  }
+
+  /* 固定アクションボタン */
+  .recruit-fixed-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255,255,255, 0.7);
+    border-top: 1px solid var(--color-grey-light);
+    padding: 24px 0;
+    z-index: 1000;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .recruit-fixed-actions__container {
+    max-width: 1040px;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .recruit-fixed-actions__container {
+      max-width: none;
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+  .recruit-fixed-actions__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 16px;
+    text-decoration: none;
+    font-family: var(--font-family-zenkaku);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    flex: 1;
+    min-height: 60px;
+  }
+
+  .recruit-fixed-actions__btn--form {
+    background: #FF4A7A;
+  }
+
+  .recruit-fixed-actions__btn--form:hover {
+    background-color: #FF1493;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+  }
+
+  .recruit-fixed-actions__btn--line {
+    background-color: #13BC1C;
+  }
+
+  .recruit-fixed-actions__btn--line:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 195, 0, 0.3);
+  }
+
+  .recruit-fixed-actions__btn--phone {
+    background-color: #3D3D3D;
+  }
+
+  .recruit-fixed-actions__btn--phone:hover {
+    background-color: #2D2D2D;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(61, 61, 61, 0.3);
+  }
+
+  .recruit-fixed-actions__btn-text {
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .recruit-fixed-actions__btn-text--mobile {
+    display: none;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  /* デスクトップ用のテキストをデフォルトで表示 */
+  .recruit-fixed-actions__btn-text--desktop {
+    display: block;
+  }
+
+  .recruit-fixed-actions__btn-line1,
+  .recruit-fixed-actions__btn-line2 {
+    display: block;
+    line-height: 1.1;
+  }
+
+  .recruit-fixed-actions__btn-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+  }
+
+  /* デスクトップ版ではアイコンを非表示 */
+  .recruit-fixed-actions__btn-icon--mobile {
+    display: none;
+  }
+
+  /* 固定アクションボタンのレスポンシブ対応 */
+  @media (max-width: 768px) {
+    .recruit-fixed-actions {
+      padding: 16px 0;
+    }
+
+    .recruit-fixed-actions__container {
+      padding: 0 16px;
+      gap: 8px;
+      flex-direction: row;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+
+    .recruit-fixed-actions__btn {
+      padding: 10px 4px;
+      min-height: 50px;
+      border-radius: 5px;
+      flex: auto;
+      width: auto;
+    }
+
+    .recruit-fixed-actions__btn-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .recruit-fixed-actions__btn-text {
+      font-size: 14px;
+    }
+
+    .recruit-fixed-actions__btn-line1,
+    .recruit-fixed-actions__btn-line2 {
+      font-size: 20px;
+    }
+
+    /* モバイル版ではアイコンを表示、テキストを非表示 */
+    .recruit-fixed-actions__btn-text--desktop {
+      display: none;
+    }
+
+    .recruit-fixed-actions__btn-text--mobile {
+      display: block;
+    }
+
+    .recruit-fixed-actions__btn-icon--mobile {
+      display: block;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .recruit-hero {
+      padding: 64px 0 32px 0; 
+    }
+
+    .recruit-hero__container {
+      padding: 0 0 0 36px;
+      min-height: 320px;
+    }
+
+    .recruit-hero__left {
+      width: auto;
+      padding: 12px 12px 12px 0;
+      border-radius: 0 15px 15px 0;
+      left: 32px;
+      align-items: flex-start;
+      max-width: 145px;
+      gap: 10px;
+    }
+
+    .recruit-hero__logo img {
+      height: 50px;
+    }
+
+    .recruit-hero__description {
+      font-size: 12px;
+      width: 100%;
+      align-self: stretch;
+      line-height: 1.5;
+    }
+
+    .recruit-hero__main-image {
+      height: 350px;
+      border-radius: 20px 0 0 20px;
+    }
+
+    .recruit-hero__overlay {
+      bottom: 16px;
+      right: 16px;
+    }
+
+    .recruit-hero__overlay-text {
+      max-width: 202px;
+    }
+
+    .recruit-about__container {
+      padding: 0 24px;
+      height: 100%;
+    }
+
+    .recruit-about__mobile-layout {
+      gap: 20px;
+    }
+
+    .recruit-about__mobile-title {
+      font-size: 36px;
+    }
+
+    .recruit-about__mobile-title::before {
+      width: 161px;
+      height: 57px;
+      top: -20px;
+    }
+
+    .recruit-about__mobile-subtitle {
+      font-size: 20px;
+    }
+
+    .recruit-about__mobile-images-container {
+      gap: 12px;
+    }
+
+    .recruit-about__mobile-image {
+    }
+
+    .recruit-about__mobile-text {
+      font-size: 16px;
+    }
+
+    .recruit-about__title {
+      font-size: 36px;
+    }
+
+    .recruit-about__title::before {
+      width: 161px;
+      height: 57px;
+      top: -20px;
+    }
+    .recruit-cta-top{
+      padding: 32px 24px;
+    }
+
+    .recruit-appeal__title,
+    .recruit-environment__title,
+    .recruit-staff-voices__title,
+    .recruit-jobs__title {
+    }
+
+    .recruit-appeal__title::before,
+    .recruit-environment__title::before,
+    .recruit-staff-voices__title::before,
+    .recruit-jobs__title::before {
+    }
+
+
+
+
+    .recruit-fixed-actions {
+      padding: 12px 0;
+    }
+
+    .recruit-fixed-actions__container {
+      padding: 0 8px;
+      gap: 4px;
+      flex-direction: row;
+      justify-content: center;
+      max-width: none;
+      width: 100%;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .recruit-fixed-actions__btn {
+      padding: 10px 4px;
+      font-size: 20px;
+      min-height: 45px;
+      width: auto;
+      box-sizing: border-box;
+    }
+
+    .recruit-fixed-actions__btn-text {
+       font-size: 20px;
+    }
+
+    .recruit-fixed-actions__btn-line1,
+    .recruit-fixed-actions__btn-line2 {
+     
+    }
+
+    .recruit-fixed-actions__btn-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    /* 小さな画面でもアイコンを表示、テキストを非表示 */
+    .recruit-fixed-actions__btn-text--desktop {
+      display: none;
+    }
+
+    .recruit-fixed-actions__btn-text--mobile {
+      display: block;
+    }
+
+    .recruit-fixed-actions__btn-icon--mobile {
+      display: block;
+    }
+  }
+</style>
