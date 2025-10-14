@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import newsData from '../../data/news.json';
 
@@ -15,8 +14,6 @@ const { article } = Astro.props;
 ---
 
 <Layout title={`${article.title} | little - Hair salon -`}>
-  <!-- ヘッダー -->
-  <Header />
 
   <!-- パンくずリスト -->
   <div class="breadcrumb">
