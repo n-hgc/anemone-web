@@ -1356,6 +1356,117 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     gap: 30px;
   }
 
+  /* RecruitSalonCard スタイル */
+  .recruit-environment__salon-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .recruit-environment__salon-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .recruit-environment__salon-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .recruit-environment__salon-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 16px 16px 0 16px;
+  }
+
+  .recruit-environment__salon-tag {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .recruit-environment__salon-tag--new {
+    background-color: #e8f5e8;
+    color: #2d5a2d;
+  }
+
+  .recruit-environment__salon-tag--mid {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+
+  .recruit-environment__salon-tag--full {
+    background-color: #d1ecf1;
+    color: #0c5460;
+  }
+
+  .recruit-environment__salon-tag--part {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
+  .recruit-environment__salon-content {
+    padding: 16px;
+  }
+
+  .recruit-environment__salon-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-black);
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+
+  .recruit-environment__salon-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .recruit-environment__salon-job,
+  .recruit-environment__salon-location,
+  .recruit-environment__salon-access {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--color-black);
+    line-height: 1.5;
+  }
+
+  .recruit-environment__salon-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .recruit-environment__salon-btn {
+    width: 100%;
+    padding: 12px;
+    background: white;
+    border: 1px solid var(--color-black);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .recruit-environment__salon-btn:hover {
+    background: var(--color-black);
+    color: white;
+  }
+
+  .recruit-environment__salon-btn a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+  }
+
   /* 働くスタッフの声セクション */
   .recruit-staff-voices {
     padding: 80px 0;
