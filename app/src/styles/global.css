@@ -55,6 +55,12 @@
   box-sizing: border-box;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 body {
   font-family: var(--font-family-zenkaku);
   line-height: 1.6;

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>認証が必要です - アネモネサロン</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;700&family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Zen Kaku Gothic New', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+            background: linear-gradient(135deg, #FAF4E8 0%, #B8AA8C 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .auth-container {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #69552E, #B8AA8C);
+        }
+        
+        .logo {
+            color: #69552E;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
+        }
+        
+        .subtitle {
+            color: #A7A7A7;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        
+        .message {
+            color: #666;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #E5E5E5;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #FAFAFA;
+        }
+        
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #69552E;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(105, 85, 46, 0.1);
+        }
+        
+        .auth-button {
+            background: linear-gradient(135deg, #69552E 0%, #5a4a26 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .auth-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(105, 85, 46, 0.3);
+        }
+        
+        .auth-button:active {
+            transform: translateY(0);
+        }
+        
+        .error {
+            color: #e74c3c;
+            margin-top: 1rem;
+            display: none;
+            font-size: 0.9rem;
+            padding: 0.75rem;
+            background: #ffeaea;
+            border-radius: 6px;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .success {
+            color: #27ae60;
+            margin-top: 1rem;
+            display: none;
+            font-size: 0.9rem;
+            padding: 0.75rem;
+            background: #eafaf1;
+            border-radius: 6px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .loading {
+            display: none;
+            margin-top: 1rem;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #69552E;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #E5E5E5;
+            color: #A7A7A7;
+            font-size: 0.8rem;
+        }
+        
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="logo">アネモネサロン</div>
+        <div class="subtitle">ANEMONE SALON</div>
+        <div class="message">
+            このサイトにアクセスするには認証が必要です。<br>
+            ユーザー名とパスワードを入力してください。
+        </div>
+        <form class="auth-form" id="authForm">
+            <div class="form-group">
+                <label for="username">ユーザー名</label>
+                <input type="text" id="username" name="username" required autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="password">パスワード</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="auth-button" id="authButton">
+                <span id="buttonText">認証</span>
+            </button>
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>認証中...</p>
+            </div>
+            <div class="error" id="errorMessage">認証に失敗しました。ユーザー名とパスワードを確認してください。</div>
+            <div class="success" id="successMessage">認証に成功しました。リダイレクトしています...</div>
+        </form>
+        <div class="footer">
+            <p>&copy; 2024 アネモネサロン. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // 認証情報（実際の運用では環境変数やサーバーサイドで管理）
+        const validCredentials = {
+            'admin': 'password123',
+            'user': 'user123',
+            'demo': 'demo123'
+        };
+        
+        // 認証状態をチェック
+        function checkAuthStatus() {
+            const isAuthenticated = sessionStorage.getItem('authenticated') === 'true';
+            const authTime = sessionStorage.getItem('authTime');
+            const currentTime = Date.now();
+            const authTimeout = 24 * 60 * 60 * 1000; // 24時間
+            
+            if (isAuthenticated && authTime && (currentTime - parseInt(authTime)) < authTimeout) {
+                redirectToMain();
+                return true;
+            } else if (isAuthenticated) {
+                // 認証が期限切れの場合
+                sessionStorage.removeItem('authenticated');
+                sessionStorage.removeItem('username');
+                sessionStorage.removeItem('authTime');
+            }
+            return false;
+        }
+        
+        // メインサイトにリダイレクト
+        function redirectToMain() {
+            // メインサイトのindex.htmlにリダイレクト
+            window.location.href = '/';
+        }
+        
+        // ローディング状態の管理
+        function setLoading(loading) {
+            const button = document.getElementById('authButton');
+            const buttonText = document.getElementById('buttonText');
+            const loadingDiv = document.getElementById('loading');
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            if (loading) {
+                button.disabled = true;
+                button.style.opacity = '0.7';
+                buttonText.textContent = '認証中...';
+                loadingDiv.style.display = 'block';
+                errorDiv.style.display = 'none';
+                successDiv.style.display = 'none';
+            } else {
+                button.disabled = false;
+                button.style.opacity = '1';
+                buttonText.textContent = '認証';
+                loadingDiv.style.display = 'none';
+            }
+        }
+        
+        // エラーメッセージの表示
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+        
+        // 成功メッセージの表示
+        function showSuccess() {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.style.display = 'block';
+        }
+        
+        // フォーム送信の処理
+        document.getElementById('authForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            
+            if (!username || !password) {
+                showError('ユーザー名とパスワードを入力してください。');
+                return;
+            }
+            
+            setLoading(true);
+            
+            // 認証処理をシミュレート（実際の実装ではサーバーサイドで処理）
+            setTimeout(() => {
+                if (validCredentials[username] === password) {
+                    // 認証成功
+                    sessionStorage.setItem('authenticated', 'true');
+                    sessionStorage.setItem('username', username);
+                    sessionStorage.setItem('authTime', Date.now().toString());
+                    
+                    showSuccess();
+                    
+                    // 2秒後にリダイレクト
+                    setTimeout(() => {
+                        redirectToMain();
+                    }, 2000);
+                } else {
+                    // 認証失敗
+                    setLoading(false);
+                    showError('認証に失敗しました。ユーザー名とパスワードを確認してください。');
+                    
+                    // パスワードフィールドをクリア
+                    document.getElementById('password').value = '';
+                    document.getElementById('password').focus();
+                }
+            }, 1500); // 1.5秒の遅延でローディングをシミュレート
+        });
+        
+        // ページ読み込み時の認証状態チェック
+        if (checkAuthStatus()) {
+            // 既に認証済みの場合は何もしない（リダイレクトされる）
+        } else {
+            // 認証が必要な場合はユーザー名フィールドにフォーカス
+            document.getElementById('username').focus();
+        }
+        
+        // Enterキーでのフォーム送信
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const form = document.getElementById('authForm');
+                if (form) {
+                    form.dispatchEvent(new Event('submit'));
+                }
+            }
+        });
+    </script>
+</body>
+</html>
