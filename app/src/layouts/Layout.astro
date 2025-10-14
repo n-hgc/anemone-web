@@ -46,22 +46,7 @@ const { title, description, image, jsonLd } = Astro.props;
     <title>{title}</title>
     
     <style>
-      /* ヘッダー固定とメインコンテンツのマージン調整 */
-      .main-content {
-        margin-top: 80px; /* PC版のヘッダー高さ */
-      }
-      
-      @media (max-width: 1023px) {
-        .main-content {
-          margin-top: 75px; /* タブレット版のヘッダー高さ */
-        }
-      }
-      
-      @media (max-width: 767px) {
-        .main-content {
-          margin-top: 64px; /* モバイル版のヘッダー高さ */
-        }
-      }
+      /* ヘッダー固定のためのスタイル */
     </style>
   </head>
   <body>

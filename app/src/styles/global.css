@@ -3,6 +3,7 @@
 :root {
   /* カラーパレット */
   --color-black: #3D3D3D;
+  --color-grey-dark: #2D2D2D;
   --color-grey-medium: #A7A7A7;
   --color-grey-light: #CFCFCF;
   --color-brown-dark: #69552E;

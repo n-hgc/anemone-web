@@ -12,71 +12,146 @@ const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   return date.toLocaleDateString('ja-JP', {
     year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
+    month: '2-digit',
+    day: '2-digit'
+  }).replace(/\//g, '.');
 };
 ---
 
-<article class={`${featured ? 'md:col-span-2' : ''} bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow`}>
+<article class="news-card">
   {news.featured_image && (
-    <div class="aspect-w-16 aspect-h-9">
+    <div class="news-card__image">
       <img 
         src={news.featured_image} 
         alt={news.title}
-        class="w-full h-48 object-cover"
+        class="news-card__img"
       />
     </div>
   )}
   
-  <div class="p-6">
-    <div class="flex items-center space-x-2 mb-2">
-      <time class="text-sm text-gray-500" datetime={news.date}>
+  <div class="news-card__content">
+    <div class="news-card__meta">
+      <time class="news-card__date" datetime={news.date}>
         {formatDate(news.date)}
       </time>
       {news.categories.length > 0 && (
-        <span class="px-2 py-1 bg-pink-100 text-pink-800 text-xs rounded-full">
+        <span class="news-card__category">
           {news.categories[0]}
         </span>
       )}
     </div>
     
-    <h3 class={`${featured ? 'text-2xl' : 'text-xl'} font-semibold text-gray-900 mb-3`}>
-      <a href={`/news/${news.id}`} class="hover:text-pink-600 transition-colors">
+    <h3 class="news-card__title">
+      <a href={`/news/${news.id}`} class="news-card__title-link">
         {news.title}
       </a>
     </h3>
     
-    <p class="text-gray-600 mb-4 line-clamp-3">
+    <p class="news-card__excerpt">
       {news.excerpt}
     </p>
-    
-    <div class="flex items-center justify-between">
-      <a 
-        href={`/news/${news.id}`}
-        class="text-pink-600 hover:text-pink-700 font-medium"
-      >
-        続きを読む →
-      </a>
-      
-      {news.tags.length > 0 && (
-        <div class="flex flex-wrap gap-1">
-          {news.tags.slice(0, 3).map((tag) => (
-            <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded">
-              #{tag}
-            </span>
-          ))}
-        </div>
-      )}
-    </div>
   </div>
 </article>
 
 <style>
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  .news-card {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #E0E0E0;
+  }
+
+  .news-card:last-child {
+    border-bottom: none;
+  }
+
+  .news-card__image {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+  }
+
+  .news-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .news-card__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .news-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .news-card__date {
+    font-family: var(--font-family-zenkaku);
+    font-size: 14px;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-grey-dark);
+  }
+
+  .news-card__category {
+    font-family: var(--font-family-zenkaku);
+    font-size: 14px;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-grey-dark);
+  }
+
+  .news-card__title {
+    margin: 0;
+  }
+
+  .news-card__title-link {
+    font-family: var(--font-family-yumincho);
+    font-size: 18px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+  }
+
+  .news-card__title-link:hover {
+    color: var(--color-brown);
+  }
+
+  .news-card__excerpt {
+    font-family: var(--font-family-zenkaku);
+    font-size: 14px;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-grey-dark);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 767px) {
+    .news-card {
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px 0;
+    }
+
+    .news-card__image {
+      width: 100%;
+      height: 200px;
+    }
+
+    .news-card__title-link {
+      font-size: 16px;
+    }
+
+    .news-card__excerpt {
+      font-size: 13px;
+    }
   }
 </style>
