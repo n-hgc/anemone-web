@@ -1,14 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import type { Salon } from '../../types';
+import type { LegacySalon } from '../../types';
 import { generateSalonJsonLd } from '../../lib/seo/jsonld';
 
 // モックデータをインポート
 import salonsData from '../../data/salons.json';
 
-const salons: Salon[] = salonsData;
-
 export async function getStaticPaths() {
+  const salons: LegacySalon[] = salonsData;
   return salons.map((salon) => ({
     params: { id: salon.id.toString() },
     props: { salon },
@@ -16,6 +15,9 @@ export async function getStaticPaths() {
 }
 
 const { salon } = Astro.props;
+
+// 他の店舗を取得するためにデータを再インポート
+const allSalons: LegacySalon[] = salonsData;
 
 // 店舗のJSON-LDを生成
 const jsonLd = generateSalonJsonLd(salon);
@@ -167,7 +169,7 @@ const jsonLd = generateSalonJsonLd(salon);
       <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">他の店舗も見る</h2>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {salons.filter(s => s.id !== salon.id).slice(0, 3).map((otherSalon) => (
+        {allSalons.filter(s => s.id !== salon.id).slice(0, 3).map((otherSalon) => (
           <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
             <h3 class="text-lg font-semibold text-gray-900 mb-2">
               {otherSalon.name}
