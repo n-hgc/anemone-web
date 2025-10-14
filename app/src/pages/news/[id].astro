@@ -1,147 +1,375 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import type { News } from '../../types';
-import { generateNewsJsonLd } from '../../lib/seo/jsonld';
-
-// モックデータをインポート
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
 import newsData from '../../data/news.json';
 
-const news: News[] = newsData;
-
 export async function getStaticPaths() {
-  return news.map((item) => ({
-    params: { id: item.id.toString() },
-    props: { news: item },
+  return newsData.map((article) => ({
+    params: { id: article.id.toString() },
+    props: { article },
   }));
 }
 
-const { news: newsItem } = Astro.props;
-
-// ニュースのJSON-LDを生成
-const jsonLd = generateNewsJsonLd(newsItem);
-
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-};
+const { article } = Astro.props;
 ---
 
-<Layout 
-  title={`${newsItem.title} - アネモネサロン`}
-  description={newsItem.excerpt}
-  image={newsItem.featured_image}
-  jsonLd={JSON.stringify(jsonLd)}
->
-  <!-- 記事ヘッダー -->
-  <section class="bg-gray-50 py-12">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <div class="flex items-center justify-center space-x-4 mb-4">
-          <time class="text-sm text-gray-500" datetime={newsItem.date}>
-            {formatDate(newsItem.date)}
-          </time>
-          {newsItem.categories.length > 0 && (
-            <span class="px-3 py-1 bg-pink-100 text-pink-800 text-sm rounded-full">
-              {newsItem.categories[0]}
-            </span>
-          )}
-        </div>
-        
-        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-          {newsItem.title}
-        </h1>
-        
-        {newsItem.featured_image && (
-          <img 
-            src={newsItem.featured_image} 
-            alt={newsItem.title}
-            class="w-full max-w-2xl mx-auto rounded-lg shadow-md"
-          />
-        )}
-      </div>
-    </div>
-  </section>
+<Layout title={`${article.title} | little - Hair salon -`}>
+  <!-- ヘッダー -->
+  <Header />
 
-  <!-- 記事本文 -->
-  <section class="py-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-none">
-        <div class="whitespace-pre-line text-gray-700 leading-relaxed">
-          {newsItem.content}
-        </div>
-      </div>
-      
-      <!-- タグ -->
-      {newsItem.tags.length > 0 && (
-        <div class="mt-12 pt-8 border-t border-gray-200">
-          <h3 class="text-lg font-semibold text-gray-900 mb-4">タグ</h3>
-          <div class="flex flex-wrap gap-2">
-            {newsItem.tags.map((tag) => (
-              <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
-                #{tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
+  <!-- パンくずリスト -->
+  <div class="breadcrumb">
+    <div class="breadcrumb__container">
+      <nav class="breadcrumb__nav">
+        <a href="/" class="breadcrumb__link">ホーム</a>
+        <span class="breadcrumb__separator">/</span>
+        <a href="/news" class="breadcrumb__link">NEWS</a>
+        <span class="breadcrumb__separator">/</span>
+        <span class="breadcrumb__current">{article.title.substring(0, 20)}...</span>
+      </nav>
     </div>
-  </section>
+  </div>
 
-  <!-- 関連ニュース -->
-  <section class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">関連ニュース</h2>
+  <!-- メインコンテンツ -->
+  <main class="news-detail-main">
+    <div class="news-detail-container">
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {news
-          .filter(item => item.id !== newsItem.id)
-          .slice(0, 3)
-          .map((relatedNews) => (
-            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">
-                <a href={`/news/${relatedNews.id}`} class="hover:text-pink-600">
-                  {relatedNews.title}
-                </a>
-              </h3>
-              <p class="text-gray-600 mb-4 line-clamp-3">
-                {relatedNews.excerpt}
-              </p>
-              <div class="flex items-center justify-between">
-                <time class="text-sm text-gray-500">
-                  {formatDate(relatedNews.date)}
-                </time>
-                <a 
-                  href={`/news/${relatedNews.id}`}
-                  class="text-pink-600 hover:text-pink-700 font-medium"
-                >
-                  続きを読む →
-                </a>
-              </div>
-            </div>
-          ))}
-      </div>
-      
-      <div class="text-center mt-8">
-        <a 
-          href="/news" 
-          class="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors"
-        >
-          すべてのニュースを見る
-        </a>
-      </div>
+      <!-- ページタイトル -->
+      <h1 class="news-detail-title section-title text-h1">
+        NEWS<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="news-detail-title-sub section-title-sub">お知らせ</span>
+      </h1>
+
+      <!-- ニュース記事 -->
+      <article class="news-article">
+        <!-- 記事メタ情報 -->
+        <div class="news-article-meta">
+          <time class="news-article-date">{article.date.replace(/-/g, '.').substring(0, 10)}</time>
+          <span class="news-article-separator">|</span>
+          <span class="news-article-category">{article.categories[0]}</span>
+        </div>
+
+        <!-- 記事タイトル -->
+        <h2 class="news-article-title">{article.title}</h2>
+
+        <!-- 記事画像 -->
+        <div class="news-article-image">
+          <img src={article.featured_image} alt={article.title} />
+        </div>
+
+        <!-- 記事本文 -->
+        <div class="news-article-content">
+          <p>{article.content}</p>
+        </div>
+
+        <!-- お知らせ一覧へボタン -->
+        <div class="news-article-actions">
+          <a href="/news" class="news-back-btn">
+            おしらせ一覧へ
+            <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="news-back-btn-icon" />
+          </a>
+        </div>
+      </article>
     </div>
-  </section>
+  </main>
+
+  <!-- フッター -->
+  <Footer />
 </Layout>
 
 <style>
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+  @import "tailwindcss";
+  
+  /* パンくずリスト */
+  .breadcrumb {
+    background-color: var(--color-beige);
+    padding: 92px 0 12px 0;
+  }
+
+  .breadcrumb__container {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 55px;
+  }
+
+  .breadcrumb__nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .breadcrumb__link {
+    font-family: var(--font-family-zenkaku);
+    font-size: 14px;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-grey-dark);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .breadcrumb__link:hover {
+    color: var(--color-brown);
+  }
+
+  .breadcrumb__separator {
+    font-family: var(--font-family-zenkaku);
+    font-size: 14px;
+    color: var(--color-grey-dark);
+  }
+
+  .breadcrumb__current {
+    font-family: var(--font-family-zenkaku);
+    font-size: 14px;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-grey-dark);
+    max-width: 200px;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* メインコンテンツ */
+  .news-detail-main {
+    background-color: var(--color-beige);
+    min-height: calc(100vh - 80px - 24px);
+    padding: 80px 0;
+  }
+
+  .news-detail-container {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 55px;
+  }
+
+  /* 共通セクションタイトル */
+  .section-title {
+    font-family: var(--font-family-yumincho);
+    color: var(--color-black);
+    text-align: left;
+    height: 64px;
+    font-size: 64px;
+    line-height: 1.0;
+  }
+  
+  .section-title-sub {
+    font-size: 24px;
+    vertical-align: middle;
+  }
+
+  /* タイトルスラッシュのスタイル */
+  .title-slash {
+    height: 28px;
+    width: auto;
+    margin: 0 0.5rem;
+    display: inline-block;
+  }
+
+  /* ニュース記事 */
+  .news-article {
+    padding: 60px 0;
+  }
+
+  .news-article-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .news-article-date {
+    font-family: "Zen Kaku Gothic New";
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 100%;
+    color: #878C92;
+  }
+
+  .news-article-separator {
+    font-family: "Zen Kaku Gothic New";
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 100%;
+    color: #878C92;
+  }
+
+  .news-article-category {
+    font-family: "Zen Kaku Gothic New";
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 100%;
+    color: #878C92;
+  }
+
+  .news-article-title {
+    font-family: var(--font-family-zenkaku);
+    font-size: 32px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    border-bottom: 4px solid var(--color-black);
+    padding-bottom: 1rem;
+  }
+
+  .news-article-image {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .news-article-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .news-article-content {
+    margin-bottom: 3rem;
+  }
+
+  .news-article-content p {
+    font-family: var(--font-family-zenkaku);
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--color-black);
+    margin-bottom: 1.5rem;
+  }
+
+  .news-article-actions {
+    text-align: center;
+  }
+
+  .news-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--color-grey-dark);
+    color: var(--color-white);
+    padding: 16px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: var(--font-family-zenkaku);
+    font-size: 16px;
+    font-weight: var(--font-weight-medium);
+    transition: background-color 0.3s ease;
+  }
+
+  .news-back-btn:hover {
+    background-color: var(--color-brown);
+  }
+
+  .news-back-btn-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 1023px) {
+    .news-detail-container {
+      padding: 0 40px;
+    }
+
+    .section-title {
+      height: auto;
+      font-size: 48px;
+    }
+    
+    .section-title-sub {
+      font-size: 20px;
+    }
+
+    .news-article {
+      padding: 32px 0;
+    }
+
+    .news-article-title {
+      font-size: 28px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .breadcrumb__container {
+      padding: 0 24px;
+    }
+
+    .news-detail-main {
+      padding: 40px 0;
+    }
+
+    .news-detail-container {
+      padding: 0 24px;
+    }
+
+    .section-title {
+      display: flex;
+      width: 170px;
+      height: 75px;
+      font-size: 36px;
+      align-items: baseline;
+      align-content: flex-start;
+      gap: 6px 11px;
+      flex-wrap: wrap;
+    }
+    
+    .title-slash {
+      margin: 0;
+    }
+    
+    .section-title-sub {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .news-article {
+    }
+
+    .news-article-title {
+      font-size: 24px;
+    }
+
+    .news-article-date,
+    .news-article-separator,
+    .news-article-category {
+      font-family: "Zen Kaku Gothic New";
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 100%;
+      color: #878C92;
+    }
+
+    .news-article-content p {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .breadcrumb__current {
+      max-width: 150px;
+    }
+
+    .news-back-btn {
+      padding: 12px 24px;
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-title {
+      font-size: 28px;
+    }
+    
+    .section-title-sub {
+      font-size: 14px;
+    }
+
+    .news-article {
+    }
+
+    .news-article-title {
+      font-size: 20px;
+    }
+
+    .breadcrumb__current {
+      max-width: 120px;
+    }
   }
 </style>
