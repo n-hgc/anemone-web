@@ -3157,6 +3157,18 @@ const salonJsonLd = {
       searchTerm: ''
     };
 
+    // サロンデータを取得（サーバーサイドで読み込まれたデータ）
+    let salonData: any[] = [];
+    fetch('/data/salons.index.json')
+      .then(response => response.json())
+      .then(data => {
+        salonData = data;
+        console.log('サロンデータを読み込みました:', salonData);
+      })
+      .catch(error => {
+        console.error('サロンデータの読み込みに失敗しました:', error);
+      });
+
     // 地域ボタンのクリックイベント
     const regionButtons = document.querySelectorAll('.region-btn');
     regionButtons.forEach(button => {
@@ -3232,18 +3244,19 @@ const salonJsonLd = {
         titleElement.textContent = `${filterText}店舗一覧`;
       }
 
-      // サロンカードの表示/非表示を切り替え
-      const salonCards = document.querySelectorAll('.salon-card');
+      // サロンカードの表示/非表示を切り替え（地域ボタンは除外）
+      const salonCards = document.querySelectorAll('#salon-cards-container [data-region]');
       salonCards.forEach(card => {
+        
         const region = card.getAttribute('data-region') || '';
         const name = card.getAttribute('data-name') || '';
         const prefecture = card.getAttribute('data-prefecture') || '';
         const city = card.getAttribute('data-city') || '';
         
-        // 地域フィルター
+        // 地域フィルター - salons.index.jsonのregion配列のslugと一致
         const regionMatch = !currentFilter.region || region === currentFilter.region;
         
-        // 検索フィルター
+        // 検索フィルター - サロン名、都道府県、市区町村で検索
         const searchMatch = !currentFilter.searchTerm || 
           name.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
           prefecture.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
@@ -3255,6 +3268,12 @@ const salonJsonLd = {
           (card as HTMLElement).style.display = 'none';
         }
       });
+
+      // フィルター結果のカウントを表示
+      const visibleCards = Array.from(salonCards).filter(card => 
+        (card as HTMLElement).style.display !== 'none'
+      );
+      console.log(`フィルター結果: ${visibleCards.length}件のサロンが表示されています`);
     }
 
     // 初期状態で関東ボタンをアクティブにする
