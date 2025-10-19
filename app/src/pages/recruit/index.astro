@@ -5,15 +5,29 @@ import RecruitStaffCard from '../../components/RecruitStaffCard.astro';
 import RecruitJobCard from '../../components/RecruitJobCard.astro';
 import RecruitFaqItem from '../../components/RecruitFaqItem.astro';
 import { generateRecruitJsonLd } from '../../lib/seo/jsonld';
-import recruitSalonsData from '../../data/recruit-salons.json';
 import recruitStaffData from '../../data/recruit-staff.json';
 import recruitJobsData from '../../data/recruit-jobs.json';
 import recruitFaqData from '../../data/recruit-faq.json';
+import type { SalonIndexData } from '../../types';
 
 // 採用ページのJSON-LDを生成
 const jsonLd = generateRecruitJsonLd();
 
-const { salons, icons } = recruitSalonsData;
+// サロンデータを読み込む (Server-side)
+let salonData: any[] = [];
+try {
+  const fs = await import('fs');
+  const path = await import('path');
+  const salonDataPath = path.join(process.cwd(), 'public', 'data', 'salons.index.json');
+  const salonDataContent = fs.readFileSync(salonDataPath, 'utf-8');
+  salonData = JSON.parse(salonDataContent);
+} catch (error) {
+  console.error('サロンデータの読み込みに失敗しました:', error);
+  salonData = [];
+}
+
+// サロンデータを直接使用（変換不要）
+const salons: SalonIndexData[] = salonData;
 const { staff } = recruitStaffData;
 const { jobs, applicationProcess } = recruitJobsData;
 const { faqs } = recruitFaqData;
@@ -442,7 +456,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
           <h3 class="recruit-environment__salons-title">北海道エリア募集店舗一覧</h3>
           <div class="recruit-environment__salon-grid">
             {salons.map(salon => (
-              <RecruitSalonCard salon={salon} icons={icons} />
+              <RecruitSalonCard salon={salon} />
             ))}
         </div>
       </div>

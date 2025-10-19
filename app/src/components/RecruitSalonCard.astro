@@ -1,61 +1,44 @@
 ---
+import type { SalonIndexData } from '../types';
+
 export interface Props {
-  salon: {
-    id: string;
-    name: string;
-    nameReading: string;
-    image: string;
-    tags: Array<{
-      type: string;
-      label: string;
-    }>;
-    jobType: string;
-    location: string;
-    access: string;
-    buttonText: string;
-    buttonLink: string;
-  };
-  icons: {
-    jobType: string;
-    location: string;
-    access: string;
-  };
+  salon: SalonIndexData;
 }
 
-const { salon, icons } = Astro.props;
+const { salon } = Astro.props;
 ---
 
 <div class="recruit-environment__salon-card">
   <img 
-    src={salon.image} 
-    alt={salon.name} 
+    src={salon.thumb} 
+    alt={salon.title} 
     class="recruit-environment__salon-image"
   />
   <div class="recruit-environment__salon-tags">
-    {salon.tags.map(tag => (
-      <span class={`recruit-environment__salon-tag recruit-environment__salon-tag--${tag.type}`}>{tag.label}</span>
+    {salon.employment_type.map(emp => (
+      <span class={`recruit-environment__salon-tag recruit-environment__salon-tag--${emp.slug === 'fulltime' ? 'full-time' : 'part-time'}`}>{emp.name}</span>
     ))}
   </div>
   <div class="recruit-environment__salon-content">
     <h4 class="recruit-environment__salon-name">
-      {salon.name} 【{salon.nameReading}】
+      {salon.title} 【{salon.furigana}】
     </h4>
     <div class="recruit-environment__salon-info">
       <div class="recruit-environment__salon-job">
-        <img src={icons.jobType} alt="職種" class="recruit-environment__salon-icon" />
-        <span>{salon.jobType}</span>
+        <img src="/images/icons/icn_content_cut.svg" alt="職種" class="recruit-environment__salon-icon" />
+        <span>{salon.job_role.map(job => job.name).join('・')}</span>
       </div>
       <div class="recruit-environment__salon-location">
-        <img src={icons.location} alt="所在地" class="recruit-environment__salon-icon" />
-        <span>{salon.location}</span>
+        <img src="/images/icons/icn_location_on.svg" alt="所在地" class="recruit-environment__salon-icon" />
+        <span>{salon.prefecture[0].name}・{salon.city[0].name}</span>
       </div>
       <div class="recruit-environment__salon-access">
-        <img src={icons.access} alt="アクセス" class="recruit-environment__salon-icon" />
+        <img src="/images/icons/icn_directions_railway.svg" alt="アクセス" class="recruit-environment__salon-icon" />
         <span>{salon.access}</span>
       </div>
     </div>
     <button class="recruit-environment__salon-btn">
-      <a href={salon.buttonLink}>{salon.buttonText}</a>
+      <a href={salon.reservation_url}>店舗詳細はこちら</a>
     </button>
   </div>
 </div>
@@ -132,6 +115,10 @@ const { salon, icons } = Astro.props;
 
   .recruit-environment__salon-tag--part-time {
     background-color: #EFFAE8;
+  }
+
+  .recruit-environment__salon-tag--job {
+    background-color: #E3F3F5;
   }
 
   .recruit-environment__salon-content {

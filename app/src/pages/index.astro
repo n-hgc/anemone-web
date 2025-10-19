@@ -5,37 +5,39 @@ import NewsCard from '../components/NewsCard.astro';
 import LocatorFilters from '../components/LocatorFilters.astro';
 import Footer from '../components/Footer.astro';
 import { componentClasses, responsive } from '../lib/design-system';
-import type { LegacySalon, News, Prefecture } from '../types';
+import type { SalonIndexData, News, Prefecture } from '../types';
 
 // モックデータをインポート
-import salonsData from '../data/salons.json';
 import newsData from '../data/news.json';
 import prefecturesData from '../data/prefectures.json';
 
-const salons: LegacySalon[] = salonsData;
+// サロンデータを読み込む
+let salonData: any[] = [];
+try {
+  const fs = await import('fs');
+  const path = await import('path');
+  const salonDataPath = path.join(process.cwd(), 'public', 'data', 'salons.index.json');
+  const salonDataContent = fs.readFileSync(salonDataPath, 'utf-8');
+  salonData = JSON.parse(salonDataContent);
+} catch (error) {
+  console.error('サロンデータの読み込みに失敗しました:', error);
+  salonData = [];
+}
+
+// サロンデータを直接使用（変換不要）
+const salons: SalonIndexData[] = salonData;
+
 const news: News[] = newsData;
 const prefectures: Prefecture[] = prefecturesData;
 
 // 最新のニュース3件を取得
 const latestNews = news.slice(0, 3);
 
-// 店舗一覧のJSON-LDを生成
+// 店舗一覧のJSON-LDを生成（サロンデータはクライアントサイドで読み込むため、ここでは空の配列）
 const salonJsonLd = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "itemListElement": salons.map((salon, index) => ({
-    "@type": "HairSalon",
-    "position": index + 1,
-    "name": `アネモネ ${salon.name}`,
-    "url": `https://anemone-salon.com/salon/${salon.id}`,
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": salon.address,
-      "addressRegion": salon.prefecture,
-      "addressCountry": "JP"
-    },
-    "telephone": salon.tel
-  }))
+  "itemListElement": []
 };
 ---
 
@@ -334,14 +336,14 @@ const salonJsonLd = {
             <div class="salon-filters">
               <!-- 地域ナビゲーション -->
               <div class="salon-regions">
-                <button class="region-btn" data-region="北海道">北海道</button>
-                <button class="region-btn" data-region="東北">東北</button>
-                <button class="region-btn" data-region="関東">関東</button>
-                <button class="region-btn" data-region="中部">中部</button>
-                <button class="region-btn" data-region="近畿">近畿</button>
-                <button class="region-btn" data-region="四国">四国</button>
-                <button class="region-btn" data-region="中国">中国</button>
-                <button class="region-btn" data-region="九州・沖縄">九州・沖縄</button>
+                <button class="region-btn" data-region="hokkaido">北海道</button>
+                <button class="region-btn" data-region="tohoku">東北</button>
+                <button class="region-btn" data-region="kanto">関東</button>
+                <button class="region-btn" data-region="chubu">中部</button>
+                <button class="region-btn" data-region="kansai">近畿</button>
+                <button class="region-btn" data-region="shikoku">四国</button>
+                <button class="region-btn" data-region="chugoku">中国</button>
+                <button class="region-btn" data-region="kyushu">九州・沖縄</button>
               </div>
               
               <!-- 検索バー -->
@@ -389,14 +391,14 @@ const salonJsonLd = {
             <div class="salon-filters">
               <!-- 地域ナビゲーション -->
               <div class="salon-regions">
-                <button class="region-btn" data-region="北海道">北海道</button>
-                <button class="region-btn" data-region="東北">東北</button>
-                <button class="region-btn" data-region="関東">関東</button>
-                <button class="region-btn" data-region="中部">中部</button>
-                <button class="region-btn" data-region="近畿">近畿</button>
-                <button class="region-btn" data-region="四国">四国</button>
-                <button class="region-btn" data-region="中国">中国</button>
-                <button class="region-btn" data-region="九州・沖縄">九州・沖縄</button>
+                <button class="region-btn" data-region="hokkaido">北海道</button>
+                <button class="region-btn" data-region="tohoku">東北</button>
+                <button class="region-btn" data-region="kanto">関東</button>
+                <button class="region-btn" data-region="chubu">中部</button>
+                <button class="region-btn" data-region="kansai">近畿</button>
+                <button class="region-btn" data-region="shikoku">四国</button>
+                <button class="region-btn" data-region="chugoku">中国</button>
+                <button class="region-btn" data-region="kyushu">九州・沖縄</button>
               </div>
               
               <!-- 検索バー -->
@@ -420,34 +422,17 @@ const salonJsonLd = {
         <!-- 店舗一覧 -->
         <div class="salon-listings">
           <div class="salon-area-title">
-            <h3 id="salon-filter-title">「北海道」店舗一覧</h3>
+            <h3 id="salon-filter-title">「関東」店舗一覧</h3>
           </div>
           <div class="salon-cards grid-3-cols" id="salon-cards-container">
             {salons.slice(0, 10).map((salon, index) => (
-              <div class="salon-card" data-region="北海道" data-name={salon.name} data-prefecture={salon.prefecture} data-city={salon.city}>
-                <img src={`/images/salon/salon-image-${String(index + 1).padStart(2, '0')}.png`} alt={salon.name} class="salon-card-image" />
-                <div class="salon-card-content">
-                  <div class="salon-card-text">
-                    <h4 class="salon-card-name">lico {salon.name} 【リコ{salon.name}】</h4>
-                  <div class="salon-card-location">
-                    <svg class="location-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    </svg>
-                    <span>{salon.prefecture}・{salon.city}</span>
-                  </div>
-                  <div class="salon-card-station">
-                    <svg class="station-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                    </svg>
-                    <span>大通駅徒歩1分・すすきの駅徒歩3分</span>
-                  </div>
-                  </div>
-                  
-                  <button class="salon-card-btn">
-                    予約・店舗詳細はこちら
-                  </button>
-                </div>
+              <div 
+                data-region={salon.region[0]?.slug || ''} 
+                data-name={salon.title} 
+                data-prefecture={salon.prefecture[0]?.slug || ''} 
+                data-city={salon.city[0]?.slug || ''}
+              >
+                <SalonCard salon={salon} />
               </div>
             ))}
           </div>
@@ -2217,6 +2202,24 @@ const salonJsonLd = {
     background-color: var(--color-black);
     color: var(--color-white);
   }
+
+  /* ローディングとエラーのスタイル */
+  .salon-loading,
+  .salon-error,
+  .salon-no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+    color: var(--color-text-grey-medium);
+  }
+
+  .salon-loading p,
+  .salon-error p,
+  .salon-no-results p {
+    font-family: var(--font-family-zenkaku);
+    font-size: 16px;
+    margin: 0;
+  }
   
   /* 採用情報セクション */
   .recruit-section {
@@ -3150,7 +3153,7 @@ const salonJsonLd = {
 
     // サロンフィルター機能
     let currentFilter = {
-      region: '北海道',
+      region: 'kanto',
       searchTerm: ''
     };
 
@@ -3205,12 +3208,32 @@ const salonJsonLd = {
 
     // フィルターを適用する関数
     function applyFilters() {
-      const salonCards = document.querySelectorAll('.salon-card');
       const titleElement = document.getElementById('salon-filter-title');
       
-      let visibleCount = 0;
+      // タイトルを更新
       let filterText = '';
+      if (currentFilter.searchTerm) {
+        filterText = `「${currentFilter.searchTerm}」`;
+      } else if (currentFilter.region) {
+        const regionNames: { [key: string]: string } = {
+          'hokkaido': '北海道',
+          'tohoku': '東北',
+          'kanto': '関東',
+          'chubu': '中部',
+          'kansai': '近畿',
+          'shikoku': '四国',
+          'chugoku': '中国',
+          'kyushu': '九州・沖縄'
+        };
+        filterText = `「${regionNames[currentFilter.region] || currentFilter.region}」`;
+      }
+      
+      if (titleElement) {
+        titleElement.textContent = `${filterText}店舗一覧`;
+      }
 
+      // サロンカードの表示/非表示を切り替え
+      const salonCards = document.querySelectorAll('.salon-card');
       salonCards.forEach(card => {
         const region = card.getAttribute('data-region') || '';
         const name = card.getAttribute('data-name') || '';
@@ -3228,28 +3251,19 @@ const salonJsonLd = {
         
         if (regionMatch && searchMatch) {
           (card as HTMLElement).style.display = 'block';
-          visibleCount++;
         } else {
           (card as HTMLElement).style.display = 'none';
         }
       });
-
-      // タイトルを更新
-      if (currentFilter.searchTerm) {
-        filterText = `「${currentFilter.searchTerm}」`;
-      } else if (currentFilter.region) {
-        filterText = `「${currentFilter.region}」`;
-      }
-      
-      if (titleElement) {
-        titleElement.textContent = `${filterText}店舗一覧`;
-      }
     }
 
-    // 初期状態で北海道ボタンをアクティブにする
-    const hokkaidoBtn = document.querySelector('.region-btn[data-region="北海道"]');
-    if (hokkaidoBtn) {
-      hokkaidoBtn.classList.add('active');
+    // 初期状態で関東ボタンをアクティブにする
+    const kantoBtn = document.querySelector('.region-btn[data-region="kanto"]');
+    if (kantoBtn) {
+      kantoBtn.classList.add('active');
     }
+
+    // 初期フィルターを適用
+    applyFilters();
   });
 </script>

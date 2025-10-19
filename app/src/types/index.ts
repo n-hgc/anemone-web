@@ -139,6 +139,138 @@ export interface SearchFilters {
   query?: string;
 }
 
+// WordPress REST API用の型定義
+export interface WpPost {
+  id: number;
+  date: string;
+  date_gmt: string;
+  guid: {
+    rendered: string;
+  };
+  modified: string;
+  modified_gmt: string;
+  slug: string;
+  status: string;
+  type: string;
+  link: string;
+  title: {
+    rendered: string;
+  };
+  content: {
+    rendered: string;
+    protected: boolean;
+  };
+  excerpt: {
+    rendered: string;
+    protected: boolean;
+  };
+  author: number;
+  featured_media: number;
+  comment_status: string;
+  ping_status: string;
+  sticky: boolean;
+  template: string;
+  format: string;
+  meta: Record<string, any>;
+  categories: number[];
+  tags: number[];
+  _links: Record<string, any>;
+}
+
+// WordPress REST API用のメディア型定義
+export interface WpMedia {
+  id: number;
+  date: string;
+  slug: string;
+  type: string;
+  link: string;
+  title: {
+    rendered: string;
+  };
+  author: number;
+  comment_status: string;
+  ping_status: string;
+  template: string;
+  meta: Record<string, any>;
+  description: {
+    rendered: string;
+  };
+  caption: {
+    rendered: string;
+  };
+  alt_text: string;
+  media_type: string;
+  mime_type: string;
+  media_details: {
+    width: number;
+    height: number;
+    file: string;
+    sizes: Record<string, {
+      file: string;
+      width: number;
+      height: number;
+      mime_type: string;
+      source_url: string;
+    }>;
+    image_meta: Record<string, any>;
+  };
+  source_url: string;
+  _links: Record<string, any>;
+}
+
+// WordPress REST API用のカテゴリ型定義
+export interface WpCategory {
+  id: number;
+  count: number;
+  description: string;
+  link: string;
+  name: string;
+  slug: string;
+  taxonomy: string;
+  parent: number;
+  meta: Record<string, any>;
+  _links: Record<string, any>;
+}
+
+// WordPress REST API用のタグ型定義
+export interface WpTag {
+  id: number;
+  count: number;
+  description: string;
+  link: string;
+  name: string;
+  slug: string;
+  taxonomy: string;
+  meta: Record<string, any>;
+  _links: Record<string, any>;
+}
+
+// WordPress REST API用のニュース型定義
+export interface WpNews extends WpPost {
+  acf?: {
+    featured_image?: number;
+    categories?: string[];
+    tags?: string[];
+  };
+}
+
+// salons.index.json用の型定義
+export interface SalonIndexData {
+  id: number;
+  title: string;
+  furigana: string;
+  thumb: string;
+  region: Array<{ slug: string; name: string }>;
+  prefecture: Array<{ slug: string; name: string }>;
+  city: Array<{ slug: string; name: string }>;
+  job_role: Array<{ slug: string; name: string }>;
+  employment_type: Array<{ slug: string; name: string }>;
+  is_hiring: boolean;
+  reservation_url: string;
+  maps_url: string;
+  access: string;
+}
+
 // レガシー形式のSalon型定義（JSONデータ用）
 export interface LegacySalon {
   id: number;
