@@ -3,11 +3,24 @@ import Layout from '../../layouts/Layout.astro';
 import NewsCard from '../../components/NewsCard.astro';
 import Footer from '../../components/Footer.astro';
 import type { News } from '../../types';
+import { api } from '../../lib/api';
 
-// モックデータをインポート
-import newsData from '../../data/news.json';
+// ページネーション用のパラメータを取得
+const page = Number(Astro.url.searchParams.get('page') || '1');
+const perPage = 4;
 
-const news: News[] = newsData;
+// NEWSデータを取得
+let newsData: { items: News[]; total: number; totalPages: number } = { items: [], total: 0, totalPages: 0 };
+try {
+  const result = await api.getNewsList({ page, per_page: perPage });
+  if (result.success) {
+    newsData = result.data;
+  }
+} catch (error) {
+  console.error('NEWS取得エラー:', error);
+}
+
+const news: News[] = newsData.items;
 
 // ニュース一覧のJSON-LDを生成
 const newsJsonLd = {
@@ -96,12 +109,16 @@ const newsJsonLd = {
         <div class="news-list">
           {news.map((newsItem) => (
             <div class="news-item">
-              <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
+              {newsItem.featured_image && (
+                <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
+              )}
               <div class="news-content">
                 <div class="news-meta">
                   <span class="news-date">{newsItem.date.replace(/-/g, '.').substring(0, 10)}</span>
                   <span class="news-separator">|</span>
-                  <span class="news-category">{newsItem.categories[0]}</span>
+                  {newsItem.categories?.[0] && (
+                    <span class="news-category">{newsItem.categories[0]}</span>
+                  )}
                 </div>
                 <h3 class="news-item-title">
                   <a href={`/news/${newsItem.id}`} class="news-item-link">{newsItem.title}</a>
@@ -115,20 +132,40 @@ const newsJsonLd = {
         </div>
 
         <!-- ページネーション -->
-        <div class="news-pagination">
-          <nav class="pagination">
-            <a href="#" class="pagination__link pagination__link--active">1</a>
-            <a href="#" class="pagination__link">2</a>
-            <a href="#" class="pagination__link">3</a>
-            <span class="pagination__dots">...</span>
-            <a href="#" class="pagination__link">N</a>
-            <a href="#" class="pagination__next">
-              <svg class="pagination__arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-              </svg>
-            </a>
-          </nav>
-        </div>
+        {newsData.totalPages > 1 && (
+          <div class="news-pagination">
+            <nav class="pagination">
+              {page > 1 && (
+                <a href={`/news?page=${page - 1}`} class="pagination__link pagination__prev">
+                  <svg class="pagination__arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                  </svg>
+                </a>
+              )}
+              
+              {Array.from({ length: Math.min(5, newsData.totalPages) }, (_, i) => {
+                const pageNum = Math.max(1, Math.min(newsData.totalPages - 4, page - 2)) + i;
+                if (pageNum > newsData.totalPages) return null;
+                return (
+                  <a 
+                    href={`/news?page=${pageNum}`} 
+                    class={`pagination__link ${pageNum === page ? 'pagination__link--active' : ''}`}
+                  >
+                    {pageNum}
+                  </a>
+                );
+              })}
+              
+              {page < newsData.totalPages && (
+                <a href={`/news?page=${page + 1}`} class="pagination__link pagination__next">
+                  <svg class="pagination__arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              )}
+            </nav>
+          </div>
+        )}
 
       </div>
     </main>
@@ -325,6 +362,11 @@ const newsJsonLd = {
     color: var(--color-black);
     margin-bottom: 8px;
     line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .news-item-link {
@@ -344,6 +386,11 @@ const newsJsonLd = {
     font-weight: var(--font-weight-regular);
     font-style: normal;
     color: var(--color-text-grey-medium);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /* ページネーション */
@@ -509,3 +556,30 @@ const newsJsonLd = {
     }
   }
 </style>
+
+<script>
+  // ニュースタブ機能（NEWS一覧ページ用）
+  document.addEventListener('DOMContentLoaded', function() {
+    const newsTabs = document.querySelectorAll('.news-tab');
+    const newsItems = document.querySelectorAll('.news-item');
+    
+    newsTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // すべてのタブからactiveクラスを削除
+        newsTabs.forEach(t => t.classList.remove('active'));
+        // クリックされたタブにactiveクラスを追加
+        tab.classList.add('active');
+        
+        const category = tab.dataset.category;
+        
+        // ニュースアイテムをカテゴリでフィルタリング
+        newsItems.forEach(item => {
+          const itemCategory = item.querySelector('.news-category')?.textContent?.toLowerCase();
+          const shouldShow = category === 'information' || itemCategory === category;
+          
+          item.style.display = shouldShow ? 'flex' : 'none';
+        });
+      });
+    });
+  });
+</script>

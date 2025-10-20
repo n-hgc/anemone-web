@@ -1,10 +1,26 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Footer from '../../components/Footer.astro';
-import newsData from '../../data/news.json';
+import { api } from '../../lib/api';
+import type { News } from '../../types';
 
 export async function getStaticPaths() {
-  return newsData.map((article) => ({
+  // WordPressから動的にパスを生成するか、既存のモックデータを使用
+  try {
+    const result = await api.getNewsList({ per_page: 100 }); // 全記事を取得
+    if (result.success) {
+      return result.data.items.map((article) => ({
+        params: { id: article.id.toString() },
+        props: { article },
+      }));
+    }
+  } catch (error) {
+    console.error('静的パス生成エラー:', error);
+  }
+  
+  // フォールバック: モックデータを使用
+  const newsData = await import('../../data/news.json');
+  return newsData.default.map((article) => ({
     params: { id: article.id.toString() },
     props: { article },
   }));
@@ -55,9 +71,7 @@ const { article } = Astro.props;
         </div>
 
         <!-- 記事本文 -->
-        <div class="news-article-content">
-          <p>{article.content}</p>
-        </div>
+        <div class="news-article-content" set:html={article.content}></div>
 
         <!-- お知らせ一覧へボタン -->
         <div class="news-article-actions">

@@ -36,20 +36,44 @@ export interface NewsFilters {
   search?: string;
 }
 
+// 環境変数解決（import.meta.env を優先し、なければ process.env）
+function getEnv(key: string): string | undefined {
+  let viteEnv: any = undefined;
+  try {
+    // Astro/Vite 環境では import.meta.env が存在
+    viteEnv = (import.meta as any).env;
+  } catch {
+    // 何もしない（SSRやビルド時に未定義の可能性）
+  }
+  const fromVite = viteEnv && Object.prototype.hasOwnProperty.call(viteEnv, key) ? viteEnv[key] : undefined;
+  // Node 環境の process.env もフォールバックとして参照
+  const fromProcess = (typeof process !== 'undefined' && process.env) ? (process.env as any)[key] : undefined;
+  return (fromVite !== undefined ? fromVite : fromProcess);
+}
+
 // データソースの設定
 const API_CONFIG = {
-  // 開発環境ではモックデータを使用
-  useMockData: process.env.NODE_ENV === 'development' && !process.env.WP_API_URL,
+  // 開発環境ではモックデータを使用（WP_API_URLが未設定なら）
+  useMockData: (getEnv('NODE_ENV') === 'development') && !getEnv('WP_API_URL'),
   // WordPress REST APIのURL
-  wpApiUrl: process.env.WP_API_URL || 'https://anemone-salon.com/wp-json/wp/v2',
+  wpApiUrl: getEnv('WP_API_URL') || 'https://anemone-salon.com/wp-json/wp/v2',
   // キャッシュ設定
   cacheTimeout: 5 * 60 * 1000, // 5分
   // WordPress 5.8認証設定（Basic認証のみ）
   wpAuth: {
-    username: process.env.WP_BASIC_AUTH_USERNAME,
-    password: process.env.WP_BASIC_AUTH_PASSWORD
+    username: getEnv('WP_BASIC_AUTH_USERNAME'),
+    password: getEnv('WP_BASIC_AUTH_PASSWORD')
   }
 };
+
+// NEWSデータソース切替（env優先）
+function isUseMockNews(): boolean {
+  const ds = (getEnv('NEWS_DATA_SOURCE') || '').toLowerCase();
+  if (ds === 'mock') return true;
+  if (ds === 'wp') return false;
+  // 未設定時は既存の判定に準拠
+  return API_CONFIG.useMockData;
+}
 
 // キャッシュストレージ（ブラウザ環境でのみ使用）
 const cache = new Map<string, { data: any; timestamp: number }>();
@@ -107,7 +131,9 @@ async function getWpData<T>(
   endpoint: string,
   params: Record<string, any> = {}
 ): Promise<T> {
-  const url = new URL(`${API_CONFIG.wpApiUrl}/${endpoint}`);
+  const base = String(API_CONFIG.wpApiUrl || '').replace(/\/+$/, '');
+  const ep = String(endpoint || '').replace(/^\/+/, '');
+  const url = new URL(`${base}/${ep}`);
   
   // パラメータをクエリに追加
   Object.entries(params).forEach(([key, value]) => {
@@ -137,9 +163,10 @@ async function getWpData<T>(
   
   // デバッグ情報を出力
   console.log('=== API抽象化レイヤーでのリクエスト ===');
-  console.log('環境変数:', {
-    WP_API_URL: process.env.WP_API_URL,
-    NODE_ENV: process.env.NODE_ENV,
+  console.log('環境変数(resolve):', {
+    NEWS_DATA_SOURCE: getEnv('NEWS_DATA_SOURCE'),
+    WP_API_URL: getEnv('WP_API_URL'),
+    NODE_ENV: getEnv('NODE_ENV'),
     useMockData: API_CONFIG.useMockData,
     wpApiUrl: API_CONFIG.wpApiUrl
   });
@@ -186,16 +213,17 @@ async function getWpData<T>(
  * WordPress REST API用のデータ変換関数
  */
 function convertWpPostToLegacyNews(wpPost: any): LegacyNews {
+  // 後方互換用の簡易変換（未使用）
   return {
     id: wpPost.id,
-    title: wpPost.title.rendered,
-    content: wpPost.content.rendered,
-    excerpt: wpPost.excerpt.rendered,
-    date: wpPost.date,
-    categories: [], // 後でカテゴリAPIから取得
-    tags: [], // 後でタグAPIから取得
-    featured_image: wpPost.featured_media ? undefined : undefined, // 後でメディアAPIから取得
-    slug: wpPost.slug
+    title: wpPost.title?.rendered ?? '',
+    content: wpPost.content?.rendered ?? '',
+    excerpt: wpPost.excerpt?.rendered ?? '',
+    date: wpPost.date_gmt ?? wpPost.date,
+    categories: [],
+    tags: [],
+    featured_image: undefined,
+    slug: wpPost.slug ?? String(wpPost.id)
   };
 }
 
@@ -459,6 +487,15 @@ export const api = {
    * ニュース一覧を取得
    */
   async getNews(filters: NewsFilters = {}): Promise<ApiResponse<any[]>> {
+    // 既存の単純配列版（後方互換）。NEWS_DATA_SOURCE=wp の場合は blog から取得
+    if (!isUseMockNews()) {
+      const list = await this.getNewsList({ per_page: 10, page: 1 });
+      return {
+        data: list.success ? list.data.items : [],
+        success: list.success,
+        message: list.message
+      };
+    }
     return fetchData('news', filters);
   },
   
@@ -466,6 +503,14 @@ export const api = {
    * 特定のニュースを取得
    */
   async getNewsItem(id: number): Promise<ApiResponse<any>> {
+    if (!isUseMockNews()) {
+      try {
+        const item = await getBlogItem(id);
+        return { data: item, success: true };
+      } catch (e) {
+        return { data: null, success: false, message: e instanceof Error ? e.message : 'Unknown error' };
+      }
+    }
     const response = await fetchData('news');
     if (response.success && Array.isArray(response.data)) {
       const newsItem = response.data.find((n: any) => n.id === id);
@@ -753,5 +798,143 @@ export const api = {
    */
   async simpleFetchTest(): Promise<ApiResponse<any[]>> {
     return await simpleFetchTest();
+  },
+
+  /**
+   * NEWS: WordPress blog から一覧取得（ページネーション情報付き）
+   */
+  async getNewsList(params: { page?: number; per_page?: number; news_type?: number } = {}): Promise<ApiResponse<{ items: LegacyNews[]; total: number; totalPages: number }>> {
+    try {
+      if (isUseMockNews()) {
+        const all = await getMockData<LegacyNews[]>('news');
+        const page = params.page ?? 1;
+        const perPage = params.per_page ?? 4;
+        const start = (page - 1) * perPage;
+        const end = start + perPage;
+        const items = all.slice(start, end);
+        const total = all.length;
+        const totalPages = Math.max(1, Math.ceil(total / perPage));
+        return { data: { items, total, totalPages }, success: true };
+      }
+      const result = await fetchBlogList(params);
+      return { data: result, success: true };
+    } catch (error) {
+      return { data: { items: [], total: 0, totalPages: 0 }, success: false, message: error instanceof Error ? error.message : 'Unknown error' };
+    }
+  },
+
+  /**
+   * NEWS: news_type のスラッグからIDを解決
+   */
+  async resolveNewsTypeId(slug: string): Promise<number | null> {
+    try {
+      if (isUseMockNews()) return null; // モックではカテゴリ未使用
+      return await resolveNewsTypeIdInternal(slug);
+    } catch (e) {
+      return null;
+    }
+  },
+
+  /**
+   * NEWS: 単一記事を取得
+   */
+  async getBlogItem(id: number): Promise<LegacyNews | null> {
+    try {
+      if (isUseMockNews()) {
+        const all = await getMockData<LegacyNews[]>('news');
+        return all.find(item => item.id === id) || null;
+      }
+      const { data } = await fetchWithHeaders(`blog/${id}`, { _embed: 1 });
+      return mapBlogToNews(data as WpBlog);
+    } catch (e) {
+      return null;
+    }
   }
 };
+
+// ========== 内部ユーティリティ（NEWS用） ==========
+
+function decodeHtml(html: string): string {
+  if (!html) return '';
+  return html
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'");
+}
+
+function toPlainText(html: string): string {
+  if (!html) return '';
+  return html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+}
+
+type WpBlog = {
+  id: number;
+  date_gmt: string;
+  title: { rendered: string };
+  content: { rendered: string };
+  slug: string;
+  featured_media: number;
+  news_type_terms?: { slug: string; name: string }[];
+  _embedded?: { 'wp:featuredmedia'?: Array<{ source_url: string; alt_text?: string }>; };
+};
+
+function mapBlogToNews(p: WpBlog): LegacyNews {
+  const media = p._embedded?.['wp:featuredmedia']?.[0]?.source_url;
+  const categories = (p.news_type_terms ?? []).map(t => t.name);
+  return {
+    id: p.id,
+    title: decodeHtml(p.title?.rendered ?? ''),
+    date: p.date_gmt,
+    categories: categories.length > 0 ? categories : ['INFORMATION'],
+    featured_image: media || undefined,
+    excerpt: toPlainText(p.content?.rendered ?? '').slice(0, 120),
+    content: p.content?.rendered ?? '',
+    tags: [],
+    slug: p.slug,
+  };
+}
+
+async function fetchWithHeaders(endpoint: string, params: Record<string, any> = {}): Promise<{ data: any; headers: Headers }> {
+  const url = new URL(`${API_CONFIG.wpApiUrl}/${endpoint}`);
+  console.log("url"+url);
+  Object.entries(params).forEach(([k, v]) => {
+    if (v !== undefined && v !== null) url.searchParams.append(k, String(v));
+  });
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (API_CONFIG.wpAuth.username && API_CONFIG.wpAuth.password) {
+    const credentials = btoa(`${API_CONFIG.wpAuth.username}:${API_CONFIG.wpAuth.password}`);
+    headers['Authorization'] = `Basic ${credentials}`;
+  }
+  const res = await fetch(url.toString(), { method: 'GET', headers, mode: 'cors', credentials: 'omit' });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`HTTP ${res.status} ${res.statusText}: ${text}`);
+  }
+  const json = await res.json();
+  return { data: json, headers: res.headers };
+}
+
+async function fetchBlogList(params: { page?: number; per_page?: number; news_type?: number } = {}): Promise<{ items: LegacyNews[]; total: number; totalPages: number }> {
+  const page = params.page ?? 1;
+  const per_page = params.per_page ?? 4;
+  const query: Record<string, any> = { _embed: 1, page, per_page, status: 'publish', order: 'desc', orderby: 'date' };
+  if (params.news_type) query['news_type'] = params.news_type;
+  const { data, headers } = await fetchWithHeaders('blog', query);
+  const items = (data as WpBlog[]).map(mapBlogToNews);
+  const total = Number(headers.get('X-WP-Total') || headers.get('x-wp-total') || items.length);
+  const totalPages = Number(headers.get('X-WP-TotalPages') || headers.get('x-wp-totalpages') || 1);
+  return { items, total, totalPages };
+}
+
+const newsTypeCache = new Map<string, number>();
+async function resolveNewsTypeIdInternal(slug: string): Promise<number | null> {
+  if (newsTypeCache.has(slug)) return newsTypeCache.get(slug)!;
+  const list = await getWpData<any[]>('news_type', { slug });
+  if (Array.isArray(list) && list.length > 0 && typeof list[0].id === 'number') {
+    newsTypeCache.set(slug, list[0].id);
+    return list[0].id;
+  }
+  return null;
+}
