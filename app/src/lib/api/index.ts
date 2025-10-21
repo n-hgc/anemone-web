@@ -834,6 +834,26 @@ export const api = {
       return { data: result, success: true };
     } catch (error) {
       console.error('Error fetching news:', error);
+      
+      // WordPress APIアクセスが拒否された場合、モックデータにフォールバック
+      if (error instanceof Error && error.message.includes('403 Forbidden')) {
+        console.log('WordPress API access denied, falling back to mock data');
+        try {
+          const all = await getMockData<LegacyNews[]>('news');
+          const page = params.page ?? 1;
+          const perPage = params.per_page ?? 4;
+          const start = (page - 1) * perPage;
+          const end = start + perPage;
+          const items = all.slice(start, end);
+          const total = all.length;
+          const totalPages = Math.max(1, Math.ceil(total / perPage));
+          console.log('Fallback to mock data result:', { items: items.length, total, totalPages });
+          return { data: { items, total, totalPages }, success: true };
+        } catch (mockError) {
+          console.error('Mock data fallback failed:', mockError);
+        }
+      }
+      
       return { data: { items: [], total: 0, totalPages: 0 }, success: false, message: error instanceof Error ? error.message : 'Unknown error' };
     }
   },
@@ -929,11 +949,22 @@ async function fetchWithHeaders(endpoint: string, params: Record<string, any> = 
   Object.entries(params).forEach(([k, v]) => {
     if (v !== undefined && v !== null) url.searchParams.append(k, String(v));
   });
-  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    'User-Agent': 'Anemone-Web/1.0 (Cloudflare Pages)',
+    'Accept': 'application/json',
+    'Referer': 'https://anemone-salon.com/'
+  };
+  
   if (API_CONFIG.wpAuth.username && API_CONFIG.wpAuth.password) {
     const credentials = btoa(`${API_CONFIG.wpAuth.username}:${API_CONFIG.wpAuth.password}`);
     headers['Authorization'] = `Basic ${credentials}`;
   }
+  
+  console.log('Request headers:', headers);
+  console.log('Request URL:', url.toString());
+  
   const res = await fetch(url.toString(), { method: 'GET', headers, mode: 'cors', credentials: 'omit' });
   if (!res.ok) {
     const text = await res.text();
