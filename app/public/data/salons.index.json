@@ -1,119 +1,127 @@
 [
   {
-    "id": 1,
-    "title": "アネモネ渋谷店",
-    "furigana": "アネモネシブヤテン",
-    "thumb": "/images/salon/salon-image-01.png",
-    "region": [{ "slug": "kanto", "name": "関東" }],
-    "prefecture": [{ "slug": "tokyo", "name": "東京都" }],
-    "city": [{ "slug": "shibuya", "name": "渋谷区" }],
-    "job_role": [{ "slug": "stylist", "name": "スタイリスト" }],
-    "employment_type": [
-      { "slug": "fulltime", "name": "正社員" },
-      { "slug": "mid-career", "name": "中途" },
-      { "slug": "new", "name": "新卒" }
+    "id": 9122,
+    "title": "little 久留米",
+    "furigana": "リトルクルメ",
+    "thumb": "https://anemone-salon.com/wp-content/uploads/2025/05/B235040153.jpg",
+    "region": [
+      {
+        "slug": "kyushu-okinawa",
+        "name": "九州・沖縄"
+      }
     ],
+    "prefecture": [
+      {
+        "slug": "fukuoka",
+        "name": "福岡県"
+      }
+    ],
+    "city": [
+      {
+        "slug": "%e4%b9%85%e7%95%99%e7%b1%b3%e5%b8%82",
+        "name": "久留米市"
+      }
+    ],
+    "job_role": [],
+    "employment_type": [],
     "is_hiring": true,
-    "reservation_url": "https://reserve.example.com/shibuya",
-    "maps_url": "https://maps.google.com/?q=渋谷駅",
-    "access": "渋谷駅徒歩3分"
+    "reservation_url": "https://lin.ee/jelqQ6y",
+    "maps_url": "",
+    "access": "久留米駅徒歩10分"
   },
   {
-    "id": 2,
-    "title": "アネモネ新宿店",
-    "furigana": "アネモネシンジュクテン",
-    "thumb": "/images/salon/salon-image-02.png",
-    "region": [{ "slug": "kanto", "name": "関東" }],
-    "prefecture": [{ "slug": "tokyo", "name": "東京都" }],
-    "city": [{ "slug": "shinjuku", "name": "新宿区" }],
-    "job_role": [{ "slug": "stylist", "name": "スタイリスト" }, { "slug": "assistant", "name": "アシスタント" }],
-    "employment_type": [
-      { "slug": "fulltime", "name": "正社員" },
-      { "slug": "parttime", "name": "パート" },
-      { "slug": "mid-career", "name": "中途" },
-      { "slug": "new", "name": "新卒" }
+    "id": 9118,
+    "title": "little 新宿",
+    "furigana": "リトルシンジュク",
+    "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/025.jpg",
+    "region": [
+      {
+        "slug": "kanto",
+        "name": "関東"
+      }
     ],
-    "is_hiring": true,
-    "reservation_url": "https://reserve.example.com/shinjuku",
-    "maps_url": "https://maps.google.com/?q=新宿駅",
-    "access": "新宿駅徒歩5分"
-  },
-  {
-    "id": 3,
-    "title": "アネモネ表参道店",
-    "furigana": "アネモネオモテサンドウテン",
-    "thumb": "/images/salon/salon-image-03.png",
-    "region": [{ "slug": "kanto", "name": "関東" }],
-    "prefecture": [{ "slug": "tokyo", "name": "東京都" }],
-    "city": [{ "slug": "omotesando", "name": "表参道" }],
-    "job_role": [{ "slug": "stylist", "name": "スタイリスト" }],
-    "employment_type": [
-      { "slug": "fulltime", "name": "正社員" },
-      { "slug": "mid-career", "name": "中途" },
-      { "slug": "new", "name": "新卒" }
+    "prefecture": [
+      {
+        "slug": "tokyo",
+        "name": "東京都"
+      }
     ],
+    "city": [
+      {
+        "slug": "%e6%96%b0%e5%ae%bf%e5%8c%ba",
+        "name": "新宿区"
+      }
+    ],
+    "job_role": [
+      {
+        "slug": "assistant",
+        "name": "アシスタント"
+      }
+    ],
+    "employment_type": [],
     "is_hiring": false,
-    "reservation_url": "https://reserve.example.com/omotesando",
-    "maps_url": "https://maps.google.com/?q=表参道駅",
-    "access": "表参道駅徒歩2分"
+    "reservation_url": "https://lin.ee/gW98Nbm",
+    "maps_url": "",
+    "access": "新宿駅徒歩3分"
   },
   {
-    "id": 4,
-    "title": "アネモネ横浜店",
-    "furigana": "アネモネヨコハマテン",
-    "thumb": "/images/salon/salon-image-04.png",
-    "region": [{ "slug": "kanto", "name": "関東" }],
-    "prefecture": [{ "slug": "kanagawa", "name": "神奈川県" }],
-    "city": [{ "slug": "yokohama", "name": "横浜市" }],
-    "job_role": [{ "slug": "stylist", "name": "スタイリスト" }, { "slug": "assistant", "name": "アシスタント" }],
+    "id": 9117,
+    "title": "Alea by little 横浜",
+    "furigana": "アーレアバイリトル",
+    "thumb": "https://anemone-salon.com/wp-content/uploads/2021/09/2MN_0062.jpg",
+    "region": [
+      {
+        "slug": "kanto",
+        "name": "関東"
+      }
+    ],
+    "prefecture": [
+      {
+        "slug": "kanagawa",
+        "name": "神奈川県"
+      }
+    ],
+    "city": [
+      {
+        "slug": "%e6%a8%aa%e6%b5%9c%e5%b8%82",
+        "name": "横浜市"
+      }
+    ],
+    "job_role": [
+      {
+        "slug": "eyelist",
+        "name": "アイリスト/アイブロウリスト"
+      },
+      {
+        "slug": "assistant",
+        "name": "アシスタント"
+      },
+      {
+        "slug": "stylist",
+        "name": "スタイリスト"
+      }
+    ],
     "employment_type": [
-      { "slug": "fulltime", "name": "正社員" },
-      { "slug": "parttime", "name": "パート" },
-      { "slug": "mid-career", "name": "中途" },
-      { "slug": "new", "name": "新卒" }
+      {
+        "slug": "parttime",
+        "name": "パート"
+      },
+      {
+        "slug": "mid-career",
+        "name": "中途"
+      },
+      {
+        "slug": "new",
+        "name": "新卒"
+      },
+      {
+        "slug": "fulltime",
+        "name": "正社員"
+      }
     ],
     "is_hiring": true,
-    "reservation_url": "https://reserve.example.com/yokohama",
-    "maps_url": "https://maps.google.com/?q=横浜駅",
-    "access": "横浜駅徒歩7分"
-  },
-  {
-    "id": 5,
-    "title": "アネモネ大阪梅田店",
-    "furigana": "アネモネオオサカウメダテン",
-    "thumb": "/images/salon/salon-image-05.png",
-    "region": [{ "slug": "kansai", "name": "近畿" }],
-    "prefecture": [{ "slug": "osaka", "name": "大阪府" }],
-    "city": [{ "slug": "umeda", "name": "梅田" }],
-    "job_role": [{ "slug": "stylist", "name": "スタイリスト" }],
-    "employment_type": [
-      { "slug": "fulltime", "name": "正社員" },
-      { "slug": "mid-career", "name": "中途" },
-      { "slug": "new", "name": "新卒" }
-    ],
-    "is_hiring": true,
-    "reservation_url": "https://reserve.example.com/osaka-umeda",
-    "maps_url": "https://maps.google.com/?q=梅田駅",
-    "access": "梅田駅徒歩4分"
-  },
-  {
-    "id": 6,
-    "title": "アネモネ名古屋店",
-    "furigana": "アネモネナゴヤテン",
-    "thumb": "/images/salon/salon-image-06.png",
-    "region": [{ "slug": "chubu", "name": "中部" }],
-    "prefecture": [{ "slug": "aichi", "name": "愛知県" }],
-    "city": [{ "slug": "nagoya", "name": "名古屋市" }],
-    "job_role": [{ "slug": "stylist", "name": "スタイリスト" }, { "slug": "assistant", "name": "アシスタント" }],
-    "employment_type": [
-      { "slug": "fulltime", "name": "正社員" },
-      { "slug": "parttime", "name": "パート" },
-      { "slug": "mid-career", "name": "中途" },
-      { "slug": "new", "name": "新卒" }
-    ],
-    "is_hiring": true,
-    "reservation_url": "https://reserve.example.com/nagoya",
-    "maps_url": "https://maps.google.com/?q=名古屋駅",
-    "access": "名古屋駅徒歩6分"
+    "reservation_url": "https://www.google.com/",
+    "maps_url": "",
+    "access": "横浜駅徒歩５分"
   }
 ]

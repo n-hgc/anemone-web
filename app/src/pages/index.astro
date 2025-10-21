@@ -338,7 +338,7 @@ const salonJsonLd = {
                 <button class="region-btn" data-region="kansai">近畿</button>
                 <button class="region-btn" data-region="shikoku">四国</button>
                 <button class="region-btn" data-region="chugoku">中国</button>
-                <button class="region-btn" data-region="kyushu">九州・沖縄</button>
+                <button class="region-btn" data-region="kyushu-okinawa">九州・沖縄</button>
               </div>
               
               <!-- 検索バー -->
@@ -393,7 +393,7 @@ const salonJsonLd = {
                 <button class="region-btn" data-region="kansai">近畿</button>
                 <button class="region-btn" data-region="shikoku">四国</button>
                 <button class="region-btn" data-region="chugoku">中国</button>
-                <button class="region-btn" data-region="kyushu">九州・沖縄</button>
+                <button class="region-btn" data-region="kyushu-okinawa">九州・沖縄</button>
               </div>
               
               <!-- 検索バー -->
@@ -417,7 +417,7 @@ const salonJsonLd = {
         <!-- 店舗一覧 -->
         <div class="salon-listings">
           <div class="salon-area-title">
-            <h3 id="salon-filter-title">「関東」店舗一覧</h3>
+            <h3 id="salon-filter-title">店舗一覧</h3>
           </div>
           <div class="salon-cards grid-3-cols" id="salon-cards-container">
             {salons.slice(0, 10).map((salon, index) => (
@@ -3270,7 +3270,7 @@ const salonJsonLd = {
 
     // サロンフィルター機能
     let currentFilter = {
-      region: 'kanto',
+      region: '',
       searchTerm: ''
     };
 
@@ -3352,7 +3352,7 @@ const salonJsonLd = {
           'kansai': '近畿',
           'shikoku': '四国',
           'chugoku': '中国',
-          'kyushu': '九州・沖縄'
+          'kyushu-okinawa': '九州・沖縄'
         };
         filterText = `「${regionNames[currentFilter.region] || currentFilter.region}」`;
       }
@@ -3372,6 +3372,9 @@ const salonJsonLd = {
         
         // 地域フィルター - salons.index.jsonのregion配列のslugと一致
         const regionMatch = !currentFilter.region || region === currentFilter.region;
+        
+        // デバッグ情報を追加
+        console.log(`サロン: ${name}, 地域: ${region}, フィルター: ${currentFilter.region}, マッチ: ${regionMatch}`);
         
         // 検索フィルター - サロン名、都道府県、市区町村で検索
         const searchMatch = !currentFilter.searchTerm || 
@@ -3393,11 +3396,11 @@ const salonJsonLd = {
       console.log(`フィルター結果: ${visibleCards.length}件のサロンが表示されています`);
     }
 
-    // 初期状態で関東ボタンをアクティブにする
-    const kantoBtn = document.querySelector('.region-btn[data-region="kanto"]');
-    if (kantoBtn) {
-      kantoBtn.classList.add('active');
-    }
+    // 初期状態ではすべてのサロンを表示（ボタンはアクティブにしない）
+    // const kantoBtn = document.querySelector('.region-btn[data-region="kanto"]');
+    // if (kantoBtn) {
+    //   kantoBtn.classList.add('active');
+    // }
 
     // 初期フィルターを適用
     applyFilters();
