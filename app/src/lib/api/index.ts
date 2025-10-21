@@ -952,9 +952,9 @@ async function fetchWithHeaders(endpoint: string, params: Record<string, any> = 
   
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
-    'User-Agent': 'Anemone-Web/1.0 (Cloudflare Pages)',
+    'User-Agent': 'Mozilla/5.0 (compatible; AnemoneWeb/1.0; +https://www.anemone-salon.com/)',
     'Accept': 'application/json',
-    'Referer': 'https://anemone-salon.com/'
+    'Referer': 'https://www.anemone-salon.com/'
   };
   
   if (API_CONFIG.wpAuth.username && API_CONFIG.wpAuth.password) {
