@@ -298,3 +298,53 @@ export interface HairstyleItem {
   imageUrl: string;
   alt: string;
 }
+
+// Instagram API用の型定義
+export interface InstagramApiItem {
+  id: number;
+  date: string;
+  date_gmt: string;
+  guid: {
+    rendered: string;
+  };
+  modified: string;
+  modified_gmt: string;
+  slug: string;
+  status: string;
+  type: string;
+  link: string;
+  title: {
+    rendered: string;
+  };
+  featured_media: number;
+  template: string;
+  meta: any[];
+  custom_fields: {
+    subtitle: string | null;
+    hero_image: string | null;
+    'salon-staff-list': string | null;
+  };
+  acf: {
+    url: string;
+  };
+  _links: {
+    self: Array<{ href: string }>;
+    collection: Array<{ href: string }>;
+    about: Array<{ href: string }>;
+    'wp:featuredmedia': Array<{ embeddable: boolean; href: string }>;
+    'wp:attachment': Array<{ href: string }>;
+    curies: Array<{ name: string; href: string; templated: boolean }>;
+  };
+}
+
+// Instagram用の変換後型定義
+export interface InstagramItem {
+  id: number;
+  title: string;
+  slug: string;
+  imageUrl: string;
+  instagramUrl: string;
+  date: string;
+  featured_media_id: number;
+  alt: string;
+}
