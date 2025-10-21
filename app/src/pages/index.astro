@@ -8,8 +8,8 @@ import { componentClasses, responsive } from '../lib/design-system';
 import type { SalonIndexData, News, Prefecture } from '../types';
 
 // モックデータをインポート
-import newsData from '../data/news.json';
 import prefecturesData from '../data/prefectures.json';
+import { api } from '../lib/api';
 
 // サロンデータを読み込む
 let salonData: any[] = [];
@@ -27,11 +27,31 @@ try {
 // サロンデータを直接使用（変換不要）
 const salons: SalonIndexData[] = salonData;
 
-const news: News[] = newsData;
+// NEWSデータを取得（まとめて取得→クライアント側でカテゴリ分割）
+let newsByCategory: { [key: string]: News[] } = { information: [], blog: [], movie: [] };
+try {
+  const result = await api.getNewsList({ per_page: 24 }); // 3カテゴリ×各4件を想定し多めに取得
+  const items = result.success ? result.data.items : [];
+  const info: News[] = [];
+  const blog: News[] = [];
+  const movie: News[] = [];
+  for (const n of items) {
+    const cat = (n.categories?.[0] || '').toLowerCase();
+    if (cat === 'information' && info.length < 4) info.push(n);
+    else if (cat === 'blog' && blog.length < 4) blog.push(n);
+    else if (cat === 'movie' && movie.length < 4) movie.push(n);
+    // 全カテゴリが4件揃ったら打ち切り
+    if (info.length === 4 && blog.length === 4 && movie.length === 4) break;
+  }
+  newsByCategory = { information: info, blog, movie };
+} catch (error) {
+  console.error('NEWS取得エラー:', error);
+}
+
 const prefectures: Prefecture[] = prefecturesData;
 
-// 最新のニュース3件を取得
-const latestNews = news.slice(0, 3);
+// 最新のニュース3件を取得（INFORMATIONカテゴリから）
+const latestNews = newsByCategory.information.slice(0, 3);
 
 // 店舗一覧のJSON-LDを生成（サロンデータはクライアントサイドで読み込むため、ここでは空の配列）
 const salonJsonLd = {
@@ -485,70 +505,73 @@ const salonJsonLd = {
           <button class="news-tab" data-category="movie">MOVIE</button>
         </div>
         
-        <!-- ニュース一覧 -->
+        <!-- ニュース一覧（WP連携：従来のDOM構造・クラスを維持） -->
         <div class="news-list">
-          <div class="news-item">
-            <img src="/images/news/news-01.png" alt="川嶋美晴さんご来店" class="news-image" />
-            <div class="news-content">
-              <div class="news-meta">
-                <span class="news-date">2025.03.13</span>
-                <span class="news-separator">|</span>
-                <span class="news-category">INFORMATION</span>
+          <div class="news-group" data-category="information">
+            {newsByCategory.information.map((newsItem) => (
+              <div class="news-item">
+                {newsItem.featured_image && (
+                  <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
+                )}
+                <div class="news-content">
+                  <div class="news-meta">
+                    <span class="news-date">{newsItem.date.replace(/-/g, '.').substring(0, 10)}</span>
+                    <span class="news-separator">|</span>
+                    {newsItem.categories?.[0] && (
+                      <span class="news-category">{newsItem.categories[0]}</span>
+                    )}
+                  </div>
+                  <h3 class="news-item-title">
+                    <a href={`/news/${newsItem.id}`} class="news-item-link">{newsItem.title}</a>
+                  </h3>
+                  <p class="news-description">{newsItem.excerpt}</p>
+                </div>
               </div>
-              <h3 class="news-item-title">川嶋美晴さんご来店☆</h3>
-              <p class="news-description">
-                先日、モデルの川嶋美晴さんにご来店いただきました。<br>
-                新しいヘアスタイルで素敵に変身されていました！
-              </p>
-            </div>
+            ))}
           </div>
-          
-          <div class="news-item">
-            <img src="/images/news/news-02.png" alt="アビスパ福岡・重見柾斗選手ご来店" class="news-image" />
-            <div class="news-content">
-              <div class="news-meta">
-                <span class="news-date">2025.01.31</span>
-                <span class="news-separator">|</span>
-                <span class="news-category">INFORMATION</span>
+          <div class="news-group" data-category="blog" style="display:none;">
+            {newsByCategory.blog.map((newsItem) => (
+              <div class="news-item">
+                {newsItem.featured_image && (
+                  <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
+                )}
+                <div class="news-content">
+                  <div class="news-meta">
+                    <span class="news-date">{newsItem.date.replace(/-/g, '.').substring(0, 10)}</span>
+                    <span class="news-separator">|</span>
+                    {newsItem.categories?.[0] && (
+                      <span class="news-category">{newsItem.categories[0]}</span>
+                    )}
+                  </div>
+                  <h3 class="news-item-title">
+                    <a href={`/news/${newsItem.id}`} class="news-item-link">{newsItem.title}</a>
+                  </h3>
+                  <p class="news-description">{newsItem.excerpt}</p>
+                </div>
               </div>
-              <h3 class="news-item-title">アビスパ福岡・重見柾斗選手ご来店☆</h3>
-              <p class="news-description">
-                サッカー選手の重見柾斗さんにご来店いただきました。<br>
-                スポーツマンらしい爽やかなスタイルに仕上げました。
-              </p>
-            </div>
+            ))}
           </div>
-          
-          <div class="news-item">
-            <img src="/images/news/news-03.png" alt="村田倫子さんご来店" class="news-image" />
-            <div class="news-content">
-              <div class="news-meta">
-                <span class="news-date">2022.08.30</span>
-                <span class="news-separator">|</span>
-                <span class="news-category">INFORMATION</span>
+          <div class="news-group" data-category="movie" style="display:none;">
+            {newsByCategory.movie.map((newsItem) => (
+              <div class="news-item">
+                {newsItem.featured_image && (
+                  <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
+                )}
+                <div class="news-content">
+                  <div class="news-meta">
+                    <span class="news-date">{newsItem.date.replace(/-/g, '.').substring(0, 10)}</span>
+                    <span class="news-separator">|</span>
+                    {newsItem.categories?.[0] && (
+                      <span class="news-category">{newsItem.categories[0]}</span>
+                    )}
+                  </div>
+                  <h3 class="news-item-title">
+                    <a href={`/news/${newsItem.id}`} class="news-item-link">{newsItem.title}</a>
+                  </h3>
+                  <p class="news-description">{newsItem.excerpt}</p>
+                </div>
               </div>
-              <h3 class="news-item-title">村田倫子さんご来店☆</h3>
-              <p class="news-description">
-                女優の村田倫子さんにご来店いただきました。<br>
-                エレガントなヘアスタイルで美しく仕上げました。
-              </p>
-            </div>
-          </div>
-          
-          <div class="news-item">
-            <img src="/images/news/news-04.png" alt="水崎綾女さんご来店" class="news-image" />
-            <div class="news-content">
-              <div class="news-meta">
-                <span class="news-date">2022.06.13</span>
-                <span class="news-separator">|</span>
-                <span class="news-category">INFORMATION</span>
-              </div>
-              <h3 class="news-item-title">水崎綾女さんご来店☆</h3>
-              <p class="news-description">
-                モデルの水崎綾女さんにご来店いただきました。<br>
-                トレンドを取り入れたスタイルで仕上げました。
-              </p>
-            </div>
+            ))}
           </div>
         </div>
         
@@ -2587,6 +2610,11 @@ const salonJsonLd = {
     color: var(--color-black);
     margin-bottom: 8px;
     line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .news-description {
@@ -2596,6 +2624,11 @@ const salonJsonLd = {
     font-weight: var(--font-weight-regular);
     font-style: normal;
     color: var(--color-text-grey-medium);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .news-more {
@@ -3134,19 +3167,22 @@ const salonJsonLd = {
       });
     }
     
-    // ニュースタブ機能
+    // ニュースタブ機能（.news-group の表示切替）
     const newsTabs = document.querySelectorAll('.news-tab');
+    const newsGroups = document.querySelectorAll('.news-group');
     newsTabs.forEach(tab => {
       tab.addEventListener('click', () => {
         // すべてのタブからactiveクラスを削除
         newsTabs.forEach(t => t.classList.remove('active'));
         // クリックされたタブにactiveクラスを追加
         tab.classList.add('active');
-        
-        // ここでカテゴリに応じたフィルタリング処理を実装
+
         const category = (tab as HTMLElement).dataset.category;
-        console.log('選択されたニュースカテゴリ:', category);
-        // 実際の実装では、ここでニュースの表示を切り替える
+        // グループの表示切替
+        newsGroups.forEach(group => {
+          const groupCategory = (group as HTMLElement).dataset.category;
+          (group as HTMLElement).style.display = groupCategory === category ? 'block' : 'none';
+        });
       });
     });
 

@@ -1,10 +1,26 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Footer from '../../components/Footer.astro';
-import newsData from '../../data/news.json';
+import { api } from '../../lib/api';
+import type { News } from '../../types';
 
 export async function getStaticPaths() {
-  return newsData.map((article) => ({
+  // WordPressから動的にパスを生成するか、既存のモックデータを使用
+  try {
+    const result = await api.getNewsList({ per_page: 100 }); // 全記事を取得
+    if (result.success) {
+      return result.data.items.map((article) => ({
+        params: { id: article.id.toString() },
+        props: { article },
+      }));
+    }
+  } catch (error) {
+    console.error('静的パス生成エラー:', error);
+  }
+  
+  // フォールバック: モックデータを使用
+  const newsData = await import('../../data/news.json');
+  return newsData.default.map((article) => ({
     params: { id: article.id.toString() },
     props: { article },
   }));
@@ -49,15 +65,8 @@ const { article } = Astro.props;
         <!-- 記事タイトル -->
         <h2 class="news-article-title">{article.title}</h2>
 
-        <!-- 記事画像 -->
-        <div class="news-article-image">
-          <img src={article.featured_image} alt={article.title} />
-        </div>
-
         <!-- 記事本文 -->
-        <div class="news-article-content">
-          <p>{article.content}</p>
-        </div>
+        <div class="news-article-content" set:html={article.content}></div>
 
         <!-- お知らせ一覧へボタン -->
         <div class="news-article-actions">
@@ -221,6 +230,7 @@ const { article } = Astro.props;
 
   .news-article-content {
     margin-bottom: 3rem;
+    display: inline-block;
   }
 
   .news-article-content p {
@@ -229,6 +239,31 @@ const { article } = Astro.props;
     line-height: 1.8;
     color: var(--color-black);
     margin-bottom: 1.5rem;
+  }
+
+  /* iframe対応 */
+  :global(.news-article-content iframe) {
+    width: 100% !important;
+    max-width: 710px !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9 !important; /* YouTubeの標準アスペクト比 */
+    border: none !important;
+    margin: 16px 0 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* YouTube埋め込み専用 */
+  :global(.news-article-content iframe[src*="youtube.com"]),
+  :global(.news-article-content iframe[src*="youtu.be"]) {
+    aspect-ratio: 16 / 9 !important;
+    min-height: 200px !important;
+  }
+
+  /* その他の動画埋め込み */
+  :global(.news-article-content iframe[src*="vimeo.com"]),
+  :global(.news-article-content iframe[src*="nicovideo.jp"]) {
+    aspect-ratio: 16 / 9 !important;
+    min-height: 200px !important;
   }
 
   .news-article-actions {
@@ -281,6 +316,11 @@ const { article } = Astro.props;
 
     .news-article-title {
       font-size: 28px;
+    }
+
+    :global(.news-article-content iframe) {
+      margin: 1.5rem 0 !important;
+      border-radius: 4px !important;
     }
   }
 
@@ -367,6 +407,10 @@ const { article } = Astro.props;
 
     .breadcrumb__current {
       max-width: 120px;
+    }
+
+    :global(.news-article-content iframe) {
+      margin: 1rem 0 !important;
     }
   }
 </style>
