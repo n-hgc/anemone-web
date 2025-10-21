@@ -8,7 +8,9 @@ import type {
   WpTag, 
   WpNews,
   LegacySalon,
-  News as LegacyNews
+  News as LegacyNews,
+  InstagramApiItem,
+  InstagramItem
 } from '../../types';
 
 export interface ApiResponse<T> {
@@ -119,6 +121,8 @@ async function getMockData<T>(type: string): Promise<T> {
       return (await import('../../data/news.json')).default as T;
     case 'prefectures':
       return (await import('../../data/prefectures.json')).default as T;
+    case 'instagram':
+      return (await import('../../data/instagram.json')).default as T;
     default:
       throw new Error(`Unknown data type: ${type}`);
   }
@@ -198,6 +202,26 @@ function convertWpPostToLegacyNews(wpPost: any): LegacyNews {
     tags: [],
     featured_image: undefined,
     slug: wpPost.slug ?? String(wpPost.id)
+  };
+}
+
+/**
+ * Instagram API用のデータ変換関数
+ */
+function convertInstagramApiToItem(apiItem: InstagramApiItem): InstagramItem {
+  // メディアIDから実際の画像URLを構築
+  // WordPressのメディアAPIエンドポイントを使用
+  const imageUrl = `https://anemone-salon.com/wp-json/wp/v2/media/${apiItem.featured_media}`;
+  
+  return {
+    id: apiItem.id,
+    title: apiItem.title.rendered,
+    slug: apiItem.slug,
+    imageUrl: imageUrl,
+    instagramUrl: apiItem.acf?.url || 'https://www.instagram.com/',
+    date: apiItem.date_gmt,
+    featured_media_id: apiItem.featured_media,
+    alt: apiItem.title.rendered
   };
 }
 
@@ -793,6 +817,113 @@ export const api = {
       return mapBlogToNews(data as WpBlog);
     } catch (e) {
       return null;
+    }
+  },
+
+  /**
+   * Instagram一覧を取得
+   */
+  async getInstagramItems(params: { per_page?: number; page?: number } = {}): Promise<ApiResponse<InstagramItem[]>> {
+    try {
+      const per_page = params.per_page || 9;
+      const page = params.page || 1;
+      
+      // WordPress APIから取得を試行
+      const apiItems = await getWpData<InstagramApiItem[]>('instagram_api', { per_page, page });
+      
+      // 各アイテムのメディア情報を取得して変換
+      const items: InstagramItem[] = [];
+      for (const apiItem of apiItems) {
+        try {
+          // メディア情報を取得
+          const mediaResponse = await this.getWpMedia(apiItem.featured_media);
+          const media = mediaResponse.success ? mediaResponse.data : null;
+          
+          const item: InstagramItem = {
+            id: apiItem.id,
+            title: apiItem.title.rendered,
+            slug: apiItem.slug,
+            imageUrl: media?.source_url || `/images/main/instagram-${String(apiItem.id).padStart(2, '0')}.png`,
+            instagramUrl: apiItem.acf?.url || 'https://www.instagram.com/',
+            date: apiItem.date_gmt,
+            featured_media_id: apiItem.featured_media,
+            alt: apiItem.title.rendered
+          };
+          
+          items.push(item);
+        } catch (mediaError) {
+          // メディア取得に失敗した場合でも基本情報は保存
+          const item: InstagramItem = {
+            id: apiItem.id,
+            title: apiItem.title.rendered,
+            slug: apiItem.slug,
+            imageUrl: `/images/main/instagram-${String(apiItem.id).padStart(2, '0')}.png`,
+            instagramUrl: apiItem.acf?.url || 'https://www.instagram.com/',
+            date: apiItem.date_gmt,
+            featured_media_id: apiItem.featured_media,
+            alt: apiItem.title.rendered
+          };
+          items.push(item);
+        }
+      }
+      
+      return {
+        data: items,
+        success: true
+      };
+    } catch (error) {
+      try {
+        // フォールバック: モックデータを使用
+        const mockData = await getMockData<InstagramItem[]>('instagram');
+        const per_page = params.per_page || 9;
+        const page = params.page || 1;
+        const start = (page - 1) * per_page;
+        const end = start + per_page;
+        const items = mockData.slice(start, end);
+        
+        return {
+          data: items,
+          success: true
+        };
+      } catch (mockError) {
+        return {
+          data: [],
+          success: false,
+          message: error instanceof Error ? error.message : 'Unknown error'
+        };
+      }
+    }
+  },
+
+  /**
+   * 特定のInstagramアイテムを取得
+   */
+  async getInstagramItem(id: number): Promise<ApiResponse<InstagramItem | null>> {
+    try {
+      const apiItem = await getWpData<InstagramApiItem>(`instagram_api/${id}`);
+      const item = convertInstagramApiToItem(apiItem);
+      
+      return {
+        data: item,
+        success: true
+      };
+    } catch (error) {
+      try {
+        // フォールバック: モックデータから検索
+        const mockData = await getMockData<InstagramItem[]>('instagram');
+        const item = mockData.find(item => item.id === id) || null;
+        
+        return {
+          data: item,
+          success: true
+        };
+      } catch (mockError) {
+        return {
+          data: null,
+          success: false,
+          message: error instanceof Error ? error.message : 'Unknown error'
+        };
+      }
     }
   }
 };
