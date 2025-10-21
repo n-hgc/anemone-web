@@ -221,33 +221,8 @@ const salonJsonLd = {
           <button class="hairstyle-tab" data-category="mens">MENS</button>
         </div>
         
-        <!-- ヘアスタイルグリッド -->
-        <div class="hairstyle-grid grid-4-cols">
-          <div class="hairstyle-item">
-            <img src="/images/main/hairstyle-01.png" alt="ヘアスタイル1" class="hairstyle-image" />
-          </div>
-          <div class="hairstyle-item">
-            <img src="/images/main/hairstyle-02.png" alt="ヘアスタイル2" class="hairstyle-image" />
-          </div>
-          <div class="hairstyle-item">
-            <img src="/images/main/hairstyle-03.png" alt="ヘアスタイル3" class="hairstyle-image" />
-          </div>
-          <div class="hairstyle-item">
-            <img src="/images/main/hairstyle-04.png" alt="ヘアスタイル4" class="hairstyle-image" />
-          </div>
-          <div class="hairstyle-item">
-            <img src="/images/main/hairstyle-05.png" alt="ヘアスタイル5" class="hairstyle-image" />
-          </div>
-          <div class="hairstyle-item">
-            <img src="/images/main/hairstyle-06.png" alt="ヘアスタイル6" class="hairstyle-image" />
-          </div>
-          <div class="hairstyle-item">
-            <img src="/images/main/hairstyle-07.png" alt="ヘアスタイル7" class="hairstyle-image" />
-          </div>
-          <div class="hairstyle-item">
-            <img src="/images/main/hairstyle-08.png" alt="ヘアスタイル8" class="hairstyle-image" />
-          </div>
-        </div>
+        <!-- ヘアスタイルグリッド（動的に埋め込み） -->
+        <div class="hairstyle-grid grid-4-cols" id="hairstyle-grid"></div>
         
         <!-- 詳しく見るボタン -->
         <div class="hairstyle-more">
@@ -1629,12 +1604,12 @@ const salonJsonLd = {
     margin-bottom: 3rem;
   }
   
-  .hairstyle-item {
+  :global(.hairstyle-item) {
     border-radius: 20px;
     overflow: hidden;
   }
   
-  .hairstyle-image {
+  :global(.hairstyle-image) {
     width: 100%;
     height: 300px;
     object-fit: cover;
@@ -2856,7 +2831,7 @@ const salonJsonLd = {
       gap: 12px;
     }
     
-    .hairstyle-image {
+    :global(.hairstyle-image) {
       height: 224px;
     }
     
@@ -3082,21 +3057,130 @@ const salonJsonLd = {
     // 自動スライド開始
     startSlideShow();
     
-    // ヘアカタログのタブ機能
+    // ヘアカタログ: JSONを取得して描画 + タブフィルタ
+    type HairstyleItem = { id: number; hairType: string; imageUrl: string; alt: string };
+    let hairstyleItems: HairstyleItem[] = [];
+    let currentCategory = 'all';
+    let currentDisplayCount = 12; // 初期表示件数
+    const ITEMS_PER_LOAD = 12; // 追加読み込み件数
+
+    function renderHairstyles(items: HairstyleItem[]) {
+      console.log('renderHairstyles呼び出し:', items.length, '件');
+      const grid = document.getElementById('hairstyle-grid');
+      if (!grid) {
+        console.error('hairstyle-grid要素が見つかりません');
+        return;
+      }
+      
+      grid.innerHTML = '';
+      const frag = document.createDocumentFragment();
+      
+      items.forEach((item, index) => {
+        console.log(`アイテム${index}:`, item.hairType, item.imageUrl);
+        const wrapper = document.createElement('div');
+        wrapper.className = 'hairstyle-item';
+        wrapper.setAttribute('data-hair-type', item.hairType);
+        
+        const img = document.createElement('img');
+        img.src = item.imageUrl;
+        img.alt = item.alt || 'ヘアスタイル';
+        img.className = 'hairstyle-image';
+        
+        wrapper.appendChild(img);
+        frag.appendChild(wrapper);
+      });
+      
+      grid.appendChild(frag);
+      console.log('ヘアスタイルグリッド更新完了:', grid.children.length, '個の要素');
+    }
+
+    function applyHairstyleFilter(category: string, resetCount: boolean = true) {
+      console.log('ヘアスタイルフィルタ適用:', category);
+      currentCategory = category;
+      
+      if (resetCount) {
+        currentDisplayCount = 12; // タブ切り替え時はリセット
+      }
+      
+      let filteredItems: HairstyleItem[];
+      
+      if (category === 'all') {
+        filteredItems = hairstyleItems;
+      } else {
+        filteredItems = hairstyleItems.filter(i => i.hairType === category);
+      }
+      
+      // 表示件数を制限
+      const displayItems = filteredItems.slice(0, currentDisplayCount);
+      
+      console.log(`フィルタ結果: ${displayItems.length}件表示 (全${filteredItems.length}件中)`);
+      renderHairstyles(displayItems);
+      
+      // もっと見るボタンの表示制御
+      updateMoreButton(filteredItems.length > currentDisplayCount);
+    }
+    
+    function updateMoreButton(hasMore: boolean) {
+      const moreBtn = document.querySelector('.hairstyle-more-btn') as HTMLElement;
+      if (moreBtn) {
+        if (hasMore) {
+          moreBtn.style.display = 'flex';
+        } else {
+          moreBtn.style.display = 'none';
+        }
+      }
+    }
+    
+    function loadMoreHairstyles() {
+      currentDisplayCount += ITEMS_PER_LOAD;
+      applyHairstyleFilter(currentCategory, false);
+    }
+
+    fetch('/data/hairstyles.index.json')
+      .then(r => r.json())
+      .then((data: HairstyleItem[]) => {
+        hairstyleItems = Array.isArray(data) ? data : [];
+        console.log('ヘアスタイルデータ読み込み完了:', hairstyleItems.length, '件');
+        // 初期表示はALLタブで表示
+        applyHairstyleFilter('all');
+      })
+      .catch(err => {
+        console.error('ヘアスタイルJSON読込失敗', err);
+        // エラー時もALLタブで表示（空配列）
+        applyHairstyleFilter('all');
+      });
+
     const hairstyleTabs = document.querySelectorAll('.hairstyle-tab');
-    hairstyleTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
+    console.log('ヘアスタイルタブ数:', hairstyleTabs.length);
+    
+    hairstyleTabs.forEach((tab, index) => {
+      console.log(`タブ${index}:`, tab.textContent, 'data-category:', (tab as HTMLElement).dataset.category);
+      
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('タブクリックイベント発火:', tab.textContent);
+        
         // すべてのタブからactiveクラスを削除
         hairstyleTabs.forEach(t => t.classList.remove('active'));
         // クリックされたタブにactiveクラスを追加
         tab.classList.add('active');
         
-        // ここでカテゴリに応じたフィルタリング処理を実装
-        const category = (tab as HTMLElement).dataset.category;
+        const category = (tab as HTMLElement).dataset.category || 'all';
         console.log('選択されたカテゴリ:', category);
-        // 実際の実装では、ここでヘアスタイルの表示を切り替える
+        console.log('現在のヘアスタイルアイテム数:', hairstyleItems.length);
+        applyHairstyleFilter(category, true); // タブ切り替え時はリセット
       });
     });
+    
+    // もっと見るボタンのイベントリスナー
+    const moreBtn = document.querySelector('.hairstyle-more-btn');
+    if (moreBtn) {
+      moreBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('もっと見るボタンクリック');
+        loadMoreHairstyles();
+      });
+    }
     
     // サロン検索機能
     const salonSearchInput = document.querySelector('.salon-search-input');

@@ -114,11 +114,11 @@ function setCache<T>(key: string, data: T): void {
 async function getMockData<T>(type: string): Promise<T> {
   switch (type) {
     case 'salons':
-      return (await import('../../data/salons.json')).default;
+      return (await import('../../data/salons.json')).default as T;
     case 'news':
-      return (await import('../../data/news.json')).default;
+      return (await import('../../data/news.json')).default as T;
     case 'prefectures':
-      return (await import('../../data/prefectures.json')).default;
+      return (await import('../../data/prefectures.json')).default as T;
     default:
       throw new Error(`Unknown data type: ${type}`);
   }
@@ -156,27 +156,8 @@ async function getWpData<T>(
   if (API_CONFIG.wpAuth.username && API_CONFIG.wpAuth.password) {
     const credentials = btoa(`${API_CONFIG.wpAuth.username}:${API_CONFIG.wpAuth.password}`);
     headers['Authorization'] = `Basic ${credentials}`;
-    console.log('Basic認証を使用します');
-  } else {
-    console.log('認証なしでリクエストします');
   }
   
-  // デバッグ情報を出力
-  console.log('=== API抽象化レイヤーでのリクエスト ===');
-  console.log('環境変数(resolve):', {
-    NEWS_DATA_SOURCE: getEnv('NEWS_DATA_SOURCE'),
-    WP_API_URL: getEnv('WP_API_URL'),
-    NODE_ENV: getEnv('NODE_ENV'),
-    useMockData: API_CONFIG.useMockData,
-    wpApiUrl: API_CONFIG.wpApiUrl
-  });
-  console.log('WordPress API Request:', {
-    url: url.toString(),
-    headers,
-    endpoint,
-    params
-  });
-  console.log('シンプルなfetchテストとの違いを確認してください');
   
   try {
     const response = await fetch(url.toString(), {
@@ -186,16 +167,9 @@ async function getWpData<T>(
       credentials: 'omit'
     });
     
-    console.log('WordPress API Response:', {
-      status: response.status,
-      statusText: response.statusText,
-      ok: response.ok,
-      headers: Object.fromEntries(response.headers.entries())
-    });
     
     if (response.ok) {
       const data = await response.json();
-      console.log('WordPress API Data:', data);
       return data;
     } else {
       const errorText = await response.text();
@@ -231,40 +205,22 @@ function convertWpPostToLegacyNews(wpPost: any): LegacyNews {
  * WordPress REST API用の店舗データ変換関数（WordPress 5.8対応）
  */
 function convertWpPostToLegacySalon(wpPost: any): LegacySalon {
-  console.log('=== convertWpPostToLegacySalon 開始 ===');
-  console.log('元のwpPost:', wpPost);
   
   // データ構造の検証
   if (!wpPost) {
-    console.error('wpPostがundefinedまたはnullです');
     throw new Error('wpPost is undefined or null');
   }
   
-  console.log('wpPostの構造:', {
-    id: wpPost.id,
-    title: wpPost.title,
-    titleType: typeof wpPost.title,
-    hasRendered: wpPost.title && 'rendered' in wpPost.title,
-    acf: wpPost.acf
-  });
-  
   if (!wpPost.title) {
-    console.error('wpPost.titleがundefinedです:', wpPost);
     throw new Error('wpPost.title is undefined');
   }
   
   if (!wpPost.title.rendered) {
-    console.error('wpPost.title.renderedがundefinedです:', {
-      title: wpPost.title,
-      titleType: typeof wpPost.title,
-      titleKeys: wpPost.title ? Object.keys(wpPost.title) : 'N/A'
-    });
     throw new Error('wpPost.title.rendered is undefined');
   }
   
   // WordPress 5.8ではACFフィールドがacfプロパティに含まれる
   const acf = wpPost.acf || {};
-  console.log('ACFデータ:', acf);
   
   // 住所の取得（複数のフィールドから試行）
   const address = acf['salon-address'] || acf.address || '';
@@ -281,13 +237,6 @@ function convertWpPostToLegacySalon(wpPost: any): LegacySalon {
   // 予約URLの取得
   const reservationUrl = acf['salon-preorder-url'] || acf.reservation_url || '';
   
-  console.log('抽出されたフィールド:', {
-    address,
-    tel,
-    hours,
-    prefecture,
-    reservationUrl
-  });
   
   // 画像の取得（KVリストから）
   const photos = acf['salon-kv-list']?.map((kv: any) => {
@@ -295,19 +244,14 @@ function convertWpPostToLegacySalon(wpPost: any): LegacySalon {
     return kv.image ? `https://anemone-salon.com/wp-content/uploads/2024/01/salon-image-${kv.image}.jpg` : '';
   }).filter(Boolean) || [];
   
-  console.log('写真URLs:', photos);
-  
   // 施設情報の取得（メニューから推測）
   const facilities = [];
   if (acf['salon-menu']) {
-    console.log('メニュー内容:', acf['salon-menu']);
     if (acf['salon-menu'].includes('完全個室')) facilities.push('完全個室');
     if (acf['salon-menu'].includes('キッズスペース')) facilities.push('キッズスペース');
     if (acf['salon-menu'].includes('Wi-Fi')) facilities.push('Wi-Fi');
     if (acf['salon-menu'].includes('駐車場')) facilities.push('駐車場');
   }
-  
-  console.log('施設情報:', facilities);
   
   const result = {
     id: wpPost.id || 0,
@@ -325,8 +269,6 @@ function convertWpPostToLegacySalon(wpPost: any): LegacySalon {
     gmb_place_id: '' // デフォルト値
   };
   
-  console.log('変換結果:', result);
-  console.log('=== convertWpPostToLegacySalon 終了 ===');
   
   return result;
 }
@@ -336,8 +278,6 @@ function convertWpPostToLegacySalon(wpPost: any): LegacySalon {
  */
 async function simpleFetchTest(): Promise<ApiResponse<any[]>> {
   try {
-    console.log('=== シンプルなfetchテスト開始（API抽象化レイヤーをバイパス） ===');
-    console.log('エンドポイント: https://anemone-salon.com/wp-json/wp/v2/salon');
     
     const response = await fetch('https://anemone-salon.com/wp-json/wp/v2/salon', {
       method: 'GET',
@@ -348,36 +288,27 @@ async function simpleFetchTest(): Promise<ApiResponse<any[]>> {
       credentials: 'omit'
     });
     
-    console.log('レスポンス受信:', {
-      status: response.status,
-      statusText: response.statusText,
-      ok: response.ok,
-      headers: Object.fromEntries(response.headers.entries())
-    });
     
     if (response.ok) {
       const data = await response.json();
-      console.log('データ取得成功:', data);
       return {
         data: data,
         success: true
       };
     } else {
       const errorText = await response.text();
-      console.error('レスポンスエラー:', errorText);
       return {
-        data: null,
+        data: [],
         success: false,
         message: `HTTP ${response.status}: ${response.statusText} - ${errorText}`
       };
     }
   } catch (error) {
-    console.error('Fetch エラー:', error);
-    return {
-      data: null,
-      success: false,
-      message: error instanceof Error ? error.message : 'Unknown error'
-    };
+      return {
+        data: [],
+        success: false,
+        message: error instanceof Error ? error.message : 'Unknown error'
+      };
   }
 }
 
@@ -413,16 +344,11 @@ async function fetchData<T>(
         // WordPress REST APIを使用
         if (type === 'salons') {
           const wpPosts = await getWpData<any[]>('salon', params);
-          console.log('取得したWordPress投稿データ:', wpPosts);
           
           // データ変換を安全に実行
           try {
-            data = wpPosts.map((wpPost, index) => {
-              console.log(`変換中: 投稿 ${index + 1}/${wpPosts.length}`, wpPost);
-              return convertWpPostToLegacySalon(wpPost);
-            }) as T;
+            data = wpPosts.map((wpPost) => convertWpPostToLegacySalon(wpPost)) as T;
           } catch (conversionError) {
-            console.error('データ変換エラー:', conversionError);
             throw new Error(`Data conversion failed: ${conversionError instanceof Error ? conversionError.message : 'Unknown error'}`);
           }
         } else if (type === 'news') {
@@ -432,7 +358,6 @@ async function fetchData<T>(
           data = await getWpData<T>(type, params);
         }
       } catch (wpError) {
-        console.warn(`WordPress API failed for ${type}, falling back to mock data:`, wpError);
         // WordPress APIが失敗した場合、モックデータにフォールバック
         data = await getMockData<T>(type);
       }
@@ -449,9 +374,8 @@ async function fetchData<T>(
     };
     
   } catch (error) {
-    console.error(`Error fetching ${type}:`, error);
     return {
-      data: null as T,
+      data: [] as T,
       success: false,
       message: error instanceof Error ? error.message : 'Unknown error'
     };
@@ -505,7 +429,7 @@ export const api = {
   async getNewsItem(id: number): Promise<ApiResponse<any>> {
     if (!isUseMockNews()) {
       try {
-        const item = await getBlogItem(id);
+        const item = await this.getBlogItem(id);
         return { data: item, success: true };
       } catch (e) {
         return { data: null, success: false, message: e instanceof Error ? e.message : 'Unknown error' };
@@ -805,17 +729,8 @@ export const api = {
    */
   async getNewsList(params: { page?: number; per_page?: number; news_type?: number } = {}): Promise<ApiResponse<{ items: LegacyNews[]; total: number; totalPages: number }>> {
     try {
-      // デバッグログ追加
-      console.log('=== getNewsList デバッグ情報 ===');
-      console.log('環境変数 WP_API_URL:', getEnv('WP_API_URL'));
-      console.log('環境変数 NEWS_DATA_SOURCE:', getEnv('NEWS_DATA_SOURCE'));
-      console.log('環境変数 NODE_ENV:', getEnv('NODE_ENV'));
-      console.log('isUseMockNews():', isUseMockNews());
-      console.log('API_CONFIG:', API_CONFIG);
-      console.log('params:', params);
       
       if (isUseMockNews()) {
-        console.log('Using mock news data');
         const all = await getMockData<LegacyNews[]>('news');
         const page = params.page ?? 1;
         const perPage = params.per_page ?? 4;
@@ -824,20 +739,16 @@ export const api = {
         const items = all.slice(start, end);
         const total = all.length;
         const totalPages = Math.max(1, Math.ceil(total / perPage));
-        console.log('Mock data result:', { items: items.length, total, totalPages });
         return { data: { items, total, totalPages }, success: true };
       }
       
-      console.log('Fetching news from WordPress API');
       const result = await fetchBlogList(params);
-      console.log('WordPress API result:', result);
       return { data: result, success: true };
     } catch (error) {
       console.error('Error fetching news:', error);
       
       // WordPress APIアクセスが拒否された場合、モックデータにフォールバック
       if (error instanceof Error && error.message.includes('403 Forbidden')) {
-        console.log('WordPress API access denied, falling back to mock data');
         try {
           const all = await getMockData<LegacyNews[]>('news');
           const page = params.page ?? 1;
@@ -847,10 +758,9 @@ export const api = {
           const items = all.slice(start, end);
           const total = all.length;
           const totalPages = Math.max(1, Math.ceil(total / perPage));
-          console.log('Fallback to mock data result:', { items: items.length, total, totalPages });
           return { data: { items, total, totalPages }, success: true };
         } catch (mockError) {
-          console.error('Mock data fallback failed:', mockError);
+          // フォールバック失敗時はエラーを無視
         }
       }
       
@@ -945,7 +855,6 @@ function mapBlogToNews(p: WpBlog): LegacyNews {
 
 async function fetchWithHeaders(endpoint: string, params: Record<string, any> = {}): Promise<{ data: any; headers: Headers }> {
   const url = new URL(`${API_CONFIG.wpApiUrl}/${endpoint}`);
-  console.log("url"+url);
   Object.entries(params).forEach(([k, v]) => {
     if (v !== undefined && v !== null) url.searchParams.append(k, String(v));
   });
@@ -962,8 +871,6 @@ async function fetchWithHeaders(endpoint: string, params: Record<string, any> = 
     headers['Authorization'] = `Basic ${credentials}`;
   }
   
-  console.log('Request headers:', headers);
-  console.log('Request URL:', url.toString());
   
   const res = await fetch(url.toString(), { method: 'GET', headers, mode: 'cors', credentials: 'omit' });
   if (!res.ok) {
@@ -975,32 +882,20 @@ async function fetchWithHeaders(endpoint: string, params: Record<string, any> = 
 }
 
 async function fetchBlogList(params: { page?: number; per_page?: number; news_type?: number } = {}): Promise<{ items: LegacyNews[]; total: number; totalPages: number }> {
-  console.log('=== fetchBlogList デバッグ情報 ===');
-  console.log('params:', params);
-  console.log('API_CONFIG.wpApiUrl:', API_CONFIG.wpApiUrl);
   
   const page = params.page ?? 1;
   const per_page = params.per_page ?? 4;
   const query: Record<string, any> = { _embed: 1, page, per_page, status: 'publish', order: 'desc', orderby: 'date' };
   if (params.news_type) query['news_type'] = params.news_type;
   
-  console.log('WordPress API query:', query);
   
   const { data, headers } = await fetchWithHeaders('blog', query);
   
-  console.log('WordPress API response data length:', Array.isArray(data) ? data.length : 'not array');
-  console.log('WordPress API headers:', {
-    'X-WP-Total': headers.get('X-WP-Total'),
-    'x-wp-total': headers.get('x-wp-total'),
-    'X-WP-TotalPages': headers.get('X-WP-TotalPages'),
-    'x-wp-totalpages': headers.get('x-wp-totalpages')
-  });
   
   const items = (data as WpBlog[]).map(mapBlogToNews);
   const total = Number(headers.get('X-WP-Total') || headers.get('x-wp-total') || items.length);
   const totalPages = Number(headers.get('X-WP-TotalPages') || headers.get('x-wp-totalpages') || 1);
   
-  console.log('Processed items:', { items: items.length, total, totalPages });
   
   return { items, total, totalPages };
 }

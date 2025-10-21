@@ -206,3 +206,18 @@ const { title, content, variant = 'primary' } = Astro.props;
 ---
 
 **最終更新日: 2024年12月19日**
+
+---
+
+## データ連携（拡張）：ヘアスタイルJSON
+
+- 生成: `node scripts/generate-hairstyles-json.js`（ビルド前に自動実行）
+- 配信: 静的ファイル `/data/hairstyles.index.json`（`app/public/data/hairstyles.index.json` をそのまま配信）
+- スキーマ（フラット配列）:
+```json
+[
+  { "id": 9055, "hairType": "medium", "imageUrl": "https://...jpg", "alt": "..." }
+]
+```
+- 取得元: `GET https://anemone-salon.com/wp-json/wp/v2/pages?slug=hairstyle` の `acf.hairstyles` を走査し、`/wp-json/wp/v2/media/{id}` で `source_url`/`alt_text` を解決
+- フロント: `app/src/pages/index.astro` で `fetch('/data/hairstyles.index.json')` してタブでフィルタ（ALL/LONG/MEDIUM/SHORT/MENS）
