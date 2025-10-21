@@ -8,7 +8,18 @@ export interface Props {
 const { salon } = Astro.props;
 ---
 
-<div class="recruit-environment__salon-card">
+<div 
+  class="recruit-environment__salon-card"
+  data-region={salon.region.map(r => r.slug).join(',')}
+  data-prefecture={salon.prefecture.map(p => p.slug).join(',')}
+  data-city={salon.city.map(c => c.slug).join(',')}
+  data-jobs={salon.job_role.map(j => j.slug).join(',')}
+  data-employment={salon.employment_type.map(e => e.slug).join(',')}
+  data-hiring={salon.is_hiring ? '1' : '0'}
+  data-title={salon.title}
+  data-furigana={salon.furigana}
+  data-access={salon.access}
+>
   <img 
     src={salon.thumb} 
     alt={salon.title} 
@@ -16,7 +27,15 @@ const { salon } = Astro.props;
   />
   <div class="recruit-environment__salon-tags">
     {salon.employment_type.map(emp => (
-      <span class={`recruit-environment__salon-tag recruit-environment__salon-tag--${emp.slug === 'fulltime' ? 'full-time' : 'part-time'}`}>{emp.name}</span>
+      <span class={`recruit-environment__salon-tag recruit-environment__salon-tag--${emp.slug === 'fulltime' 
+        ? 'full-time' 
+        : emp.slug === 'parttime' 
+          ? 'part-time' 
+          : emp.slug === 'mid-career' 
+            ? 'mid-career' 
+            : emp.slug === 'new' 
+              ? 'new-graduate' 
+              : emp.slug}`}>{emp.name}</span>
     ))}
   </div>
   <div class="recruit-environment__salon-content">
@@ -107,6 +126,11 @@ const { salon } = Astro.props;
 
   .recruit-environment__salon-tag--mid-career {
     background-color: #FFF1E4;
+  }
+
+  /* 新卒/中途 表示色を調整 */
+  .recruit-environment__salon-tag--new {
+    background-color: #E3F3F5;
   }
 
   .recruit-environment__salon-tag--full-time {

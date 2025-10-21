@@ -329,34 +329,35 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
                   <h4 class="recruit-environment__search-section-title">条件検索</h4>
                   <div class="recruit-environment__search-row">
                     <label class="recruit-environment__search-label">店舗エリア</label>
-                    <select class="recruit-environment__search-select">
-                      <option>選択してください</option>
-                      <option>北海道</option>
-                      <option>東北</option>
-                      <option>関東</option>
-                      <option>中部</option>
-                      <option>関西</option>
-                      <option>中国</option>
-                      <option>四国</option>
-                      <option>九州</option>
+                    <select id="regionSelect" class="recruit-environment__search-select">
+                      <option value="">選択してください</option>
+                      <option value="hokkaido">北海道</option>
+                      <option value="tohoku">東北</option>
+                      <option value="kanto">関東</option>
+                      <option value="chubu">中部</option>
+                      <option value="kansai">関西</option>
+                      <option value="chugoku">中国</option>
+                      <option value="shikoku">四国</option>
+                      <option value="kyushu">九州</option>
                     </select>
                   </div>
                   <div class="recruit-environment__search-row">
                     <label class="recruit-environment__search-label">募集職種</label>
-                    <select class="recruit-environment__search-select">
-                      <option>選択してください</option>
-                      <option>アシスタント</option>
-                      <option>スタイリスト</option>
-                      <option>店長</option>
+                    <select id="jobSelect" class="recruit-environment__search-select">
+                      <option value="">選択してください</option>
+                      <option value="assistant">アシスタント</option>
+                      <option value="stylist">スタイリスト</option>
+                      <option value="eyelist">アイリスト/アイブロウリスト</option>
                     </select>
                   </div>
                   <div class="recruit-environment__search-row">
                     <label class="recruit-environment__search-label">雇用形態</label>
-                    <select class="recruit-environment__search-select">
-                      <option>選択してください</option>
-                      <option>正社員</option>
-                      <option>業務委託</option>
-                      <option>パート</option>
+                    <select id="employmentSelect" class="recruit-environment__search-select">
+                      <option value="">選択してください</option>
+                      <option value="parttime">パート</option>
+                      <option value="fulltime">正社員</option>
+                      <option value="mid-career">中途</option>
+                      <option value="new">新卒</option>
                     </select>
                   </div>
                 </div>
@@ -364,11 +365,12 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
                 <div class="recruit-environment__search-section">
                   <h4 class="recruit-environment__search-section-title">フリーワード検索</h4>
                   <div class="recruit-environment__search-row">
-                    <input 
-                      type="text" 
-                      placeholder="サロン名・地域名で検索" 
-                      class="recruit-environment__search-input"
-                    />
+                  <input 
+                    id="keywordInput"
+                    type="text" 
+                    placeholder="サロン名・地域名で検索" 
+                    class="recruit-environment__search-input"
+                  />
                   </div>
                 </div>
                 
@@ -400,34 +402,35 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
                 <h4 class="recruit-environment__mobile-search-section-title">条件検索</h4>
                 <div class="recruit-environment__mobile-search-row">
                   <label class="recruit-environment__mobile-search-label">店舗エリア</label>
-                  <select class="recruit-environment__mobile-search-select">
-                    <option>選択してください</option>
-                    <option>北海道</option>
-                    <option>東北</option>
-                    <option>関東</option>
-                    <option>中部</option>
-                    <option>関西</option>
-                    <option>中国</option>
-                    <option>四国</option>
-                    <option>九州</option>
+                  <select id="mobile-regionSelect" class="recruit-environment__mobile-search-select">
+                    <option value="">選択してください</option>
+                    <option value="hokkaido">北海道</option>
+                    <option value="tohoku">東北</option>
+                    <option value="kanto">関東</option>
+                    <option value="chubu">中部</option>
+                    <option value="kansai">関西</option>
+                    <option value="chugoku">中国</option>
+                    <option value="shikoku">四国</option>
+                    <option value="kyushu">九州</option>
                   </select>
                 </div>
                 <div class="recruit-environment__mobile-search-row">
                   <label class="recruit-environment__mobile-search-label">募集職種</label>
-                  <select class="recruit-environment__mobile-search-select">
-                    <option>選択してください</option>
-                    <option>アシスタント</option>
-                    <option>スタイリスト</option>
-                    <option>店長</option>
+                  <select id="mobile-jobSelect" class="recruit-environment__mobile-search-select">
+                    <option value="">選択してください</option>
+                    <option value="assistant">アシスタント</option>
+                    <option value="stylist">スタイリスト</option>
+                    <option value="eyelist">アイリスト/アイブロウリスト</option>
                   </select>
                 </div>
                 <div class="recruit-environment__mobile-search-row">
                   <label class="recruit-environment__mobile-search-label">雇用形態</label>
-                  <select class="recruit-environment__mobile-search-select">
-                    <option>選択してください</option>
-                    <option>正社員</option>
-                    <option>業務委託</option>
-                    <option>パート</option>
+                  <select id="mobile-employmentSelect" class="recruit-environment__mobile-search-select">
+                    <option value="">選択してください</option>
+                    <option value="parttime">パート</option>
+                    <option value="fulltime">正社員</option>
+                    <option value="mid-career">中途</option>
+                    <option value="new">新卒</option>
                   </select>
                 </div>
               </div>
@@ -436,6 +439,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
                 <h4 class="recruit-environment__mobile-search-section-title">フリーワード検索</h4>
                 <div class="recruit-environment__mobile-search-row">
                   <input 
+                    id="mobile-keywordInput"
                     type="text" 
                     placeholder="サロン名・地域名で検索" 
                     class="recruit-environment__mobile-search-input"
@@ -453,7 +457,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
         <!-- サロン一覧 -->
         <div class="recruit-environment__salons">
-          <h3 class="recruit-environment__salons-title">北海道エリア募集店舗一覧</h3>
+          <h3 id="salonsTitle" class="recruit-environment__salons-title">求人募集中の店舗一覧</h3>
           <div class="recruit-environment__salon-grid">
             {salons.map(salon => (
               <RecruitSalonCard salon={salon} />
@@ -662,6 +666,143 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   </div>
   
   </body>
+<script>
+// @ts-nocheck
+(function(){
+  /**
+   * @param {string} sel
+   * @param {Document|Element} [root=document]
+   * @returns {Element|null}
+   */
+  const $ = (sel, root = document) => root.querySelector(sel);
+  /**
+   * @param {string} sel
+   * @param {Document|Element} [root=document]
+   * @returns {Element[]}
+   */
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  /** @type {Record<string, string>} */
+  const regionMap = {
+    '北海道': 'hokkaido',
+    '東北': 'tohoku',
+    '関東': 'kanto',
+    '中部': 'chubu',
+    '関西': 'kansai',
+    '中国': 'chugoku',
+    '四国': 'shikoku',
+    '九州': 'kyushu'
+  };
+
+  /**
+   * @param {string} [prefix]
+   * @returns {{region:string, job:string, employment:string, q:string}}
+   */
+  function readState(prefix = '') {
+    const region = $(prefix ? `#${prefix}regionSelect` : '#regionSelect')?.value || '';
+    const job = $(prefix ? `#${prefix}jobSelect` : '#jobSelect')?.value || '';
+    const employment = $(prefix ? `#${prefix}employmentSelect` : '#employmentSelect')?.value || '';
+    const q = $(prefix ? `#${prefix}keywordInput` : '#keywordInput')?.value || '';
+    return { region, job, employment, q };
+  }
+
+  /**
+   * @param {string} val
+   * @returns {string}
+   */
+  function toSlugRegion(val) {
+    if (!val) return '';
+    if (/^[a-z0-9-]+$/.test(val)) return val;
+    return regionMap[val] || '';
+  }
+
+  /**
+   * @param {{region:string, job:string, employment:string, q:string}} filters
+   */
+  function applyFilter(filters) {
+    const cards = $$('.recruit-environment__salon-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const hiring = card.getAttribute('data-hiring') === '1';
+      const region = (card.getAttribute('data-region') || '').split(',').filter(Boolean);
+      const jobs = (card.getAttribute('data-jobs') || '').split(',').filter(Boolean);
+      const employment = (card.getAttribute('data-employment') || '').split(',').filter(Boolean);
+      const title = (card.getAttribute('data-title') || '').toLowerCase();
+      const furigana = (card.getAttribute('data-furigana') || '').toLowerCase();
+      const access = (card.getAttribute('data-access') || '').toLowerCase();
+
+      const match =
+        hiring &&
+        (!filters.region || region.includes(filters.region)) &&
+        (!filters.job || jobs.includes(filters.job)) &&
+        (!filters.employment || employment.includes(filters.employment)) &&
+        (!filters.q || title.includes(filters.q) || furigana.includes(filters.q) || access.includes(filters.q));
+
+      card.style.display = match ? '' : 'none';
+      if (match) visibleCount++;
+    });
+
+    const titleEl = $('#salonsTitle');
+    if (titleEl) {
+      if (filters.region) {
+        const label = Object.keys(regionMap).find(k => regionMap[k] === filters.region) || '対象エリア';
+        titleEl.textContent = `${label}エリア募集店舗一覧（${visibleCount}件）`;
+      } else if (filters.job || filters.employment || filters.q) {
+        titleEl.textContent = `検索結果（${visibleCount}件）`;
+      } else {
+        titleEl.textContent = `求人募集中の店舗一覧（${visibleCount}件）`;
+      }
+    }
+  }
+
+  /**
+   * @param {string} [prefix]
+   */
+  function onSearch(prefix = '') {
+    const f = readState(prefix);
+    const normalized = {
+      region: toSlugRegion(f.region),
+      job: f.job,
+      employment: f.employment,
+      q: (f.q || '').trim().toLowerCase()
+    };
+    applyFilter(normalized);
+
+    const url = new URL(window.location.href);
+    ['region','job','employment','q'].forEach(k => url.searchParams.delete(k));
+    if (normalized.region) url.searchParams.set('region', normalized.region);
+    if (normalized.job) url.searchParams.set('job', normalized.job);
+    if (normalized.employment) url.searchParams.set('employment', normalized.employment);
+    if (normalized.q) url.searchParams.set('q', normalized.q);
+    window.history.replaceState({}, '', url.toString());
+  }
+
+  function initFromURL() {
+    const url = new URL(window.location.href);
+    const region = url.searchParams.get('region') || '';
+    const job = url.searchParams.get('job') || '';
+    const employment = url.searchParams.get('employment') || '';
+    const q = url.searchParams.get('q') || '';
+
+    if (region) { const el = $('#regionSelect'); if (el) el.value = region; }
+    if (job) { const el = $('#jobSelect'); if (el) el.value = job; }
+    if (employment) { const el = $('#employmentSelect'); if (el) el.value = employment; }
+    if (q) { const el = $('#keywordInput'); if (el) el.value = q; }
+
+    applyFilter({ region, job, employment, q: (q || '').toLowerCase() });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    $('.recruit-environment__search-btn')?.addEventListener('click', () => onSearch(''));
+    $('#keywordInput')?.addEventListener('keydown', /** @param {KeyboardEvent} e */ (e) => { if (e.key === 'Enter') onSearch(''); });
+    $('.recruit-environment__mobile-search-btn')?.addEventListener('click', () => onSearch('mobile-'));
+    $('#mobile-keywordInput')?.addEventListener('keydown', /** @param {KeyboardEvent} e */ (e) => { if (e.key === 'Enter') onSearch('mobile-'); });
+
+    initFromURL();
+  });
+})();
+</script>
 </html>
 
 <style>
