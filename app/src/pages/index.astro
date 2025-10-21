@@ -31,9 +31,7 @@ const salons: SalonIndexData[] = salonData;
 let newsByCategory: { [key: string]: News[] } = { information: [], blog: [], movie: [] };
 try {
   const result = await api.getNewsList({ per_page: 24 }); // 3カテゴリ×各4件を想定し多めに取得
-  console.log(result);
   const items = result.success ? result.data.items : [];
-  console.log("結果<br>"+items);
   const info: News[] = [];
   const blog: News[] = [];
   const movie: News[] = [];

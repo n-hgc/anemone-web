@@ -5,22 +5,22 @@ import Footer from '../../components/Footer.astro';
 import type { News } from '../../types';
 import { api } from '../../lib/api';
 
-// ページネーション用のパラメータを取得
-const page = Number(Astro.url.searchParams.get('page') || '1');
-const perPage = 4;
+// ビルド時に全データ取得
+const result = await api.getNewsList({ page: 1, per_page: 100 });
+const allNews: News[] = result.success ? result.data.items : [];
 
-// NEWSデータを取得
-let newsData: { items: News[]; total: number; totalPages: number } = { items: [], total: 0, totalPages: 0 };
-try {
-  const result = await api.getNewsList({ page, per_page: perPage });
-  if (result.success) {
-    newsData = result.data;
-  }
-} catch (error) {
-  console.error('NEWS取得エラー:', error);
-}
+// カテゴリ別に分類
+const newsByCategory = {
+  information: allNews.filter(n => {
+    const cat = (n.categories?.[0] || '').toLowerCase();
+    return cat === 'information' || cat === '' || !cat;
+  }),
+  blog: allNews.filter(n => (n.categories?.[0] || '').toLowerCase() === 'blog'),
+  movie: allNews.filter(n => (n.categories?.[0] || '').toLowerCase() === 'movie')
+};
 
-const news: News[] = newsData.items;
+// JSON-LD用に全ニュースを使用
+const news: News[] = allNews;
 
 // ニュース一覧のJSON-LDを生成
 const newsJsonLd = {
@@ -105,67 +105,17 @@ const newsJsonLd = {
           <button class="news-tab" data-category="movie">MOVIE</button>
         </div>
         
-        <!-- ニュース一覧 -->
-        <div class="news-list">
-          {news.map((newsItem) => (
-            <div class="news-item">
-              {newsItem.featured_image && (
-                <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
-              )}
-              <div class="news-content">
-                <div class="news-meta">
-                  <span class="news-date">{newsItem.date.replace(/-/g, '.').substring(0, 10)}</span>
-                  <span class="news-separator">|</span>
-                  {newsItem.categories?.[0] && (
-                    <span class="news-category">{newsItem.categories[0]}</span>
-                  )}
-                </div>
-                <h3 class="news-item-title">
-                  <a href={`/news/${newsItem.id}`} class="news-item-link">{newsItem.title}</a>
-                </h3>
-                <p class="news-description">
-                  {newsItem.excerpt}
-                </p>
-              </div>
-            </div>
-          ))}
+        <!-- ニュース一覧（JavaScriptで動的生成） -->
+        <div class="news-list" id="news-list">
         </div>
 
-        <!-- ページネーション -->
-        {newsData.totalPages > 1 && (
-          <div class="news-pagination">
-            <nav class="pagination">
-              {page > 1 && (
-                <a href={`/news?page=${page - 1}`} class="pagination__link pagination__prev">
-                  <svg class="pagination__arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                  </svg>
-                </a>
-              )}
-              
-              {Array.from({ length: Math.min(5, newsData.totalPages) }, (_, i) => {
-                const pageNum = Math.max(1, Math.min(newsData.totalPages - 4, page - 2)) + i;
-                if (pageNum > newsData.totalPages) return null;
-                return (
-                  <a 
-                    href={`/news?page=${pageNum}`} 
-                    class={`pagination__link ${pageNum === page ? 'pagination__link--active' : ''}`}
-                  >
-                    {pageNum}
-                  </a>
-                );
-              })}
-              
-              {page < newsData.totalPages && (
-                <a href={`/news?page=${page + 1}`} class="pagination__link pagination__next">
-                  <svg class="pagination__arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                  </svg>
-                </a>
-              )}
-            </nav>
-          </div>
-        )}
+        <!-- ページネーション（JavaScriptで動的生成） -->
+        <div class="news-pagination" id="news-pagination">
+        </div>
+        
+        <!-- データをJSON形式で埋め込み -->
+        <script type="application/json" id="news-data" set:html={JSON.stringify(newsByCategory)}>
+        </script>
 
       </div>
     </main>
@@ -280,6 +230,8 @@ const newsJsonLd = {
     transition: all 0.3s ease;
     flex: 1;
     text-align: center;
+    text-decoration: none;
+    display: inline-block;
   }
 
   .news-tab::after {
@@ -307,55 +259,55 @@ const newsJsonLd = {
   }
 
   /* ニュース一覧 */
-  .news-list {
+  :global(.news-list) {
     margin: 0 auto;
   }
 
-  .news-item {
+  :global(.news-item) {
     display: flex;
     gap: 1.5rem;
     padding: 32px 0;
     border-bottom: 1px solid var(--color-grey-light);
   }
 
-  .news-image {
+  :global(.news-image) {
     width: 240px;
     height: 134px;
     object-fit: cover;
     flex-shrink: 0;
   }
 
-  .news-content {
+  :global(.news-content) {
     flex: 1;
   }
 
-  .news-meta {
+  :global(.news-meta) {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
+    gap: 8px;
+    margin-bottom: 8px;
   }
 
-  .news-date {
+  :global(.news-date) {
     font-family: var(--font-family-zenkaku);
     font-size: 24px;
     color: var(--color-text-grey-medium);
   }
 
-  .news-separator {
+  :global(.news-separator) {
     font-family: var(--font-family-zenkaku);
     font-size: 24px;
     color: var(--color-text-grey-medium);
   }
 
-  .news-category {
+  :global(.news-category) {
     font-family: var(--font-family-zenkaku);
     font-size: 24px;
     font-weight: var(--font-weight-regular);
     color: var(--color-text-grey-medium);
   }
 
-  .news-item-title {
+  :global(.news-item-title) {
     font-family: var(--font-family-zenkaku);
     font-size: 24px;
     font-weight: var(--font-weight-medium);
@@ -369,17 +321,17 @@ const newsJsonLd = {
     text-overflow: ellipsis;
   }
 
-  .news-item-link {
+  :global(.news-item-link) {
     color: var(--color-black);
     text-decoration: none;
     transition: color 0.3s ease;
   }
 
-  .news-item-link:hover {
+  :global(.news-item-link:hover) {
     color: var(--color-brown);
   }
 
-  .news-description {
+  :global(.news-description) {
     font-family: var(--font-family-zenkaku);
     font-size: 16px;
     line-height: 1.5;
@@ -394,64 +346,71 @@ const newsJsonLd = {
   }
 
   /* ページネーション */
-  .news-pagination {
+  :global(.news-pagination) {
     display: flex;
     justify-content: center;
     padding-top: 56px;
   }
 
-  .pagination {
+  :global(.pagination) {
     display: flex;
     align-items: center;
     gap: 8px;
   }
 
-  .pagination__link {
+  :global(.pagination__link) {
     font-family: var(--font-family-zenkaku);
     font-size: 16px;
     font-weight: var(--font-weight-regular);
     color: var(--color-grey-dark);
-    text-decoration: none;
+    background: none;
+    border: none;
     padding: 8px 12px;
     border-radius: 4px;
     transition: all 0.3s ease;
+    cursor: pointer;
   }
 
-  .pagination__link--active {
+  :global(.pagination__link--active) {
     color: var(--color-black);
     text-decoration: underline;
   }
 
-  .pagination__link:hover {
+  :global(.pagination__link:hover) {
     color: var(--color-black);
     background-color: var(--color-grey-light);
   }
 
-  .pagination__dots {
+  :global(.pagination__dots) {
     font-family: var(--font-family-zenkaku);
     font-size: 16px;
     color: var(--color-grey-dark);
     padding: 8px 4px;
   }
 
-  .pagination__next {
+  :global(.pagination__prev),
+  :global(.pagination__next) {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 32px;
     height: 32px;
     color: var(--color-grey-dark);
-    text-decoration: none;
+    background: none;
+    border: none;
     border-radius: 4px;
     transition: all 0.3s ease;
+    cursor: pointer;
+    padding: 0;
   }
 
-  .pagination__next:hover {
+  :global(.pagination__prev:hover),
+  :global(.pagination__next:hover) {
     color: var(--color-black);
     background-color: var(--color-grey-light);
   }
 
-  .pagination__arrow {
+  :global(.pagination__arrow) {
     width: 16px;
     height: 16px;
   }
@@ -516,27 +475,28 @@ const newsJsonLd = {
       padding: 0.75rem 1rem;
     }
 
-    .news-item {
+    :global(.news-item) {
       flex-direction: column;
-      gap: 1rem;
+      gap: 24px;
+      padding: 32px 0;
     }
 
-    .news-image {
+    :global(.news-image) {
       width: 100%;
-      height: 200px;
+      height: 182px;
     }
 
-    .news-date,
-    .news-separator,
-    .news-category {
-      font-size: 18px;
-    }
-
-    .news-item-title {
+    :global(.news-date),
+    :global(.news-separator),
+    :global(.news-category) {
       font-size: 20px;
     }
 
-    .news-description {
+    :global(.news-item-title) {
+      font-size: 20px;
+    }
+
+    :global(.news-description) {
       font-size: 14px;
     }
   }
@@ -558,28 +518,131 @@ const newsJsonLd = {
 </style>
 
 <script>
-  // ニュースタブ機能（NEWS一覧ページ用）
-  document.addEventListener('DOMContentLoaded', function() {
-    const newsTabs = document.querySelectorAll('.news-tab');
-    const newsItems = document.querySelectorAll('.news-item');
+  const perPage = 4;
+  let currentType = 'information';
+  let currentPage = 1;
+  
+  // データ読み込み
+  const newsData = JSON.parse(document.getElementById('news-data').textContent);
+  
+  // URLハッシュから初期状態を復元
+  function loadStateFromHash() {
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    currentType = params.get('type') || 'information';
+    currentPage = Number(params.get('page') || '1');
+  }
+  
+  // URLハッシュを更新
+  function updateHash() {
+    window.location.hash = `type=${currentType}&page=${currentPage}`;
+  }
+  
+  // ニュースアイテムをレンダリング
+  function renderNews() {
+    const items = newsData[currentType] || [];
+    const startIndex = (currentPage - 1) * perPage;
+    const endIndex = startIndex + perPage;
+    const pageItems = items.slice(startIndex, endIndex);
     
-    newsTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        // すべてのタブからactiveクラスを削除
-        newsTabs.forEach(t => t.classList.remove('active'));
-        // クリックされたタブにactiveクラスを追加
-        tab.classList.add('active');
-        
-        const category = tab.dataset.category;
-        
-        // ニュースアイテムをカテゴリでフィルタリング
-        newsItems.forEach(item => {
-          const itemCategory = item.querySelector('.news-category')?.textContent?.toLowerCase();
-          const shouldShow = category === 'information' || itemCategory === category;
-          
-          item.style.display = shouldShow ? 'flex' : 'none';
-        });
+    const newsList = document.getElementById('news-list');
+    newsList.innerHTML = pageItems.map(item => `
+      <div class="news-item">
+        ${item.featured_image ? `<img src="${item.featured_image}" alt="${item.title}" class="news-image" />` : ''}
+        <div class="news-content">
+          <div class="news-meta">
+            <span class="news-date">${item.date.replace(/-/g, '.').substring(0, 10)}</span>
+            <span class="news-separator">|</span>
+            ${item.categories?.[0] ? `<span class="news-category">${item.categories[0]}</span>` : ''}
+          </div>
+          <h3 class="news-item-title">
+            <a href="/news/${item.id}" class="news-item-link">${item.title}</a>
+          </h3>
+          <p class="news-description">${item.excerpt}</p>
+        </div>
+      </div>
+    `).join('');
+    
+    renderPagination(items.length);
+  }
+  
+  // ページネーションをレンダリング
+  function renderPagination(totalItems) {
+    const totalPages = Math.max(1, Math.ceil(totalItems / perPage));
+    const pagination = document.getElementById('news-pagination');
+    
+    if (totalPages <= 1) {
+      pagination.innerHTML = '';
+      return;
+    }
+    
+    let html = '<nav class="pagination">';
+    
+    // 前へ
+    if (currentPage > 1) {
+      html += `<button class="pagination__link pagination__prev" data-page="${currentPage - 1}">
+        <svg class="pagination__arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>`;
+    }
+    
+    // ページ番号
+    for (let i = 1; i <= Math.min(5, totalPages); i++) {
+      const pageNum = Math.max(1, Math.min(totalPages - 4, currentPage - 2)) + i - 1;
+      if (pageNum > totalPages) break;
+      html += `<button class="pagination__link ${pageNum === currentPage ? 'pagination__link--active' : ''}" data-page="${pageNum}">${pageNum}</button>`;
+    }
+    
+    // 次へ
+    if (currentPage < totalPages) {
+      html += `<button class="pagination__link pagination__next" data-page="${currentPage + 1}">
+        <svg class="pagination__arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>`;
+    }
+    
+    html += '</nav>';
+    pagination.innerHTML = html;
+    
+    // ページネーションのイベントリスナー
+    pagination.querySelectorAll('[data-page]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentPage = Number(btn.dataset.page);
+        updateHash();
+        renderNews();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     });
+  }
+  
+  // タブ切り替え
+  document.querySelectorAll('.news-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.news-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentType = tab.dataset.category;
+      currentPage = 1; // タブ切り替え時はページ1にリセット
+      updateHash();
+      renderNews();
+    });
+  });
+  
+  // 初期化
+  loadStateFromHash();
+  document.querySelectorAll('.news-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.category === currentType);
+  });
+  renderNews();
+  
+  // ブラウザバック/フォワード対応
+  window.addEventListener('hashchange', () => {
+    loadStateFromHash();
+    document.querySelectorAll('.news-tab').forEach(tab => {
+      tab.classList.toggle('active', tab.dataset.category === currentType);
+    });
+    renderNews();
   });
 </script>
+

@@ -883,6 +883,18 @@ type WpBlog = {
 function mapBlogToNews(p: WpBlog): LegacyNews {
   const media = p._embedded?.['wp:featuredmedia']?.[0]?.source_url;
   const categories = (p.news_type_terms ?? []).map(t => t.name);
+  
+  // コンテンツのテキスト部分を<p>タグで囲む処理
+  let content = p.content?.rendered ?? '';
+  if (content) {
+    // 既存の<p>タグがある場合はそのまま使用
+    if (!content.includes('<p>')) {
+      // <p>タグがない場合のみ、テキストを行ごとに分割して<p>タグで囲む
+      const lines = content.split('\n').filter(line => line.trim() !== '');
+      content = lines.map(line => `<p>${line.trim()}</p>`).join('\n');
+    }
+  }
+  
   return {
     id: p.id,
     title: decodeHtml(p.title?.rendered ?? ''),
@@ -890,7 +902,7 @@ function mapBlogToNews(p: WpBlog): LegacyNews {
     categories: categories.length > 0 ? categories : ['INFORMATION'],
     featured_image: media || undefined,
     excerpt: toPlainText(p.content?.rendered ?? '').slice(0, 120),
-    content: p.content?.rendered ?? '',
+    content: content, // <p>タグで囲まれたコンテンツ
     tags: [],
     slug: p.slug,
   };
@@ -921,10 +933,13 @@ async function fetchBlogList(params: { page?: number; per_page?: number; news_ty
   const per_page = params.per_page ?? 4;
   const query: Record<string, any> = { _embed: 1, page, per_page, status: 'publish', order: 'desc', orderby: 'date' };
   if (params.news_type) query['news_type'] = params.news_type;
+  
   const { data, headers } = await fetchWithHeaders('blog', query);
+  
   const items = (data as WpBlog[]).map(mapBlogToNews);
   const total = Number(headers.get('X-WP-Total') || headers.get('x-wp-total') || items.length);
   const totalPages = Number(headers.get('X-WP-TotalPages') || headers.get('x-wp-totalpages') || 1);
+  
   return { items, total, totalPages };
 }
 
