@@ -805,7 +805,17 @@ export const api = {
    */
   async getNewsList(params: { page?: number; per_page?: number; news_type?: number } = {}): Promise<ApiResponse<{ items: LegacyNews[]; total: number; totalPages: number }>> {
     try {
+      // デバッグログ追加
+      console.log('=== getNewsList デバッグ情報 ===');
+      console.log('環境変数 WP_API_URL:', getEnv('WP_API_URL'));
+      console.log('環境変数 NEWS_DATA_SOURCE:', getEnv('NEWS_DATA_SOURCE'));
+      console.log('環境変数 NODE_ENV:', getEnv('NODE_ENV'));
+      console.log('isUseMockNews():', isUseMockNews());
+      console.log('API_CONFIG:', API_CONFIG);
+      console.log('params:', params);
+      
       if (isUseMockNews()) {
+        console.log('Using mock news data');
         const all = await getMockData<LegacyNews[]>('news');
         const page = params.page ?? 1;
         const perPage = params.per_page ?? 4;
@@ -814,11 +824,16 @@ export const api = {
         const items = all.slice(start, end);
         const total = all.length;
         const totalPages = Math.max(1, Math.ceil(total / perPage));
+        console.log('Mock data result:', { items: items.length, total, totalPages });
         return { data: { items, total, totalPages }, success: true };
       }
+      
+      console.log('Fetching news from WordPress API');
       const result = await fetchBlogList(params);
+      console.log('WordPress API result:', result);
       return { data: result, success: true };
     } catch (error) {
+      console.error('Error fetching news:', error);
       return { data: { items: [], total: 0, totalPages: 0 }, success: false, message: error instanceof Error ? error.message : 'Unknown error' };
     }
   },
@@ -929,16 +944,32 @@ async function fetchWithHeaders(endpoint: string, params: Record<string, any> = 
 }
 
 async function fetchBlogList(params: { page?: number; per_page?: number; news_type?: number } = {}): Promise<{ items: LegacyNews[]; total: number; totalPages: number }> {
+  console.log('=== fetchBlogList デバッグ情報 ===');
+  console.log('params:', params);
+  console.log('API_CONFIG.wpApiUrl:', API_CONFIG.wpApiUrl);
+  
   const page = params.page ?? 1;
   const per_page = params.per_page ?? 4;
   const query: Record<string, any> = { _embed: 1, page, per_page, status: 'publish', order: 'desc', orderby: 'date' };
   if (params.news_type) query['news_type'] = params.news_type;
   
+  console.log('WordPress API query:', query);
+  
   const { data, headers } = await fetchWithHeaders('blog', query);
+  
+  console.log('WordPress API response data length:', Array.isArray(data) ? data.length : 'not array');
+  console.log('WordPress API headers:', {
+    'X-WP-Total': headers.get('X-WP-Total'),
+    'x-wp-total': headers.get('x-wp-total'),
+    'X-WP-TotalPages': headers.get('X-WP-TotalPages'),
+    'x-wp-totalpages': headers.get('x-wp-totalpages')
+  });
   
   const items = (data as WpBlog[]).map(mapBlogToNews);
   const total = Number(headers.get('X-WP-Total') || headers.get('x-wp-total') || items.length);
   const totalPages = Number(headers.get('X-WP-TotalPages') || headers.get('x-wp-totalpages') || 1);
+  
+  console.log('Processed items:', { items: items.length, total, totalPages });
   
   return { items, total, totalPages };
 }
