@@ -290,3 +290,11 @@ export interface LegacySalon {
   reservation_url: string;
   gmb_place_id: string;
 }
+
+// ヘアスタイル（フラット配列）用の型定義
+export interface HairstyleItem {
+  id: number;
+  hairType: 'short' | 'medium' | 'long' | 'mens';
+  imageUrl: string;
+  alt: string;
+}
