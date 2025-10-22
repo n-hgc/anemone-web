@@ -132,6 +132,7 @@ const salonJsonLd = {
               />
               <div class="hero-slide-overlay">
                 <div class="hero-slide-content">
+                  <div class="hero-catchphrase">髪と、わたしと、<br class="hero-catchphrase-br">生きていく。</div>
                   <img src="/images/header/logo.png" alt="little" class="hero-logo" />
                 </div>
               </div>
@@ -145,6 +146,7 @@ const salonJsonLd = {
               />
               <div class="hero-slide-overlay">
                 <div class="hero-slide-content">
+                  <div class="hero-catchphrase">髪と、わたしと、<br class="hero-catchphrase-br">生きていく。</div>
                   <img src="/images/header/logo.png" alt="little" class="hero-logo" />
                 </div>
               </div>
@@ -158,6 +160,7 @@ const salonJsonLd = {
               />
               <div class="hero-slide-overlay">
                 <div class="hero-slide-content">
+                  <div class="hero-catchphrase">髪と、わたしと、<br class="hero-catchphrase-br">生きていく。</div>
                   <img src="/images/header/logo.png" alt="little" class="hero-logo" />
                 </div>
               </div>
@@ -193,7 +196,8 @@ const salonJsonLd = {
     <!-- イントロダクションセクション -->
     <section class="intro-section">
       <div class="intro-container section-container">
-        <div class="intro-content">
+        <!-- PC用レイアウト -->
+        <div class="intro-content intro-content-pc">
           <div class="intro-text">
             <h2 class="intro-title">
               通いやすさ×技術力<br>全国110店舗の身近で上質なサロン
@@ -211,6 +215,28 @@ const salonJsonLd = {
               alt="アネモネサロンの店内" 
               class="intro-image-content"
             />
+          </div>
+        </div>
+
+        <!-- スマホ用レイアウト -->
+        <div class="intro-content intro-content-mobile">
+          <h2 class="intro-title">
+            通いやすさ×技術力<br>全国110店舗の身近で上質なサロン
+          </h2>
+          <div class="intro-image">
+            <img 
+              src="/images/main/salon_intro.png" 
+              alt="アネモネサロンの店内" 
+              class="intro-image-content"
+            />
+          </div>
+          <div class="intro-text">
+            <p class="intro-description">
+              littleは、全国に110店舗以上を展開するヘアサロンブランドです。<br>
+              一人ひとりの日常に寄り添いながらも、洗練された技術と感性で「いつもの私」を少しだけ特別に。<br>
+              リーズナブルな価格でありながら、高い技術力と丁寧な接客を提供し、リピーターのお客様にも多く選ばれています。<br>
+              あなたの毎日に、ほんの少しのときめきを
+            </p>
           </div>
         </div>
       </div>
@@ -456,12 +482,7 @@ const salonJsonLd = {
           
           <div class="recruit-text">
             <p class="recruit-description">
-              littleでは、全国各地のサロンネットワークで、<br>
-              場所や時間にとらわれず、あなたらしく活躍できる環境をご提供します。<br>
-              育児との両立や独立支援、成長も自立も支える仕組みが整っています。
-            </p>
-            <p class="recruit-description">
-              "美容師をずっと続けたい"という想いに、littleは全力で応えます。
+              littleでは、全国各地のサロンネットワークで、場所や時間にとらわれず、あなたらしく活躍できる環境をご提供します。<br>育児との両立や独立支援、成長も自立も支える仕組みが整っています。
             </p>
           </div>
           
@@ -702,6 +723,22 @@ const salonJsonLd = {
     z-index: 2;
   }
 
+  .hero-catchphrase {
+    font-family: var(--font-family-yumincho);
+    font-size: 24px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+    line-height: 1.2;
+    margin-bottom: 10px;
+    text-align: left;
+    z-index: 3;
+    position: relative;
+  }
+
+  .hero-catchphrase-br {
+    display: none;
+  }
+
   .hero-logo {
     width: 300px;
     height: auto;
@@ -898,7 +935,7 @@ const salonJsonLd = {
     
     .hero-text-overlay {
       top: 10px;
-      max-height: 56px;
+      max-height: 42px;
       z-index: 1000;
     }
     
@@ -1344,6 +1381,16 @@ const salonJsonLd = {
     display: flex;
     align-items: center;
     gap: 40px;
+  }
+
+  /* PC用レイアウト（デフォルト表示） */
+  .intro-content-pc {
+    display: flex;
+  }
+
+  /* スマホ用レイアウト（デフォルト非表示） */
+  .intro-content-mobile {
+    display: none;
   }
   
   .intro-text {
@@ -2736,6 +2783,15 @@ const salonJsonLd = {
       padding: 40px 0;
     }
     
+    .hero-catchphrase {
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .hero-catchphrase-br {
+      display: block;
+    }
+
     .hero-logo {
       width: 144px;
     }
@@ -2744,9 +2800,22 @@ const salonJsonLd = {
       flex-direction: column;
       gap: 2rem;
     }
+
+    /* スマホ用レイアウトの表示切り替え */
+    .intro-content-pc {
+      display: none;
+    }
+
+    .intro-content-mobile {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
     
     .intro-title {
       font-size: 20px;
+      margin-bottom: 0;
+      width: 100%;
     }
 
     .intro-image-content {
