@@ -1,0 +1,268 @@
+---
+// リクルートページ専用応募CTAコンポーネント
+---
+
+<section class="recruit-cta-top">
+  <div class="recruit-cta-top__container">
+    <h2 class="recruit-cta-top__title">応募やサロン見学はこちらから</h2>
+    <div class="recruit-cta-top__content">
+      <!-- メール -->
+      <div class="recruit-cta-top__column">
+        <h3 class="recruit-cta-top__column-title">メール</h3>
+        <p class="recruit-cta-top__column-description">
+          サロン見学・面接を<br>
+          すぐにご希望の方はこちら
+        </p>
+        <a href="mailto:recruit@little-salon.com" class="recruit-cta-top__btn recruit-cta-top__btn--mail">
+          <span class="recruit-cta-top__btn-text">面接・見学応募メール</span>
+          <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-cta-top__btn-icon" />
+        </a>
+      </div>
+      
+      <!-- 公式LINE -->
+      <div class="recruit-cta-top__column">
+        <h3 class="recruit-cta-top__column-title">公式LINE</h3>
+        <p class="recruit-cta-top__column-description">
+          まずは詳細を知りたい<br>
+          気軽に相談したい方はこちら
+        </p>
+        <a href="https://line.me/R/ti/p/@little-salon" class="recruit-cta-top__btn recruit-cta-top__btn--line">
+          <span class="recruit-cta-top__btn-text">公式LINEヘチャット相談</span>
+          <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-cta-top__btn-icon" />
+        </a>
+      </div>
+      
+      <!-- お電話 -->
+      <div class="recruit-cta-top__column">
+        <h3 class="recruit-cta-top__column-title">お電話</h3>
+        <div class="recruit-cta-top__phone-info">
+          <p class="recruit-cta-top__phone-number">050-6655-1632</p>
+          <p class="recruit-cta-top__phone-text">受付時間 10:00-17:00<br>(年末年始を除く)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @import "tailwindcss";
+  
+  /* CSS変数の定義 */
+  :root {
+    --color-beige: #FAF4E8;
+    --color-brown: #69552E;
+    --color-brown-light: #8B6F47;
+    --color-white: #FFFFFF;
+    --color-black: #3D3D3D;
+    --color-grey-light: #E5E5E5;
+    --color-grey-medium: #666666;
+    --font-family-yumincho: 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', 'MS PMincho', serif;
+    --font-family-zenkaku: 'Zen Kaku Gothic New', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+  }
+
+  /* CTA（上部） */
+  .recruit-cta-top {
+    padding: 80px 0;
+  }
+
+  .recruit-cta-top__container {
+    max-width: 1040px;
+    background-color: #FFFCF7;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 15px;
+  }
+
+  .recruit-cta-top__title {
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--color-black);
+    text-align: center;
+    line-height: 1.0;
+    margin-bottom: 24px;
+    font-family: var(--font-family-yumincho);
+  }
+
+  .recruit-cta-top__content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0px;
+    position: relative;
+  }
+
+  .recruit-cta-top__content::before,
+  .recruit-cta-top__content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: var(--color-grey-light);
+  }
+
+  .recruit-cta-top__content::before {
+    left: calc(33.333%);
+  }
+
+  .recruit-cta-top__content::after {
+    right: calc(33.333%);
+  }
+
+  .recruit-cta-top__column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .recruit-cta-top__column-title {
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--color-black);
+    margin-bottom: 12px;
+    font-family: var(--font-family-zenkaku);
+  }
+
+  .recruit-cta-top__column-description {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-black);
+    margin-bottom: 12px;
+    font-family: var(--font-family-zenkaku);
+    font-weight: 300;
+  }
+
+  .recruit-cta-top__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    width: auto;
+  }
+
+  .recruit-cta-top__btn--mail {
+    background-color: var(--color-brown);
+    color: var(--color-white);
+  }
+
+  .recruit-cta-top__btn--mail:hover {
+    background-color: var(--color-brown-light);
+  }
+
+  .recruit-cta-top__btn--line {
+    background-color: #00B900;
+    color: var(--color-white);
+  }
+
+  .recruit-cta-top__btn--line:hover {
+    background-color: #00A000;
+  }
+
+  .recruit-cta-top__btn-text {
+    text-align: center;
+  }
+
+  .recruit-cta-top__btn-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+  }
+
+  .recruit-cta-top__phone-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .recruit-cta-top__phone-number {
+    font-size: 42px;
+    font-weight: 500;
+    color: #DAA520;
+    line-height: 1.0;
+    margin-bottom: 16px;
+    font-family: var(--font-family-zenkaku);
+  }
+
+  .recruit-cta-top__phone-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-black);
+    margin: 0;
+    font-family: var(--font-family-zenkaku);
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .recruit-cta-top {
+      padding: 32px 24px;
+    }
+
+    .recruit-cta-top__container {
+      padding: 24px;
+    }
+
+    .recruit-cta-top__title {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    .recruit-cta-top__content {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .recruit-cta-top__content::before,
+    .recruit-cta-top__content::after {
+      display: none;
+    }
+
+    .recruit-cta-top__column {
+      padding: 0 24px 24px 24px;
+      border-bottom: 1px solid #B2B2B2;
+    }
+
+    .recruit-cta-top__column:last-child {
+      border-bottom: none;
+      padding-right: 0;
+      padding-left: 0;
+      padding-bottom: 0;
+    }
+
+    .recruit-cta-top__column-title {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .recruit-cta-top__column-description {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .recruit-cta-top__btn {
+      padding: 14px 16px;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .recruit-cta-top__phone-number {
+      font-size: 42px;
+      margin-bottom: 0px;
+    }
+
+    .recruit-cta-top__phone-text {
+      font-size: 16px;
+    }
+  }
+</style>

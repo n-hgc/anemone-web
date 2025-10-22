@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "node ../scripts/generate-hairstyles-json.js && node ../scripts/generate-salons-json.js",
+    "prebuild": "node ../scripts/generate-hairstyles-json.js && node ../scripts/generate-salons-json.js && node ../scripts/generate-interviews-json.js",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",

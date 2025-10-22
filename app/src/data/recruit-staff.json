@@ -6,9 +6,9 @@
       "nameReading": "エリナ",
       "image": "/images/recruit/staff-01.png",
       "role": "little 小倉店 副店長",
-      "description": "キャリアと私生活の両立! 女性副店長の美容師の楽しみ方",
+      "description": "キャリアと私生活の両立!<br>女性副店長の美容師の楽しみ方",
       "buttonText": "もっと見る",
-      "buttonLink": "#"
+      "buttonLink": "/recruit/interview/5614"
     },
     {
       "id": "kamba",
@@ -18,7 +18,7 @@
       "role": "little FCオーナー",
       "description": "地方でも業務委託という働き方を浸透させたい! littleで叶う自由で有意義な美容師ライフ",
       "buttonText": "もっと見る",
-      "buttonLink": "#"
+      "buttonLink": "/recruit/interview/5625"
     },
     {
       "id": "matsubara",
@@ -28,7 +28,7 @@
       "role": "LEINA 副店長",
       "description": "入社2年でアシスタントから副店長へ! 札幌でキャリアを磨く若手の奮闘記",
       "buttonText": "もっと見る",
-      "buttonLink": "#"
+      "buttonLink": "/recruit/interview/5619"
     }
   ]
 }

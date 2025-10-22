@@ -1,5 +1,35 @@
 [
   {
+    "id": 9139,
+    "title": "little 飯塚",
+    "furigana": "リトルイイヅカ",
+    "thumb": "https://anemone-salon.com/wp-content/uploads/2025/05/B234496151.jpg",
+    "region": [
+      {
+        "slug": "kyushu-okinawa",
+        "name": "九州・沖縄"
+      }
+    ],
+    "prefecture": [
+      {
+        "slug": "fukuoka",
+        "name": "福岡県"
+      }
+    ],
+    "city": [
+      {
+        "slug": "%e9%a3%af%e5%a1%9a%e5%b8%82",
+        "name": "飯塚市"
+      }
+    ],
+    "job_role": [],
+    "employment_type": [],
+    "is_hiring": false,
+    "reservation_url": "https://lin.ee/6Nhoei0",
+    "maps_url": "",
+    "access": "飯塚駅から徒歩5分"
+  },
+  {
     "id": 9122,
     "title": "little 久留米",
     "furigana": "リトルクルメ",
@@ -22,8 +52,22 @@
         "name": "久留米市"
       }
     ],
-    "job_role": [],
-    "employment_type": [],
+    "job_role": [
+      {
+        "slug": "eyelist",
+        "name": "アイリスト/アイブロウリスト"
+      }
+    ],
+    "employment_type": [
+      {
+        "slug": "parttime",
+        "name": "パート"
+      },
+      {
+        "slug": "new",
+        "name": "新卒"
+      }
+    ],
     "is_hiring": true,
     "reservation_url": "https://lin.ee/jelqQ6y",
     "maps_url": "",
