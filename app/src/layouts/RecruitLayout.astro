@@ -1,0 +1,77 @@
+---
+import RecruitHeader from '../components/RecruitHeader.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  jsonLd?: string;
+}
+
+const { title, description, image, jsonLd } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- フォントの読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;700&family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {image && <meta property="og:image" content={image} />}
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {image && <meta name="twitter:image" content={image} />}
+    
+    <!-- JSON-LD -->
+    {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+    
+    <title>{title}</title>
+    
+    <style>
+      /* ヘッダー固定とメインコンテンツのマージン調整 */
+      .main-content {
+      }
+      
+      @media (max-width: 1023px) {
+        .main-content {
+        }
+      }
+      
+      @media (max-width: 767px) {
+        .main-content {
+        }
+      }
+      
+      /* recruitページ専用の見出しマージンリセット */
+      h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- recruitページ専用ヘッダー -->
+    <RecruitHeader />
+    
+    <!-- ページコンテンツ -->
+    <main class="main-content">
+      <slot />
+    </main>
+  </body>
+</html>

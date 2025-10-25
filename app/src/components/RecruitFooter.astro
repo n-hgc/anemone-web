@@ -1,0 +1,495 @@
+---
+// リクルートページ専用フッターコンポーネント
+---
+
+<footer class="footer">
+  <div class="footer-container">
+    <!-- ブランドロゴ -->
+    <div class="footer-brand">
+      <h2 class="footer-brand-text">
+        <span class="footer-brand-name">little</span>
+        <span class="footer-brand-tagline">.Recruit</span>
+      </h2>
+    </div>
+    
+    <!-- ナビゲーション -->
+    <nav class="footer-nav">
+      <a href="/" class="footer-nav-link">TOP</a>
+      <div class="footer-nav-separator"></div>
+      <a href="#" class="footer-nav-link">littleで働く魅力</a>
+      <div class="footer-nav-separator"></div>
+      <a href="#" class="footer-nav-link">サロン・求人を探す</a>
+      <div class="footer-nav-separator"></div>
+      <a href="#" class="footer-nav-link">働くスタッフの声</a>
+      <div class="footer-nav-separator"></div>
+      <a href="/news" class="footer-nav-link">よくある質問</a>
+    </nav>
+    
+    <!-- 採用サイトボタン -->
+    <div class="footer-recruit">
+      <a href="/" class="footer-recruit-btn">
+        <span class="footer-recruit-text">公式サイト</span>
+        <svg class="footer-recruit-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+        </svg>
+      </a>
+    </div>
+    
+    <!-- SNSアイコンとスポンサー -->
+    <div class="footer-bottom">
+      <div class="footer-social">
+        <a href="https://twitter.com/anemone_salon" class="footer-social-link" target="_blank" rel="noopener noreferrer">
+          <svg class="footer-social-icon" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://instagram.com/anemone_salon" class="footer-social-link" target="_blank" rel="noopener noreferrer">
+          <svg class="footer-social-icon" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://line.me/ti/p/@anemone_salon" class="footer-social-link" target="_blank" rel="noopener noreferrer">
+          <svg class="footer-social-icon" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+          </svg>
+        </a>
+      </div>
+      
+      <!-- スポンサー -->
+      <div class="footer-sponsors">
+        <div class="footer-sponsor">
+          <img src="/images/footer/abemas.png" alt="SHIBUYA ABEMAS" class="footer-sponsor-image" />
+        </div>
+        
+        <div class="footer-sponsor">
+          <img src="/images/footer/sunrockers.png" alt="SUN ROCKERS SHIBUYA" class="footer-sponsor-image" />
+        </div>
+      </div>
+    </div>
+    
+    <!-- コピーライト -->
+    <div class="footer-copyright">
+      <p>© anemone. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- 固定アクションボタン -->
+<div class="recruit-fixed-actions">
+  <div class="recruit-fixed-actions__container">
+    <a href="#entry" class="recruit-fixed-actions__btn recruit-fixed-actions__btn--form">
+      <span class="recruit-fixed-actions__btn-text recruit-fixed-actions__btn-text--desktop">
+        <span class="recruit-fixed-actions__btn-line1">メールでエントリー</span>
+      </span>
+      <span class="recruit-fixed-actions__btn-text--mobile">
+        <span class="recruit-fixed-actions__btn-line1">メールで</span>
+        <span class="recruit-fixed-actions__btn-line2">エントリー</span>
+      </span>
+    </a>
+    <a href="https://line.me/R/ti/p/@little-salon" class="recruit-fixed-actions__btn recruit-fixed-actions__btn--line">
+      <span class="recruit-fixed-actions__btn-text">公式LINE</span>
+    </a>
+    <a href="tel:050-6655-1632" class="recruit-fixed-actions__btn recruit-fixed-actions__btn--phone">
+      <span class="recruit-fixed-actions__btn-text recruit-fixed-actions__btn-text--desktop">お電話から問い合わせ</span>
+      <img src="/images/icons/icn_phone_fill.svg" alt="電話" class="recruit-fixed-actions__btn-icon recruit-fixed-actions__btn-icon--mobile" />
+    </a>
+  </div>
+</div>
+
+<style>
+  @import "tailwindcss";
+  
+  /* CSS変数の定義 */
+  :root {
+    --color-beige: #FAF4E8;
+    --color-brown: #69552E;
+    --color-brown-light: #8B6F47;
+    --color-white: #FFFFFF;
+    --color-black: #3D3D3D;
+    --color-grey-light: #E5E5E5;
+    --color-grey-medium: #666666;
+    --font-family-yumincho: 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', 'MS PMincho', serif;
+    --font-family-zenkaku: 'Zen Kaku Gothic New', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+  }
+
+  /* Footer */
+  .footer {
+    background-color: #3D3D3D;
+    padding: 60px 0 30px;
+  }
+  
+  .footer-container {
+    max-width: 484px;
+    margin: 0 auto;
+  }
+  
+  .footer-brand {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .footer-brand-text {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .footer-brand-name {
+    font-family: var(--font-family-yumincho);
+    font-size: 2.5rem;
+    line-height: 1.0;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+  }
+  
+  .footer-brand-tagline {
+    font-family: var(--font-family-yumincho);
+    font-size: 18px;
+    line-height: 1.0;
+    color: var(--color-white);
+  }
+  
+  .footer-nav {
+    display: flex;
+    width: 480px;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 36px;
+  }
+  
+  .footer-nav-link {
+    color: var(--color-white);
+    text-decoration: none;
+    font-family: var(--font-family-zenkaku);
+    font-size: 12px;
+    font-weight: var(--font-weight-regular);
+    padding: 8px;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-nav-link:hover {
+    color: var(--color-brown-light);
+  }
+  
+  .footer-nav-separator {
+    width: 1px;
+    height: 16px;
+    background-color: var(--color-white);
+    opacity: 0.5;
+  }
+  
+  .footer-recruit {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .footer-recruit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: transparent;
+    color: var(--color-white);
+    border: 1px solid var(--color-white);
+    padding: 24px 24px;
+    border-radius: 6px;
+    font-family: var(--font-family-zenkaku);
+    font-size: 18px;
+    line-height: 1.0;
+    font-weight: var(--font-weight-regular);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .footer-recruit-btn:hover {
+    background-color: var(--color-white);
+    color: var(--color-grey-medium);
+  }
+  
+  .footer-recruit-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .footer-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background-color: var(--color-white);
+    color: var(--color-black);
+  }
+  
+  .footer-social-link:hover {
+    border: 1px solid var(--color-white);
+    background-color: var(--color-grey-medium);
+    color: var(--color-white);
+  }
+  
+  .footer-social-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .footer-sponsors {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .footer-sponsor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .footer-sponsor-image {
+    height: 77px;
+    width: auto;
+    object-fit: contain;
+  }
+  
+  .footer-copyright {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .footer-copyright p {
+    font-family: var(--font-family-zenkaku);
+    font-size: 0.75rem;
+    color: var(--color-white);
+    opacity: 0.8;
+  }
+
+  /* Footer レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .footer {
+      padding: 40px 0 20px;
+    }
+    
+    .footer-container {
+      padding: 0 1rem;
+    }
+    
+    .footer-brand {
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand-text {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .footer-brand-name {
+      font-size: 48px;
+    }
+    
+    .footer-nav {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0px 1rem;
+      width: 100%;
+    }
+    
+    .footer-nav-link {
+      font-size: 12px;
+      padding: 8px;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      gap: 12px;
+    } 
+    .footer-sponsors {
+      flex-direction: row;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-sponsor-image {
+      width: auto;
+      height: 72px;
+    }
+  }
+
+  /* 固定アクションボタン */
+  .recruit-fixed-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255,255,255, 0.7);
+    border-top: 1px solid var(--color-grey-light);
+    padding: 24px 0;
+    z-index: 1000;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .recruit-fixed-actions__container {
+    max-width: 1040px;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .recruit-fixed-actions__container {
+      max-width: none;
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+  .recruit-fixed-actions__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 16px;
+    text-decoration: none;
+    font-family: var(--font-family-zenkaku);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    flex: 1;
+    min-height: 60px;
+  }
+
+  .recruit-fixed-actions__btn--form {
+    background: #FF4A7A;
+  }
+
+  .recruit-fixed-actions__btn--form:hover {
+    background-color: #FF1493;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+  }
+
+  .recruit-fixed-actions__btn--line {
+    background-color: #13BC1C;
+  }
+
+  .recruit-fixed-actions__btn--line:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 195, 0, 0.3);
+  }
+
+  .recruit-fixed-actions__btn--phone {
+    background-color: #3D3D3D;
+  }
+
+  .recruit-fixed-actions__btn--phone:hover {
+    background-color: #2D2D2D;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(61, 61, 61, 0.3);
+  }
+
+  .recruit-fixed-actions__btn-text {
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .recruit-fixed-actions__btn-text--mobile {
+    display: none;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  /* デスクトップ用のテキストをデフォルトで表示 */
+  .recruit-fixed-actions__btn-text--desktop {
+    display: block;
+  }
+
+  .recruit-fixed-actions__btn-line1,
+  .recruit-fixed-actions__btn-line2 {
+    display: block;
+    line-height: 1.1;
+  }
+
+  .recruit-fixed-actions__btn-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+  }
+
+  /* デスクトップ版ではアイコンを非表示 */
+  .recruit-fixed-actions__btn-icon--mobile {
+    display: none;
+  }
+
+  /* 固定アクションボタンのレスポンシブ対応 */
+  @media (max-width: 768px) {
+    .recruit-fixed-actions {
+      padding: 16px 0;
+    }
+
+    .recruit-fixed-actions__container {
+      padding: 0 16px;
+      gap: 8px;
+      flex-direction: row;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+
+    .recruit-fixed-actions__btn {
+      padding: 10px 4px;
+      min-height: 50px;
+      border-radius: 5px;
+      flex: auto;
+      width: auto;
+    }
+
+    .recruit-fixed-actions__btn-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .recruit-fixed-actions__btn-text {
+      font-size: 14px;
+    }
+
+    .recruit-fixed-actions__btn-line1,
+    .recruit-fixed-actions__btn-line2 {
+      font-size: 20px;
+    }
+
+    /* モバイル版ではアイコンを表示、テキストを非表示 */
+    .recruit-fixed-actions__btn-text--desktop {
+      display: none;
+    }
+
+    .recruit-fixed-actions__btn-text--mobile {
+      display: block;
+    }
+
+    .recruit-fixed-actions__btn-icon--mobile {
+      display: block;
+    }
+  }
+</style>
