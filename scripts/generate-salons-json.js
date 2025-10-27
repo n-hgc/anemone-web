@@ -54,16 +54,32 @@ async function fetchMediaUrl(baseUrl, mediaId) {
 
 async function main() {
   const WP_BASE = process.env.WP_BASE_URL || 'https://anemone-salon.com';
-  const salonUrl = `${WP_BASE}/wp-json/wp/v2/salon_v2`;
-
-  console.log('Fetching salon data from WordPress...');
-  const salons = await fetchJson(salonUrl);
   
-  if (!Array.isArray(salons)) {
-    throw new Error('Invalid salon data format');
+  // 全てのサロンデータを取得（ページネーション対応）
+  console.log('Fetching salon data from WordPress...');
+  let allSalons = [];
+  let page = 1;
+  let hasMore = true;
+  
+  while (hasMore) {
+    const salonUrl = `${WP_BASE}/wp-json/wp/v2/salon_v2?per_page=100&page=${page}`;
+    const salons = await fetchJson(salonUrl);
+    
+    if (!Array.isArray(salons)) {
+      throw new Error('Invalid salon data format');
+    }
+    
+    allSalons = allSalons.concat(salons);
+    
+    // 100件未満なら最後のページ
+    hasMore = salons.length === 100;
+    page++;
+    
+    console.log(`Fetched ${salons.length} salons (page ${page - 1}), total: ${allSalons.length}`);
   }
-
-  console.log(`Found ${salons.length} salons, processing...`);
+  
+  console.log(`Found ${allSalons.length} salons total, processing...`);
+  const salons = allSalons;
 
   const items = [];
 
