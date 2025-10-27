@@ -462,7 +462,11 @@ const salonJsonLd = {
                 data-region={salon.region[0]?.slug || ''} 
                 data-name={salon.title} 
                 data-prefecture={salon.prefecture[0]?.slug || ''} 
+                data-prefecture-name={salon.prefecture[0]?.name || ''}
                 data-city={salon.city[0]?.slug || ''}
+                data-city-name={salon.city[0]?.name || ''}
+                data-access={salon.access || ''}
+                data-furigana={salon.furigana || ''}
               >
                 <SalonCard salon={salon} />
               </div>
@@ -3243,10 +3247,13 @@ const salonJsonLd = {
     function filterSalons(searchTerm: string) {
       const salonCards = document.querySelectorAll('.salon-card');
       salonCards.forEach(card => {
-        const salonName = card.querySelector('.salon-card-name')?.textContent;
-        const salonLocation = card.querySelector('.salon-card-location span')?.textContent;
+        const salonName = card.querySelector('.salon-card-name')?.textContent || '';
+        const salonLocation = card.querySelector('.salon-card-location span')?.textContent || '';
+        const salonAccess = card.querySelector('.salon-card-access span')?.textContent || '';
         
-        if (salonName?.includes(searchTerm) || salonLocation?.includes(searchTerm)) {
+        if (salonName.toLowerCase().includes(searchTerm.toLowerCase()) || 
+            salonLocation.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            salonAccess.toLowerCase().includes(searchTerm.toLowerCase())) {
           (card as HTMLElement).style.display = 'block';
         } else {
           (card as HTMLElement).style.display = 'none';
@@ -3387,7 +3394,11 @@ const salonJsonLd = {
         const region = card.getAttribute('data-region') || '';
         const name = card.getAttribute('data-name') || '';
         const prefecture = card.getAttribute('data-prefecture') || '';
+        const prefectureName = card.getAttribute('data-prefecture-name') || '';
         const city = card.getAttribute('data-city') || '';
+        const cityName = card.getAttribute('data-city-name') || '';
+        const access = card.getAttribute('data-access') || '';
+        const furigana = card.getAttribute('data-furigana') || '';
         
         // 地域フィルター - salons.index.jsonのregion配列のslugと一致
         const regionMatch = !currentFilter.region || region === currentFilter.region;
@@ -3395,11 +3406,13 @@ const salonJsonLd = {
         // デバッグ情報を追加
         console.log(`サロン: ${name}, 地域: ${region}, フィルター: ${currentFilter.region}, マッチ: ${regionMatch}`);
         
-        // 検索フィルター - サロン名、都道府県、市区町村で検索
+        // 検索フィルター - すべてのデータで検索
         const searchMatch = !currentFilter.searchTerm || 
           name.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
-          prefecture.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
-          city.toLowerCase().includes(currentFilter.searchTerm.toLowerCase());
+          prefectureName.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
+          cityName.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
+          access.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
+          furigana.toLowerCase().includes(currentFilter.searchTerm.toLowerCase());
         
         if (regionMatch && searchMatch) {
           (card as HTMLElement).style.display = 'block';
