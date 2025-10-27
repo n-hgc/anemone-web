@@ -90,12 +90,16 @@ const { salon } = Astro.props;
     <div class="salon-card-info">
       <div class="salon-card-location">
         <img src="/images/icons/icn_location_on.svg" alt="住所" class="salon-card-icon" />
-        <span>{salon.prefecture[0].name}・{salon.city[0].name}</span>
+        <span>
+          {salon.prefecture && salon.prefecture.length > 0 ? salon.prefecture[0].name : ''}
+          {(salon.prefecture && salon.prefecture.length > 0) && (salon.city && salon.city.length > 0) ? '・' : ''}
+          {salon.city && salon.city.length > 0 ? salon.city[0].name : ''}
+        </span>
       </div>
       
       <div class="salon-card-access">
         <img src="/images/icons/icn_directions_railway.svg" alt="アクセス" class="salon-card-icon" />
-        <span>{salon.access}</span>
+        <span>{salon.access || ''}</span>
       </div>
     </div>
     

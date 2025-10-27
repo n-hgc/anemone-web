@@ -45,19 +45,23 @@ const { salon } = Astro.props;
     <div class="recruit-environment__salon-info">
       <div class="recruit-environment__salon-job">
         <img src="/images/icons/icn_content_cut.svg" alt="職種" class="recruit-environment__salon-icon" />
-        <span>{salon.job_role.map(job => job.name).join('・')}</span>
+        <span>{salon.job_role && salon.job_role.length > 0 ? salon.job_role.map(job => job.name).join('・') : ''}</span>
       </div>
       <div class="recruit-environment__salon-location">
         <img src="/images/icons/icn_location_on.svg" alt="所在地" class="recruit-environment__salon-icon" />
-        <span>{salon.prefecture[0].name}・{salon.city[0].name}</span>
+        <span>
+          {salon.prefecture && salon.prefecture.length > 0 ? salon.prefecture[0].name : ''}
+          {(salon.prefecture && salon.prefecture.length > 0) && (salon.city && salon.city.length > 0) ? '・' : ''}
+          {salon.city && salon.city.length > 0 ? salon.city[0].name : ''}
+        </span>
       </div>
       <div class="recruit-environment__salon-access">
         <img src="/images/icons/icn_directions_railway.svg" alt="アクセス" class="recruit-environment__salon-icon" />
-        <span>{salon.access}</span>
+        <span>{salon.access || 'アクセス情報未設定'}</span>
       </div>
     </div>
     <button class="recruit-environment__salon-btn">
-      <a href={salon.reservation_url}>店舗詳細はこちら</a>
+      <a href={salon.reservation_url}>求人に応募する</a>
     </button>
   </div>
 </div>

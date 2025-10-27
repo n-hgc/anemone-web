@@ -237,14 +237,14 @@ import Layout from '../layouts/Layout.astro';
 import SalonCard from '../components/SalonCard.astro';
 import NewsCard from '../components/NewsCard.astro';
 import LocatorFilters from '../components/LocatorFilters.astro';
-import type { Salon, News, Prefecture } from '../types';
+import type { LegacySalon, News, Prefecture } from '../types';
 
 // モックデータをインポート
 import salonsData from '../data/salons.json';
 import newsData from '../data/news.json';
 import prefecturesData from '../data/prefectures.json';
 
-const salons: Salon[] = salonsData;
+const salons: LegacySalon[] = salonsData;
 const news: News[] = newsData;
 const prefectures: Prefecture[] = prefecturesData;
 
