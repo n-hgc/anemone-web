@@ -457,7 +457,7 @@ const salonJsonLd = {
             <h3 id="salon-filter-title">店舗一覧</h3>
           </div>
           <div class="salon-cards grid-3-cols" id="salon-cards-container">
-            {salons.slice(0, 10).map((salon, index) => (
+            {salons.map((salon, index) => (
               <div 
                 data-region={salon.region[0]?.slug || ''} 
                 data-name={salon.title} 
