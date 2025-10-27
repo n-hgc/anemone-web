@@ -1,4 +1,4 @@
-import type { Salon, LegacySalon, News } from '../../types';
+import type { LegacySalon, News } from '../../types';
 
 // JSON-LDを生成するユーティリティ関数
 export const jsonld = (obj: object) => 
