@@ -335,7 +335,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
                       <option value="tohoku">東北</option>
                       <option value="kanto">関東</option>
                       <option value="chubu">中部</option>
-                      <option value="kansai">関西</option>
+                      <option value="kinki">関西</option>
                       <option value="chugoku">中国</option>
                       <option value="shikoku">四国</option>
                       <option value="kyushu-okinawa">九州・沖縄</option>
@@ -688,7 +688,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     '東北': 'tohoku',
     '関東': 'kanto',
     '中部': 'chubu',
-    '関西': 'kansai',
+    '関西': 'kinki',
     '中国': 'chugoku',
     '四国': 'shikoku',
     '九州・沖縄': 'kyushu-okinawa'
@@ -731,13 +731,17 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       const title = (card.getAttribute('data-title') || '').toLowerCase();
       const furigana = (card.getAttribute('data-furigana') || '').toLowerCase();
       const access = (card.getAttribute('data-access') || '').toLowerCase();
+      const prefecture = (card.getAttribute('data-prefecture-name') || '').toLowerCase();
+      const city = (card.getAttribute('data-city-name') || '').toLowerCase();
+      const jobsName = (card.getAttribute('data-jobs-name') || '').toLowerCase();
+      const employmentName = (card.getAttribute('data-employment-name') || '').toLowerCase();
 
       const match =
         hiring &&
         (!filters.region || region.includes(filters.region)) &&
         (!filters.job || jobs.includes(filters.job)) &&
         (!filters.employment || employment.includes(filters.employment)) &&
-        (!filters.q || title.includes(filters.q) || furigana.includes(filters.q) || access.includes(filters.q));
+        (!filters.q || title.includes(filters.q) || furigana.includes(filters.q) || access.includes(filters.q) || prefecture.includes(filters.q) || city.includes(filters.q) || jobsName.includes(filters.q) || employmentName.includes(filters.q));
 
       card.style.display = match ? '' : 'none';
       if (match) visibleCount++;
