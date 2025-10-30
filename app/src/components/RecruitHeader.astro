@@ -36,13 +36,13 @@
             </a>
           </li>
           <li class="recruit-header__nav-item">
-            <a href="#appeal" class="recruit-header__nav-link">
+            <a href="#salon" class="recruit-header__nav-link">
               <span class="recruit-header__nav-en">SALON</span>
               <span class="recruit-header__nav-jp">サロン・求人を探す</span>
             </a>
           </li>
           <li class="recruit-header__nav-item">
-            <a href="#salon" class="recruit-header__nav-link">
+            <a href="#interview" class="recruit-header__nav-link">
               <span class="recruit-header__nav-en">INTERVIEW</span>
               <span class="recruit-header__nav-jp">働くスタッフの声</span>
             </a>
@@ -58,7 +58,7 @@
 
       <!-- エントリーボタン（PC版のみ表示） -->
       <div class="recruit-header__actions">
-        <a href="#entry" class="recruit-header__entry-btn">
+        <a href="https://page.line.me/739brjkr" class="recruit-header__entry-btn">
           <span class="recruit-header__entry-text">応募・サロン見学はこちら</span>
           <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-header__entry-icon" />
         </a>
@@ -68,6 +68,7 @@
       <div class="recruit-header__mobile-actions">
         <!-- 応募ボタン（モバイル版のみ表示） -->
         <button class="recruit-header__mobile-apply-btn" aria-label="応募・サロン見学">
+          <a href="https://page.line.me/739brjkr" class="recruit-header__mobile-apply-link">
           <svg class="recruit-header__mobile-apply-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
           </svg>
@@ -75,6 +76,7 @@
             <div class="recruit-header__mobile-apply-line">応募</div>
             <div class="recruit-header__mobile-apply-line">サロン見学</div>
           </div>
+          </a>
         </button>
         
         <!-- ハンバーガーメニューボタン（モバイル版のみ表示） -->
@@ -99,13 +101,13 @@
           </a>
         </li>
         <li class="recruit-header__mobile-nav-item">
-          <a href="#appeal" class="recruit-header__mobile-nav-link">
+          <a href="#salonList" class="recruit-header__mobile-nav-link">
             <span class="recruit-header__mobile-nav-en">SALON</span>
             <span class="recruit-header__mobile-nav-jp">サロン・求人を探す</span>
           </a>
         </li>
         <li class="recruit-header__mobile-nav-item">
-          <a href="#salon" class="recruit-header__mobile-nav-link">
+          <a href="#interview" class="recruit-header__mobile-nav-link">
             <span class="recruit-header__mobile-nav-en">INTERVIEW</span>
             <span class="recruit-header__mobile-nav-jp">働くスタッフの声</span>
           </a>
@@ -120,13 +122,13 @@
       
       <!-- モバイル用ソーシャルメディアアイコン -->
       <div class="recruit-header__mobile-social">
-        <a href="https://twitter.com/anemone_salon" class="recruit-header__mobile-social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+        <a href="https://x.com/anemone_salon" class="recruit-header__mobile-social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
           <img src="/images/header/icon_x.png" alt="Twitter" class="recruit-header__mobile-social-icon" />
         </a>
-        <a href="https://instagram.com/anemone_salon" class="recruit-header__mobile-social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <a href="https://www.instagram.com/little_anemone_salon/" class="recruit-header__mobile-social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <img src="/images/header/icon_insta.png" alt="Instagram" class="recruit-header__mobile-social-icon" />
         </a>
-        <a href="https://line.me/R/ti/p/@anemone_salon" class="recruit-header__mobile-social-link" target="_blank" rel="noopener noreferrer" aria-label="LINE">
+        <a href="https://page.line.me/739brjkr" class="recruit-header__mobile-social-link" target="_blank" rel="noopener noreferrer" aria-label="LINE">
           <img src="/images/header/icon_line.png" alt="LINE" class="recruit-header__mobile-social-icon" />
         </a>
       </div>
@@ -356,9 +358,18 @@
     transform: translateY(-2px);
   }
 
+
+  .recruit-header__mobile-apply-link {
+    display: contents;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
   .recruit-header__mobile-apply-icon {
-    width: 21px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
     color: var(--color-white);
   }
 
