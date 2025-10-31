@@ -370,7 +370,7 @@ const salonJsonLd = {
               <div class="salon-regions">
                 <button class="region-btn" data-region="hokkaido">北海道</button>
                 <button class="region-btn" data-region="tohoku">東北</button>
-                <button class="region-btn" data-region="kanto">関東</button>
+                <button class="region-btn active" data-region="kanto">関東</button>
                 <button class="region-btn" data-region="chubu">中部</button>
                 <button class="region-btn" data-region="kinki">近畿</button>
                 <button class="region-btn" data-region="shikoku">四国</button>
@@ -425,7 +425,7 @@ const salonJsonLd = {
               <div class="salon-regions">
                 <button class="region-btn" data-region="hokkaido">北海道</button>
                 <button class="region-btn" data-region="tohoku">東北</button>
-                <button class="region-btn" data-region="kanto">関東</button>
+                <button class="region-btn active" data-region="kanto">関東</button>
                 <button class="region-btn" data-region="chubu">中部</button>
                 <button class="region-btn" data-region="kinki">近畿</button>
                 <button class="region-btn" data-region="shikoku">四国</button>
@@ -3305,7 +3305,7 @@ const salonJsonLd = {
 
     // サロンフィルター機能
     let currentFilter = {
-      region: '',
+      region: 'kanto',
       searchTerm: ''
     };
 
@@ -3437,11 +3437,11 @@ const salonJsonLd = {
       console.log(`フィルター結果: ${visibleCards.length}件のサロンが表示されています`);
     }
 
-    // 初期状態ではすべてのサロンを表示（ボタンはアクティブにしない）
-    // const kantoBtn = document.querySelector('.region-btn[data-region="kanto"]');
-    // if (kantoBtn) {
-    //   kantoBtn.classList.add('active');
-    // }
+    // 初期状態で関東を選択
+    const kantoBtns = document.querySelectorAll('.region-btn[data-region="kanto"]');
+    kantoBtns.forEach(btn => {
+      btn.classList.add('active');
+    });
 
     // 初期フィルターを適用
     applyFilters();
