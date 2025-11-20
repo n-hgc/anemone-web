@@ -3370,13 +3370,23 @@ const salonJsonLd = {
     const regionButtons = document.querySelectorAll('.region-btn');
     regionButtons.forEach(button => {
       button.addEventListener('click', () => {
-        // すべてのボタンからactiveクラスを削除
-        regionButtons.forEach(btn => btn.classList.remove('active'));
-        // クリックされたボタンにactiveクラスを追加
-        button.classList.add('active');
+        const clickedRegion = button.getAttribute('data-region') || '';
         
-        // フィルターを更新
-        currentFilter.region = button.getAttribute('data-region') || '';
+        // 選択中のボタンを再度クリックした場合はリセット
+        if (currentFilter.region === clickedRegion) {
+          // すべてのボタンからactiveクラスを削除
+          regionButtons.forEach(btn => btn.classList.remove('active'));
+          // フィルターをリセット
+          currentFilter.region = '';
+        } else {
+          // すべてのボタンからactiveクラスを削除
+          regionButtons.forEach(btn => btn.classList.remove('active'));
+          // クリックされたボタンにactiveクラスを追加
+          button.classList.add('active');
+          // フィルターを更新
+          currentFilter.region = clickedRegion;
+        }
+        
         applyFilters();
       });
     });
@@ -3454,8 +3464,12 @@ const salonJsonLd = {
         const access = card.getAttribute('data-access') || '';
         const furigana = card.getAttribute('data-furigana') || '';
         
-        // 地域フィルター - salons.index.jsonのregion配列のslugと一致
-        const regionMatch = !currentFilter.region || region === currentFilter.region;
+        // 地域フィルター
+        // 地域が選択されている場合: その地域のサロンのみ
+        // 地域が未選択の場合: 検索キーワードがあれば全てのサロン、なければ非表示
+        const regionMatch = currentFilter.region 
+          ? region === currentFilter.region 
+          : (currentFilter.searchTerm ? true : false);
         
         // デバッグ情報を追加
         console.log(`サロン: ${name}, 地域: ${region}, フィルター: ${currentFilter.region}, マッチ: ${regionMatch}`);
