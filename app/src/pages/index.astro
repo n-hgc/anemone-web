@@ -370,7 +370,7 @@ const salonJsonLd = {
               <div class="salon-regions">
                 <button class="region-btn" data-region="hokkaido">北海道</button>
                 <button class="region-btn" data-region="tohoku">東北</button>
-                <button class="region-btn active" data-region="kanto">関東</button>
+                <button class="region-btn" data-region="kanto">関東</button>
                 <button class="region-btn" data-region="chubu">中部</button>
                 <button class="region-btn" data-region="kinki">近畿</button>
                 <button class="region-btn" data-region="shikoku">四国</button>
@@ -425,7 +425,7 @@ const salonJsonLd = {
               <div class="salon-regions">
                 <button class="region-btn" data-region="hokkaido">北海道</button>
                 <button class="region-btn" data-region="tohoku">東北</button>
-                <button class="region-btn active" data-region="kanto">関東</button>
+                <button class="region-btn" data-region="kanto">関東</button>
                 <button class="region-btn" data-region="chubu">中部</button>
                 <button class="region-btn" data-region="kinki">近畿</button>
                 <button class="region-btn" data-region="shikoku">四国</button>
@@ -3028,6 +3028,7 @@ const salonJsonLd = {
     .intro-description {
       font-size: 12px;
       line-height: 2.0;
+      word-break: auto-phrase;
     }
     
   }
@@ -3358,7 +3359,7 @@ const salonJsonLd = {
 
     // サロンフィルター機能
     let currentFilter = {
-      region: 'kanto',
+      region: '',
       searchTerm: ''
     };
 
@@ -3378,13 +3379,23 @@ const salonJsonLd = {
     const regionButtons = document.querySelectorAll('.region-btn');
     regionButtons.forEach(button => {
       button.addEventListener('click', () => {
-        // すべてのボタンからactiveクラスを削除
-        regionButtons.forEach(btn => btn.classList.remove('active'));
-        // クリックされたボタンにactiveクラスを追加
-        button.classList.add('active');
+        const clickedRegion = button.getAttribute('data-region') || '';
         
-        // フィルターを更新
-        currentFilter.region = button.getAttribute('data-region') || '';
+        // 選択中のボタンを再度クリックした場合はリセット
+        if (currentFilter.region === clickedRegion) {
+          // すべてのボタンからactiveクラスを削除
+          regionButtons.forEach(btn => btn.classList.remove('active'));
+          // フィルターをリセット
+          currentFilter.region = '';
+        } else {
+          // すべてのボタンからactiveクラスを削除
+          regionButtons.forEach(btn => btn.classList.remove('active'));
+          // クリックされたボタンにactiveクラスを追加
+          button.classList.add('active');
+          // フィルターを更新
+          currentFilter.region = clickedRegion;
+        }
+        
         applyFilters();
       });
     });
@@ -3462,8 +3473,12 @@ const salonJsonLd = {
         const access = card.getAttribute('data-access') || '';
         const furigana = card.getAttribute('data-furigana') || '';
         
-        // 地域フィルター - salons.index.jsonのregion配列のslugと一致
-        const regionMatch = !currentFilter.region || region === currentFilter.region;
+        // 地域フィルター
+        // 地域が選択されている場合: その地域のサロンのみ
+        // 地域が未選択の場合: 検索キーワードがあれば全てのサロン、なければ非表示
+        const regionMatch = currentFilter.region 
+          ? region === currentFilter.region 
+          : (currentFilter.searchTerm ? true : false);
         
         // デバッグ情報を追加
         console.log(`サロン: ${name}, 地域: ${region}, フィルター: ${currentFilter.region}, マッチ: ${regionMatch}`);
@@ -3490,11 +3505,9 @@ const salonJsonLd = {
       console.log(`フィルター結果: ${visibleCards.length}件のサロンが表示されています`);
     }
 
-    // 初期状態で関東を選択
-    const kantoBtns = document.querySelectorAll('.region-btn[data-region="kanto"]');
-    kantoBtns.forEach(btn => {
-      btn.classList.add('active');
-    });
+    // 初期状態ではすべてのサロンを表示（ボタンはアクティブにしない）
+    // 全ての地域ボタンからactiveクラスを削除して、未選択状態にする
+    regionButtons.forEach(btn => btn.classList.remove('active'));
 
     // 初期フィルターを適用
     applyFilters();
