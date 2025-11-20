@@ -264,7 +264,7 @@ const salonJsonLd = {
         <!-- 詳しく見るボタン -->
         <div class="hairstyle-more">
           <button class="hairstyle-more-btn">
-            <span class="hairstyle-more-text">詳しく見る</span>
+            <span class="hairstyle-more-text">もっとみる</span>
             <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="hairstyle-more-icon" />
           </button>
         </div>
@@ -325,12 +325,12 @@ const salonJsonLd = {
                 <p class="mail-form-description-mobile">
                   貴社名・お名前・電話番号・希望人数<br>依頼場所を記載の上、お問い合わせください。
                 </p>
-                <button class="mail-form-btn">
+                <a href="mailto:recruit@anemone-salon.com" class="mail-form-btn">
                   メールでのご依頼はこちら
                   <svg class="mail-form-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                   </svg>
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -370,7 +370,7 @@ const salonJsonLd = {
               <div class="salon-regions">
                 <button class="region-btn" data-region="hokkaido">北海道</button>
                 <button class="region-btn" data-region="tohoku">東北</button>
-                <button class="region-btn" data-region="kanto">関東</button>
+                <button class="region-btn active" data-region="kanto">関東</button>
                 <button class="region-btn" data-region="chubu">中部</button>
                 <button class="region-btn" data-region="kinki">近畿</button>
                 <button class="region-btn" data-region="shikoku">四国</button>
@@ -425,7 +425,7 @@ const salonJsonLd = {
               <div class="salon-regions">
                 <button class="region-btn" data-region="hokkaido">北海道</button>
                 <button class="region-btn" data-region="tohoku">東北</button>
-                <button class="region-btn" data-region="kanto">関東</button>
+                <button class="region-btn active" data-region="kanto">関東</button>
                 <button class="region-btn" data-region="chubu">中部</button>
                 <button class="region-btn" data-region="kinki">近畿</button>
                 <button class="region-btn" data-region="shikoku">四国</button>
@@ -520,6 +520,7 @@ const salonJsonLd = {
         <div class="news-list">
           <div class="news-group" data-category="information">
             {newsByCategory.information.map((newsItem) => (
+              <a href={`/news/${newsItem.id}`} class="news-item-link">
               <div class="news-item">
                 {newsItem.featured_image && (
                   <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
@@ -533,15 +534,17 @@ const salonJsonLd = {
                     )}
                   </div>
                   <h3 class="news-item-title">
-                    <a href={`/news/${newsItem.id}`} class="news-item-link">{newsItem.title}</a>
+                    {newsItem.title}
                   </h3>
                   <p class="news-description">{newsItem.excerpt}</p>
                 </div>
               </div>
+            </a>
             ))}
           </div>
           <div class="news-group" data-category="blog" style="display:none;">
             {newsByCategory.blog.map((newsItem) => (
+              <a href={`/news/${newsItem.id}`} class="news-item-link">
               <div class="news-item">
                 {newsItem.featured_image && (
                   <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
@@ -555,15 +558,17 @@ const salonJsonLd = {
                     )}
                   </div>
                   <h3 class="news-item-title">
-                    <a href={`/news/${newsItem.id}`} class="news-item-link">{newsItem.title}</a>
+                    {newsItem.title}
                   </h3>
                   <p class="news-description">{newsItem.excerpt}</p>
                 </div>
               </div>
+            </a>
             ))}
           </div>
           <div class="news-group" data-category="movie" style="display:none;">
             {newsByCategory.movie.map((newsItem) => (
+              <a href={`/news/${newsItem.id}`} class="news-item-link">
               <div class="news-item">
                 {newsItem.featured_image && (
                   <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
@@ -577,11 +582,12 @@ const salonJsonLd = {
                     )}
                   </div>
                   <h3 class="news-item-title">
-                    <a href={`/news/${newsItem.id}`} class="news-item-link">{newsItem.title}</a>
+                    {newsItem.title}
                   </h3>
                   <p class="news-description">{newsItem.excerpt}</p>
                 </div>
               </div>
+            </a>
             ))}
           </div>
         </div>
@@ -1656,6 +1662,7 @@ const salonJsonLd = {
     width: 24px;
     height: 24px;
     transition: filter 0.3s ease;
+    rotate: 90deg;
   }
   
   /* 企業様向けヘアメイクセクション */
@@ -1911,11 +1918,12 @@ const salonJsonLd = {
     font-size: 14px;
     font-weight: var(--font-weight-regular);
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     transition: all 0.3s ease;
-    margin: 0 auto;
+    text-decoration: none;
+    pointer-events: auto;
   }
   
   .mail-form-btn:hover {
@@ -1926,6 +1934,7 @@ const salonJsonLd = {
   .mail-form-icon {
     width: 20px;
     height: 20px;
+    pointer-events: none;
   }
   
   /* サロン店舗セクション */
@@ -3350,7 +3359,7 @@ const salonJsonLd = {
 
     // サロンフィルター機能
     let currentFilter = {
-      region: '',
+      region: 'kanto',
       searchTerm: ''
     };
 
