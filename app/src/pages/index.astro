@@ -3019,6 +3019,7 @@ const salonJsonLd = {
     .intro-description {
       font-size: 12px;
       line-height: 2.0;
+      word-break: auto-phrase;
     }
     
   }
@@ -3482,10 +3483,8 @@ const salonJsonLd = {
     }
 
     // 初期状態ではすべてのサロンを表示（ボタンはアクティブにしない）
-    // const kantoBtn = document.querySelector('.region-btn[data-region="kanto"]');
-    // if (kantoBtn) {
-    //   kantoBtn.classList.add('active');
-    // }
+    // 全ての地域ボタンからactiveクラスを削除して、未選択状態にする
+    regionButtons.forEach(btn => btn.classList.remove('active'));
 
     // 初期フィルターを適用
     applyFilters();
