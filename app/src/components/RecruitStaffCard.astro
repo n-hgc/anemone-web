@@ -160,4 +160,26 @@ const { staff } = Astro.props;
     height: 24px;
     filter: brightness(0) invert(1);
   }
+
+  @media (max-width: 480px) {
+    .recruit-staff-voices__name {
+      font-size: 20px;
+    }
+    .recruit-staff-voices__name-reading {
+      font-size: 20px;
+    }
+    .recruit-staff-voices__role {
+      font-size: 16px;
+      line-height: 2.0;
+    }
+
+    .recruit-staff-voices__description {
+      font-size: 14px;
+      line-height: 2.0;
+      word-break: auto-phrase;
+    }
+    .recruit-staff-voices__btn {
+      font-size: 14px;
+    }
+  }
 </style>

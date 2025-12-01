@@ -2085,7 +2085,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     .recruit-jobs,
     .recruit-application-process,
     .recruit-faq {
-      padding: 32px 0;
+      padding: 48px 0;
     }
 
     .recruit-cta-top {
@@ -2226,8 +2226,8 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     }
 
     .recruit-environment__mobile-search-description {
-      font-size: 14px;
-      line-height: 1.5;
+      font-size: 12px;
+      line-height: 2.0;
       margin-bottom: 24px;
       font-family: var(--font-family-zenkaku);
       font-weight: 300;
@@ -2275,7 +2275,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       font-family: var(--font-family-zenkaku);
       font-weight: 500;
       line-height: 1.0;
-      font-size: 18px;
+      font-size: 16px;
       margin-bottom: 12px;
     }
 
@@ -2939,7 +2939,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     }
 
     .recruit-about__mobile-title {
-      font-size: 36px;
+      font-size: 28px;
     }
 
     .recruit-about__mobile-title::before {
@@ -2949,7 +2949,8 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     }
 
     .recruit-about__mobile-subtitle {
-      font-size: 20px;
+      font-size: 18px;
+      word-break: auto-phrase;
     }
 
     .recruit-about__mobile-images-container {
@@ -2960,7 +2961,10 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     }
 
     .recruit-about__mobile-text {
-      font-size: 16px;
+      font-size: 12px;
+      line-height: 2.0;
+      word-break: auto-phrase;
+      font-weight: 300;
     }
 
     .recruit-about__title {
@@ -2976,19 +2980,98 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       padding: 32px 24px;
     }
 
+    .recruit-cta-top__title {
+      font-size: 18px;
+    }
+
+    .recruit-cta-top__column-title {
+      font-size: 20px;
+    }
+
+    .recruit-cta-top__column-description {
+      font-size: 14px;
+      line-height: 2.0;
+    }
+
+    .recruit-cta-top__btn-text {
+      font-size: 14px;
+    }
+
+    .recruit-cta-top__phone-text {
+      font-size: 14px;
+      line-height: 2.0;
+    }
+
     .recruit-appeal__title,
     .recruit-environment__title,
     .recruit-staff-voices__title,
-    .recruit-jobs__title {
+    .recruit-jobs__title,
+    .recruit-faq__title {
+      font-size: 28px;
+      width: auto;
+    }
+
+    .recruit-appeal__content {
+      gap: 20px;
+    }
+
+    .recruit-appeal__text {
+      font-size: 12px;
+      line-height: 2.0;
+      word-break: auto-phrase;
     }
 
     .recruit-appeal__title::before,
-    .recruit-environment__title::before,
-    .recruit-staff-voices__title::before,
     .recruit-jobs__title::before {
     }
 
+    .recruit-environment__title::before{
+      top: -30px;
+    }
 
+    .recruit-staff-voices__title::before{
+      top: -20px;
+      left: 90px;
+    }
+
+
+    .recruit-environment__mobile-search-title {
+      margin-bottom: 0px;
+    }
+    .recruit-environment__mobile-search-section-title {
+      margin-bottom: 0px;
+    }
+
+    .recruit-environment__mobile-search-label {
+      font-size: 14px !important;
+      line-height: 2.0;
+    }
+
+    .recruit-environment__mobile-search-select {
+      font-size: 14px !important;
+    }
+
+    .recruit-environment__mobile-search-input {
+      font-size: 14px !important;
+    }
+
+    .recruit-environment__mobile-search-btn {
+      font-size: 14px !important;
+    }
+
+    .recruit-application-process__title {
+      font-size: 24px;
+    }
+
+    .recruit-application-process__step-title {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .recruit-application-process__step-description {
+      font-size: 12px;
+      line-height: 2.0;
+    }
 
 
     .recruit-fixed-actions {
@@ -3017,11 +3100,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     .recruit-fixed-actions__btn-text {
        font-size: 20px;
     }
-
-    .recruit-fixed-actions__btn-line1,
-    .recruit-fixed-actions__btn-line2 {
-     
-    }
+    
 
     .recruit-fixed-actions__btn-icon {
       width: 40px;
