@@ -1,15 +1,15 @@
 ---
-import RecruitHeader from '../../components/RecruitHeader.astro';
-import RecruitFooter from '../../components/RecruitFooter.astro';
-import RecruitSalonCard from '../../components/RecruitSalonCard.astro';
-import RecruitStaffCard from '../../components/RecruitStaffCard.astro';
-import RecruitJobCard from '../../components/RecruitJobCard.astro';
-import RecruitFaqItem from '../../components/RecruitFaqItem.astro';
-import { generateRecruitJsonLd } from '../../lib/seo/jsonld';
-import recruitStaffData from '../../data/recruit-staff.json';
-import recruitJobsData from '../../data/recruit-jobs.json';
-import recruitFaqData from '../../data/recruit-faq.json';
-import type { SalonIndexData } from '../../types';
+import RecruitHeader from "../../components/RecruitHeader.astro";
+import RecruitFooter from "../../components/RecruitFooter.astro";
+import RecruitSalonCard from "../../components/RecruitSalonCard.astro";
+import RecruitStaffCard from "../../components/RecruitStaffCard.astro";
+import RecruitJobCard from "../../components/RecruitJobCard.astro";
+import RecruitFaqItem from "../../components/RecruitFaqItem.astro";
+import { generateRecruitJsonLd } from "../../lib/seo/jsonld";
+import recruitStaffData from "../../data/recruit-staff.json";
+import recruitJobsData from "../../data/recruit-jobs.json";
+import recruitFaqData from "../../data/recruit-faq.json";
+import type { SalonIndexData } from "../../types";
 
 // 採用ページのJSON-LDを生成
 const jsonLd = generateRecruitJsonLd();
@@ -17,13 +17,18 @@ const jsonLd = generateRecruitJsonLd();
 // サロンデータを読み込む (Server-side)
 let salonData: any[] = [];
 try {
-  const fs = await import('fs');
-  const path = await import('path');
-  const salonDataPath = path.join(process.cwd(), 'public', 'data', 'salons.index.json');
-  const salonDataContent = fs.readFileSync(salonDataPath, 'utf-8');
+  const fs = await import("fs");
+  const path = await import("path");
+  const salonDataPath = path.join(
+    process.cwd(),
+    "public",
+    "data",
+    "salons.index.json"
+  );
+  const salonDataContent = fs.readFileSync(salonDataPath, "utf-8");
   salonData = JSON.parse(salonDataContent);
 } catch (error) {
-  console.error('サロンデータの読み込みに失敗しました:', error);
+  console.error("サロンデータの読み込みに失敗しました:", error);
   salonData = [];
 }
 
@@ -34,11 +39,13 @@ const { jobs, applicationProcess } = recruitJobsData;
 const { faqs } = recruitFaqData;
 
 const title = "採用情報 - little";
-const description = "littleでは美容師・スタイリストを募集しています。お客様に喜んでいただけるサービスを一緒に提供しませんか？";
-const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&h=630&fit=crop";
+const description =
+  "littleでは美容師・スタイリストを募集しています。お客様に喜んでいただけるサービスを一緒に提供しませんか？";
+const image =
+  "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&h=630&fit=crop";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
@@ -46,52 +53,60 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- グローバルCSSの読み込み -->
-    <link rel="stylesheet" href="/src/styles/global.css">
-    
+    <link rel="stylesheet" href="/src/styles/global.css" />
+
     <!-- フォントの読み込み -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;700&family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;700&family=Shippori+Mincho:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
-    
+
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    
+
     <title>{title}</title>
-    
+
     <style>
       /* ヘッダー固定とメインコンテンツのマージン調整 */
       .main-content {
         margin-top: 80px; /* PC版のヘッダー高さ */
       }
-      
+
       @media (max-width: 1023px) {
         .main-content {
           margin-top: 75px; /* タブレット版のヘッダー高さ */
         }
       }
-      
+
       @media (max-width: 767px) {
         .main-content {
           margin-top: 64px; /* モバイル版のヘッダー高さ */
         }
       }
-      
+
       /* recruitページ専用の見出しマージンリセット */
-      h1, h2, h3, h4, h5, h6 {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
         margin: 0;
         padding: 0;
       }
@@ -100,260 +115,462 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   <body>
     <!-- recruitページ専用ヘッダー -->
     <RecruitHeader />
-  
-  <!-- ページ全体の背景をbeigeに設定 -->
-  <div class="bg-beige">
-    
-  <!-- ヒーローセクション -->
-    <section id="title" class="recruit-hero">
-      <div class="recruit-hero__container">
-        <!-- 左側コンテンツ -->
-        <div class="recruit-hero__left">
-          <div class="recruit-hero__logo">
-            <img src="/images/header/logo.png" alt="little" />
-          </div>
-          <div class="recruit-hero__text">
-            <p class="recruit-hero__description">
-              “自分らしく働ける”<br>全国展開なのに個性が活きる自由なサロン</p>
-          </div>
-        </div>
-        
-        <!-- 右側画像 -->
-        <div class="recruit-hero__right">
-          <img 
-            src="/images/recruit/hero-image-1.png" 
-            alt="littleサロンの店内" 
-            class="recruit-hero__main-image"
-          />
-          <div class="recruit-hero__overlay">
-            <img src="/images/recruit/hero-text.svg" alt="Be yourself" class="recruit-hero__overlay-text" />
-          </div>
-        </div>
-    </div>
-          <div class="recruit-hero__images">
-            <div class="recruit-hero__image-item">
-              <img src="/images/recruit/hero-image-2.png" alt="スタイリストの様子" />
-            </div>
-            <div class="recruit-hero__image-item">
-              <img src="/images/recruit/hero-image-3.png" alt="カットの様子" />
-            </div>
-            <div class="recruit-hero__image-item">
-              <img src="/images/recruit/hero-image-4.png" alt="シャンプーの様子" />
-            </div>
-    </div>
-  </section>
 
-    <!-- littleとはセクション -->
-    <section id="about" class="recruit-about">
-      <div class="recruit-about__container">
-        <div class="recruit-about__content">
-          <!-- デスクトップ用：左側テキスト、右側画像 -->
-          <div class="recruit-about__desktop-layout">
-            <!-- 左側：テキストコンテンツ -->
-            <div class="recruit-about__text-section">
-              <h2 class="recruit-about__title">littleとは</h2>
-              <p class="recruit-about__subtitle">全国展開で「わたしらしさ」が活きるサロン</p>
-              <div class="recruit-about__text">
+    <!-- ページ全体の背景をbeigeに設定 -->
+    <div class="bg-beige">
+      <!-- ヒーローセクション -->
+      <section id="title" class="recruit-hero">
+        <div class="recruit-hero__container">
+          <!-- 左側コンテンツ -->
+          <div class="recruit-hero__left">
+            <div class="recruit-hero__logo">
+              <img src="/images/header/logo.png" alt="little" />
+            </div>
+            <div class="recruit-hero__text">
+              <p class="recruit-hero__description">
+                “自分らしく働ける”<br />全国展開なのに個性が活きる自由なサロン
+              </p>
+            </div>
+          </div>
+
+          <!-- 右側画像 -->
+          <div class="recruit-hero__right">
+            <img
+              src="/images/recruit/hero-image-1.png"
+              alt="littleサロンの店内"
+              class="recruit-hero__main-image"
+            />
+            <div class="recruit-hero__overlay">
+              <img
+                src="/images/recruit/hero-text.svg"
+                alt="Be yourself"
+                class="recruit-hero__overlay-text"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="recruit-hero__images">
+          <div class="recruit-hero__image-item">
+            <img
+              src="/images/recruit/hero-image-2.png"
+              alt="スタイリストの様子"
+            />
+          </div>
+          <div class="recruit-hero__image-item">
+            <img src="/images/recruit/hero-image-3.png" alt="カットの様子" />
+          </div>
+          <div class="recruit-hero__image-item">
+            <img
+              src="/images/recruit/hero-image-4.png"
+              alt="シャンプーの様子"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- littleとはセクション -->
+      <section id="about" class="recruit-about">
+        <div class="recruit-about__container">
+          <div class="recruit-about__content">
+            <!-- デスクトップ用：左側テキスト、右側画像 -->
+            <div class="recruit-about__desktop-layout">
+              <!-- 左側：テキストコンテンツ -->
+              <div class="recruit-about__text-section">
+                <h2 class="recruit-about__title">littleとは</h2>
+                <p class="recruit-about__subtitle">
+                  全国展開で「わたしらしさ」が活きるサロン
+                </p>
+                <div class="recruit-about__text">
+                  <p>
+                    little
+                    (リトル)は、全国100店舗以上を展開する美容室ブランドです。
+                    <br
+                    />スタイリスト一人ひとりが自分らしく活躍できる環境を整え、ヘアケア商材、美容機器など最新のアイテムやトレンドも積極的に取り入れています。
+                    <br
+                    />お客様に新しい体験を届けながら、自身も成長できる場所として、心地良さと自由な働き方を叶えられるサロンが
+                    little です。
+                  </p>
+                </div>
+              </div>
+
+              <!-- 右側：画像コンテンツ -->
+              <div class="recruit-about__images-container">
+                <div class="recruit-about__images-section">
+                  <div class="recruit-about__image">
+                    <img
+                      src="/images/recruit/about-image-01.png"
+                      alt="littleサロンのスタイリングエリア"
+                    />
+                  </div>
+                </div>
+                <div class="recruit-about__images-section">
+                  <div class="recruit-about__image">
+                    <img
+                      src="/images/recruit/about-image-03.png"
+                      alt="littleサロンのラウンジエリア"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- スマホ用：title -> subtitle -> images -> text の順番 -->
+            <div class="recruit-about__mobile-layout">
+              <h2 class="recruit-about__mobile-title">littleとは</h2>
+              <p class="recruit-about__mobile-subtitle">
+                全国展開で「わたしらしさ」が活きるサロン
+              </p>
+
+              <div class="recruit-about__mobile-images-container">
+                <div class="recruit-about__images-section">
+                  <div class="recruit-about__image">
+                    <img
+                      src="/images/recruit/about-image-01.png"
+                      alt="littleサロンのスタイリングエリア"
+                    />
+                  </div>
+                </div>
+                <div class="recruit-about__images-section">
+                  <div class="recruit-about__image">
+                    <img
+                      src="/images/recruit/about-image-03.png"
+                      alt="littleサロンのラウンジエリア"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="recruit-about__mobile-text">
                 <p>
-                  little (リトル)は、全国100店舗以上を展開する美容室ブランドです。
-                  <br>スタイリスト一人ひとりが自分らしく活躍できる環境を整え、ヘアケア商材、美容機器など最新のアイテムやトレンドも積極的に取り入れています。
-                  <br>お客様に新しい体験を届けながら、自身も成長できる場所として、心地良さと自由な働き方を叶えられるサロンが little です。
+                  little
+                  (リトル)は、全国100店舗以上を展開する美容室ブランドです。
+                  <br
+                  />スタイリスト一人ひとりが自分らしく活躍できる環境を整え、ヘアケア商材、美容機器など最新のアイテムやトレンドも積極的に取り入れています。
+                  <br
+                  />お客様に新しい体験を届けながら、自身も成長できる場所として、心地良さと自由な働き方を叶えられるサロンが
+                  little です。
                 </p>
               </div>
             </div>
-            
-            <!-- 右側：画像コンテンツ -->
-            <div class="recruit-about__images-container">
-              <div class="recruit-about__images-section">
-                <div class="recruit-about__image">
-                  <img 
-                    src="/images/recruit/about-image-01.png" 
-                    alt="littleサロンのスタイリングエリア" 
-                  />
-                </div>
-              </div>
-              <div class="recruit-about__images-section">
-                <div class="recruit-about__image">
-                  <img 
-                    src="/images/recruit/about-image-03.png" 
-                    alt="littleサロンのラウンジエリア" 
-                  />
-                </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 応募CTA（上部） -->
+      <section class="recruit-cta-top">
+        <div class="recruit-cta-top__container">
+          <h2 class="recruit-cta-top__title">応募やサロン見学はこちらから</h2>
+          <div class="recruit-cta-top__content">
+            <!-- メール -->
+            <div class="recruit-cta-top__column">
+              <h3 class="recruit-cta-top__column-title">メール</h3>
+              <p class="recruit-cta-top__column-description">
+                サロン見学・面接を<br />
+                すぐにご希望の方はこちら
+              </p>
+              <a
+                href="mailto:recruit@little-salon.com"
+                class="recruit-cta-top__btn recruit-cta-top__btn--mail"
+              >
+                <span class="recruit-cta-top__btn-text"
+                  >面接・見学応募メール</span
+                >
+                <img
+                  src="/images/icons/icn_right_arrow.svg"
+                  alt="右矢印"
+                  class="recruit-cta-top__btn-icon"
+                />
+              </a>
+            </div>
+
+            <!-- 公式LINE -->
+            <div class="recruit-cta-top__column">
+              <h3 class="recruit-cta-top__column-title">公式LINE</h3>
+              <p class="recruit-cta-top__column-description">
+                まずは詳細を知りたい<br />
+                気軽に相談したい方はこちら
+              </p>
+              <a
+                href="https://page.line.me/739brjkr"
+                class="recruit-cta-top__btn recruit-cta-top__btn--line"
+              >
+                <span class="recruit-cta-top__btn-text"
+                  >公式LINEヘチャット相談</span
+                >
+                <img
+                  src="/images/icons/icn_right_arrow.svg"
+                  alt="右矢印"
+                  class="recruit-cta-top__btn-icon"
+                />
+              </a>
+            </div>
+
+            <!-- お電話 -->
+            <div class="recruit-cta-top__column">
+              <h3 class="recruit-cta-top__column-title">お電話</h3>
+              <div class="recruit-cta-top__phone-info">
+                <p class="recruit-cta-top__phone-number">050-6655-1632</p>
+                <p class="recruit-cta-top__phone-text">
+                  受付時間 10:00-17:00<br />(年末年始を除く)
+                </p>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <!-- スマホ用：title -> subtitle -> images -> text の順番 -->
-          <div class="recruit-about__mobile-layout">
-            <h2 class="recruit-about__mobile-title">littleとは</h2>
-            <p class="recruit-about__mobile-subtitle">全国展開で「わたしらしさ」が活きるサロン</p>
-            
-            <div class="recruit-about__mobile-images-container">
-              <div class="recruit-about__images-section">
-                <div class="recruit-about__image">
-                  <img 
-                    src="/images/recruit/about-image-01.png" 
-                    alt="littleサロンのスタイリングエリア" 
-                  />
-                </div>
-              </div>
-              <div class="recruit-about__images-section">
-                <div class="recruit-about__image">
-                  <img 
-                    src="/images/recruit/about-image-03.png" 
-                    alt="littleサロンのラウンジエリア" 
-                  />
-                </div>
-              </div>
+      <!-- 働く魅力セクション -->
+      <section id="appeal" class="recruit-appeal">
+        <div class="recruit-appeal__container">
+          <h2 class="recruit-appeal__title">littleで働く魅力</h2>
+          <div class="recruit-appeal__content">
+            <div class="recruit-appeal__image">
+              <img
+                src="/images/recruit/appeal-01.jpg"
+                alt="littleサロンで働くスタッフの様子"
+              />
             </div>
-            
-            <div class="recruit-about__mobile-text">
+            <div class="recruit-appeal__text">
               <p>
-                little (リトル)は、全国100店舗以上を展開する美容室ブランドです。
-                <br>スタイリスト一人ひとりが自分らしく活躍できる環境を整え、ヘアケア商材、美容機器など最新のアイテムやトレンドも積極的に取り入れています。
-                <br>お客様に新しい体験を届けながら、自身も成長できる場所として、心地良さと自由な働き方を叶えられるサロンが little です。
+                全国に広がるlittleは、どこでも変わらず、安心して働けるサロン。<br
+                />指名がなくても安定した集客があり、SNSや独立支援も充実。働き方も、場所も、キャリアも、自分で選んでいい。未来をひらくすべての美容師さんへ。
               </p>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 応募CTA（上部） -->
-    <section class="recruit-cta-top">
-      <div class="recruit-cta-top__container">
-        <h2 class="recruit-cta-top__title">応募やサロン見学はこちらから</h2>
-        <div class="recruit-cta-top__content">
-          <!-- メール -->
-          <div class="recruit-cta-top__column">
-            <h3 class="recruit-cta-top__column-title">メール</h3>
-            <p class="recruit-cta-top__column-description">
-              サロン見学・面接を<br>
-              すぐにご希望の方はこちら
-            </p>
-            <a href="mailto:recruit@little-salon.com" class="recruit-cta-top__btn recruit-cta-top__btn--mail">
-              <span class="recruit-cta-top__btn-text">面接・見学応募メール</span>
-              <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-cta-top__btn-icon" />
-            </a>
-      </div>
-      
-          <!-- 公式LINE -->
-          <div class="recruit-cta-top__column">
-            <h3 class="recruit-cta-top__column-title">公式LINE</h3>
-            <p class="recruit-cta-top__column-description">
-              まずは詳細を知りたい<br>
-              気軽に相談したい方はこちら
-            </p>
-            <a href="https://page.line.me/739brjkr" class="recruit-cta-top__btn recruit-cta-top__btn--line">
-              <span class="recruit-cta-top__btn-text">公式LINEヘチャット相談</span>
-              <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-cta-top__btn-icon" />
-            </a>
-            </div>
-          
-          <!-- お電話 -->
-          <div class="recruit-cta-top__column">
-            <h3 class="recruit-cta-top__column-title">お電話</h3>
-            <div class="recruit-cta-top__phone-info">
-              <p class="recruit-cta-top__phone-number">050-6655-1632</p>
-              <p class="recruit-cta-top__phone-text">受付時間 10:00-17:00<br>(年末年始を除く)</p>
-            </div>
-            </div>
-          </div>
-          </div>
-    </section>
+      <!-- 働く環境・サロン紹介セクション -->
+      <section id="salon" class="recruit-environment">
+        <div class="recruit-environment__container">
+          <h2 class="recruit-environment__title">働く環境・サロン紹介</h2>
 
-    <!-- 働く魅力セクション -->
-    <section id="appeal" class="recruit-appeal">
-      <div class="recruit-appeal__container">
-        <h2 class="recruit-appeal__title">littleで働く魅力</h2>
-        <div class="recruit-appeal__content">
-          <div class="recruit-appeal__image">
-            <img 
-              src="/images/recruit/appeal-01.jpg" 
-              alt="littleサロンで働くスタッフの様子" 
-          />
-        </div>
-          <div class="recruit-appeal__text">
-            <p>
-              全国に広がるlittleは、どこでも変わらず、安心して働けるサロン。<br>指名がなくても安定した集客があり、SNSや独立支援も充実。働き方も、場所も、キャリアも、自分で選んでいい。未来をひらくすべての美容師さんへ。
-            </p>
+          <!-- 統計データ -->
+          <div class="recruit-environment__stats">
+            <div class="recruit-environment__stat-item">
+              <img
+                src="/images/recruit/salondata_01.png"
+                alt="全国店舗数"
+                class="recruit-environment__stat-image"
+              />
+            </div>
+            <div class="recruit-environment__stat-item">
+              <img
+                src="/images/recruit/salondata_02.png"
+                alt="FCオーナー数"
+                class="recruit-environment__stat-image"
+              />
+            </div>
+            <div class="recruit-environment__stat-item">
+              <img
+                src="/images/recruit/salondata_03.png"
+                alt="スタイリスト数"
+                class="recruit-environment__stat-image"
+              />
+            </div>
+            <div class="recruit-environment__stat-item">
+              <img
+                src="/images/recruit/salondata_04.png"
+                alt="歩合制度"
+                class="recruit-environment__stat-image"
+              />
+            </div>
+            <div class="recruit-environment__stat-item">
+              <img
+                src="/images/recruit/salondata_05.png"
+                alt="データ5"
+                class="recruit-environment__stat-image"
+              />
+            </div>
+            <div class="recruit-environment__stat-item">
+              <img
+                src="/images/recruit/salondata_06.png"
+                alt="データ6"
+                class="recruit-environment__stat-image"
+              />
+            </div>
+            <div class="recruit-environment__stat-item">
+              <img
+                src="/images/recruit/salondata_07.png"
+                alt="データ7"
+                class="recruit-environment__stat-image"
+              />
+            </div>
+            <div class="recruit-environment__stat-item">
+              <img
+                src="/images/recruit/salondata_08.png"
+                alt="データ8"
+                class="recruit-environment__stat-image"
+              />
+            </div>
           </div>
-      </div>
-    </div>
-  </section>
 
-    <!-- 働く環境・サロン紹介セクション -->
-    <section id="salon" class="recruit-environment">
-      <div class="recruit-environment__container">
-        <h2 class="recruit-environment__title">働く環境・サロン紹介</h2>
-        
-        <!-- 統計データ -->
-        <div class="recruit-environment__stats">
-          <div class="recruit-environment__stat-item">
-            <img src="/images/recruit/salondata_01.png" alt="全国店舗数" class="recruit-environment__stat-image" />
+          <!-- 求人検索 -->
+          <div class="recruit-environment__search">
+            <!-- デスクトップ用：左側検索フォーム、右側日本地図 -->
+            <div class="recruit-environment__desktop-layout">
+              <div class="recruit-environment__search-content">
+                <h3 class="recruit-environment__search-title">
+                  求人募集中の店舗
+                </h3>
+                <p class="recruit-environment__search-description">
+                  little
+                  (リトル)は、全国の店舗ごとにアシスタント・スタイリスト・店長ポジションを目指せる募集枠がございます。店舗見学も可能ですので、ぜひ気軽にご相談ください。
+                </p>
+
+                <div class="recruit-environment__search-form">
+                  <div class="recruit-environment__search-section">
+                    <h4 class="recruit-environment__search-section-title">
+                      条件検索
+                    </h4>
+                    <div class="recruit-environment__search-row">
+                      <label class="recruit-environment__search-label"
+                        >店舗エリア</label
+                      >
+                      <select
+                        id="regionSelect"
+                        class="recruit-environment__search-select"
+                      >
+                        <option value="">選択してください</option>
+                        <option value="hokkaido">北海道</option>
+                        <option value="tohoku">東北</option>
+                        <option value="kanto">関東</option>
+                        <option value="chubu">中部</option>
+                        <option value="kinki">関西</option>
+                        <option value="chugoku">中国</option>
+                        <option value="shikoku">四国</option>
+                        <option value="kyushu-okinawa">九州・沖縄</option>
+                      </select>
+                    </div>
+                    <div class="recruit-environment__search-row">
+                      <label class="recruit-environment__search-label"
+                        >募集職種</label
+                      >
+                      <select
+                        id="jobSelect"
+                        class="recruit-environment__search-select"
+                      >
+                        <option value="">選択してください</option>
+                        <option value="assistant">アシスタント</option>
+                        <option value="stylist">スタイリスト</option>
+                        <option value="eyelist"
+                          >アイリスト/アイブロウリスト</option
+                        >
+                      </select>
+                    </div>
+                    <div class="recruit-environment__search-row">
+                      <label class="recruit-environment__search-label"
+                        >雇用形態</label
+                      >
+                      <select
+                        id="employmentSelect"
+                        class="recruit-environment__search-select"
+                      >
+                        <option value="">選択してください</option>
+                        <option value="parttime">パート</option>
+                        <option value="fulltime">正社員</option>
+                        <option value="mid-career">中途</option>
+                        <option value="new">新卒</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="recruit-environment__search-section">
+                    <h4 class="recruit-environment__search-section-title">
+                      フリーワード検索
+                    </h4>
+                    <div class="recruit-environment__search-row">
+                      <input
+                        id="keywordInput"
+                        type="text"
+                        placeholder="サロン名・地域名で検索"
+                        class="recruit-environment__search-input"
+                      />
+                    </div>
+                  </div>
+
+                  <button class="recruit-environment__search-btn">
+                    <span>指定した条件で検索する</span>
+                    <img
+                      src="/images/icons/icn_search.svg"
+                      alt="検索"
+                      class="recruit-environment__search-btn-icon"
+                    />
+                  </button>
+                </div>
+              </div>
+
+              <div class="recruit-environment__search-map">
+                <img
+                  src="/images/main/illust_japan.png"
+                  alt="日本地図"
+                  class="recruit-environment__map-image"
+                />
+              </div>
             </div>
-          <div class="recruit-environment__stat-item">
-            <img src="/images/recruit/salondata_02.png" alt="FCオーナー数" class="recruit-environment__stat-image" />
-            </div>
-          <div class="recruit-environment__stat-item">
-            <img src="/images/recruit/salondata_03.png" alt="スタイリスト数" class="recruit-environment__stat-image" />
-            </div>
-          <div class="recruit-environment__stat-item">
-            <img src="/images/recruit/salondata_04.png" alt="歩合制度" class="recruit-environment__stat-image" />
-          </div>
-          <div class="recruit-environment__stat-item">
-            <img src="/images/recruit/salondata_05.png" alt="データ5" class="recruit-environment__stat-image" />
-          </div>
-          <div class="recruit-environment__stat-item">
-            <img src="/images/recruit/salondata_06.png" alt="データ6" class="recruit-environment__stat-image" />
-          </div>
-          <div class="recruit-environment__stat-item">
-            <img src="/images/recruit/salondata_07.png" alt="データ7" class="recruit-environment__stat-image" />
-          </div>
-          <div class="recruit-environment__stat-item">
-            <img src="/images/recruit/salondata_08.png" alt="データ8" class="recruit-environment__stat-image" />
-          </div>
-          </div>
-      
-        <!-- 求人検索 -->
-        <div class="recruit-environment__search">
-          <!-- デスクトップ用：左側検索フォーム、右側日本地図 -->
-          <div class="recruit-environment__desktop-layout">
-            <div class="recruit-environment__search-content">
-              <h3 class="recruit-environment__search-title">求人募集中の店舗</h3>
-              <p class="recruit-environment__search-description">
-                little (リトル)は、全国の店舗ごとにアシスタント・スタイリスト・店長ポジションを目指せる募集枠がございます。店舗見学も可能ですので、ぜひ気軽にご相談ください。
+
+            <!-- スマホ用：タイトル → 説明文 → 日本地図 → 検索フォーム -->
+            <div class="recruit-environment__mobile-layout" id="salonList">
+              <h3 class="recruit-environment__mobile-search-title">
+                求人募集中の店舗
+              </h3>
+              <p class="recruit-environment__mobile-search-description">
+                little
+                (リトル)は、全国の店舗ごとにアシスタント・スタイリスト・店長ポジションを目指せる募集枠がございます。店舗見学も可能ですので、ぜひ気軽にご相談ください。
               </p>
-              
-              <div class="recruit-environment__search-form">
-                <div class="recruit-environment__search-section">
-                  <h4 class="recruit-environment__search-section-title">条件検索</h4>
-                  <div class="recruit-environment__search-row">
-                    <label class="recruit-environment__search-label">店舗エリア</label>
-                    <select id="regionSelect" class="recruit-environment__search-select">
+
+              <!-- <div class="recruit-environment__mobile-search-map">
+              <img src="/images/main/illust_japan.png" alt="日本地図" class="recruit-environment__mobile-map-image" />
+            </div> -->
+
+              <div class="recruit-environment__mobile-search-form">
+                <div class="recruit-environment__mobile-search-section">
+                  <h4 class="recruit-environment__mobile-search-section-title">
+                    条件検索
+                  </h4>
+                  <div class="recruit-environment__mobile-search-row">
+                    <label class="recruit-environment__mobile-search-label"
+                      >店舗エリア</label
+                    >
+                    <select
+                      id="mobile-regionSelect"
+                      class="recruit-environment__mobile-search-select"
+                    >
                       <option value="">選択してください</option>
                       <option value="hokkaido">北海道</option>
                       <option value="tohoku">東北</option>
                       <option value="kanto">関東</option>
                       <option value="chubu">中部</option>
-                      <option value="kinki">関西</option>
+                      <option value="kansai">関西</option>
                       <option value="chugoku">中国</option>
                       <option value="shikoku">四国</option>
                       <option value="kyushu-okinawa">九州・沖縄</option>
                     </select>
                   </div>
-                  <div class="recruit-environment__search-row">
-                    <label class="recruit-environment__search-label">募集職種</label>
-                    <select id="jobSelect" class="recruit-environment__search-select">
+                  <div class="recruit-environment__mobile-search-row">
+                    <label class="recruit-environment__mobile-search-label"
+                      >募集職種</label
+                    >
+                    <select
+                      id="mobile-jobSelect"
+                      class="recruit-environment__mobile-search-select"
+                    >
                       <option value="">選択してください</option>
                       <option value="assistant">アシスタント</option>
                       <option value="stylist">スタイリスト</option>
-                      <option value="eyelist">アイリスト/アイブロウリスト</option>
+                      <option value="eyelist"
+                        >アイリスト/アイブロウリスト</option
+                      >
                     </select>
                   </div>
-                  <div class="recruit-environment__search-row">
-                    <label class="recruit-environment__search-label">雇用形態</label>
-                    <select id="employmentSelect" class="recruit-environment__search-select">
+                  <div class="recruit-environment__mobile-search-row">
+                    <label class="recruit-environment__mobile-search-label"
+                      >雇用形態</label
+                    >
+                    <select
+                      id="mobile-employmentSelect"
+                      class="recruit-environment__mobile-search-select"
+                    >
                       <option value="">選択してください</option>
                       <option value="parttime">パート</option>
                       <option value="fulltime">正社員</option>
@@ -363,383 +580,410 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
                   </div>
                 </div>
 
-                <div class="recruit-environment__search-section">
-                  <h4 class="recruit-environment__search-section-title">フリーワード検索</h4>
-                  <div class="recruit-environment__search-row">
-                  <input 
-                    id="keywordInput"
-                    type="text" 
-                    placeholder="サロン名・地域名で検索" 
-                    class="recruit-environment__search-input"
-                  />
+                <div class="recruit-environment__mobile-search-section">
+                  <h4 class="recruit-environment__mobile-search-section-title">
+                    フリーワード検索
+                  </h4>
+                  <div class="recruit-environment__mobile-search-row">
+                    <input
+                      id="mobile-keywordInput"
+                      type="text"
+                      placeholder="サロン名・地域名で検索"
+                      class="recruit-environment__mobile-search-input"
+                    />
                   </div>
                 </div>
-                
-                <button class="recruit-environment__search-btn">
+
+                <button class="recruit-environment__mobile-search-btn">
                   <span>指定した条件で検索する</span>
-                  <img src="/images/icons/icn_search.svg" alt="検索" class="recruit-environment__search-btn-icon" />
+                  <img
+                    src="/images/icons/icn_search.svg"
+                    alt="検索"
+                    class="recruit-environment__mobile-search-btn-icon"
+                  />
                 </button>
               </div>
             </div>
-            
-            <div class="recruit-environment__search-map">
-              <img src="/images/main/illust_japan.png" alt="日本地図" class="recruit-environment__map-image" />
-            </div>
           </div>
 
-          <!-- スマホ用：タイトル → 説明文 → 日本地図 → 検索フォーム -->
-          <div class="recruit-environment__mobile-layout" id="salonList">
-            <h3 class="recruit-environment__mobile-search-title">求人募集中の店舗</h3>
-            <p class="recruit-environment__mobile-search-description">
-              little (リトル)は、全国の店舗ごとにアシスタント・スタイリスト・店長ポジションを目指せる募集枠がございます。店舗見学も可能ですので、ぜひ気軽にご相談ください。
-            </p>
-            
-            <!-- <div class="recruit-environment__mobile-search-map">
-              <img src="/images/main/illust_japan.png" alt="日本地図" class="recruit-environment__mobile-map-image" />
-            </div> -->
-            
-            <div class="recruit-environment__mobile-search-form">
-              <div class="recruit-environment__mobile-search-section">
-                <h4 class="recruit-environment__mobile-search-section-title">条件検索</h4>
-                <div class="recruit-environment__mobile-search-row">
-                  <label class="recruit-environment__mobile-search-label">店舗エリア</label>
-                  <select id="mobile-regionSelect" class="recruit-environment__mobile-search-select">
-                    <option value="">選択してください</option>
-                    <option value="hokkaido">北海道</option>
-                    <option value="tohoku">東北</option>
-                    <option value="kanto">関東</option>
-                    <option value="chubu">中部</option>
-                    <option value="kansai">関西</option>
-                    <option value="chugoku">中国</option>
-                    <option value="shikoku">四国</option>
-                    <option value="kyushu-okinawa">九州・沖縄</option>
-                  </select>
-                </div>
-                <div class="recruit-environment__mobile-search-row">
-                  <label class="recruit-environment__mobile-search-label">募集職種</label>
-                  <select id="mobile-jobSelect" class="recruit-environment__mobile-search-select">
-                    <option value="">選択してください</option>
-                    <option value="assistant">アシスタント</option>
-                    <option value="stylist">スタイリスト</option>
-                    <option value="eyelist">アイリスト/アイブロウリスト</option>
-                  </select>
-                </div>
-                <div class="recruit-environment__mobile-search-row">
-                  <label class="recruit-environment__mobile-search-label">雇用形態</label>
-                  <select id="mobile-employmentSelect" class="recruit-environment__mobile-search-select">
-                    <option value="">選択してください</option>
-                    <option value="parttime">パート</option>
-                    <option value="fulltime">正社員</option>
-                    <option value="mid-career">中途</option>
-                    <option value="new">新卒</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="recruit-environment__mobile-search-section">
-                <h4 class="recruit-environment__mobile-search-section-title">フリーワード検索</h4>
-                <div class="recruit-environment__mobile-search-row">
-                  <input 
-                    id="mobile-keywordInput"
-                    type="text" 
-                    placeholder="サロン名・地域名で検索" 
-                    class="recruit-environment__mobile-search-input"
-                  />
-                </div>
-              </div>
-              
-              <button class="recruit-environment__mobile-search-btn">
-                <span>指定した条件で検索する</span>
-                <img src="/images/icons/icn_search.svg" alt="検索" class="recruit-environment__mobile-search-btn-icon" />
-              </button>
+          <!-- サロン一覧 -->
+          <div class="recruit-environment__salons">
+            <h3 id="salonsTitle" class="recruit-environment__salons-title">
+              求人募集中の店舗一覧
+            </h3>
+            <div class="recruit-environment__salon-grid">
+              {salons.map((salon) => <RecruitSalonCard salon={salon} />)}
             </div>
           </div>
         </div>
-
-        <!-- サロン一覧 -->
-        <div class="recruit-environment__salons">
-          <h3 id="salonsTitle" class="recruit-environment__salons-title">求人募集中の店舗一覧</h3>
-          <div class="recruit-environment__salon-grid">
-            {salons.map(salon => (
-              <RecruitSalonCard salon={salon} />
-            ))}
+      </section>
+      <!-- 募集職種セクション -->
+      <section class="recruit-jobs">
+        <div class="recruit-jobs__container">
+          <h2 class="recruit-jobs__title">募集職種</h2>
+          <div class="recruit-jobs__grid">
+            {jobs.map((job) => <RecruitJobCard job={job} />)}
+          </div>
         </div>
-      </div>
+      </section>
+
+      <!-- 働くスタッフの声セクション -->
+      <section class="recruit-staff-voices">
+        <div class="recruit-staff-voices__container">
+          <h2 class="recruit-staff-voices__title">働くスタッフの声</h2>
+          <div class="recruit-staff-voices__grid">
+            {
+              staff.map((staffMember) => (
+                <RecruitStaffCard staff={staffMember} />
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <!-- 応募の流れセクション -->
+      <section class="recruit-application-process">
+        <div class="recruit-application-process__container">
+          <h2 class="recruit-application-process__title">応募の流れ</h2>
+          <div class="recruit-application-process__steps">
+            {
+              applicationProcess.map((step) => (
+                <div class="recruit-application-process__step">
+                  <div
+                    class={`recruit-application-process__step-number recruit-application-process__step-number--step${step.step}`}
+                  >
+                    <div class="recruit-application-process__step-content-wrapper">
+                      <span class="recruit-application-process__step-text">
+                        STEP
+                      </span>
+                      <span class="recruit-application-process__step-digit">
+                        {step.step}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="recruit-application-process__step-content">
+                    <h3 class="recruit-application-process__step-title">
+                      {step.title}
+                    </h3>
+                    <p class="recruit-application-process__step-description">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+      <!-- 募集要項セクション -->
+
+      <!-- よくある質問セクション -->
+      <section id="faq" class="recruit-faq">
+        <div class="recruit-faq__container">
+          <h2 class="recruit-faq__title">よくある質問</h2>
+          <div class="recruit-faq__list">
+            {
+              faqs.map((faq, index) => (
+                <RecruitFaqItem faq={faq} index={index} />
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="recruit-cta-top">
+        <div class="recruit-cta-top__container">
+          <h2 class="recruit-cta-top__title">応募やサロン見学はこちらから</h2>
+          <div class="recruit-cta-top__content">
+            <!-- メール -->
+            <div class="recruit-cta-top__column">
+              <h3 class="recruit-cta-top__column-title">メール</h3>
+              <p class="recruit-cta-top__column-description">
+                サロン見学・面接を<br />
+                すぐにご希望の方はこちら
+              </p>
+              <a
+                href="mailto:recruit@anemone-salon.com"
+                class="recruit-cta-top__btn recruit-cta-top__btn--mail"
+              >
+                <span class="recruit-cta-top__btn-text"
+                  >面接・見学応募メール</span
+                >
+                <img
+                  src="/images/icons/icn_right_arrow.svg"
+                  alt="右矢印"
+                  class="recruit-cta-top__btn-icon"
+                />
+              </a>
+            </div>
+
+            <!-- 公式LINE -->
+            <div class="recruit-cta-top__column">
+              <h3 class="recruit-cta-top__column-title">公式LINE</h3>
+              <p class="recruit-cta-top__column-description">
+                まずは詳細を知りたい<br />
+                気軽に相談したい方はこちら
+              </p>
+              <a
+                href="https://page.line.me/739brjkr"
+                class="recruit-cta-top__btn recruit-cta-top__btn--line"
+              >
+                <span class="recruit-cta-top__btn-text"
+                  >公式LINEヘチャット相談</span
+                >
+                <img
+                  src="/images/icons/icn_right_arrow.svg"
+                  alt="右矢印"
+                  class="recruit-cta-top__btn-icon"
+                />
+              </a>
+            </div>
+
+            <!-- お電話 -->
+            <div class="recruit-cta-top__column">
+              <h3 class="recruit-cta-top__column-title">お電話</h3>
+              <div class="recruit-cta-top__phone-info">
+                <p class="recruit-cta-top__phone-number">050-6655-1632</p>
+                <p class="recruit-cta-top__phone-text">
+                  受付時間 10:00-17:00<br />(年末年始を除く)
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <RecruitFooter />
     </div>
-  </section>
-
-    <!-- 働くスタッフの声セクション -->
-    <section class="recruit-staff-voices">
-      <div class="recruit-staff-voices__container">
-        <h2 class="recruit-staff-voices__title">働くスタッフの声</h2>
-        <div class="recruit-staff-voices__grid">
-          {staff.map(staffMember => (
-            <RecruitStaffCard staff={staffMember} />
-          ))}
-      </div>
-      </div>
-    </section>
-
-    <!-- 募集職種セクション -->
-    <section class="recruit-jobs">
-      <div class="recruit-jobs__container">
-        <h2 class="recruit-jobs__title">募集職種</h2>
-        <div class="recruit-jobs__grid">
-          {jobs.map(job => (
-            <RecruitJobCard job={job} />
-          ))}
-          </div>
-        </div>
-    </section>
-
-    <!-- 応募の流れセクション -->
-    <section class="recruit-application-process">
-      <div class="recruit-application-process__container">
-        <h2 class="recruit-application-process__title">応募の流れ</h2>
-        <div class="recruit-application-process__steps">
-          {applicationProcess.map(step => (
-            <div class="recruit-application-process__step">
-              <div class={`recruit-application-process__step-number recruit-application-process__step-number--step${step.step}`}>
-                <div class="recruit-application-process__step-content-wrapper">
-                  <span class="recruit-application-process__step-text">STEP</span>
-                  <span class="recruit-application-process__step-digit">{step.step}</span>
-                </div>
-              </div>
-              <div class="recruit-application-process__step-content">
-                <h3 class="recruit-application-process__step-title">{step.title}</h3>
-                <p class="recruit-application-process__step-description">{step.description}</p>
-        </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-    <!-- 募集要項セクション -->
-
-    <!-- よくある質問セクション -->
-    <section id="faq" class="recruit-faq">
-      <div class="recruit-faq__container">
-        <h2 class="recruit-faq__title">よくある質問</h2>
-        <div class="recruit-faq__list">
-          {faqs.map((faq, index) => (
-            <RecruitFaqItem faq={faq} index={index} />
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="recruit-cta-top">
-      <div class="recruit-cta-top__container">
-        <h2 class="recruit-cta-top__title">応募やサロン見学はこちらから</h2>
-        <div class="recruit-cta-top__content">
-          <!-- メール -->
-          <div class="recruit-cta-top__column">
-            <h3 class="recruit-cta-top__column-title">メール</h3>
-            <p class="recruit-cta-top__column-description">
-              サロン見学・面接を<br>
-              すぐにご希望の方はこちら
-            </p>
-            <a href="mailto:recruit@anemone-salon.com" class="recruit-cta-top__btn recruit-cta-top__btn--mail">
-              <span class="recruit-cta-top__btn-text">面接・見学応募メール</span>
-              <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-cta-top__btn-icon" />
-            </a>
-      </div>
-      
-          <!-- 公式LINE -->
-          <div class="recruit-cta-top__column">
-            <h3 class="recruit-cta-top__column-title">公式LINE</h3>
-            <p class="recruit-cta-top__column-description">
-              まずは詳細を知りたい<br>
-              気軽に相談したい方はこちら
-            </p>
-            <a href="https://page.line.me/739brjkr" class="recruit-cta-top__btn recruit-cta-top__btn--line">
-              <span class="recruit-cta-top__btn-text">公式LINEヘチャット相談</span>
-              <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="recruit-cta-top__btn-icon" />
-            </a>
-            </div>
-          
-          <!-- お電話 -->
-          <div class="recruit-cta-top__column">
-            <h3 class="recruit-cta-top__column-title">お電話</h3>
-            <div class="recruit-cta-top__phone-info">
-              <p class="recruit-cta-top__phone-number">050-6655-1632</p>
-              <p class="recruit-cta-top__phone-text">受付時間 10:00-17:00<br>(年末年始を除く)</p>
-            </div>
-            </div>
-          </div>
-          </div>
-    </section>
-
-
-  <RecruitFooter />
-
-    
-  </div>
-  
   </body>
-<script>
-// @ts-nocheck
-(function(){
-  /**
-   * @param {string} sel
-   * @param {Document|Element} [root=document]
-   * @returns {Element|null}
-   */
-  const $ = (sel, root = document) => root.querySelector(sel);
-  /**
-   * @param {string} sel
-   * @param {Document|Element} [root=document]
-   * @returns {Element[]}
-   */
-  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+  <script>
+    // @ts-nocheck
+    (function () {
+      /**
+       * @param {string} sel
+       * @param {Document|Element} [root=document]
+       * @returns {Element|null}
+       */
+      const $ = (sel, root = document) => root.querySelector(sel);
+      /**
+       * @param {string} sel
+       * @param {Document|Element} [root=document]
+       * @returns {Element[]}
+       */
+      const $$ = (sel, root = document) =>
+        Array.from(root.querySelectorAll(sel));
 
-  /** @type {Record<string, string>} */
-  const regionMap = {
-    '北海道': 'hokkaido',
-    '東北': 'tohoku',
-    '関東': 'kanto',
-    '中部': 'chubu',
-    '関西': 'kinki',
-    '中国': 'chugoku',
-    '四国': 'shikoku',
-    '九州・沖縄': 'kyushu-okinawa'
-  };
+      /** @type {Record<string, string>} */
+      const regionMap = {
+        北海道: "hokkaido",
+        東北: "tohoku",
+        関東: "kanto",
+        中部: "chubu",
+        関西: "kinki",
+        中国: "chugoku",
+        四国: "shikoku",
+        "九州・沖縄": "kyushu-okinawa",
+      };
 
-  /**
-   * @param {string} [prefix]
-   * @returns {{region:string, job:string, employment:string, q:string}}
-   */
-  function readState(prefix = '') {
-    const region = $(prefix ? `#${prefix}regionSelect` : '#regionSelect')?.value || '';
-    const job = $(prefix ? `#${prefix}jobSelect` : '#jobSelect')?.value || '';
-    const employment = $(prefix ? `#${prefix}employmentSelect` : '#employmentSelect')?.value || '';
-    const q = $(prefix ? `#${prefix}keywordInput` : '#keywordInput')?.value || '';
-    return { region, job, employment, q };
-  }
-
-  /**
-   * @param {string} val
-   * @returns {string}
-   */
-  function toSlugRegion(val) {
-    if (!val) return '';
-    if (/^[a-z0-9-]+$/.test(val)) return val;
-    return regionMap[val] || '';
-  }
-
-  /**
-   * @param {{region:string, job:string, employment:string, q:string}} filters
-   */
-  function applyFilter(filters) {
-    const cards = $$('.recruit-environment__salon-card');
-    let visibleCount = 0;
-
-    cards.forEach(card => {
-      const hiring = card.getAttribute('data-hiring') === '1';
-      const region = (card.getAttribute('data-region') || '').split(',').filter(Boolean);
-      const jobs = (card.getAttribute('data-jobs') || '').split(',').filter(Boolean);
-      const employment = (card.getAttribute('data-employment') || '').split(',').filter(Boolean);
-      const title = (card.getAttribute('data-title') || '').toLowerCase();
-      const furigana = (card.getAttribute('data-furigana') || '').toLowerCase();
-      const access = (card.getAttribute('data-access') || '').toLowerCase();
-      const prefecture = (card.getAttribute('data-prefecture-name') || '').toLowerCase();
-      const city = (card.getAttribute('data-city-name') || '').toLowerCase();
-      const jobsName = (card.getAttribute('data-jobs-name') || '').toLowerCase();
-      const employmentName = (card.getAttribute('data-employment-name') || '').toLowerCase();
-
-      const match =
-        hiring &&
-        (!filters.region || region.includes(filters.region)) &&
-        (!filters.job || jobs.includes(filters.job)) &&
-        (!filters.employment || employment.includes(filters.employment)) &&
-        (!filters.q || title.includes(filters.q) || furigana.includes(filters.q) || access.includes(filters.q) || prefecture.includes(filters.q) || city.includes(filters.q) || jobsName.includes(filters.q) || employmentName.includes(filters.q));
-
-      card.style.display = match ? '' : 'none';
-      if (match) visibleCount++;
-    });
-
-    const titleEl = $('#salonsTitle');
-    if (titleEl) {
-      if (filters.region) {
-        const label = Object.keys(regionMap).find(k => regionMap[k] === filters.region) || '対象エリア';
-        titleEl.textContent = `${label}エリア募集店舗一覧（${visibleCount}件）`;
-      } else if (filters.job || filters.employment || filters.q) {
-        titleEl.textContent = `検索結果（${visibleCount}件）`;
-      } else {
-        titleEl.textContent = `求人募集中の店舗一覧（${visibleCount}件）`;
+      /**
+       * @param {string} [prefix]
+       * @returns {{region:string, job:string, employment:string, q:string}}
+       */
+      function readState(prefix = "") {
+        const region =
+          $(prefix ? `#${prefix}regionSelect` : "#regionSelect")?.value || "";
+        const job =
+          $(prefix ? `#${prefix}jobSelect` : "#jobSelect")?.value || "";
+        const employment =
+          $(prefix ? `#${prefix}employmentSelect` : "#employmentSelect")
+            ?.value || "";
+        const q =
+          $(prefix ? `#${prefix}keywordInput` : "#keywordInput")?.value || "";
+        return { region, job, employment, q };
       }
-    }
-  }
 
-  /**
-   * @param {string} [prefix]
-   */
-  function onSearch(prefix = '') {
-    const f = readState(prefix);
-    const normalized = {
-      region: toSlugRegion(f.region),
-      job: f.job,
-      employment: f.employment,
-      q: (f.q || '').trim().toLowerCase()
-    };
-    applyFilter(normalized);
+      /**
+       * @param {string} val
+       * @returns {string}
+       */
+      function toSlugRegion(val) {
+        if (!val) return "";
+        if (/^[a-z0-9-]+$/.test(val)) return val;
+        return regionMap[val] || "";
+      }
 
-    const url = new URL(window.location.href);
-    ['region','job','employment','q'].forEach(k => url.searchParams.delete(k));
-    if (normalized.region) url.searchParams.set('region', normalized.region);
-    if (normalized.job) url.searchParams.set('job', normalized.job);
-    if (normalized.employment) url.searchParams.set('employment', normalized.employment);
-    if (normalized.q) url.searchParams.set('q', normalized.q);
-    window.history.replaceState({}, '', url.toString());
-  }
+      /**
+       * @param {{region:string, job:string, employment:string, q:string}} filters
+       */
+      function applyFilter(filters) {
+        const cards = $$(".recruit-environment__salon-card");
+        let visibleCount = 0;
 
-  function initFromURL() {
-    const url = new URL(window.location.href);
-    const region = url.searchParams.get('region') || '';
-    const job = url.searchParams.get('job') || '';
-    const employment = url.searchParams.get('employment') || '';
-    const q = url.searchParams.get('q') || '';
+        cards.forEach((card) => {
+          const hiring = card.getAttribute("data-hiring") === "1";
+          const region = (card.getAttribute("data-region") || "")
+            .split(",")
+            .filter(Boolean);
+          const jobs = (card.getAttribute("data-jobs") || "")
+            .split(",")
+            .filter(Boolean);
+          const employment = (card.getAttribute("data-employment") || "")
+            .split(",")
+            .filter(Boolean);
+          const title = (card.getAttribute("data-title") || "").toLowerCase();
+          const furigana = (
+            card.getAttribute("data-furigana") || ""
+          ).toLowerCase();
+          const access = (card.getAttribute("data-access") || "").toLowerCase();
+          const prefecture = (
+            card.getAttribute("data-prefecture-name") || ""
+          ).toLowerCase();
+          const city = (
+            card.getAttribute("data-city-name") || ""
+          ).toLowerCase();
+          const jobsName = (
+            card.getAttribute("data-jobs-name") || ""
+          ).toLowerCase();
+          const employmentName = (
+            card.getAttribute("data-employment-name") || ""
+          ).toLowerCase();
 
-    if (region) { const el = $('#regionSelect'); if (el) el.value = region; }
-    if (job) { const el = $('#jobSelect'); if (el) el.value = job; }
-    if (employment) { const el = $('#employmentSelect'); if (el) el.value = employment; }
-    if (q) { const el = $('#keywordInput'); if (el) el.value = q; }
+          const match =
+            hiring &&
+            (!filters.region || region.includes(filters.region)) &&
+            (!filters.job || jobs.includes(filters.job)) &&
+            (!filters.employment || employment.includes(filters.employment)) &&
+            (!filters.q ||
+              title.includes(filters.q) ||
+              furigana.includes(filters.q) ||
+              access.includes(filters.q) ||
+              prefecture.includes(filters.q) ||
+              city.includes(filters.q) ||
+              jobsName.includes(filters.q) ||
+              employmentName.includes(filters.q));
 
-    applyFilter({ region, job, employment, q: (q || '').toLowerCase() });
-  }
+          card.style.display = match ? "" : "none";
+          if (match) visibleCount++;
+        });
 
-  document.addEventListener('DOMContentLoaded', () => {
-    $('.recruit-environment__search-btn')?.addEventListener('click', () => onSearch(''));
-    $('#keywordInput')?.addEventListener('keydown', /** @param {KeyboardEvent} e */ (e) => { if (e.key === 'Enter') onSearch(''); });
-    $('.recruit-environment__mobile-search-btn')?.addEventListener('click', () => onSearch('mobile-'));
-    $('#mobile-keywordInput')?.addEventListener('keydown', /** @param {KeyboardEvent} e */ (e) => { if (e.key === 'Enter') onSearch('mobile-'); });
+        const titleEl = $("#salonsTitle");
+        if (titleEl) {
+          if (filters.region) {
+            const label =
+              Object.keys(regionMap).find(
+                (k) => regionMap[k] === filters.region
+              ) || "対象エリア";
+            titleEl.textContent = `${label}エリア募集店舗一覧（${visibleCount}件）`;
+          } else if (filters.job || filters.employment || filters.q) {
+            titleEl.textContent = `検索結果（${visibleCount}件）`;
+          } else {
+            titleEl.textContent = `求人募集中の店舗一覧（${visibleCount}件）`;
+          }
+        }
+      }
 
-    initFromURL();
-  });
-})();
-</script>
+      /**
+       * @param {string} [prefix]
+       */
+      function onSearch(prefix = "") {
+        const f = readState(prefix);
+        const normalized = {
+          region: toSlugRegion(f.region),
+          job: f.job,
+          employment: f.employment,
+          q: (f.q || "").trim().toLowerCase(),
+        };
+        applyFilter(normalized);
+
+        const url = new URL(window.location.href);
+        ["region", "job", "employment", "q"].forEach((k) =>
+          url.searchParams.delete(k)
+        );
+        if (normalized.region)
+          url.searchParams.set("region", normalized.region);
+        if (normalized.job) url.searchParams.set("job", normalized.job);
+        if (normalized.employment)
+          url.searchParams.set("employment", normalized.employment);
+        if (normalized.q) url.searchParams.set("q", normalized.q);
+        window.history.replaceState({}, "", url.toString());
+      }
+
+      function initFromURL() {
+        const url = new URL(window.location.href);
+        const region = url.searchParams.get("region") || "";
+        const job = url.searchParams.get("job") || "";
+        const employment = url.searchParams.get("employment") || "";
+        const q = url.searchParams.get("q") || "";
+
+        if (region) {
+          const el = $("#regionSelect");
+          if (el) el.value = region;
+        }
+        if (job) {
+          const el = $("#jobSelect");
+          if (el) el.value = job;
+        }
+        if (employment) {
+          const el = $("#employmentSelect");
+          if (el) el.value = employment;
+        }
+        if (q) {
+          const el = $("#keywordInput");
+          if (el) el.value = q;
+        }
+
+        applyFilter({ region, job, employment, q: (q || "").toLowerCase() });
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        $(".recruit-environment__search-btn")?.addEventListener("click", () =>
+          onSearch("")
+        );
+        $("#keywordInput")?.addEventListener(
+          "keydown",
+          /** @param {KeyboardEvent} e */ (e) => {
+            if (e.key === "Enter") onSearch("");
+          }
+        );
+        $(".recruit-environment__mobile-search-btn")?.addEventListener(
+          "click",
+          () => onSearch("mobile-")
+        );
+        $("#mobile-keywordInput")?.addEventListener(
+          "keydown",
+          /** @param {KeyboardEvent} e */ (e) => {
+            if (e.key === "Enter") onSearch("mobile-");
+          }
+        );
+
+        initFromURL();
+      });
+    })();
+  </script>
 </html>
 
 <style>
   @import "tailwindcss";
-  
+
   /* CSS変数の定義 */
   :root {
-    --color-beige: #FAF4E8;
-    --color-brown: #69552E;
-    --color-brown-light: #8B6F47;
-    --color-white: #FFFFFF;
-    --color-black: #3D3D3D;
-    --color-grey-light: #E5E5E5;
+    --color-beige: #faf4e8;
+    --color-brown: #69552e;
+    --color-brown-light: #8b6f47;
+    --color-white: #ffffff;
+    --color-black: #3d3d3d;
+    --color-grey-light: #e5e5e5;
     --color-grey-medium: #666666;
-    --font-family-yumincho: 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', 'MS PMincho', serif;
-    --font-family-zenkaku: 'Zen Kaku Gothic New', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    --font-family-yumincho: "Yu Mincho", "YuMincho", "Hiragino Mincho Pro",
+      "MS PMincho", serif;
+    --font-family-zenkaku: "Zen Kaku Gothic New", "Hiragino Sans",
+      "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
     --font-weight-regular: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
   }
-  
+
   /* ページ全体の背景 */
   .bg-beige {
     background-color: var(--color-beige);
@@ -892,24 +1136,24 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     color: var(--color-black);
     font-family: var(--font-family-yumincho);
     font-weight: 500;
-    line-height: 1.0;
+    line-height: 1;
     margin: 0;
     position: relative;
     z-index: 5;
   }
 
   .recruit-about__title::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -80%;
     left: -5%;
     height: 100px;
     width: 286px;
-    background-image: url('/images/recruit/txt_about.svg');
+    background-image: url("/images/recruit/txt_about.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    opacity: 1.0;
+    opacity: 1;
     z-index: -1;
   }
 
@@ -948,7 +1192,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     display: flex;
     gap: 40px;
   }
-  
+
   .recruit-about__images-section:first-child {
     align-items: flex-end;
   }
@@ -974,7 +1218,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
   .recruit-cta-top__container {
     max-width: 1040px;
-    background-color: #FFFCF7;
+    background-color: #fffcf7;
     margin: 0 auto;
     padding: 40px;
     border-radius: 15px;
@@ -985,7 +1229,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     font-weight: 500;
     color: var(--color-black);
     text-align: center;
-    line-height: 1.0;
+    line-height: 1;
     margin-bottom: 24px;
     font-family: var(--font-family-yumincho);
   }
@@ -999,7 +1243,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
   .recruit-cta-top__content::before,
   .recruit-cta-top__content::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     bottom: 0;
@@ -1064,12 +1308,12 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-cta-top__btn--line {
-    background-color: #00B900;
+    background-color: #00b900;
     color: var(--color-white);
   }
 
   .recruit-cta-top__btn--line:hover {
-    background-color: #00A000;
+    background-color: #00a000;
   }
 
   .recruit-cta-top__btn-text {
@@ -1092,8 +1336,8 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   .recruit-cta-top__phone-number {
     font-size: 42px;
     font-weight: 500;
-    color: #DAA520;
-    line-height: 1.0;
+    color: #daa520;
+    line-height: 1;
     margin-bottom: 16px;
     font-family: var(--font-family-zenkaku);
   }
@@ -1136,19 +1380,19 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-appeal__title::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -20px;
     left: 50%;
     transform: translateX(-50%);
     width: 286px;
     height: 100px;
-    background-image: url('/images/recruit/txt_about.svg');
+    background-image: url("/images/recruit/txt_about.svg");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     z-index: -1;
-    opacity: 1.0;
+    opacity: 1;
   }
 
   .recruit-appeal__content {
@@ -1179,7 +1423,6 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     color: var(--color-black);
   }
 
-
   /* 働く環境・サロン紹介セクション */
   .recruit-environment {
     padding: 80px 0;
@@ -1203,19 +1446,19 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-environment__title::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -40px;
     left: 50%;
     transform: translateX(-50%);
     width: 413px;
     height: 114px;
-    background-image: url('/images/recruit/txt_data.svg');
+    background-image: url("/images/recruit/txt_data.svg");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     z-index: -1;
-    opacity: 1.0;
+    opacity: 1;
   }
 
   .recruit-environment__stats {
@@ -1297,13 +1540,13 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     font-family: var(--font-family-yumincho);
   }
 
-    .recruit-environment__search-description {
-      font-size: 14px;
-      color: var(--color-black);
-      line-height: 1.5;
-      font-family: var(--font-family-zenkaku);
-      margin-bottom: 16px;
-    }
+  .recruit-environment__search-description {
+    font-size: 14px;
+    color: var(--color-black);
+    line-height: 1.5;
+    font-family: var(--font-family-zenkaku);
+    margin-bottom: 16px;
+  }
 
   .recruit-environment__search-form {
     display: flex;
@@ -1343,7 +1586,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   .recruit-environment__search-input {
     flex: 1;
     padding: 12px 16px;
-    border: 2px solid #E5E5E5;
+    border: 2px solid #e5e5e5;
     border-radius: 8px;
     font-size: 18px;
     background-color: white;
@@ -1412,7 +1655,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
-    border-bottom: 0.5px solid var(--Text-black, #3D3D3D);
+    border-bottom: 0.5px solid var(--Text-black, #3d3d3d);
     font-size: 24px;
     font-weight: 600;
     color: var(--color-black);
@@ -1560,19 +1803,19 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-staff-voices__title::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -20px;
     left: 50%;
     transform: translateX(-50%);
     width: 342px;
     height: 100px;
-    background-image: url('/images/recruit/txt_staff-voices.svg');
+    background-image: url("/images/recruit/txt_staff-voices.svg");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     z-index: -1;
-    opacity: 1.0;
+    opacity: 1;
   }
 
   .recruit-staff-voices__grid {
@@ -1604,19 +1847,19 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-jobs__title::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -45px;
     left: 50%;
     transform: translateX(-50%);
     width: 304px;
     height: 130px;
-    background-image: url('/images/recruit/txt_jobs.svg');
+    background-image: url("/images/recruit/txt_jobs.svg");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     z-index: -1;
-    opacity: 1.0;
+    opacity: 1;
   }
 
   .recruit-jobs__grid {
@@ -1635,7 +1878,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     max-width: 1040px;
     margin: 0 auto;
     padding: 40px 120px;
-    background-color: #EAE2D3;
+    background-color: #eae2d3;
     border-radius: 15px;
   }
 
@@ -1656,13 +1899,13 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-application-process__steps::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 51.5px;
     top: 60px;
     bottom: 60px;
     width: 3px;
-    background-image: radial-gradient(circle, #69552E 1.5px, transparent 1.5px);
+    background-image: radial-gradient(circle, #69552e 1.5px, transparent 1.5px);
     background-size: 3px 6px;
     background-repeat: repeat-y;
   }
@@ -1693,19 +1936,19 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-application-process__step-number--step1 {
-    background-color: #FCF2DF;
+    background-color: #fcf2df;
   }
 
   .recruit-application-process__step-number--step2 {
-    background-color: #FEEBC8;
+    background-color: #feebc8;
   }
 
   .recruit-application-process__step-number--step3 {
-    background-color: #F1D49F;
+    background-color: #f1d49f;
   }
 
   .recruit-application-process__step-text {
-    color: #69552E;
+    color: #69552e;
     text-align: center;
     font-family: var(--font-family-yumincho);
     font-size: 24px;
@@ -1715,7 +1958,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-application-process__step-digit {
-    color: #69552E;
+    color: #69552e;
     font-family: var(--font-family-yumincho);
     font-size: 32px;
     font-style: normal;
@@ -1742,7 +1985,6 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     font-family: var(--font-family-zenkaku);
   }
 
-
   /* よくある質問セクション */
   .recruit-faq {
     padding: 80px 0;
@@ -1766,19 +2008,19 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-faq__title::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -20px;
     left: 50%;
     transform: translateX(-50%);
     width: 212px;
     height: 111px;
-    background-image: url('/images/recruit/txt_faq.svg');
+    background-image: url("/images/recruit/txt_faq.svg");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     z-index: -1;
-    opacity: 1.0;
+    opacity: 1;
   }
 
   .recruit-faq__list {
@@ -1786,7 +2028,6 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     flex-direction: column;
     gap: 24px;
   }
-
 
   /* CTA（下部） */
   .recruit-cta-bottom {
@@ -1834,18 +2075,18 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-cta-bottom__btn--line {
-    background-color: #00B900;
+    background-color: #00b900;
     color: white;
   }
 
   .recruit-cta-bottom__btn--line:hover {
-    background-color: #00A000;
+    background-color: #00a000;
   }
 
   .recruit-cta-bottom__phone {
     font-size: 24px;
     font-weight: 700;
-    color: #DAA520;
+    color: #daa520;
   }
 
   /* レスポンシブ対応 */
@@ -1953,24 +2194,24 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       color: var(--color-black);
       font-family: var(--font-family-yumincho);
       font-weight: 500;
-      line-height: 1.0;
+      line-height: 1;
       margin: 0;
       position: relative;
       z-index: 5;
     }
 
     .recruit-about__mobile-title::before {
-      content: '';
+      content: "";
       position: absolute;
       top: -80%;
       left: -5%;
       height: 100px;
       width: 286px;
-      background-image: url('/images/recruit/txt_about.svg');
+      background-image: url("/images/recruit/txt_about.svg");
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
-      opacity: 1.0;
+      opacity: 1;
       z-index: -1;
     }
 
@@ -2107,7 +2348,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
     .recruit-cta-top__column {
       padding: 0 24px 24px 24px;
-      border-bottom: 1px solid #B2B2B2;
+      border-bottom: 1px solid #b2b2b2;
     }
 
     .recruit-cta-top__column:last-child {
@@ -2186,7 +2427,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       text-align: left;
       margin-bottom: 32px;
       width: 180px;
-      line-height: 1.0;
+      line-height: 1;
       word-break: break-word;
     }
 
@@ -2227,7 +2468,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
     .recruit-environment__mobile-search-description {
       font-size: 12px;
-      line-height: 2.0;
+      line-height: 2;
       margin-bottom: 24px;
       font-family: var(--font-family-zenkaku);
       font-weight: 300;
@@ -2266,7 +2507,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     .recruit-environment__mobile-search-label {
       font-size: 18px !important;
       font-weight: 300 !important;
-      line-height: 1.0;
+      line-height: 1;
       color: var(--color-black) !important;
       font-family: var(--font-family-zenkaku);
     }
@@ -2274,7 +2515,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     .recruit-environment__mobile-search-section-title {
       font-family: var(--font-family-zenkaku);
       font-weight: 500;
-      line-height: 1.0;
+      line-height: 1;
       font-size: 16px;
       margin-bottom: 12px;
     }
@@ -2315,7 +2556,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     }
 
     .recruit-environment__mobile-search-btn:hover {
-      background-color: #8B6F47 !important;
+      background-color: #8b6f47 !important;
     }
 
     .recruit-environment__salon-grid {
@@ -2350,14 +2591,13 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       font-size: 16px;
     }
 
-
     .recruit-environment__salons-title {
       display: flex;
       padding-bottom: 16px;
       justify-content: space-between;
       align-items: center;
       align-self: stretch;
-      border-bottom: 0.5px solid var(--Text-black, #3D3D3D);
+      border-bottom: 0.5px solid var(--Text-black, #3d3d3d);
       font-size: 20px;
       font-weight: 400;
       margin-bottom: 32px;
@@ -2399,7 +2639,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       font-size: 32px;
       text-align: left;
       margin-bottom: 32px;
-      line-height: 1.0;
+      line-height: 1;
       word-break: break-word;
     }
 
@@ -2421,7 +2661,6 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       left: 86px;
     }
 
-
     .recruit-staff-voices__grid {
       grid-template-columns: 1fr;
       gap: 20px;
@@ -2439,7 +2678,6 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     .recruit-application-process__container {
       padding: 40px 24px;
     }
-
 
     .recruit-application-process__title {
       font-size: 32px;
@@ -2509,42 +2747,42 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
   /* Footer */
   .footer {
-    background-color: #3D3D3D;
+    background-color: #3d3d3d;
     padding: 60px 0 30px;
   }
-  
+
   .footer-container {
     max-width: 484px;
     margin: 0 auto;
   }
-  
+
   .footer-brand {
     text-align: center;
     margin-bottom: 24px;
   }
-  
+
   .footer-brand-text {
     display: flex;
     align-items: baseline;
     justify-content: center;
     gap: 0.5rem;
   }
-  
+
   .footer-brand-name {
     font-family: var(--font-family-yumincho);
     font-size: 2.5rem;
-    line-height: 1.0;
+    line-height: 1;
     font-weight: var(--font-weight-medium);
     color: var(--color-white);
   }
-  
+
   .footer-brand-tagline {
     font-family: var(--font-family-yumincho);
     font-size: 18px;
-    line-height: 1.0;
+    line-height: 1;
     color: var(--color-white);
   }
-  
+
   .footer-nav {
     display: flex;
     width: 480px;
@@ -2553,7 +2791,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     gap: 0;
     margin-bottom: 36px;
   }
-  
+
   .footer-nav-link {
     color: var(--color-white);
     text-decoration: none;
@@ -2563,23 +2801,23 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     padding: 8px;
     transition: color 0.3s ease;
   }
-  
+
   .footer-nav-link:hover {
     color: var(--color-brown-light);
   }
-  
+
   .footer-nav-separator {
     width: 1px;
     height: 16px;
     background-color: var(--color-white);
     opacity: 0.5;
   }
-  
+
   .footer-recruit {
     text-align: center;
     margin-bottom: 3rem;
   }
-  
+
   .footer-recruit-btn {
     display: inline-flex;
     align-items: center;
@@ -2593,34 +2831,34 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     border-radius: 6px;
     font-family: var(--font-family-zenkaku);
     font-size: 18px;
-    line-height: 1.0;
+    line-height: 1;
     font-weight: var(--font-weight-regular);
     text-decoration: none;
     transition: all 0.3s ease;
   }
-  
+
   .footer-recruit-btn:hover {
     background-color: var(--color-white);
     color: var(--color-grey-medium);
   }
-  
+
   .footer-recruit-icon {
     width: 16px;
     height: 16px;
   }
-  
+
   .footer-bottom {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin-bottom: 2rem;
   }
-  
+
   .footer-social {
     display: flex;
     gap: 1rem;
   }
-  
+
   .footer-social-link {
     display: flex;
     align-items: center;
@@ -2632,41 +2870,41 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     background-color: var(--color-white);
     color: var(--color-black);
   }
-  
+
   .footer-social-link:hover {
     border: 1px solid var(--color-white);
     background-color: var(--color-grey-medium);
     color: var(--color-white);
   }
-  
+
   .footer-social-icon {
     width: 24px;
     height: 24px;
   }
-  
+
   .footer-sponsors {
     display: flex;
     gap: 10px;
   }
-  
+
   .footer-sponsor {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
+
   .footer-sponsor-image {
     height: 77px;
     width: auto;
     object-fit: contain;
   }
-  
+
   .footer-copyright {
     text-align: center;
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
   }
-  
+
   .footer-copyright p {
     font-family: var(--font-family-zenkaku);
     font-size: 0.75rem;
@@ -2679,11 +2917,11 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     .footer {
       padding: 40px 0 20px;
     }
-    
+
     .footer-container {
       padding: 0 1rem;
     }
-    
+
     .footer-brand {
       margin-bottom: 2rem;
     }
@@ -2692,18 +2930,18 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       flex-direction: column;
       align-items: center;
     }
-    
+
     .footer-brand-name {
       font-size: 48px;
     }
-    
+
     .footer-nav {
       flex-direction: row;
       flex-wrap: wrap;
       gap: 0px 1rem;
       width: 100%;
     }
-    
+
     .footer-nav-link {
       font-size: 12px;
       padding: 8px;
@@ -2711,12 +2949,12 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     .footer-bottom {
       flex-direction: column;
       gap: 12px;
-    } 
+    }
     .footer-sponsors {
       flex-direction: row;
       margin-bottom: 2rem;
     }
-    
+
     .footer-sponsor-image {
       width: auto;
       height: 72px;
@@ -2729,7 +2967,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(255,255,255, 0.7);
+    background-color: rgba(255, 255, 255, 0.7);
     border-top: 1px solid var(--color-grey-light);
     padding: 24px 0;
     z-index: 1000;
@@ -2773,17 +3011,17 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-fixed-actions__btn--form {
-    background: #FF4A7A;
+    background: #ff4a7a;
   }
 
   .recruit-fixed-actions__btn--form:hover {
-    background-color: #FF1493;
+    background-color: #ff1493;
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
   }
 
   .recruit-fixed-actions__btn--line {
-    background-color: #13BC1C;
+    background-color: #13bc1c;
   }
 
   .recruit-fixed-actions__btn--line:hover {
@@ -2792,11 +3030,11 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-fixed-actions__btn--phone {
-    background-color: #3D3D3D;
+    background-color: #3d3d3d;
   }
 
   .recruit-fixed-actions__btn--phone:hover {
-    background-color: #2D2D2D;
+    background-color: #2d2d2d;
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(61, 61, 61, 0.3);
   }
@@ -2886,7 +3124,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
   @media (max-width: 480px) {
     .recruit-hero {
-      padding: 64px 0 32px 0; 
+      padding: 64px 0 32px 0;
     }
 
     .recruit-hero__container {
@@ -2962,7 +3200,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
     .recruit-about__mobile-text {
       font-size: 12px;
-      line-height: 2.0;
+      line-height: 2;
       word-break: auto-phrase;
       font-weight: 300;
     }
@@ -2976,7 +3214,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
       height: 57px;
       top: -20px;
     }
-    .recruit-cta-top{
+    .recruit-cta-top {
       padding: 32px 24px;
     }
 
@@ -2990,7 +3228,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
     .recruit-cta-top__column-description {
       font-size: 14px;
-      line-height: 2.0;
+      line-height: 2;
     }
 
     .recruit-cta-top__btn-text {
@@ -2999,7 +3237,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
     .recruit-cta-top__phone-text {
       font-size: 14px;
-      line-height: 2.0;
+      line-height: 2;
     }
 
     .recruit-appeal__title,
@@ -3017,7 +3255,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
     .recruit-appeal__text {
       font-size: 12px;
-      line-height: 2.0;
+      line-height: 2;
       word-break: auto-phrase;
     }
 
@@ -3025,15 +3263,14 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     .recruit-jobs__title::before {
     }
 
-    .recruit-environment__title::before{
+    .recruit-environment__title::before {
       top: -30px;
     }
 
-    .recruit-staff-voices__title::before{
+    .recruit-staff-voices__title::before {
       top: -20px;
       left: 90px;
     }
-
 
     .recruit-environment__mobile-search-title {
       margin-bottom: 0px;
@@ -3044,7 +3281,7 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
     .recruit-environment__mobile-search-label {
       font-size: 14px !important;
-      line-height: 2.0;
+      line-height: 2;
     }
 
     .recruit-environment__mobile-search-select {
@@ -3070,9 +3307,8 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
     .recruit-application-process__step-description {
       font-size: 12px;
-      line-height: 2.0;
+      line-height: 2;
     }
-
 
     .recruit-fixed-actions {
       padding: 12px 0;
@@ -3098,9 +3334,8 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     }
 
     .recruit-fixed-actions__btn-text {
-       font-size: 20px;
+      font-size: 20px;
     }
-    
 
     .recruit-fixed-actions__btn-icon {
       width: 40px;
