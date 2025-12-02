@@ -242,111 +242,106 @@ const salonJsonLd = {
       </div>
     </section>
 
-    <!-- ヘアカタログセクション -->
-    <section class="hairstyle-section">
-      <div class="hairstyle-container">
-        <h2 class="hairstyle-title section-title text-h1">
-          HAIRSTYLE<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="hairstyle-title-sub section-title-sub">ヘアカタログ</span>
+    <!-- ニュースセクション -->
+    <section class="news-section">
+      <div class="news-container">
+        <h2 class="news-title section-title text-h0">
+          NEWS<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="news-title-sub">お知らせ</span>
         </h2>
         
         <!-- タブナビゲーション -->
-        <div class="hairstyle-tabs">
-          <button class="hairstyle-tab active" data-category="all">ALL</button>
-          <button class="hairstyle-tab" data-category="long">LONG</button>
-          <button class="hairstyle-tab" data-category="medium">MEDIUM</button>
-          <button class="hairstyle-tab" data-category="short">SHORT</button>
-          <button class="hairstyle-tab" data-category="mens">MENS</button>
+        <div class="news-tabs">
+          <button class="news-tab active" data-category="information">INFORMATION</button>
+          <button class="news-tab" data-category="blog">BLOG</button>
+          <button class="news-tab" data-category="movie">MOVIE</button>
         </div>
         
-        <!-- ヘアスタイルグリッド（動的に埋め込み） -->
-        <div class="hairstyle-grid grid-4-cols" id="hairstyle-grid"></div>
+        <!-- ニュース一覧（WP連携：従来のDOM構造・クラスを維持） -->
+        <div class="news-list">
+          <div class="news-group" data-category="information">
+            {newsByCategory.information.map((newsItem) => (
+              <a href={`/news/${newsItem.id}`} class="news-item-link">
+              <div class="news-item">
+                {newsItem.featured_image && (
+                  <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
+                )}
+                <div class="news-content">
+                  <div class="news-meta">
+                    <span class="news-date">{newsItem.date.replace(/-/g, '.').substring(0, 10)}</span>
+                    <span class="news-separator">|</span>
+                    {newsItem.categories?.[0] && (
+                      <span class="news-category">{newsItem.categories[0]}</span>
+                    )}
+                  </div>
+                  <h3 class="news-item-title">
+                    {newsItem.title}
+                  </h3>
+                  <p class="news-description">{newsItem.excerpt}</p>
+                </div>
+              </div>
+            </a>
+            ))}
+          </div>
+          <div class="news-group" data-category="blog" style="display:none;">
+            {newsByCategory.blog.map((newsItem) => (
+              <a href={`/news/${newsItem.id}`} class="news-item-link">
+              <div class="news-item">
+                {newsItem.featured_image && (
+                  <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
+                )}
+                <div class="news-content">
+                  <div class="news-meta">
+                    <span class="news-date">{newsItem.date.replace(/-/g, '.').substring(0, 10)}</span>
+                    <span class="news-separator">|</span>
+                    {newsItem.categories?.[0] && (
+                      <span class="news-category">{newsItem.categories[0]}</span>
+                    )}
+                  </div>
+                  <h3 class="news-item-title">
+                    {newsItem.title}
+                  </h3>
+                  <p class="news-description">{newsItem.excerpt}</p>
+                </div>
+              </div>
+            </a>
+            ))}
+          </div>
+          <div class="news-group" data-category="movie" style="display:none;">
+            {newsByCategory.movie.map((newsItem) => (
+              <a href={`/news/${newsItem.id}`} class="news-item-link">
+              <div class="news-item">
+                {newsItem.featured_image && (
+                  <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
+                )}
+                <div class="news-content">
+                  <div class="news-meta">
+                    <span class="news-date">{newsItem.date.replace(/-/g, '.').substring(0, 10)}</span>
+                    <span class="news-separator">|</span>
+                    {newsItem.categories?.[0] && (
+                      <span class="news-category">{newsItem.categories[0]}</span>
+                    )}
+                  </div>
+                  <h3 class="news-item-title">
+                    {newsItem.title}
+                  </h3>
+                  <p class="news-description">{newsItem.excerpt}</p>
+                </div>
+              </div>
+            </a>
+            ))}
+          </div>
+        </div>
         
         <!-- 詳しく見るボタン -->
-        <div class="hairstyle-more">
-          <button class="hairstyle-more-btn">
-            <span class="hairstyle-more-text">もっとみる</span>
-            <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="hairstyle-more-icon" />
-          </button>
+        <div class="news-more">
+          <a href="/news" class="news-more-btn">
+            <span class="news-more-text">詳しく見る</span>
+            <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="news-more-icon" />
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- 企業様向けヘアメイクセクション -->
-    <section class="hairmake-section">
-      <div class="hairmake-container">
-        <h2 class="hairmake-title section-title text-h1">
-          HAIRMAKE<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="hairmake-title-sub section-title-sub">企業様向けヘアメイク</span>
-        </h2>
-        
-        <div class="hairmake-content">
-          <div class="hairmake-text">
-            <p class="hairmake-description">
-              雑誌、放送、アパレル、撮影、イベントなど、企業様向けヘアメイクをお探しの担当者様へ。特別な一日にプロのヘアメイクをお届けします。
-            </p>
-            
-            <!-- 料金表 -->
-            <div class="hairmake-pricing">
-              <div class="pricing-title">
-                ヘアメイク1名あたりの料金
-              </div>
-              <table class="pricing-table">
-                <thead>
-                  <tr>
-                    <th>拘束時間(目安)</th>
-                    <th>料金</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>約3時間</td>
-                    <td>33,000円+税</td>
-                  </tr>
-                  <tr>
-                    <td>約6時間</td>
-                    <td>44,000円+税</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
-            <p class="hairmake-note">
-              ※ヘアメイク複数人でのご依頼も可能ですので、お問い合わせください。<br>
-              また、複数名でのご依頼の場合は割引のご相談も承りますので、お気軽にお申し付けください。
-            </p>
-            
-            <!-- メール依頼フォーム -->
-            <div class="mail-form">
-              <div class="mail-form-content">
-                <p class="mail-form-description">
-                  以下のボタンの先で<br>
-                  「貴社名・お名前・お電話番号・希望人数・依頼場所」を記載の上、<br>
-                  メールでお問い合わせください
-                </p>
-                <p class="mail-form-description-mobile">
-                  貴社名・お名前・電話番号・希望人数<br>依頼場所を記載の上、お問い合わせください。
-                </p>
-                <a href="mailto:recruit@anemone-salon.com" class="mail-form-btn">
-                  メールでのご依頼はこちら
-                  <svg class="mail-form-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          <div class="hairmake-image">
-            <img 
-              src="/images/main/hairmake.png" 
-              alt="ヘアメイクサービス" 
-              class="hairmake-image-content"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- サロン店舗セクション -->
     <section id="salons" class="salon-section">
       <div class="salon-container">
         
@@ -476,6 +471,113 @@ const salonJsonLd = {
       </div>
     </section>
 
+    <!-- ヘアカタログセクション -->
+    <section class="hairstyle-section">
+      <div class="hairstyle-container">
+        <h2 class="hairstyle-title section-title text-h1">
+          HAIRSTYLE<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="hairstyle-title-sub section-title-sub">ヘアカタログ</span>
+        </h2>
+        
+        <!-- タブナビゲーション -->
+        <div class="hairstyle-tabs">
+          <button class="hairstyle-tab active" data-category="all">ALL</button>
+          <button class="hairstyle-tab" data-category="long">LONG</button>
+          <button class="hairstyle-tab" data-category="medium">MEDIUM</button>
+          <button class="hairstyle-tab" data-category="short">SHORT</button>
+          <button class="hairstyle-tab" data-category="mens">MENS</button>
+        </div>
+        
+        <!-- ヘアスタイルグリッド（動的に埋め込み） -->
+        <div class="hairstyle-grid grid-4-cols" id="hairstyle-grid"></div>
+        
+        <!-- 詳しく見るボタン -->
+        <div class="hairstyle-more">
+          <button class="hairstyle-more-btn">
+            <span class="hairstyle-more-text">もっとみる</span>
+            <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="hairstyle-more-icon" />
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 企業様向けヘアメイクセクション -->
+    <section class="hairmake-section">
+      <div class="hairmake-container">
+        <h2 class="hairmake-title section-title text-h1">
+          HAIRMAKE<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="hairmake-title-sub section-title-sub">企業様向けヘアメイク</span>
+        </h2>
+        
+        <div class="hairmake-content">
+          <div class="hairmake-text">
+            <p class="hairmake-description">
+              雑誌、放送、アパレル、撮影、イベントなど、企業様向けヘアメイクをお探しの担当者様へ。特別な一日にプロのヘアメイクをお届けします。
+            </p>
+            
+            <!-- 料金表 -->
+            <div class="hairmake-pricing">
+              <div class="pricing-title">
+                ヘアメイク1名あたりの料金
+              </div>
+              <table class="pricing-table">
+                <thead>
+                  <tr>
+                    <th>拘束時間(目安)</th>
+                    <th>料金</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>約3時間</td>
+                    <td>33,000円+税</td>
+                  </tr>
+                  <tr>
+                    <td>約6時間</td>
+                    <td>44,000円+税</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <p class="hairmake-note">
+              ※ヘアメイク複数人でのご依頼も可能ですので、お問い合わせください。<br>
+              また、複数名でのご依頼の場合は割引のご相談も承りますので、お気軽にお申し付けください。
+            </p>
+            
+            <!-- メール依頼フォーム -->
+            <div class="mail-form">
+              <div class="mail-form-content">
+                <p class="mail-form-description">
+                  以下のボタンの先で<br>
+                  「貴社名・お名前・お電話番号・希望人数・依頼場所」を記載の上、<br>
+                  メールでお問い合わせください
+                </p>
+                <p class="mail-form-description-mobile">
+                  貴社名・お名前・電話番号・希望人数<br>依頼場所を記載の上、お問い合わせください。
+                </p>
+                <a href="mailto:recruit@anemone-salon.com" class="mail-form-btn">
+                  メールでのご依頼はこちら
+                  <svg class="mail-form-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hairmake-image">
+            <img 
+              src="/images/main/hairmake.png" 
+              alt="ヘアメイクサービス" 
+              class="hairmake-image-content"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- サロン店舗セクション -->
+
+
     <!-- 採用情報セクション -->
     <section class="recruit-section">
       <div class="recruit-container">
@@ -502,105 +604,6 @@ const salonJsonLd = {
       </div>
     </section>
 
-    <!-- ニュースセクション -->
-    <section class="news-section">
-      <div class="news-container">
-        <h2 class="news-title section-title text-h0">
-          NEWS<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="news-title-sub">お知らせ</span>
-        </h2>
-        
-        <!-- タブナビゲーション -->
-        <div class="news-tabs">
-          <button class="news-tab active" data-category="information">INFORMATION</button>
-          <button class="news-tab" data-category="blog">BLOG</button>
-          <button class="news-tab" data-category="movie">MOVIE</button>
-        </div>
-        
-        <!-- ニュース一覧（WP連携：従来のDOM構造・クラスを維持） -->
-        <div class="news-list">
-          <div class="news-group" data-category="information">
-            {newsByCategory.information.map((newsItem) => (
-              <a href={`/news/${newsItem.id}`} class="news-item-link">
-              <div class="news-item">
-                {newsItem.featured_image && (
-                  <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
-                )}
-                <div class="news-content">
-                  <div class="news-meta">
-                    <span class="news-date">{newsItem.date.replace(/-/g, '.').substring(0, 10)}</span>
-                    <span class="news-separator">|</span>
-                    {newsItem.categories?.[0] && (
-                      <span class="news-category">{newsItem.categories[0]}</span>
-                    )}
-                  </div>
-                  <h3 class="news-item-title">
-                    {newsItem.title}
-                  </h3>
-                  <p class="news-description">{newsItem.excerpt}</p>
-                </div>
-              </div>
-            </a>
-            ))}
-          </div>
-          <div class="news-group" data-category="blog" style="display:none;">
-            {newsByCategory.blog.map((newsItem) => (
-              <a href={`/news/${newsItem.id}`} class="news-item-link">
-              <div class="news-item">
-                {newsItem.featured_image && (
-                  <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
-                )}
-                <div class="news-content">
-                  <div class="news-meta">
-                    <span class="news-date">{newsItem.date.replace(/-/g, '.').substring(0, 10)}</span>
-                    <span class="news-separator">|</span>
-                    {newsItem.categories?.[0] && (
-                      <span class="news-category">{newsItem.categories[0]}</span>
-                    )}
-                  </div>
-                  <h3 class="news-item-title">
-                    {newsItem.title}
-                  </h3>
-                  <p class="news-description">{newsItem.excerpt}</p>
-                </div>
-              </div>
-            </a>
-            ))}
-          </div>
-          <div class="news-group" data-category="movie" style="display:none;">
-            {newsByCategory.movie.map((newsItem) => (
-              <a href={`/news/${newsItem.id}`} class="news-item-link">
-              <div class="news-item">
-                {newsItem.featured_image && (
-                  <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
-                )}
-                <div class="news-content">
-                  <div class="news-meta">
-                    <span class="news-date">{newsItem.date.replace(/-/g, '.').substring(0, 10)}</span>
-                    <span class="news-separator">|</span>
-                    {newsItem.categories?.[0] && (
-                      <span class="news-category">{newsItem.categories[0]}</span>
-                    )}
-                  </div>
-                  <h3 class="news-item-title">
-                    {newsItem.title}
-                  </h3>
-                  <p class="news-description">{newsItem.excerpt}</p>
-                </div>
-              </div>
-            </a>
-            ))}
-          </div>
-        </div>
-        
-        <!-- 詳しく見るボタン -->
-        <div class="news-more">
-          <a href="/news" class="news-more-btn">
-            <span class="news-more-text">詳しく見る</span>
-            <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="news-more-icon" />
-          </a>
-        </div>
-      </div>
-    </section>
 
     <!-- Instagramセクション -->
     <section class="instagram-section">
