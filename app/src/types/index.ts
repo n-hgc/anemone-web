@@ -200,7 +200,7 @@ export interface SalonIndexData {
   title: string;
   furigana: string;
   thumb: string;
-  region: Array<{ slug: string; name: string }>;
+  region: Array<{ id: number; slug: string; name: string; parent: number }>;
   prefecture: Array<{ id: number; slug: string; name: string; parent: number }>; // parent: 0 = 親ターム（都道府県）、> 0 = 子ターム（エリア）
   city: Array<{ id: number; slug: string; name: string; parent: number }>;
   job_role: Array<{ slug: string; name: string }>;

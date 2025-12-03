@@ -32,6 +32,74 @@ try {
 // サロンデータを直接使用（変換不要）
 const salons: SalonIndexData[] = salonData;
 
+// リージョン・都道府県・エリアの階層構造を抽出
+interface RegionHierarchy {
+  id: number;
+  slug: string;
+  name: string;
+  prefectures: Array<{
+    id: number;
+    slug: string;
+    name: string;
+    areas: Array<{ id: number; slug: string; name: string }>;
+  }>;
+}
+
+const regionHierarchy = new Map<string, RegionHierarchy>();
+
+salons.forEach((salon) => {
+  salon.region.forEach((region) => {
+    if (!regionHierarchy.has(region.slug)) {
+      regionHierarchy.set(region.slug, {
+        id: region.id,
+        slug: region.slug,
+        name: region.name,
+        prefectures: [],
+      });
+    }
+
+    const regionData = regionHierarchy.get(region.slug)!;
+
+    // 都道府県（親ターム、parent === 0）を抽出
+    salon.prefecture
+      .filter((p) => p.parent === 0)
+      .forEach((pref) => {
+        // 都道府県が既に存在するかチェック
+        let prefData = regionData.prefectures.find((p) => p.id === pref.id);
+
+        if (!prefData) {
+          prefData = {
+            id: pref.id,
+            slug: pref.slug,
+            name: pref.name,
+            areas: [],
+          };
+          regionData.prefectures.push(prefData);
+        }
+
+        // エリア（子ターム、parent > 0）を抽出
+        salon.prefecture
+          .filter((p) => p.parent === pref.id)
+          .forEach((area) => {
+            // 重複チェック
+            if (!prefData.areas.find((a) => a.id === area.id)) {
+              prefData.areas.push({
+                id: area.id,
+                slug: area.slug,
+                name: area.name,
+              });
+            }
+          });
+      });
+  });
+});
+
+// Mapを配列に変換（表示用）
+const regionHierarchyArray = Array.from(regionHierarchy.values());
+
+// 階層構造データをJSONとして埋め込む（クライアントサイドで利用するため）
+const regionHierarchyJson = JSON.stringify(regionHierarchyArray);
+
 // NEWSデータを取得（まとめて取得→クライアント側でカテゴリ分割）
 let newsByCategory: { [key: string]: News[] } = {
   information: [],
@@ -87,6 +155,13 @@ const salonJsonLd = {
   image="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&h=630&fit=crop"
   jsonLd={JSON.stringify(salonJsonLd)}
 >
+  <!-- 階層構造データを埋め込む -->
+  <script
+    id="region-hierarchy-data"
+    type="application/json"
+    set:html={regionHierarchyJson}
+  />
+
   <!-- 認証チェック用のスクリプト -->
   <script>
     // 認証状態をチェック
@@ -452,16 +527,33 @@ const salonJsonLd = {
           <div class="salon-filters">
             <!-- 地域ナビゲーション -->
             <div class="salon-regions">
-              <button class="region-btn" data-region="hokkaido">北海道</button>
-              <button class="region-btn" data-region="tohoku">東北</button>
-              <button class="region-btn" data-region="kanto">関東</button>
-              <button class="region-btn" data-region="chubu">中部</button>
-              <button class="region-btn" data-region="kinki">近畿</button>
-              <button class="region-btn" data-region="shikoku">四国</button>
-              <button class="region-btn" data-region="chugoku">中国</button>
-              <button class="region-btn" data-region="kyushu-okinawa"
-                >九州・沖縄</button
-              >
+              {
+                regionHierarchyArray.map((region) => (
+                  <button class="region-btn" data-region={region.slug}>
+                    {region.name}
+                  </button>
+                ))
+              }
+            </div>
+
+            <!-- 都道府県選択（リージョン選択後に表示） -->
+            <div
+              class="salon-prefectures"
+              id="salon-prefectures"
+              style="display: none;"
+            >
+              <h4 class="salon-prefectures-title">都道府県を選択</h4>
+              <div class="salon-prefectures-list" id="salon-prefectures-list">
+                <!-- JavaScriptで動的に生成 -->
+              </div>
+            </div>
+
+            <!-- エリア選択（都道府県選択後に表示） -->
+            <div class="salon-areas" id="salon-areas" style="display: none;">
+              <h4 class="salon-areas-title">エリアを選択</h4>
+              <div class="salon-areas-list" id="salon-areas-list">
+                <!-- JavaScriptで動的に生成 -->
+              </div>
             </div>
 
             <!-- 検索バー -->
@@ -518,16 +610,36 @@ const salonJsonLd = {
           <div class="salon-filters">
             <!-- 地域ナビゲーション -->
             <div class="salon-regions">
-              <button class="region-btn" data-region="hokkaido">北海道</button>
-              <button class="region-btn" data-region="tohoku">東北</button>
-              <button class="region-btn" data-region="kanto">関東</button>
-              <button class="region-btn" data-region="chubu">中部</button>
-              <button class="region-btn" data-region="kinki">近畿</button>
-              <button class="region-btn" data-region="shikoku">四国</button>
-              <button class="region-btn" data-region="chugoku">中国</button>
-              <button class="region-btn" data-region="kyushu-okinawa"
-                >九州・沖縄</button
+              {
+                regionHierarchyArray.map((region) => (
+                  <button class="region-btn" data-region={region.slug}>
+                    {region.name}
+                  </button>
+                ))
+              }
+            </div>
+
+            <!-- 都道府県選択（リージョン選択後に表示） -->
+            <div
+              class="salon-prefectures"
+              id="salon-prefectures-sp"
+              style="display: none;"
+            >
+              <h4 class="salon-prefectures-title">都道府県を選択</h4>
+              <div
+                class="salon-prefectures-list"
+                id="salon-prefectures-list-sp"
               >
+                <!-- JavaScriptで動的に生成 -->
+              </div>
+            </div>
+
+            <!-- エリア選択（都道府県選択後に表示） -->
+            <div class="salon-areas" id="salon-areas-sp" style="display: none;">
+              <h4 class="salon-areas-title">エリアを選択</h4>
+              <div class="salon-areas-list" id="salon-areas-list-sp">
+                <!-- JavaScriptで動的に生成 -->
+              </div>
             </div>
 
             <!-- 検索バー -->
@@ -2201,6 +2313,58 @@ const salonJsonLd = {
     color: var(--color-white);
   }
 
+  .salon-prefectures,
+  .salon-areas {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .salon-prefectures-title,
+  .salon-areas-title {
+    font-family: var(--font-family-zenkaku);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-black);
+    margin-bottom: 0.75rem;
+  }
+
+  .salon-prefectures-list,
+  .salon-areas-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .prefecture-btn,
+  .area-btn {
+    display: flex;
+    min-width: 120px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: 1px solid var(--color-black);
+    background-color: transparent;
+    color: var(--color-black);
+    font-family: var(--font-family-zenkaku);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0 1rem;
+  }
+
+  .prefecture-btn:hover,
+  .area-btn:hover {
+    background-color: #e6ddca;
+  }
+
+  .prefecture-btn.active,
+  .area-btn.active {
+    background-color: var(--color-black);
+    color: var(--color-white);
+  }
+
   .salon-search {
     display: flex;
     margin-bottom: 3rem;
@@ -3564,9 +3728,26 @@ const salonJsonLd = {
       });
     });
 
+    // 階層構造データを取得（サーバーサイドで埋め込まれたデータを使用）
+    const regionHierarchyData: Array<{
+      id: number;
+      slug: string;
+      name: string;
+      prefectures: Array<{
+        id: number;
+        slug: string;
+        name: string;
+        areas: Array<{ id: number; slug: string; name: string }>;
+      }>;
+    }> = JSON.parse(
+      document.getElementById("region-hierarchy-data")?.textContent || "[]"
+    );
+
     // サロンフィルター機能
     let currentFilter = {
       region: "",
+      prefecture: "",
+      area: "",
       searchTerm: "",
     };
 
@@ -3582,6 +3763,116 @@ const salonJsonLd = {
         console.error("サロンデータの読み込みに失敗しました:", error);
       });
 
+    // 都道府県とエリアを表示する関数
+    function showPrefectures(regionSlug: string, isMobile: boolean = false) {
+      const prefix = isMobile ? "-sp" : "";
+      const prefectureContainer = document.getElementById(
+        `salon-prefectures${prefix}`
+      );
+      const prefectureList = document.getElementById(
+        `salon-prefectures-list${prefix}`
+      );
+      const areaContainer = document.getElementById(`salon-areas${prefix}`);
+      const areaList = document.getElementById(`salon-areas-list${prefix}`);
+
+      if (!prefectureContainer || !prefectureList) return;
+
+      const region = regionHierarchyData.find((r) => r.slug === regionSlug);
+      if (!region) {
+        prefectureContainer.style.display = "none";
+        if (areaContainer) areaContainer.style.display = "none";
+        return;
+      }
+
+      // 都道府県リストを生成
+      prefectureList.innerHTML = region.prefectures
+        .map(
+          (pref) => `
+        <button 
+          class="prefecture-btn" 
+          data-prefecture-id="${pref.id}"
+          data-prefecture-slug="${pref.slug}"
+          data-prefecture-name="${pref.name}"
+          data-has-areas="${pref.areas.length > 0 ? "true" : "false"}"
+        >
+          ${pref.name}${pref.areas.length > 0 ? ` (${pref.areas.length}件のエリア)` : ""}
+        </button>
+      `
+        )
+        .join("");
+
+      prefectureContainer.style.display = "block";
+      if (areaContainer) areaContainer.style.display = "none";
+
+      // 都道府県ボタンのクリックイベント
+      prefectureList.querySelectorAll(".prefecture-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const prefId = btn.getAttribute("data-prefecture-id");
+          const prefSlug = btn.getAttribute("data-prefecture-slug") || "";
+          const prefName = btn.getAttribute("data-prefecture-name") || "";
+          const hasAreas = btn.getAttribute("data-has-areas") === "true";
+
+          // アクティブ状態を切り替え
+          prefectureList
+            .querySelectorAll(".prefecture-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          // エリアを表示
+          if (hasAreas && areaContainer && areaList) {
+            const selectedPref = region.prefectures.find(
+              (p) => p.id === Number(prefId)
+            );
+            if (selectedPref) {
+              areaList.innerHTML = selectedPref.areas
+                .map(
+                  (area) => `
+                  <button 
+                    class="area-btn" 
+                    data-area-id="${area.id}"
+                    data-area-slug="${area.slug}"
+                    data-area-name="${area.name}"
+                  >
+                    ${area.name}
+                  </button>
+                `
+                )
+                .join("");
+
+              areaContainer.style.display = "block";
+
+              // エリアボタンのクリックイベント
+              areaList.querySelectorAll(".area-btn").forEach((areaBtn) => {
+                areaBtn.addEventListener("click", () => {
+                  const areaSlug = areaBtn.getAttribute("data-area-slug") || "";
+                  const areaName = areaBtn.getAttribute("data-area-name") || "";
+
+                  // アクティブ状態を切り替え
+                  areaList
+                    .querySelectorAll(".area-btn")
+                    .forEach((b) => b.classList.remove("active"));
+                  areaBtn.classList.add("active");
+
+                  // フィルターを更新
+                  currentFilter.region = regionSlug;
+                  currentFilter.prefecture = prefSlug;
+                  currentFilter.area = areaSlug;
+                  applyFilters();
+                });
+              });
+            }
+          } else {
+            // エリアがない場合は都道府県でフィルター
+            if (areaContainer) areaContainer.style.display = "none";
+            currentFilter.region = regionSlug;
+            currentFilter.prefecture = prefSlug;
+            currentFilter.area = "";
+            applyFilters();
+          }
+        });
+      });
+    }
+
     // 地域ボタンのクリックイベント
     const regionButtons = document.querySelectorAll(".region-btn");
     regionButtons.forEach((button) => {
@@ -3594,6 +3885,21 @@ const salonJsonLd = {
           regionButtons.forEach((btn) => btn.classList.remove("active"));
           // フィルターをリセット
           currentFilter.region = "";
+          currentFilter.prefecture = "";
+          currentFilter.area = "";
+          // 都道府県とエリアを非表示
+          document
+            .getElementById("salon-prefectures")
+            ?.style.setProperty("display", "none");
+          document
+            .getElementById("salon-prefectures-sp")
+            ?.style.setProperty("display", "none");
+          document
+            .getElementById("salon-areas")
+            ?.style.setProperty("display", "none");
+          document
+            .getElementById("salon-areas-sp")
+            ?.style.setProperty("display", "none");
         } else {
           // すべてのボタンからactiveクラスを削除
           regionButtons.forEach((btn) => btn.classList.remove("active"));
@@ -3601,6 +3907,11 @@ const salonJsonLd = {
           button.classList.add("active");
           // フィルターを更新
           currentFilter.region = clickedRegion;
+          currentFilter.prefecture = "";
+          currentFilter.area = "";
+          // 都道府県を表示（PC用とSP用の両方）
+          showPrefectures(clickedRegion, false);
+          showPrefectures(clickedRegion, true);
         }
 
         applyFilters();
@@ -3660,6 +3971,20 @@ const salonJsonLd = {
       let filterText = "";
       if (currentFilter.searchTerm) {
         filterText = `「${currentFilter.searchTerm}」`;
+      } else if (currentFilter.area) {
+        // エリアが選択されている場合
+        const areaName =
+          document
+            .querySelector(".area-btn.active")
+            ?.getAttribute("data-area-name") || currentFilter.area;
+        filterText = `「${areaName}」`;
+      } else if (currentFilter.prefecture) {
+        // 都道府県が選択されている場合
+        const prefName =
+          document
+            .querySelector(".prefecture-btn.active")
+            ?.getAttribute("data-prefecture-name") || currentFilter.prefecture;
+        filterText = `「${prefName}」`;
       } else if (currentFilter.region) {
         const regionNames: { [key: string]: string } = {
           hokkaido: "北海道",
@@ -3703,6 +4028,13 @@ const salonJsonLd = {
             ? true
             : false;
 
+        // 都道府県フィルター
+        const prefectureMatch =
+          !currentFilter.prefecture || prefecture === currentFilter.prefecture;
+
+        // エリアフィルター
+        const areaMatch = !currentFilter.area || area === currentFilter.area;
+
         // デバッグ情報を追加
         console.log(
           `サロン: ${name}, 地域: ${region}, フィルター: ${currentFilter.region}, マッチ: ${regionMatch}`
@@ -3728,7 +4060,11 @@ const salonJsonLd = {
             .toLowerCase()
             .includes(currentFilter.searchTerm.toLowerCase());
 
-        if (regionMatch && searchMatch) {
+        // 最終的なマッチ判定（地域、都道府県、エリア、検索のすべてを考慮）
+        const match =
+          regionMatch && prefectureMatch && areaMatch && searchMatch;
+
+        if (match) {
           (card as HTMLElement).style.display = "block";
         } else {
           (card as HTMLElement).style.display = "none";
