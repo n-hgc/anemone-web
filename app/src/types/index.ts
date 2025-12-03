@@ -142,13 +142,16 @@ export interface WpMedia {
     width: number;
     height: number;
     file: string;
-    sizes: Record<string, {
-      file: string;
-      width: number;
-      height: number;
-      mime_type: string;
-      source_url: string;
-    }>;
+    sizes: Record<
+      string,
+      {
+        file: string;
+        width: number;
+        height: number;
+        mime_type: string;
+        source_url: string;
+      }
+    >;
     image_meta: Record<string, any>;
   };
   source_url: string;
@@ -198,8 +201,8 @@ export interface SalonIndexData {
   furigana: string;
   thumb: string;
   region: Array<{ slug: string; name: string }>;
-  prefecture: Array<{ slug: string; name: string }>;
-  city: Array<{ slug: string; name: string }>;
+  prefecture: Array<{ id: number; slug: string; name: string; parent: number }>; // parent: 0 = 親ターム（都道府県）、> 0 = 子ターム（エリア）
+  city: Array<{ id: number; slug: string; name: string; parent: number }>;
   job_role: Array<{ slug: string; name: string }>;
   employment_type: Array<{ slug: string; name: string }>;
   is_hiring: boolean;
@@ -231,7 +234,7 @@ export interface LegacySalon {
 // ヘアスタイル（フラット配列）用の型定義
 export interface HairstyleItem {
   id: number;
-  hairType: 'short' | 'medium' | 'long' | 'mens';
+  hairType: "short" | "medium" | "long" | "mens";
   imageUrl: string;
   alt: string;
 }
@@ -259,7 +262,7 @@ export interface InstagramApiItem {
   custom_fields: {
     subtitle: string | null;
     hero_image: string | null;
-    'salon-staff-list': string | null;
+    "salon-staff-list": string | null;
   };
   acf: {
     url: string;
@@ -268,8 +271,8 @@ export interface InstagramApiItem {
     self: Array<{ href: string }>;
     collection: Array<{ href: string }>;
     about: Array<{ href: string }>;
-    'wp:featuredmedia': Array<{ embeddable: boolean; href: string }>;
-    'wp:attachment': Array<{ href: string }>;
+    "wp:featuredmedia": Array<{ embeddable: boolean; href: string }>;
+    "wp:attachment": Array<{ href: string }>;
     curies: Array<{ name: string; href: string; templated: boolean }>;
   };
 }

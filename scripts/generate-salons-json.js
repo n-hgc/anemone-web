@@ -1,20 +1,20 @@
 // Node script: Fetch salon data from WordPress REST API and generate flat JSON
 // Output: app/public/data/salons.index.json
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function fetchJson(url, init = {}) {
-  const res = await fetch(url, { 
-    headers: { 
-      'Accept': 'application/json',
-      'Accept-Encoding': 'gzip, deflate, br'
-    }, 
-    ...init 
+  const res = await fetch(url, {
+    headers: {
+      Accept: "application/json",
+      "Accept-Encoding": "gzip, deflate, br",
+    },
+    ...init,
   });
   if (!res.ok) {
     throw new Error(`HTTP ${res.status} for ${url}`);
@@ -24,14 +24,18 @@ async function fetchJson(url, init = {}) {
 
 async function fetchTaxonomyTerms(baseUrl, taxonomy, ids) {
   if (!ids || ids.length === 0) return [];
-  
+
   const terms = [];
   for (const id of ids) {
     try {
-      const term = await fetchJson(`${baseUrl}/wp-json/wp/v2/${taxonomy}/${id}`);
+      const term = await fetchJson(
+        `${baseUrl}/wp-json/wp/v2/${taxonomy}/${id}`
+      );
       terms.push({
+        id: term.id,
         slug: term.slug,
-        name: term.name
+        name: term.name,
+        parent: term.parent || 0, // 階層型タクソノミーの場合、parent フィールドを取得（0 = 親ターム）
       });
     } catch (e) {
       console.warn(`Failed to fetch ${taxonomy} term ${id}:`, e?.message || e);
@@ -42,7 +46,7 @@ async function fetchTaxonomyTerms(baseUrl, taxonomy, ids) {
 
 async function fetchMediaUrl(baseUrl, mediaId) {
   if (!mediaId) return null;
-  
+
   try {
     const media = await fetchJson(`${baseUrl}/wp-json/wp/v2/media/${mediaId}`);
     return media?.source_url || null;
@@ -53,31 +57,35 @@ async function fetchMediaUrl(baseUrl, mediaId) {
 }
 
 async function main() {
-  const WP_BASE = process.env.WP_BASE_URL || 'https://anemone-salon.com';
-  
+  const WP_BASE = process.env.WP_BASE_URL || "https://anemone-salon.com";
+
   // 全てのサロンデータを取得（ページネーション対応）
-  console.log('Fetching salon data from WordPress...');
+  console.log("Fetching salon data from WordPress...");
   let allSalons = [];
   let page = 1;
   let hasMore = true;
-  
+
   while (hasMore) {
     const salonUrl = `${WP_BASE}/wp-json/wp/v2/salon_v2?per_page=100&page=${page}`;
     const salons = await fetchJson(salonUrl);
-    
+
     if (!Array.isArray(salons)) {
-      throw new Error('Invalid salon data format');
+      throw new Error("Invalid salon data format");
     }
-    
+
     allSalons = allSalons.concat(salons);
-    
+
     // 100件未満なら最後のページ
     hasMore = salons.length === 100;
     page++;
-    
-    console.log(`Fetched ${salons.length} salons (page ${page - 1}), total: ${allSalons.length}`);
+
+    console.log(
+      `Fetched ${salons.length} salons (page ${page - 1}), total: ${
+        allSalons.length
+      }`
+    );
   }
-  
+
   console.log(`Found ${allSalons.length} salons total, processing...`);
   const salons = allSalons;
 
@@ -87,23 +95,35 @@ async function main() {
     try {
       // 基本情報
       const id = salon.id;
-      const title = salon.title?.rendered || '';
-      const furigana = salon.acf?.furigana || '';
-      const access = salon.acf?.access || '';
+      const title = salon.title?.rendered || "";
+      const furigana = salon.acf?.furigana || "";
+      const access = salon.acf?.access || "";
       const isHiring = salon.acf?.is_hiring || false;
-      const reservationUrl = salon.acf?.reservation_url || '';
-      const mapsUrl = salon.acf?.maps_url || '';
+      const reservationUrl = salon.acf?.reservation_url || "";
+      const mapsUrl = salon.acf?.maps_url || "";
 
       // 画像URLを取得
       const thumbUrl = await fetchMediaUrl(WP_BASE, salon.featured_media);
-      const thumb = thumbUrl || '/images/salon/salon-image-01.png'; // フォールバック
+      const thumb = thumbUrl || "/images/salon/salon-image-01.png"; // フォールバック
 
       // タクソノミー情報を取得
-      const region = await fetchTaxonomyTerms(WP_BASE, 'region', salon.region);
-      const prefecture = await fetchTaxonomyTerms(WP_BASE, 'prefecture', salon.prefecture);
-      const city = await fetchTaxonomyTerms(WP_BASE, 'city', salon.city);
-      const jobRole = await fetchTaxonomyTerms(WP_BASE, 'job_role', salon.job_role);
-      const employmentType = await fetchTaxonomyTerms(WP_BASE, 'employment_type', salon.employment_type);
+      const region = await fetchTaxonomyTerms(WP_BASE, "region", salon.region);
+      const prefecture = await fetchTaxonomyTerms(
+        WP_BASE,
+        "prefecture",
+        salon.prefecture
+      );
+      const city = await fetchTaxonomyTerms(WP_BASE, "city", salon.city);
+      const jobRole = await fetchTaxonomyTerms(
+        WP_BASE,
+        "job_role",
+        salon.job_role
+      );
+      const employmentType = await fetchTaxonomyTerms(
+        WP_BASE,
+        "employment_type",
+        salon.employment_type
+      );
 
       items.push({
         id,
@@ -118,7 +138,7 @@ async function main() {
         is_hiring: isHiring,
         reservation_url: reservationUrl,
         maps_url: mapsUrl,
-        access
+        access,
       });
 
       console.log(`Processed: ${title}`);
@@ -127,14 +147,14 @@ async function main() {
     }
   }
 
-  const outDir = path.join(__dirname, '..', 'app', 'public', 'data');
-  const outFile = path.join(outDir, 'salons.index.json');
+  const outDir = path.join(__dirname, "..", "app", "public", "data");
+  const outFile = path.join(outDir, "salons.index.json");
   fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(outFile, JSON.stringify(items, null, 2), 'utf-8');
+  fs.writeFileSync(outFile, JSON.stringify(items, null, 2), "utf-8");
   console.log(`Wrote ${items.length} salons to ${outFile}`);
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error(err);
   process.exit(1);
 });

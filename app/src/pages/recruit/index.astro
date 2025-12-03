@@ -838,6 +838,9 @@ const image =
           const prefecture = (
             card.getAttribute("data-prefecture-name") || ""
           ).toLowerCase();
+          const area = (
+            card.getAttribute("data-area-name") || ""
+          ).toLowerCase();
           const city = (
             card.getAttribute("data-city-name") || ""
           ).toLowerCase();
@@ -858,6 +861,7 @@ const image =
               furigana.includes(filters.q) ||
               access.includes(filters.q) ||
               prefecture.includes(filters.q) ||
+              area.includes(filters.q) ||
               city.includes(filters.q) ||
               jobsName.includes(filters.q) ||
               employmentName.includes(filters.q));

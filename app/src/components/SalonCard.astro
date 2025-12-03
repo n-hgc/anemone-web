@@ -1,12 +1,29 @@
 ---
-import type { SalonIndexData } from '../types';
-import { componentClasses, responsive } from '../lib/design-system';
+import type { SalonIndexData } from "../types";
+import { componentClasses, responsive } from "../lib/design-system";
 
 export interface Props {
   salon: SalonIndexData;
 }
 
 const { salon } = Astro.props;
+
+// 親子関係を考慮して都道府県とエリアを取得
+// prefecture タクソノミー内で親ターム（parent === 0）と子ターム（parent > 0）を分ける
+const prefectureTerms = salon.prefecture?.filter((p) => p.parent === 0) || [];
+const areaTerms = salon.prefecture?.filter((p) => p.parent > 0) || [];
+// 後方互換性のため、city タクソノミーも確認
+const cityTerms = salon.city || [];
+
+// 表示用の都道府県名とエリア名を取得
+const prefectureName =
+  prefectureTerms.length > 0 ? prefectureTerms[0].name : "";
+const areaName =
+  areaTerms.length > 0
+    ? areaTerms[0].name
+    : cityTerms.length > 0
+      ? cityTerms[0].name
+      : "";
 ---
 
 <style>
@@ -20,7 +37,7 @@ const { salon } = Astro.props;
     line-height: 1.25;
     font-family: var(--font-family-zenkaku);
   }
-  
+
   /* サロンカードのボタンスタイル */
   .salon-card-btn {
     background-color: var(--color-white);
@@ -39,7 +56,7 @@ const { salon } = Astro.props;
     justify-content: center;
     width: 100%;
   }
-  
+
   .salon-card-btn:hover {
     background-color: var(--color-black);
     color: var(--color-white);
@@ -60,7 +77,7 @@ const { salon } = Astro.props;
     gap: 8px;
     font-size: 16px;
     color: #848383;
-    line-height: 1.0;
+    line-height: 1;
     font-family: var(--font-family-zenkaku);
     font-weight: 700;
   }
@@ -96,45 +113,55 @@ const { salon } = Astro.props;
 
 <div class={componentClasses.card.base}>
   <div class="aspect-w-16 aspect-h-9">
-    <img 
-      src={salon.thumb} 
+    <img
+      src={salon.thumb}
       alt={`${salon.title}の外観`}
       class="w-full h-48 object-cover"
     />
   </div>
-  
+
   <div class="p-4">
     <h3 class="salon-card-name">
       {salon.title}【{salon.furigana}】
     </h3>
-    
+
     <div class="salon-card-info">
       <div class="salon-card-location">
-        <img src="/images/icons/icn_location_on.svg" alt="住所" class="salon-card-icon" />
+        <img
+          src="/images/icons/icn_location_on.svg"
+          alt="住所"
+          class="salon-card-icon"
+        />
         <span>
-          {salon.prefecture && salon.prefecture.length > 0 ? salon.prefecture[0].name : ''}
-          {(salon.prefecture && salon.prefecture.length > 0) && (salon.city && salon.city.length > 0) ? '・' : ''}
-          {salon.city && salon.city.length > 0 ? salon.city[0].name : ''}
+          {prefectureName}
+          {prefectureName && areaName ? "・" : ""}
+          {areaName}
         </span>
       </div>
-      
+
       <div class="salon-card-access">
-        <img src="/images/icons/icn_directions_railway.svg" alt="アクセス" class="salon-card-icon" />
-        <span>{salon.access || ''}</span>
+        <img
+          src="/images/icons/icn_directions_railway.svg"
+          alt="アクセス"
+          class="salon-card-icon"
+        />
+        <span>{salon.access || ""}</span>
       </div>
     </div>
-    
-    {salon.reservation_url && (
-      <div class="mt-4">
-        <a 
-          href={salon.reservation_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="salon-card-btn"
-        >
-          予約・店舗詳細はこちら
-        </a>
-      </div>
-    )}
+
+    {
+      salon.reservation_url && (
+        <div class="mt-4">
+          <a
+            href={salon.reservation_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="salon-card-btn"
+          >
+            予約・店舗詳細はこちら
+          </a>
+        </div>
+      )
+    }
   </div>
 </div>

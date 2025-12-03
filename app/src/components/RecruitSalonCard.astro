@@ -1,46 +1,89 @@
 ---
-import type { SalonIndexData } from '../types';
+import type { SalonIndexData } from "../types";
 
 export interface Props {
   salon: SalonIndexData;
 }
 
 const { salon } = Astro.props;
+
+// 親子関係を考慮して都道府県とエリアを取得
+// prefecture タクソノミー内で親ターム（parent === 0）と子ターム（parent > 0）を分ける
+const prefectureTerms = salon.prefecture?.filter((p) => p.parent === 0) || [];
+const areaTerms = salon.prefecture?.filter((p) => p.parent > 0) || [];
+// 後方互換性のため、city タクソノミーも確認
+const cityTerms = salon.city || [];
+
+// 表示用の都道府県名とエリア名を取得
+const prefectureName =
+  prefectureTerms.length > 0 ? prefectureTerms[0].name : "";
+const areaName =
+  areaTerms.length > 0
+    ? areaTerms[0].name
+    : cityTerms.length > 0
+      ? cityTerms[0].name
+      : "";
+
+// フィルタリング用のdata属性（親タームと子タームを分けて設定）
+const prefectureSlugs = prefectureTerms.map((p) => p.slug).join(",");
+const prefectureNames = prefectureTerms.map((p) => p.name).join(",");
+const areaSlugs = areaTerms.map((a) => a.slug).join(",");
+const areaNames = areaTerms.map((a) => a.name).join(",");
 ---
 
-<div 
+<div
   class="recruit-environment__salon-card"
-  data-region={salon.region.map(r => r.slug).join(',')}
-  data-prefecture={salon.prefecture.map(p => p.slug).join(',')}
-  data-prefecture-name={salon.prefecture.map(p => p.name).join(',')}
-  data-city={salon.city.map(c => c.slug).join(',')}
-  data-city-name={salon.city.map(c => c.name).join(',')}
-  data-jobs={salon.job_role.map(j => j.slug).join(',')}
-  data-jobs-name={salon.job_role.map(j => j.name).join(',')}
-  data-employment={salon.employment_type.map(e => e.slug).join(',')}
-  data-employment-name={salon.employment_type.map(e => e.name).join(',')}
-  data-hiring={salon.is_hiring ? '1' : '0'}
+  data-region={salon.region.map((r) => r.slug).join(",")}
+  data-prefecture={prefectureSlugs ||
+    salon.prefecture.map((p) => p.slug).join(",")}
+  data-prefecture-name={prefectureNames ||
+    salon.prefecture.map((p) => p.name).join(",")}
+  data-area={areaSlugs ||
+    salon.prefecture
+      .filter((p) => p.parent > 0)
+      .map((p) => p.slug)
+      .join(",")}
+  data-area-name={areaNames ||
+    salon.prefecture
+      .filter((p) => p.parent > 0)
+      .map((p) => p.name)
+      .join(",")}
+  data-city={salon.city.map((c) => c.slug).join(",")}
+  data-city-name={salon.city.map((c) => c.name).join(",")}
+  data-jobs={salon.job_role.map((j) => j.slug).join(",")}
+  data-jobs-name={salon.job_role.map((j) => j.name).join(",")}
+  data-employment={salon.employment_type.map((e) => e.slug).join(",")}
+  data-employment-name={salon.employment_type.map((e) => e.name).join(",")}
+  data-hiring={salon.is_hiring ? "1" : "0"}
   data-title={salon.title}
   data-furigana={salon.furigana}
   data-access={salon.access}
 >
-  <img 
-    src={salon.thumb} 
-    alt={salon.title} 
+  <img
+    src={salon.thumb}
+    alt={salon.title}
     class="recruit-environment__salon-image"
   />
   <div class="recruit-environment__salon-tags">
-    {salon.employment_type.map(emp => (
-      <span class={`recruit-environment__salon-tag recruit-environment__salon-tag--${emp.slug === 'fulltime' 
-        ? 'full-time' 
-        : emp.slug === 'parttime' 
-          ? 'part-time' 
-          : emp.slug === 'mid-career' 
-            ? 'mid-career' 
-            : emp.slug === 'new' 
-              ? 'new-graduate' 
-              : emp.slug}`}>{emp.name}</span>
-    ))}
+    {
+      salon.employment_type.map((emp) => (
+        <span
+          class={`recruit-environment__salon-tag recruit-environment__salon-tag--${
+            emp.slug === "fulltime"
+              ? "full-time"
+              : emp.slug === "parttime"
+                ? "part-time"
+                : emp.slug === "mid-career"
+                  ? "mid-career"
+                  : emp.slug === "new"
+                    ? "new-graduate"
+                    : emp.slug
+          }`}
+        >
+          {emp.name}
+        </span>
+      ))
+    }
   </div>
   <div class="recruit-environment__salon-content">
     <h4 class="recruit-environment__salon-name">
@@ -48,20 +91,38 @@ const { salon } = Astro.props;
     </h4>
     <div class="recruit-environment__salon-info">
       <div class="recruit-environment__salon-job">
-        <img src="/images/icons/icn_content_cut.svg" alt="職種" class="recruit-environment__salon-icon" />
-        <span>{salon.job_role && salon.job_role.length > 0 ? salon.job_role.map(job => job.name).join('・') : ''}</span>
+        <img
+          src="/images/icons/icn_content_cut.svg"
+          alt="職種"
+          class="recruit-environment__salon-icon"
+        />
+        <span
+          >{
+            salon.job_role && salon.job_role.length > 0
+              ? salon.job_role.map((job) => job.name).join("・")
+              : ""
+          }</span
+        >
       </div>
       <div class="recruit-environment__salon-location">
-        <img src="/images/icons/icn_location_on.svg" alt="所在地" class="recruit-environment__salon-icon" />
+        <img
+          src="/images/icons/icn_location_on.svg"
+          alt="所在地"
+          class="recruit-environment__salon-icon"
+        />
         <span>
-          {salon.prefecture && salon.prefecture.length > 0 ? salon.prefecture[0].name : ''}
-          {(salon.prefecture && salon.prefecture.length > 0) && (salon.city && salon.city.length > 0) ? '・' : ''}
-          {salon.city && salon.city.length > 0 ? salon.city[0].name : ''}
+          {prefectureName}
+          {prefectureName && areaName ? "・" : ""}
+          {areaName}
         </span>
       </div>
       <div class="recruit-environment__salon-access">
-        <img src="/images/icons/icn_directions_railway.svg" alt="アクセス" class="recruit-environment__salon-icon" />
-        <span>{salon.access || 'アクセス情報未設定'}</span>
+        <img
+          src="/images/icons/icn_directions_railway.svg"
+          alt="アクセス"
+          class="recruit-environment__salon-icon"
+        />
+        <span>{salon.access || "アクセス情報未設定"}</span>
       </div>
     </div>
     <button class="recruit-environment__salon-btn">
@@ -75,7 +136,9 @@ const { salon } = Astro.props;
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
     height: 428px;
   }
 
@@ -129,28 +192,28 @@ const { salon } = Astro.props;
   }
 
   .recruit-environment__salon-tag--new-graduate {
-    background-color: #E3F3F5;
+    background-color: #e3f3f5;
   }
 
   .recruit-environment__salon-tag--mid-career {
-    background-color: #FFF1E4;
+    background-color: #fff1e4;
   }
 
   /* 新卒/中途 表示色を調整 */
   .recruit-environment__salon-tag--new {
-    background-color: #E3F3F5;
+    background-color: #e3f3f5;
   }
 
   .recruit-environment__salon-tag--full-time {
-    background-color: #FAF4E8;
+    background-color: #faf4e8;
   }
 
   .recruit-environment__salon-tag--part-time {
-    background-color: #EFFAE8;
+    background-color: #effae8;
   }
 
   .recruit-environment__salon-tag--job {
-    background-color: #E3F3F5;
+    background-color: #e3f3f5;
   }
 
   .recruit-environment__salon-content {
@@ -158,7 +221,7 @@ const { salon } = Astro.props;
     display: flex;
     flex-direction: column;
     height: calc(100% - 229px);
-    gap:10px;
+    gap: 10px;
     justify-content: space-between;
   }
 
@@ -187,7 +250,7 @@ const { salon } = Astro.props;
     gap: 8px;
     font-size: 16px;
     color: #848383;
-    line-height: 1.0;
+    line-height: 1;
     font-family: var(--font-family-zenkaku);
     font-weight: 700;
   }

@@ -1,26 +1,31 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import SalonCard from '../components/SalonCard.astro';
-import NewsCard from '../components/NewsCard.astro';
-import LocatorFilters from '../components/LocatorFilters.astro';
-import Footer from '../components/Footer.astro';
-import { componentClasses, responsive } from '../lib/design-system';
-import type { SalonIndexData, News, Prefecture, InstagramItem } from '../types';
+import Layout from "../layouts/Layout.astro";
+import SalonCard from "../components/SalonCard.astro";
+import NewsCard from "../components/NewsCard.astro";
+import LocatorFilters from "../components/LocatorFilters.astro";
+import Footer from "../components/Footer.astro";
+import { componentClasses, responsive } from "../lib/design-system";
+import type { SalonIndexData, News, Prefecture, InstagramItem } from "../types";
 
 // モックデータをインポート
-import prefecturesData from '../data/prefectures.json';
-import { api } from '../lib/api';
+import prefecturesData from "../data/prefectures.json";
+import { api } from "../lib/api";
 
 // サロンデータを読み込む
 let salonData: any[] = [];
 try {
-  const fs = await import('fs');
-  const path = await import('path');
-  const salonDataPath = path.join(process.cwd(), 'public', 'data', 'salons.index.json');
-  const salonDataContent = fs.readFileSync(salonDataPath, 'utf-8');
+  const fs = await import("fs");
+  const path = await import("path");
+  const salonDataPath = path.join(
+    process.cwd(),
+    "public",
+    "data",
+    "salons.index.json"
+  );
+  const salonDataContent = fs.readFileSync(salonDataPath, "utf-8");
   salonData = JSON.parse(salonDataContent);
 } catch (error) {
-  console.error('サロンデータの読み込みに失敗しました:', error);
+  console.error("サロンデータの読み込みに失敗しました:", error);
   salonData = [];
 }
 
@@ -28,7 +33,11 @@ try {
 const salons: SalonIndexData[] = salonData;
 
 // NEWSデータを取得（まとめて取得→クライアント側でカテゴリ分割）
-let newsByCategory: { [key: string]: News[] } = { information: [], blog: [], movie: [] };
+let newsByCategory: { [key: string]: News[] } = {
+  information: [],
+  blog: [],
+  movie: [],
+};
 try {
   const result = await api.getNewsList({ per_page: 24 }); // 3カテゴリ×各4件を想定し多めに取得
   const items = result.success ? result.data.items : [];
@@ -36,16 +45,16 @@ try {
   const blog: News[] = [];
   const movie: News[] = [];
   for (const n of items) {
-    const cat = (n.categories?.[0] || '').toLowerCase();
-    if (cat === 'information' && info.length < 4) info.push(n);
-    else if (cat === 'blog' && blog.length < 4) blog.push(n);
-    else if (cat === 'movie' && movie.length < 4) movie.push(n);
+    const cat = (n.categories?.[0] || "").toLowerCase();
+    if (cat === "information" && info.length < 4) info.push(n);
+    else if (cat === "blog" && blog.length < 4) blog.push(n);
+    else if (cat === "movie" && movie.length < 4) movie.push(n);
     // 全カテゴリが4件揃ったら打ち切り
     if (info.length === 4 && blog.length === 4 && movie.length === 4) break;
   }
   newsByCategory = { information: info, blog, movie };
 } catch (error) {
-  console.error('NEWS取得エラー:', error);
+  console.error("NEWS取得エラー:", error);
 }
 
 // Instagramデータを取得
@@ -54,7 +63,7 @@ try {
   const result = await api.getInstagramItems({ per_page: 9 });
   instagramItems = result.success ? result.data : [];
 } catch (error) {
-  console.error('Instagram取得エラー:', error);
+  console.error("Instagram取得エラー:", error);
   // エラーが発生した場合でも空配列で継続
   instagramItems = [];
 }
@@ -68,11 +77,11 @@ const latestNews = newsByCategory.information.slice(0, 3);
 const salonJsonLd = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "itemListElement": []
+  itemListElement: [],
 };
 ---
 
-<Layout 
+<Layout
   title="アネモネサロン - 美容室・ヘアサロン"
   description="アネモネサロンは全国展開する美容室・ヘアサロンです。お客様一人ひとりに合ったスタイルをご提案いたします。"
   image="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&h=630&fit=crop"
@@ -82,27 +91,32 @@ const salonJsonLd = {
   <script>
     // 認証状態をチェック
     function checkAuthStatus() {
-      const isAuthenticated = sessionStorage.getItem('authenticated') === 'true';
-      const authTime = sessionStorage.getItem('authTime');
+      const isAuthenticated =
+        sessionStorage.getItem("authenticated") === "true";
+      const authTime = sessionStorage.getItem("authTime");
       const currentTime = Date.now();
       const authTimeout = 24 * 60 * 60 * 1000; // 24時間
-      
-      if (isAuthenticated && authTime && (currentTime - parseInt(authTime)) < authTimeout) {
+
+      if (
+        isAuthenticated &&
+        authTime &&
+        currentTime - parseInt(authTime) < authTimeout
+      ) {
         return true;
       } else if (isAuthenticated) {
         // 認証が期限切れの場合
-        sessionStorage.removeItem('authenticated');
-        sessionStorage.removeItem('username');
-        sessionStorage.removeItem('authTime');
+        sessionStorage.removeItem("authenticated");
+        sessionStorage.removeItem("username");
+        sessionStorage.removeItem("authTime");
       }
       return false;
     }
-    
+
     // 認証ページにリダイレクト
     function redirectToAuth() {
-      window.location.href = '/auth.html';
+      window.location.href = "/auth.html";
     }
-    
+
     // 認証チェックを実行
     if (!checkAuthStatus()) {
       redirectToAuth();
@@ -110,13 +124,12 @@ const salonJsonLd = {
   </script>
   <!-- ページ全体の背景をbeigeに設定 -->
   <div class="bg-beige">
-    
     <!-- ヒーローセクション -->
     <section class="hero-section">
       <!-- 右上のテキスト画像 -->
-      <img 
-        src="/images/hero/text.svg" 
-        alt="アネモネサロン" 
+      <img
+        src="/images/hero/text.svg"
+        alt="アネモネサロン"
         class="hero-text-overlay"
       />
       <div class="hero-container">
@@ -125,48 +138,72 @@ const salonJsonLd = {
           <!-- スライドショー -->
           <div class="hero-slideshow">
             <div class="hero-slide active">
-              <img 
-                src="/images/hero/slide-1.png" 
-                alt="アネモネサロンのスタイリング" 
+              <img
+                src="/images/hero/slide-1.png"
+                alt="アネモネサロンのスタイリング"
                 class="hero-slide-image"
               />
               <div class="hero-slide-overlay">
                 <div class="hero-slide-content">
-                  <div class="hero-catchphrase">髪と、わたしと、<br class="hero-catchphrase-br">生きていく。</div>
-                  <img src="/images/header/logo.png" alt="little" class="hero-logo" />
+                  <div class="hero-catchphrase">
+                    髪と、わたしと、<br
+                      class="hero-catchphrase-br"
+                    />生きていく。
+                  </div>
+                  <img
+                    src="/images/header/logo.png"
+                    alt="little"
+                    class="hero-logo"
+                  />
                 </div>
               </div>
             </div>
-            
+
             <div class="hero-slide">
-              <img 
-                src="/images/hero/slide-2.png" 
-                alt="アネモネサロンの店内" 
+              <img
+                src="/images/hero/slide-2.png"
+                alt="アネモネサロンの店内"
                 class="hero-slide-image"
               />
               <div class="hero-slide-overlay">
                 <div class="hero-slide-content">
-                  <div class="hero-catchphrase">髪と、わたしと、<br class="hero-catchphrase-br">生きていく。</div>
-                  <img src="/images/header/logo.png" alt="little" class="hero-logo" />
+                  <div class="hero-catchphrase">
+                    髪と、わたしと、<br
+                      class="hero-catchphrase-br"
+                    />生きていく。
+                  </div>
+                  <img
+                    src="/images/header/logo.png"
+                    alt="little"
+                    class="hero-logo"
+                  />
                 </div>
               </div>
             </div>
-            
+
             <div class="hero-slide">
-              <img 
-                src="/images/hero/slide-3.png" 
-                alt="アネモネサロンのスタイリング" 
+              <img
+                src="/images/hero/slide-3.png"
+                alt="アネモネサロンのスタイリング"
                 class="hero-slide-image"
               />
               <div class="hero-slide-overlay">
                 <div class="hero-slide-content">
-                  <div class="hero-catchphrase">髪と、わたしと、<br class="hero-catchphrase-br">生きていく。</div>
-                  <img src="/images/header/logo.png" alt="little" class="hero-logo" />
+                  <div class="hero-catchphrase">
+                    髪と、わたしと、<br
+                      class="hero-catchphrase-br"
+                    />生きていく。
+                  </div>
+                  <img
+                    src="/images/header/logo.png"
+                    alt="little"
+                    class="hero-logo"
+                  />
                 </div>
               </div>
             </div>
           </div>
-          
+
           <!-- ページネーション（右側に独立配置） -->
           <div class="hero-slide-pagination">
             <div class="pagination-stripe active" data-slide="0"></div>
@@ -175,13 +212,22 @@ const salonJsonLd = {
           </div>
         </div>
       </div>
-      
+
       <!-- Floating Action Button (PC用) -->
       <div class="hero-fab">
         <button class="hero-search-btn" aria-label="店舗を選んで予約する">
           <div class="hero-btn-content">
-            <svg class="hero-search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            <svg
+              class="hero-search-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
             <div class="hero-btn-text">
               <div class="hero-btn-line">店舗を選んで</div>
@@ -190,221 +236,275 @@ const salonJsonLd = {
           </div>
         </button>
       </div>
-      </div>
     </section>
+  </div>
 
-    <!-- イントロダクションセクション -->
-    <section class="intro-section">
-      <div class="intro-container section-container">
-        <!-- PC用レイアウト -->
-        <div class="intro-content intro-content-pc">
-          <div class="intro-text">
-            <h2 class="intro-title">
-              通いやすさ×技術力<br>全国110店舗の身近で上質なサロン
-            </h2>
-            <p class="intro-description">
-              littleは、全国に110店舗以上を展開するヘアサロンブランドです。<br>
-              一人ひとりの日常に寄り添いながらも、洗練された技術と感性で「いつもの私」を少しだけ特別に。<br>
-              リーズナブルな価格でありながら、高い技術力と丁寧な接客を提供し、リピーターのお客様にも多く選ばれています。<br>
-              あなたの毎日に、ほんの少しのときめきを
-            </p>
-          </div>
-          <div class="intro-image">
-            <img 
-              src="/images/main/salon_intro.png" 
-              alt="アネモネサロンの店内" 
-              class="intro-image-content"
-            />
-          </div>
-        </div>
-
-        <!-- スマホ用レイアウト -->
-        <div class="intro-content intro-content-mobile">
+  <!-- イントロダクションセクション -->
+  <section class="intro-section">
+    <div class="intro-container section-container">
+      <!-- PC用レイアウト -->
+      <div class="intro-content intro-content-pc">
+        <div class="intro-text">
           <h2 class="intro-title">
-            通いやすさ×技術力<br>全国110店舗の身近で上質なサロン
+            通いやすさ×技術力<br />全国110店舗の身近で上質なサロン
           </h2>
-          <div class="intro-image">
-            <img 
-              src="/images/main/salon_intro.png" 
-              alt="アネモネサロンの店内" 
-              class="intro-image-content"
+          <p class="intro-description">
+            littleは、全国に110店舗以上を展開するヘアサロンブランドです。<br />
+            一人ひとりの日常に寄り添いながらも、洗練された技術と感性で「いつもの私」を少しだけ特別に。<br
             />
-          </div>
-          <div class="intro-text">
-            <p class="intro-description">
-              littleは、全国に110店舗以上を展開するヘアサロンブランドです。<br>
-              一人ひとりの日常に寄り添いながらも、洗練された技術と感性で「いつもの私」を少しだけ特別に。<br>
-              リーズナブルな価格でありながら、高い技術力と丁寧な接客を提供し、リピーターのお客様にも多く選ばれています。<br>
-              あなたの毎日に、ほんの少しのときめきを
-            </p>
-          </div>
+            リーズナブルな価格でありながら、高い技術力と丁寧な接客を提供し、リピーターのお客様にも多く選ばれています。<br
+            />
+            あなたの毎日に、ほんの少しのときめきを
+          </p>
+        </div>
+        <div class="intro-image">
+          <img
+            src="/images/main/salon_intro.png"
+            alt="アネモネサロンの店内"
+            class="intro-image-content"
+          />
         </div>
       </div>
-    </section>
 
-    <!-- ニュースセクション -->
-    <section class="news-section">
-      <div class="news-container">
-        <h2 class="news-title section-title text-h0">
-          NEWS<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="news-title-sub">お知らせ</span>
+      <!-- スマホ用レイアウト -->
+      <div class="intro-content intro-content-mobile">
+        <h2 class="intro-title">
+          通いやすさ×技術力<br />全国110店舗の身近で上質なサロン
         </h2>
-        
-        <!-- タブナビゲーション -->
-        <div class="news-tabs">
-          <button class="news-tab active" data-category="information">INFORMATION</button>
-          <button class="news-tab" data-category="blog">BLOG</button>
-          <button class="news-tab" data-category="movie">MOVIE</button>
+        <div class="intro-image">
+          <img
+            src="/images/main/salon_intro.png"
+            alt="アネモネサロンの店内"
+            class="intro-image-content"
+          />
         </div>
-        
-        <!-- ニュース一覧（WP連携：従来のDOM構造・クラスを維持） -->
-        <div class="news-list">
-          <div class="news-group" data-category="information">
-            {newsByCategory.information.map((newsItem) => (
-              <a href={`/news/${newsItem.id}`} class="news-item-link">
-              <div class="news-item">
-                {newsItem.featured_image && (
-                  <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
-                )}
-                <div class="news-content">
-                  <div class="news-meta">
-                    <span class="news-date">{newsItem.date.replace(/-/g, '.').substring(0, 10)}</span>
-                    <span class="news-separator">|</span>
-                    {newsItem.categories?.[0] && (
-                      <span class="news-category">{newsItem.categories[0]}</span>
-                    )}
-                  </div>
-                  <h3 class="news-item-title">
-                    {newsItem.title}
-                  </h3>
-                  <p class="news-description">{newsItem.excerpt}</p>
-                </div>
-              </div>
-            </a>
-            ))}
-          </div>
-          <div class="news-group" data-category="blog" style="display:none;">
-            {newsByCategory.blog.map((newsItem) => (
-              <a href={`/news/${newsItem.id}`} class="news-item-link">
-              <div class="news-item">
-                {newsItem.featured_image && (
-                  <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
-                )}
-                <div class="news-content">
-                  <div class="news-meta">
-                    <span class="news-date">{newsItem.date.replace(/-/g, '.').substring(0, 10)}</span>
-                    <span class="news-separator">|</span>
-                    {newsItem.categories?.[0] && (
-                      <span class="news-category">{newsItem.categories[0]}</span>
-                    )}
-                  </div>
-                  <h3 class="news-item-title">
-                    {newsItem.title}
-                  </h3>
-                  <p class="news-description">{newsItem.excerpt}</p>
-                </div>
-              </div>
-            </a>
-            ))}
-          </div>
-          <div class="news-group" data-category="movie" style="display:none;">
-            {newsByCategory.movie.map((newsItem) => (
-              <a href={`/news/${newsItem.id}`} class="news-item-link">
-              <div class="news-item">
-                {newsItem.featured_image && (
-                  <img src={newsItem.featured_image} alt={newsItem.title} class="news-image" />
-                )}
-                <div class="news-content">
-                  <div class="news-meta">
-                    <span class="news-date">{newsItem.date.replace(/-/g, '.').substring(0, 10)}</span>
-                    <span class="news-separator">|</span>
-                    {newsItem.categories?.[0] && (
-                      <span class="news-category">{newsItem.categories[0]}</span>
-                    )}
-                  </div>
-                  <h3 class="news-item-title">
-                    {newsItem.title}
-                  </h3>
-                  <p class="news-description">{newsItem.excerpt}</p>
-                </div>
-              </div>
-            </a>
-            ))}
-          </div>
-        </div>
-        
-        <!-- 詳しく見るボタン -->
-        <div class="news-more">
-          <a href="/news" class="news-more-btn">
-            <span class="news-more-text">詳しく見る</span>
-            <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="news-more-icon" />
-          </a>
+        <div class="intro-text">
+          <p class="intro-description">
+            littleは、全国に110店舗以上を展開するヘアサロンブランドです。<br />
+            一人ひとりの日常に寄り添いながらも、洗練された技術と感性で「いつもの私」を少しだけ特別に。<br
+            />
+            リーズナブルな価格でありながら、高い技術力と丁寧な接客を提供し、リピーターのお客様にも多く選ばれています。<br
+            />
+            あなたの毎日に、ほんの少しのときめきを
+          </p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="salons" class="salon-section">
-      <div class="salon-container">
-        
-        <!-- メインコンテンツエリア -->
-        <div class="salon-main-content">
-          <!-- タイトルとテキスト -->
-          <div class="salon-header">
-            <h2 class="salon-title section-title text-h1">
-              SALON<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="salon-title-sub section-title-sub">little グループ店舗</span>
-            </h2>
-            <p class="salon-description">
-              littleは、全国に広がる"通いやすくて、頼れる"サロン。店舗ごとの雰囲気や得意なスタイルもぜひチェックしてみてください。
-            </p>
-          </div>
-          
-          <!-- PC用: 2列レイアウト -->
-          <div class="salon-content-pc">
-            <!-- 左側: フィルター -->
-            <div class="salon-filters">
-              <!-- 地域ナビゲーション -->
-              <div class="salon-regions">
-                <button class="region-btn" data-region="hokkaido">北海道</button>
-                <button class="region-btn" data-region="tohoku">東北</button>
-                <button class="region-btn" data-region="kanto">関東</button>
-                <button class="region-btn" data-region="chubu">中部</button>
-                <button class="region-btn" data-region="kinki">近畿</button>
-                <button class="region-btn" data-region="shikoku">四国</button>
-                <button class="region-btn" data-region="chugoku">中国</button>
-                <button class="region-btn" data-region="kyushu-okinawa">九州・沖縄</button>
-              </div>
-              
-              <!-- 検索バー -->
-              <div class="salon-search">
-                <input 
-                  type="text" 
-                  id="salon-search-input"
-                  placeholder="サロン名・地域名で検索" 
-                  class="salon-search-input"
-                />
-                <button class="salon-search-btn" id="salon-search-btn">
-                  <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                  </svg>
-                </button>
-              </div>
+  <!-- ニュースセクション -->
+  <section class="news-section">
+    <div class="news-container">
+      <h2 class="news-title section-title text-h0">
+        NEWS<img
+          src="/images/title_slash.svg"
+          alt="/"
+          class="title-slash"
+        /><span class="news-title-sub">お知らせ</span>
+      </h2>
+
+      <!-- タブナビゲーション -->
+      <div class="news-tabs">
+        <button class="news-tab active" data-category="information"
+          >INFORMATION</button
+        >
+        <button class="news-tab" data-category="blog">BLOG</button>
+        <button class="news-tab" data-category="movie">MOVIE</button>
+      </div>
+
+      <!-- ニュース一覧（WP連携：従来のDOM構造・クラスを維持） -->
+      <div class="news-list">
+        <div class="news-group" data-category="information">
+          {
+            newsByCategory.information.map((newsItem) => (
+              <a href={`/news/${newsItem.id}`} class="news-item-link">
+                <div class="news-item">
+                  {newsItem.featured_image && (
+                    <img
+                      src={newsItem.featured_image}
+                      alt={newsItem.title}
+                      class="news-image"
+                    />
+                  )}
+                  <div class="news-content">
+                    <div class="news-meta">
+                      <span class="news-date">
+                        {newsItem.date.replace(/-/g, ".").substring(0, 10)}
+                      </span>
+                      <span class="news-separator">|</span>
+                      {newsItem.categories?.[0] && (
+                        <span class="news-category">
+                          {newsItem.categories[0]}
+                        </span>
+                      )}
+                    </div>
+                    <h3 class="news-item-title">{newsItem.title}</h3>
+                    <p class="news-description">{newsItem.excerpt}</p>
+                  </div>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+        <div class="news-group" data-category="blog" style="display:none;">
+          {
+            newsByCategory.blog.map((newsItem) => (
+              <a href={`/news/${newsItem.id}`} class="news-item-link">
+                <div class="news-item">
+                  {newsItem.featured_image && (
+                    <img
+                      src={newsItem.featured_image}
+                      alt={newsItem.title}
+                      class="news-image"
+                    />
+                  )}
+                  <div class="news-content">
+                    <div class="news-meta">
+                      <span class="news-date">
+                        {newsItem.date.replace(/-/g, ".").substring(0, 10)}
+                      </span>
+                      <span class="news-separator">|</span>
+                      {newsItem.categories?.[0] && (
+                        <span class="news-category">
+                          {newsItem.categories[0]}
+                        </span>
+                      )}
+                    </div>
+                    <h3 class="news-item-title">{newsItem.title}</h3>
+                    <p class="news-description">{newsItem.excerpt}</p>
+                  </div>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+        <div class="news-group" data-category="movie" style="display:none;">
+          {
+            newsByCategory.movie.map((newsItem) => (
+              <a href={`/news/${newsItem.id}`} class="news-item-link">
+                <div class="news-item">
+                  {newsItem.featured_image && (
+                    <img
+                      src={newsItem.featured_image}
+                      alt={newsItem.title}
+                      class="news-image"
+                    />
+                  )}
+                  <div class="news-content">
+                    <div class="news-meta">
+                      <span class="news-date">
+                        {newsItem.date.replace(/-/g, ".").substring(0, 10)}
+                      </span>
+                      <span class="news-separator">|</span>
+                      {newsItem.categories?.[0] && (
+                        <span class="news-category">
+                          {newsItem.categories[0]}
+                        </span>
+                      )}
+                    </div>
+                    <h3 class="news-item-title">{newsItem.title}</h3>
+                    <p class="news-description">{newsItem.excerpt}</p>
+                  </div>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- 詳しく見るボタン -->
+      <div class="news-more">
+        <a href="/news" class="news-more-btn">
+          <span class="news-more-text">詳しく見る</span>
+          <img
+            src="/images/icons/icn_right_arrow.svg"
+            alt="右矢印"
+            class="news-more-icon"
+          />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="salons" class="salon-section">
+    <div class="salon-container">
+      <!-- メインコンテンツエリア -->
+      <div class="salon-main-content">
+        <!-- タイトルとテキスト -->
+        <div class="salon-header">
+          <h2 class="salon-title section-title text-h1">
+            SALON<img
+              src="/images/title_slash.svg"
+              alt="/"
+              class="title-slash"
+            /><span class="salon-title-sub section-title-sub"
+              >little グループ店舗</span
+            >
+          </h2>
+          <p class="salon-description">
+            littleは、全国に広がる"通いやすくて、頼れる"サロン。店舗ごとの雰囲気や得意なスタイルもぜひチェックしてみてください。
+          </p>
+        </div>
+
+        <!-- PC用: 2列レイアウト -->
+        <div class="salon-content-pc">
+          <!-- 左側: フィルター -->
+          <div class="salon-filters">
+            <!-- 地域ナビゲーション -->
+            <div class="salon-regions">
+              <button class="region-btn" data-region="hokkaido">北海道</button>
+              <button class="region-btn" data-region="tohoku">東北</button>
+              <button class="region-btn" data-region="kanto">関東</button>
+              <button class="region-btn" data-region="chubu">中部</button>
+              <button class="region-btn" data-region="kinki">近畿</button>
+              <button class="region-btn" data-region="shikoku">四国</button>
+              <button class="region-btn" data-region="chugoku">中国</button>
+              <button class="region-btn" data-region="kyushu-okinawa"
+                >九州・沖縄</button
+              >
             </div>
-            
-            <!-- 右側: 日本地図 -->
-            <div class="salon-map">
-              <div class="japan-map">
-                <img 
-                  src="/images/main/illust_japan.png" 
-                  alt="日本地図" 
-                  class="japan-map-image"
-                />
-              </div>
+
+            <!-- 検索バー -->
+            <div class="salon-search">
+              <input
+                type="text"
+                id="salon-search-input"
+                placeholder="サロン名・地域名で検索"
+                class="salon-search-input"
+              />
+              <button class="salon-search-btn" id="salon-search-btn">
+                <svg
+                  class="search-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
             </div>
           </div>
-          
-          <!-- SP用: 縦並びレイアウト -->
-          <div class="salon-content-sp">
-            <!-- 日本地図 -->
-            <!-- <div class="salon-map">
+
+          <!-- 右側: 日本地図 -->
+          <div class="salon-map">
+            <div class="japan-map">
+              <img
+                src="/images/main/illust_japan.png"
+                alt="日本地図"
+                class="japan-map-image"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- SP用: 縦並びレイアウト -->
+        <div class="salon-content-sp">
+          <!-- 日本地図 -->
+          <!-- <div class="salon-map">
               <div class="japan-map">
                 <img 
                   src="/images/main/illust_japan.png" 
@@ -413,215 +513,296 @@ const salonJsonLd = {
                 />
               </div>
             </div> -->
-            
-            <!-- フィルター -->
-            <div class="salon-filters">
-              <!-- 地域ナビゲーション -->
-              <div class="salon-regions">
-                <button class="region-btn" data-region="hokkaido">北海道</button>
-                <button class="region-btn" data-region="tohoku">東北</button>
-                <button class="region-btn" data-region="kanto">関東</button>
-                <button class="region-btn" data-region="chubu">中部</button>
-                <button class="region-btn" data-region="kinki">近畿</button>
-                <button class="region-btn" data-region="shikoku">四国</button>
-                <button class="region-btn" data-region="chugoku">中国</button>
-                <button class="region-btn" data-region="kyushu-okinawa">九州・沖縄</button>
-              </div>
-              
-              <!-- 検索バー -->
-              <div class="salon-search">
-                <input 
-                  type="text" 
-                  id="salon-search-input-sp"
-                  placeholder="サロン名・地域名で検索" 
-                  class="salon-search-input"
-                />
-                <button class="salon-search-btn" id="salon-search-btn-sp">
-                  <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- 店舗一覧 -->
-        <div class="salon-listings">
-          <div class="salon-area-title">
-            <h3 id="salon-filter-title">店舗一覧</h3>
-          </div>
-          <div class="salon-cards grid-3-cols" id="salon-cards-container">
-            {salons.map((salon, index) => (
-              <div 
-                data-region={salon.region[0]?.slug || ''} 
-                data-name={salon.title} 
-                data-prefecture={salon.prefecture[0]?.slug || ''} 
-                data-prefecture-name={salon.prefecture[0]?.name || ''}
-                data-city={salon.city[0]?.slug || ''}
-                data-city-name={salon.city[0]?.name || ''}
-                data-access={salon.access || ''}
-                data-furigana={salon.furigana || ''}
+
+          <!-- フィルター -->
+          <div class="salon-filters">
+            <!-- 地域ナビゲーション -->
+            <div class="salon-regions">
+              <button class="region-btn" data-region="hokkaido">北海道</button>
+              <button class="region-btn" data-region="tohoku">東北</button>
+              <button class="region-btn" data-region="kanto">関東</button>
+              <button class="region-btn" data-region="chubu">中部</button>
+              <button class="region-btn" data-region="kinki">近畿</button>
+              <button class="region-btn" data-region="shikoku">四国</button>
+              <button class="region-btn" data-region="chugoku">中国</button>
+              <button class="region-btn" data-region="kyushu-okinawa"
+                >九州・沖縄</button
               >
-                <SalonCard salon={salon} />
-              </div>
-            ))}
+            </div>
+
+            <!-- 検索バー -->
+            <div class="salon-search">
+              <input
+                type="text"
+                id="salon-search-input-sp"
+                placeholder="サロン名・地域名で検索"
+                class="salon-search-input"
+              />
+              <button class="salon-search-btn" id="salon-search-btn-sp">
+                <svg
+                  class="search-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- ヘアカタログセクション -->
-    <section class="hairstyle-section">
-      <div class="hairstyle-container">
-        <h2 class="hairstyle-title section-title text-h1">
-          HAIRSTYLE<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="hairstyle-title-sub section-title-sub">ヘアカタログ</span>
-        </h2>
-        
-        <!-- タブナビゲーション -->
-        <div class="hairstyle-tabs">
-          <button class="hairstyle-tab active" data-category="all">ALL</button>
-          <button class="hairstyle-tab" data-category="long">LONG</button>
-          <button class="hairstyle-tab" data-category="medium">MEDIUM</button>
-          <button class="hairstyle-tab" data-category="short">SHORT</button>
-          <button class="hairstyle-tab" data-category="mens">MENS</button>
+      <!-- 店舗一覧 -->
+      <div class="salon-listings">
+        <div class="salon-area-title">
+          <h3 id="salon-filter-title">店舗一覧</h3>
         </div>
-        
-        <!-- ヘアスタイルグリッド（動的に埋め込み） -->
-        <div class="hairstyle-grid grid-4-cols" id="hairstyle-grid"></div>
-        
-        <!-- 詳しく見るボタン -->
-        <div class="hairstyle-more">
-          <button class="hairstyle-more-btn">
-            <span class="hairstyle-more-text">もっとみる</span>
-            <img src="/images/icons/icn_right_arrow.svg" alt="右矢印" class="hairstyle-more-icon" />
-          </button>
+        <div class="salon-cards grid-3-cols" id="salon-cards-container">
+          {
+            salons.map((salon, index) => {
+              // 親子関係を考慮して都道府県とエリアを取得
+              const prefectureTerms =
+                salon.prefecture?.filter((p) => p.parent === 0) || [];
+              const areaTerms =
+                salon.prefecture?.filter((p) => p.parent > 0) || [];
+              const prefectureSlug =
+                prefectureTerms[0]?.slug || salon.prefecture[0]?.slug || "";
+              const prefectureName =
+                prefectureTerms[0]?.name || salon.prefecture[0]?.name || "";
+              const areaSlug = areaTerms[0]?.slug || "";
+              const areaName = areaTerms[0]?.name || "";
+              // 後方互換性のため、city タクソノミーも確認
+              const citySlug = salon.city[0]?.slug || "";
+              const cityName = salon.city[0]?.name || "";
+              return (
+                <div
+                  data-region={salon.region[0]?.slug || ""}
+                  data-name={salon.title}
+                  data-prefecture={prefectureSlug}
+                  data-prefecture-name={prefectureName}
+                  data-area={areaSlug}
+                  data-area-name={areaName}
+                  data-city={citySlug}
+                  data-city-name={cityName}
+                  data-access={salon.access || ""}
+                  data-furigana={salon.furigana || ""}
+                >
+                  <SalonCard salon={salon} />
+                </div>
+              );
+            })
+          }
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- 企業様向けヘアメイクセクション -->
-    <section class="hairmake-section">
-      <div class="hairmake-container">
-        <h2 class="hairmake-title section-title text-h1">
-          HAIRMAKE<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="hairmake-title-sub section-title-sub">企業様向けヘアメイク</span>
-        </h2>
-        
-        <div class="hairmake-content">
-          <div class="hairmake-text">
-            <p class="hairmake-description">
-              雑誌、放送、アパレル、撮影、イベントなど、企業様向けヘアメイクをお探しの担当者様へ。特別な一日にプロのヘアメイクをお届けします。
-            </p>
-            
-            <!-- 料金表 -->
-            <div class="hairmake-pricing">
-              <div class="pricing-title">
-                ヘアメイク1名あたりの料金
-              </div>
-              <table class="pricing-table">
-                <thead>
-                  <tr>
-                    <th>拘束時間(目安)</th>
-                    <th>料金</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>約3時間</td>
-                    <td>33,000円+税</td>
-                  </tr>
-                  <tr>
-                    <td>約6時間</td>
-                    <td>44,000円+税</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
-            <p class="hairmake-note">
-              ※ヘアメイク複数人でのご依頼も可能ですので、お問い合わせください。<br>
-              また、複数名でのご依頼の場合は割引のご相談も承りますので、お気軽にお申し付けください。
-            </p>
-            
-            <!-- メール依頼フォーム -->
-            <div class="mail-form">
-              <div class="mail-form-content">
-                <p class="mail-form-description">
-                  以下のボタンの先で<br>
-                  「貴社名・お名前・お電話番号・希望人数・依頼場所」を記載の上、<br>
-                  メールでお問い合わせください
-                </p>
-                <p class="mail-form-description-mobile">
-                  貴社名・お名前・電話番号・希望人数<br>依頼場所を記載の上、お問い合わせください。
-                </p>
-                <a href="mailto:recruit@anemone-salon.com" class="mail-form-btn">
-                  メールでのご依頼はこちら
-                  <svg class="mail-form-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
+  <!-- ヘアカタログセクション -->
+  <section class="hairstyle-section">
+    <div class="hairstyle-container">
+      <h2 class="hairstyle-title section-title text-h1">
+        HAIRSTYLE<img
+          src="/images/title_slash.svg"
+          alt="/"
+          class="title-slash"
+        /><span class="hairstyle-title-sub section-title-sub">ヘアカタログ</span
+        >
+      </h2>
+
+      <!-- タブナビゲーション -->
+      <div class="hairstyle-tabs">
+        <button class="hairstyle-tab active" data-category="all">ALL</button>
+        <button class="hairstyle-tab" data-category="long">LONG</button>
+        <button class="hairstyle-tab" data-category="medium">MEDIUM</button>
+        <button class="hairstyle-tab" data-category="short">SHORT</button>
+        <button class="hairstyle-tab" data-category="mens">MENS</button>
+      </div>
+
+      <!-- ヘアスタイルグリッド（動的に埋め込み） -->
+      <div class="hairstyle-grid grid-4-cols" id="hairstyle-grid"></div>
+
+      <!-- 詳しく見るボタン -->
+      <div class="hairstyle-more">
+        <button class="hairstyle-more-btn">
+          <span class="hairstyle-more-text">もっとみる</span>
+          <img
+            src="/images/icons/icn_right_arrow.svg"
+            alt="右矢印"
+            class="hairstyle-more-icon"
+          />
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 企業様向けヘアメイクセクション -->
+  <section class="hairmake-section">
+    <div class="hairmake-container">
+      <h2 class="hairmake-title section-title text-h1">
+        HAIRMAKE<img
+          src="/images/title_slash.svg"
+          alt="/"
+          class="title-slash"
+        /><span class="hairmake-title-sub section-title-sub"
+          >企業様向けヘアメイク</span
+        >
+      </h2>
+
+      <div class="hairmake-content">
+        <div class="hairmake-text">
+          <p class="hairmake-description">
+            雑誌、放送、アパレル、撮影、イベントなど、企業様向けヘアメイクをお探しの担当者様へ。特別な一日にプロのヘアメイクをお届けします。
+          </p>
+
+          <!-- 料金表 -->
+          <div class="hairmake-pricing">
+            <div class="pricing-title">ヘアメイク1名あたりの料金</div>
+            <table class="pricing-table">
+              <thead>
+                <tr>
+                  <th>拘束時間(目安)</th>
+                  <th>料金</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>約3時間</td>
+                  <td>33,000円+税</td>
+                </tr>
+                <tr>
+                  <td>約6時間</td>
+                  <td>44,000円+税</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          
-          <div class="hairmake-image">
-            <img 
-              src="/images/main/hairmake.png" 
-              alt="ヘアメイクサービス" 
-              class="hairmake-image-content"
+
+          <p class="hairmake-note">
+            ※ヘアメイク複数人でのご依頼も可能ですので、お問い合わせください。<br
             />
+            また、複数名でのご依頼の場合は割引のご相談も承りますので、お気軽にお申し付けください。
+          </p>
+
+          <!-- メール依頼フォーム -->
+          <div class="mail-form">
+            <div class="mail-form-content">
+              <p class="mail-form-description">
+                以下のボタンの先で<br />
+                「貴社名・お名前・お電話番号・希望人数・依頼場所」を記載の上、<br
+                />
+                メールでお問い合わせください
+              </p>
+              <p class="mail-form-description-mobile">
+                貴社名・お名前・電話番号・希望人数<br
+                />依頼場所を記載の上、お問い合わせください。
+              </p>
+              <a href="mailto:recruit@anemone-salon.com" class="mail-form-btn">
+                メールでのご依頼はこちら
+                <svg
+                  class="mail-form-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- サロン店舗セクション -->
-
-
-    <!-- 採用情報セクション -->
-    <section class="recruit-section">
-      <div class="recruit-container">
-        <div class="recruit-content">
-          <h2 class="recruit-title">
-            RECRUIT<img src="/images/title_slash.svg" alt="/" class="title-slash" /><span class="recruit-title-sub">採用情報</span>
-          </h2>
-          
-          <div class="recruit-text">
-            <p class="recruit-description">
-              littleでは、全国各地のサロンネットワークで、場所や時間にとらわれず、あなたらしく活躍できる環境をご提供します。<br>育児との両立や独立支援、成長も自立も支える仕組みが整っています。
-            </p>
-          </div>
-          
-          <div class="recruit-cta">
-            <a href="/recruit" class="recruit-btn">
-              <span class="recruit-btn-text">採用情報へ</span>
-              <svg class="recruit-btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-              </svg>
-            </a>
-          </div>
+        <div class="hairmake-image">
+          <img
+            src="/images/main/hairmake.png"
+            alt="ヘアメイクサービス"
+            class="hairmake-image-content"
+          />
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
+  <!-- サロン店舗セクション -->
 
-    <!-- Instagramセクション -->
-    <section class="instagram-section">
-      <div class="instagram-container">
-        <h2 class="instagram-title">
-          / Instagram
+  <!-- 採用情報セクション -->
+  <section class="recruit-section">
+    <div class="recruit-container">
+      <div class="recruit-content">
+        <h2 class="recruit-title">
+          RECRUIT<img
+            src="/images/title_slash.svg"
+            alt="/"
+            class="title-slash"
+          /><span class="recruit-title-sub">採用情報</span>
         </h2>
-        
-        <!-- Instagram投稿グリッド -->
-        <div class="instagram-grid grid-3-cols">
-          {instagramItems.length > 0 ? (
+
+        <div class="recruit-text">
+          <p class="recruit-description">
+            littleでは、全国各地のサロンネットワークで、場所や時間にとらわれず、あなたらしく活躍できる環境をご提供します。<br
+            />育児との両立や独立支援、成長も自立も支える仕組みが整っています。
+          </p>
+        </div>
+
+        <div class="recruit-cta">
+          <a href="/recruit" class="recruit-btn">
+            <span class="recruit-btn-text">採用情報へ</span>
+            <svg
+              class="recruit-btn-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instagramセクション -->
+  <section class="instagram-section">
+    <div class="instagram-container">
+      <h2 class="instagram-title">/ Instagram</h2>
+
+      <!-- Instagram投稿グリッド -->
+      <div class="instagram-grid grid-3-cols">
+        {
+          instagramItems.length > 0 ? (
             instagramItems.map((item) => (
               <div class="instagram-item">
-                <a href={item.instagramUrl} target="_blank" rel="noopener noreferrer">
-                  <img src={item.imageUrl} alt={item.alt} class="instagram-image" />
+                <a
+                  href={item.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={item.imageUrl}
+                    alt={item.alt}
+                    class="instagram-image"
+                  />
                   <div class="instagram-overlay">
-                    <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    <svg
+                      class="instagram-icon"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                     </svg>
                   </div>
                 </a>
@@ -631,22 +812,21 @@ const salonJsonLd = {
             <div class="instagram-placeholder">
               <p>Instagram投稿を読み込み中...</p>
             </div>
-          )}
-        </div>
+          )
+        }
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- CTAセクション -->
+  <!-- CTAセクション -->
 
-    <!-- Footer -->
-    <Footer />
-    
-  </div>
+  <!-- Footer -->
+  <Footer />
 </Layout>
 
 <style>
   @import "tailwindcss";
-  
+
   /* ヒーローセクションのスタイル */
   .hero-section {
     position: relative;
@@ -654,7 +834,7 @@ const salonJsonLd = {
     min-height: 320px;
     padding-top: 80px; /* ヘッダーの高さ分をパディングで補正 */
   }
-  
+
   .hero-text-overlay {
     position: absolute;
     top: 120px;
@@ -663,7 +843,7 @@ const salonJsonLd = {
     max-height: 116px;
     width: auto;
   }
-  
+
   .hero-container {
     display: flex;
     padding: 24px 55px;
@@ -676,7 +856,7 @@ const salonJsonLd = {
     height: 100%;
     min-height: 500px;
   }
-  
+
   .hero-main {
     position: relative;
     width: 100%;
@@ -690,14 +870,14 @@ const salonJsonLd = {
     align-self: stretch;
     z-index: 10;
   }
-  
+
   .hero-slideshow {
     flex: 1;
     height: 100%;
     position: relative;
     z-index: 10;
   }
-  
+
   .hero-slide {
     position: absolute;
     top: 0;
@@ -708,17 +888,17 @@ const salonJsonLd = {
     transition: opacity 0.8s ease-in-out;
     z-index: 5;
   }
-  
+
   .hero-slide.active {
     opacity: 1;
   }
-  
+
   .hero-slide-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  
+
   .hero-slide-overlay {
     position: absolute;
     top: 0;
@@ -726,7 +906,7 @@ const salonJsonLd = {
     right: 0;
     bottom: 0;
   }
-  
+
   .hero-slide-content {
     position: absolute;
     top: 50%;
@@ -757,13 +937,13 @@ const salonJsonLd = {
     height: auto;
     object-fit: contain;
   }
-  
+
   .hero-title {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .hero-tagline {
     font-family: var(--font-family-yumincho);
     font-size: 1.125rem;
@@ -771,15 +951,15 @@ const salonJsonLd = {
     color: var(--color-black);
     line-height: 1.2;
   }
-  
+
   .hero-brand {
     font-family: var(--font-family-yumincho);
     font-size: 2.5rem;
     font-weight: var(--font-weight-bold);
     color: var(--color-black);
-    line-height: 1.0;
+    line-height: 1;
   }
-  
+
   .hero-subtitle {
     font-family: var(--font-family-yumincho);
     font-size: 0.875rem;
@@ -787,13 +967,13 @@ const salonJsonLd = {
     color: var(--color-black);
     line-height: 1.2;
   }
-  
+
   .hero-decorative {
     position: absolute;
     top: 2rem;
     right: 2rem;
   }
-  
+
   .hero-magic {
     font-family: var(--font-family-yumincho);
     font-size: 1.25rem;
@@ -802,7 +982,7 @@ const salonJsonLd = {
     font-style: italic;
     opacity: 0.8;
   }
-  
+
   /* スライドショー内のページネーション */
   .hero-slide-pagination {
     display: flex;
@@ -814,7 +994,7 @@ const salonJsonLd = {
     pointer-events: auto;
     padding: 12px;
   }
-  
+
   /* Floating Action Button */
   .hero-fab {
     position: absolute;
@@ -825,14 +1005,14 @@ const salonJsonLd = {
     flex-direction: column;
     align-items: center;
     z-index: 20;
-    background-image: url('/images/fab_bg.png');
+    background-image: url("/images/fab_bg.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     width: 240px;
     height: 210px;
   }
-  
+
   /* PC用のFloating Action Button */
   @media (min-width: 768px) {
     .hero-fab {
@@ -842,7 +1022,7 @@ const salonJsonLd = {
       transform: translateY(-50%);
       z-index: 1000;
     }
-    
+
     .hero-slide-pagination {
       display: flex;
       width: 8px;
@@ -860,37 +1040,34 @@ const salonJsonLd = {
       display: none;
     }
   }
-  
-  
+
   /* ページネーションストライプ */
   .pagination-stripe {
     width: 8px;
     height: 60px;
-    background-color: #E8DDC7;
+    background-color: #e8ddc7;
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
   }
-  
+
   .pagination-stripe.active {
-    background-color: #D4C4A8; /* アクティブ時は少し濃い色 */
+    background-color: #d4c4a8; /* アクティブ時は少し濃い色 */
   }
-  
+
   .pagination-stripe:hover {
-    background-color: #F0E6D0; /* ホバー時の色 */
+    background-color: #f0e6d0; /* ホバー時の色 */
   }
-  
+
   /* ページネーション区切り線 */
   .pagination-divider {
     width: 8px;
     height: 1px;
-    background-color: #2C2C2C;
+    background-color: #2c2c2c;
     border-radius: 0.5px;
   }
-  
-  
-  
+
   .hero-search-btn {
     width: 210px;
     height: 210px;
@@ -907,8 +1084,7 @@ const salonJsonLd = {
     position: relative;
     overflow: hidden;
   }
-  
-  
+
   .hero-btn-content {
     display: flex;
     margin-top: 15px;
@@ -917,19 +1093,19 @@ const salonJsonLd = {
     gap: 4px;
     justify-content: center;
   }
-  
+
   .hero-search-icon {
     width: 42px;
     height: 42px;
     stroke-width: 1;
   }
-  
+
   .hero-btn-text {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  
+
   .hero-btn-line {
     font-family: var(--font-family-zenkaku);
     font-size: 20px;
@@ -937,7 +1113,7 @@ const salonJsonLd = {
     color: white;
     line-height: 1.25;
   }
-  
+
   /* レスポンシブ対応 */
   @media (max-width: 767px) {
     .hero-section {
@@ -945,13 +1121,13 @@ const salonJsonLd = {
       margin-top: 64px; /* モバイル版のヘッダー高さ分を相殺 */
       padding-top: 64px; /* モバイル版のヘッダー高さ分をパディングで補正 */
     }
-    
+
     .hero-text-overlay {
       top: 10px;
       max-height: 42px;
       z-index: 1000;
     }
-    
+
     .hero-container {
       padding: 0;
       flex-direction: row;
@@ -960,7 +1136,7 @@ const salonJsonLd = {
       align-self: stretch;
       min-height: 100%;
     }
-    
+
     .hero-main {
       position: absolute;
       top: 0;
@@ -1017,13 +1193,13 @@ const salonJsonLd = {
       z-index: 2147483646 !important;
       position: relative !important;
     }
-    
+
     .hero-slideshow {
       flex: 1;
       height: 100%;
       position: relative;
     }
-    
+
     .hero-slide {
       position: absolute;
       top: 0;
@@ -1031,7 +1207,7 @@ const salonJsonLd = {
       width: 100%;
       height: 100%;
     }
-    
+
     .hero-slide-image {
       width: 100%;
       height: 100%;
@@ -1039,7 +1215,7 @@ const salonJsonLd = {
       border-radius: 0 20px 20px 0;
       /* mix-blend-mode: multiply; */
     }
-    
+
     .hero-slide-pagination {
       display: flex;
       flex-direction: row;
@@ -1050,23 +1226,22 @@ const salonJsonLd = {
       height: 8px;
       padding: 1rem;
     }
-    
+
     .pagination-stripe {
       height: 8px;
       width: 8px;
       border-radius: 4px;
     }
-    
+
     .pagination-stripe.active {
       height: 8px;
     }
-    
+
     .pagination-divider {
       height: 8px;
       width: 1px;
     }
-    
-    
+
     .hero-fab {
       position: absolute;
       bottom: 1rem;
@@ -1076,91 +1251,90 @@ const salonJsonLd = {
       transform: none;
       flex-direction: row;
     }
-    
-    
+
     .hero-search-btn {
       width: 60px;
       height: 60px;
     }
-    
+
     .hero-btn-content {
       gap: 0.25rem;
     }
-    
+
     .hero-search-icon {
       width: 20px;
       height: 20px;
     }
-    
+
     .hero-btn-text {
       display: none; /* SPではテキストを非表示 */
     }
-    
+
     .hero-slide-content {
       padding: 1rem;
     }
-    
+
     .hero-brand {
       font-size: 2rem;
     }
-    
+
     .hero-tagline {
       font-size: 1rem;
     }
-    
+
     .hero-magic {
       font-size: 1rem;
     }
   }
-  
+
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
   .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
   /* イントロダクションセクション */
   .intro-section {
     background-color: var(--color-beige);
     padding: 110px 0;
   }
-  
+
   /* 共通コンテナスタイル */
   .section-container {
     max-width: 1040px;
     margin: 0 auto;
   }
-  
+
   .section-container-wide {
     max-width: 1200px;
     margin: 0 auto;
   }
-  
+
   .intro-container {
     /* イントロダクション専用の追加スタイルがあればここに */
   }
-  
+
   /* 共通グリッドレイアウト */
   .grid-4-cols {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
   }
-  
+
   .grid-3-cols {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
   }
-  
+
   .grid-2-cols {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1225,7 +1399,7 @@ const salonJsonLd = {
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
-    
+
     .grid-3-cols {
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
@@ -1237,12 +1411,12 @@ const salonJsonLd = {
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
     }
-    
+
     .grid-3-cols {
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
     }
-    
+
     .grid-2-cols {
       grid-template-columns: 1fr;
       gap: 16px;
@@ -1257,7 +1431,7 @@ const salonJsonLd = {
       gap: 12px;
     }
   }
-  
+
   /* 共通タイポグラフィ */
   .text-h1 {
     font-family: var(--font-family-yumincho);
@@ -1265,49 +1439,49 @@ const salonJsonLd = {
     font-weight: var(--font-weight-medium);
     line-height: 100%;
   }
-  
+
   .text-h2 {
     font-family: var(--font-family-yumincho);
     font-size: 48px;
     font-weight: var(--font-weight-medium);
     line-height: 100%;
   }
-  
+
   .text-h3 {
     font-family: var(--font-family-yumincho);
     font-size: 32px;
     font-weight: var(--font-weight-medium);
     line-height: 120%;
   }
-  
+
   .text-h4 {
     font-family: var(--font-family-yumincho);
     font-size: 24px;
     font-weight: var(--font-weight-medium);
     line-height: 120%;
   }
-  
+
   .text-body {
     font-family: var(--font-family-zenkaku);
     font-size: 16px;
     font-weight: var(--font-weight-regular);
     line-height: 150%;
   }
-  
+
   .text-body-large {
     font-family: var(--font-family-zenkaku);
     font-size: 18px;
     font-weight: var(--font-weight-regular);
     line-height: 150%;
   }
-  
+
   .text-small {
     font-family: var(--font-family-zenkaku);
     font-size: 14px;
     font-weight: var(--font-weight-regular);
     line-height: 150%;
   }
-  
+
   .text-caption {
     font-family: var(--font-family-zenkaku);
     font-size: 12px;
@@ -1320,15 +1494,15 @@ const salonJsonLd = {
     .text-h1 {
       font-size: 48px;
     }
-    
+
     .text-h2 {
       font-size: 36px;
     }
-    
+
     .text-h3 {
       font-size: 28px;
     }
-    
+
     .text-h4 {
       font-size: 20px;
     }
@@ -1338,23 +1512,23 @@ const salonJsonLd = {
     .text-h1 {
       font-size: 36px;
     }
-    
+
     .text-h2 {
       font-size: 28px;
     }
-    
+
     .text-h3 {
       font-size: 24px;
     }
-    
+
     .text-h4 {
       font-size: 18px;
     }
-    
+
     .text-body {
       font-size: 14px;
     }
-    
+
     .text-body-large {
       font-size: 16px;
     }
@@ -1364,32 +1538,32 @@ const salonJsonLd = {
     .text-h1 {
       font-size: 28px;
     }
-    
+
     .text-h2 {
       font-size: 24px;
     }
-    
+
     .text-h3 {
       font-size: 20px;
     }
-    
+
     .text-h4 {
       font-size: 16px;
     }
-    
+
     .text-body {
       font-size: 13px;
     }
-    
+
     .text-body-large {
       font-size: 14px;
     }
-    
+
     .text-small {
       font-size: 12px;
     }
   }
-  
+
   .intro-content {
     display: flex;
     align-items: center;
@@ -1405,12 +1579,12 @@ const salonJsonLd = {
   .intro-content-mobile {
     display: none;
   }
-  
+
   .intro-text {
     flex: 1;
     color: var(--color-black);
   }
-  
+
   /* 共通セクションタイトル */
   .section-title {
     color: var(--color-black);
@@ -1418,7 +1592,7 @@ const salonJsonLd = {
     height: 64px;
     margin-bottom: 40px;
   }
-  
+
   .section-title-sub {
     font-size: 24px;
     vertical-align: middle;
@@ -1448,11 +1622,11 @@ const salonJsonLd = {
       gap: 6px 11px;
       flex-wrap: wrap;
     }
-    
+
     .title-slash {
       margin: 0;
     }
-    
+
     .section-title-sub {
       margin: 0;
     }
@@ -1464,17 +1638,17 @@ const salonJsonLd = {
       max-width: 800px;
       padding: 0 20px;
     }
-    
+
     .section-container-wide {
       max-width: 900px;
       padding: 0 20px;
     }
-    
+
     .section-title {
       height: auto;
       margin-bottom: 32px;
     }
-    
+
     .section-title-sub {
       font-size: 20px;
     }
@@ -1485,17 +1659,17 @@ const salonJsonLd = {
       max-width: 100%;
       padding: 0 16px;
     }
-    
+
     .section-container-wide {
       max-width: 100%;
       padding: 0 16px;
     }
-    
+
     .section-title {
       height: auto;
       margin-bottom: 24px;
     }
-    
+
     .section-title-sub {
       font-size: 16px;
     }
@@ -1506,16 +1680,16 @@ const salonJsonLd = {
     .section-container-wide {
       padding: 0 24px;
     }
-    
+
     .section-title {
       margin-bottom: 20px;
     }
-    
+
     .section-title-sub {
       font-size: 14px;
     }
   }
-  
+
   .intro-title {
     font-family: var(--font-family-yumincho);
     font-size: 24px;
@@ -1523,7 +1697,7 @@ const salonJsonLd = {
     line-height: 1.5;
     margin-bottom: 2rem;
   }
-  
+
   .intro-description {
     font-family: var(--font-family-zenkaku);
     font-weight: var(--font-weight-normal);
@@ -1531,45 +1705,45 @@ const salonJsonLd = {
     line-height: 1.5;
     margin-bottom: 24px;
   }
-  
+
   .intro-highlight {
     font-family: var(--font-family-yumincho);
     font-size: 1.5rem;
     font-weight: var(--font-weight-medium);
     color: var(--color-brown-light);
   }
-  
+
   .intro-image {
   }
-  
+
   .intro-image-content {
     width: 460px;
     height: 424px;
     object-fit: cover;
     border-radius: 20px;
   }
-  
+
   /* ヘアカタログセクション */
   .hairstyle-section {
     background-color: var(--color-beige);
     padding: 80px 0;
   }
-  
+
   .hairstyle-container {
     max-width: 1040px;
     margin: 0 auto;
   }
-  
+
   .hairstyle-title {
     /* タイポグラフィは共通クラスで管理 */
   }
-  
+
   .hairstyle-tabs {
     display: flex;
     gap: 8px;
     margin-bottom: 3rem;
   }
-  
+
   .hairstyle-tab {
     background: none;
     border: none;
@@ -1584,9 +1758,9 @@ const salonJsonLd = {
     flex: 1;
     text-align: center;
   }
-  
+
   .hairstyle-tab::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -1594,13 +1768,13 @@ const salonJsonLd = {
     height: 4px;
     background-color: var(--color-grey-light);
   }
-  
+
   .hairstyle-tab.active {
     color: var(--color-text-black);
   }
-  
+
   .hairstyle-tab.active::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -1608,28 +1782,28 @@ const salonJsonLd = {
     height: 4px;
     background-color: var(--color-text-black);
   }
-  
+
   .hairstyle-grid {
     margin-bottom: 3rem;
   }
-  
+
   :global(.hairstyle-item) {
     border-radius: 20px;
     overflow: hidden;
   }
-  
+
   :global(.hairstyle-image) {
     width: 100%;
     height: 300px;
     object-fit: cover;
   }
-  
+
   .hairstyle-more {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  
+
   .hairstyle-more-btn {
     display: flex;
     width: 178px;
@@ -1645,62 +1819,62 @@ const salonJsonLd = {
     cursor: pointer;
     transition: all 0.3s ease;
   }
-  
+
   .hairstyle-more-btn:hover {
     background-color: var(--color-brown);
     color: var(--color-white);
   }
-  
+
   .hairstyle-more-btn:hover .hairstyle-more-icon {
     filter: brightness(0) invert(1);
   }
-  
+
   .hairstyle-more-text {
     font-family: var(--font-family-zenkaku);
     font-size: 16px;
     font-weight: var(--font-weight-medium);
   }
-  
+
   .hairstyle-more-icon {
     width: 24px;
     height: 24px;
     transition: filter 0.3s ease;
     rotate: 90deg;
   }
-  
+
   /* 企業様向けヘアメイクセクション */
   .hairmake-section {
     background-color: var(--color-beige);
     padding: 80px 0;
   }
-  
+
   .hairmake-container {
     max-width: 1040px;
     margin: 0 auto;
   }
-  
+
   .hairmake-title {
     /* タイポグラフィは共通クラスで管理 */
   }
-  
+
   .hairmake-content {
     display: flex;
     align-items: flex-end;
     gap: 40px;
   }
-  
+
   .hairmake-text {
     flex: 1;
     color: var(--color-black);
   }
-  
+
   .hairmake-description {
     font-family: var(--font-family-zenkaku);
     font-size: 16px;
     line-height: 1.5;
     margin-bottom: 2rem;
   }
-  
+
   .hairmake-pricing {
     margin-bottom: 24px;
   }
@@ -1711,13 +1885,13 @@ const salonJsonLd = {
     align-items: center;
     gap: 10px;
     align-self: stretch;
-    background: rgba(61, 61, 61, 0.20);
+    background: rgba(61, 61, 61, 0.2);
     font-family: var(--font-family-zenkaku);
     font-size: 1rem;
     font-weight: var(--font-weight-medium);
     color: var(--color-black);
   }
-  
+
   .pricing-table {
     width: 100%;
     border-collapse: collapse;
@@ -1725,7 +1899,7 @@ const salonJsonLd = {
     overflow: hidden;
     align-self: stretch;
   }
-  
+
   .pricing-table th,
   .pricing-table td {
     text-align: left;
@@ -1739,7 +1913,7 @@ const salonJsonLd = {
   }
 
   .pricing-table tbody tr:first-child {
-    border-bottom: 0.5px dashed var(--Text-black, #3D3D3D);
+    border-bottom: 0.5px dashed var(--Text-black, #3d3d3d);
   }
 
   .pricing-table thead {
@@ -1761,14 +1935,14 @@ const salonJsonLd = {
     width: 100%;
     padding: 8px 0 8px 8px;
   }
-  
+
   .pricing-table th {
     color: var(--color-black);
     font-family: var(--font-family-zenkaku);
     font-weight: var(--font-weight-medium);
     font-size: 16px;
   }
-  
+
   .pricing-table td {
     color: var(--color-black);
     font-family: var(--font-family-zenkaku);
@@ -1780,15 +1954,15 @@ const salonJsonLd = {
     .pricing-table td {
       padding: 14px 16px;
     }
-    
+
     .pricing-table th {
       font-size: 14px;
     }
-    
+
     .pricing-table td {
       font-size: 20px;
     }
-    
+
     .pricing-table tr {
       padding: 6px 0 6px 6px;
     }
@@ -1799,15 +1973,15 @@ const salonJsonLd = {
     .pricing-table td {
       padding: 8px 10px;
     }
-    
+
     .pricing-table th {
       font-size: 14px;
     }
-    
+
     .pricing-table td {
       font-size: 16px;
     }
-    
+
     .pricing-table tr {
       padding: 4px 0 4px 4px;
     }
@@ -1816,7 +1990,7 @@ const salonJsonLd = {
     .mail-form .mail-form-description {
       display: none !important;
     }
-    
+
     .mail-form .mail-form-description-mobile {
       display: block !important;
     }
@@ -1826,7 +2000,7 @@ const salonJsonLd = {
     .pricing-title {
       font-size: 12px;
     }
-    
+
     .pricing-table tr {
       padding: 3px 0 3px 3px;
     }
@@ -1835,23 +2009,23 @@ const salonJsonLd = {
     .mail-form .mail-form-description {
       display: none !important;
     }
-    
+
     .mail-form .mail-form-description-mobile {
       display: block !important;
     }
   }
-  
+
   .hairmake-note {
     font-family: var(--font-family-zenkaku);
     font-weight: var(--font-weight-regular);
     font-size: 10px;
-    line-height: 2.0;
+    line-height: 2;
     margin-bottom: 24px;
   }
-  
+
   .mail-form {
     position: relative;
-    background-image: url('/images/hero/slide-2.png');
+    background-image: url("/images/hero/slide-2.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1860,7 +2034,7 @@ const salonJsonLd = {
   }
 
   .mail-form::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -1878,7 +2052,7 @@ const salonJsonLd = {
   .hairmake-image {
     width: 460px;
   }
-  
+
   .hairmake-image-content {
     width: 100%;
     height: 463px;
@@ -1907,7 +2081,7 @@ const salonJsonLd = {
     font-family: var(--font-family-zenkaku);
     font-weight: 300;
     font-size: 12px;
-    line-height: 2.0;
+    line-height: 2;
     margin-bottom: 12px;
   }
 
@@ -1928,62 +2102,62 @@ const salonJsonLd = {
     text-decoration: none;
     pointer-events: auto;
   }
-  
+
   .mail-form-btn:hover {
     background-color: var(--color-white);
     color: var(--color-black);
   }
-  
+
   .mail-form-icon {
     width: 20px;
     height: 20px;
     pointer-events: none;
   }
-  
+
   /* サロン店舗セクション */
   .salon-section {
     background-color: var(--color-beige);
     padding: 80px 0;
   }
-  
+
   .salon-container {
     max-width: 1040px;
     margin: 0 auto;
   }
-  
+
   .salon-title {
     /* タイポグラフィは共通クラスで管理 */
   }
-  
+
   /* サロンセクションのメインコンテンツ */
   .salon-main-content {
     margin-bottom: 3rem;
   }
-  
+
   .salon-header {
     margin-bottom: 2rem;
   }
-  
+
   /* PC用レイアウト */
   .salon-content-pc {
     display: flex;
     align-items: flex-start;
     gap: 2rem;
   }
-  
+
   .salon-filters {
     flex: 1;
   }
-  
+
   .salon-map {
     flex: 0 0 auto;
   }
-  
+
   /* SP用レイアウト（デフォルトで非表示） */
   .salon-content-sp {
     display: none;
   }
-  
+
   .salon-description {
     font-family: var(--font-family-zenkaku);
     font-size: 16px;
@@ -1992,14 +2166,14 @@ const salonJsonLd = {
     text-align: left;
     margin-bottom: 40px;
   }
-  
+
   .salon-regions {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
     margin-bottom: 3rem;
   }
-  
+
   .region-btn {
     display: flex;
     width: 172px;
@@ -2017,25 +2191,25 @@ const salonJsonLd = {
     transition: all 0.3s ease;
     padding: 0 1rem;
   }
-  
+
   .region-btn:hover {
-    background-color: #E6DDCA;
+    background-color: #e6ddca;
   }
-  
+
   .region-btn.active {
     background-color: var(--color-black);
     color: var(--color-white);
   }
-  
+
   .salon-search {
     display: flex;
     margin-bottom: 3rem;
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid #E0E0E0;
+    border: 1px solid #e0e0e0;
     background-color: var(--color-white);
   }
-  
+
   .salon-search-input {
     flex: 1;
     background-color: var(--color-white);
@@ -2045,11 +2219,11 @@ const salonJsonLd = {
     font-size: 1rem;
     outline: none;
   }
-  
+
   .salon-search-input::placeholder {
     color: #999999;
   }
-  
+
   .salon-search-btn {
     background-color: #666666;
     color: var(--color-white);
@@ -2062,20 +2236,20 @@ const salonJsonLd = {
     min-width: 60px;
     transition: background-color 0.3s ease;
   }
-  
+
   .salon-search-btn:hover {
     background-color: #555555;
   }
-  
+
   .search-icon {
     width: 20px;
     height: 20px;
   }
-  
+
   .salon-map {
     text-align: center;
   }
-  
+
   .japan-map {
     height: 472px;
     border-radius: 8px;
@@ -2085,24 +2259,24 @@ const salonJsonLd = {
     overflow: hidden;
     background-color: var(--color-beige);
   }
-  
+
   .japan-map-image {
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
-  
+
   .salon-listings {
     margin-top: 3rem;
   }
-  
+
   .salon-area-title {
     display: flex;
     padding-bottom: 16px;
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
-    border-bottom: 0.5px solid var(--Text-black, #3D3D3D);
+    border-bottom: 0.5px solid var(--Text-black, #3d3d3d);
     margin-bottom: 2rem;
   }
 
@@ -2112,33 +2286,35 @@ const salonJsonLd = {
     font-weight: var(--font-weight-medium);
     color: var(--color-black);
     margin: 0;
-    line-height: 1.0;
+    line-height: 1;
   }
-  
+
   .salon-cards {
     /* グリッドスタイルは共通クラスで管理 */
   }
-  
+
   .salon-card {
     background-color: var(--color-white);
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
     height: 364px;
   }
-  
+
   .salon-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   }
-  
+
   .salon-card-image {
     width: 100%;
     height: 159px;
     object-fit: cover;
   }
-  
+
   .salon-card-content {
     padding: 16px;
     display: flex;
@@ -2146,7 +2322,7 @@ const salonJsonLd = {
     height: calc(100% - 159px);
     justify-content: space-between;
   }
-  
+
   .salon-card-text {
     display: flex;
     flex-direction: column;
@@ -2160,18 +2336,19 @@ const salonJsonLd = {
     color: var(--color-black);
     line-height: 1.25;
   }
-  
+
   .salon-card-location,
   .salon-card-station {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    font-family: var(--font-family-zenkaku); font-size: 16px;
+    font-family: var(--font-family-zenkaku);
+    font-size: 16px;
     font-weight: bold;
     color: #848383;
-    line-height: 1.0;
+    line-height: 1;
   }
-  
+
   .location-icon,
   .station-icon {
     width: 16px;
@@ -2179,7 +2356,7 @@ const salonJsonLd = {
     flex-shrink: 0;
     margin-top: 0.125rem;
   }
-  
+
   .salon-card-btn {
     background-color: var(--color-white);
     color: var(--color-black);
@@ -2198,7 +2375,7 @@ const salonJsonLd = {
     align-items: center;
     justify-content: center;
   }
-  
+
   .salon-card-btn:hover {
     background-color: var(--color-black);
     color: var(--color-white);
@@ -2221,20 +2398,20 @@ const salonJsonLd = {
     font-size: 16px;
     margin: 0;
   }
-  
+
   /* 採用情報セクション */
   .recruit-section {
     position: relative;
-    background-image: url('/images/hero/slide-1.png');
+    background-image: url("/images/hero/slide-1.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     padding: 56px 0;
     overflow: hidden;
   }
-  
+
   .recruit-section::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -2243,20 +2420,20 @@ const salonJsonLd = {
     background: rgba(105, 85, 46, 0.9);
     backdrop-filter: blur(2px);
   }
-  
+
   .recruit-container {
     position: relative;
     z-index: 2;
     max-width: 1040px;
     margin: 0 auto;
   }
-  
+
   .recruit-content {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
   }
-  
+
   .recruit-title {
     font-family: var(--font-family-yumincho);
     font-size: 64px;
@@ -2265,13 +2442,13 @@ const salonJsonLd = {
     margin-bottom: 32px;
     line-height: 1.2;
   }
-  .recruit-title-sub{
+  .recruit-title-sub {
     font-size: 24px;
   }
   .recruit-text {
     margin-bottom: 32px;
   }
-  
+
   .recruit-description {
     font-family: var(--font-family-zenkaku);
     font-weight: var(--font-weight-regular);
@@ -2281,11 +2458,11 @@ const salonJsonLd = {
     margin-bottom: 16px;
     text-align: center;
   }
-  
+
   .recruit-cta {
     text-align: center;
   }
-  
+
   .recruit-btn {
     display: inline-flex;
     align-items: center;
@@ -2302,16 +2479,16 @@ const salonJsonLd = {
     transition: all 0.3s ease;
     cursor: pointer;
   }
-  
+
   .recruit-btn:hover {
     background-color: var(--color-white);
     color: var(--color-black);
   }
-  
+
   .recruit-btn-text {
     font-family: var(--font-family-zenkaku);
   }
-  
+
   .recruit-btn-icon {
     width: 20px;
     height: 20px;
@@ -2323,24 +2500,24 @@ const salonJsonLd = {
       max-width: 800px;
       padding: 0 20px;
     }
-    
+
     .recruit-content {
       max-width: 100%;
     }
-    
+
     .recruit-title {
       font-size: 48px;
       margin-bottom: 24px;
     }
-    
+
     .recruit-title-sub {
       font-size: 20px;
     }
-    
+
     .recruit-text {
       margin-bottom: 24px;
     }
-    
+
     .recruit-description {
       font-size: 15px;
       margin-bottom: 16px;
@@ -2351,35 +2528,35 @@ const salonJsonLd = {
     .recruit-section {
       padding: 60px 0;
     }
-    
+
     .recruit-container {
       padding: 0 16px;
     }
-    
+
     .recruit-title {
       font-size: 36px;
       margin-bottom: 20px;
     }
-    
+
     .recruit-title-sub {
       font-size: 16px;
     }
-    
+
     .recruit-text {
       margin-bottom: 20px;
     }
-    
+
     .recruit-description {
       font-size: 14px;
-      line-height: 2.0;
+      line-height: 2;
       margin-bottom: 24px;
     }
-    
+
     .recruit-btn {
       padding: 12px 24px;
       font-size: 14px;
     }
-    
+
     .recruit-btn-icon {
       width: 18px;
       height: 18px;
@@ -2390,54 +2567,53 @@ const salonJsonLd = {
     .recruit-section {
       padding: 40px 0;
     }
-    
+
     .recruit-container {
       padding: 0 24px;
     }
-    
+
     .recruit-title {
       font-size: 28px;
       margin-bottom: 16px;
     }
-    
+
     .recruit-title-sub {
       font-size: 14px;
     }
 
     .recruit-description {
       font-size: 12px;
-      line-height: 2.0;
+      line-height: 2;
       word-break: auto-phrase;
     }
-    
+
     .recruit-text {
       margin-bottom: 16px;
     }
-    
-    
+
     .recruit-btn {
       padding: 10px 20px;
       font-size: 13px;
       gap: 0.5rem;
     }
-    
+
     .recruit-btn-icon {
       width: 16px;
       height: 16px;
     }
   }
-  
+
   /* ニュースセクション */
   .news-section {
     background-color: var(--color-beige);
     padding: 80px 0;
   }
-  
+
   .news-container {
     max-width: 1040px;
     margin: 0 auto;
   }
-  
+
   .news-title {
     font-family: var(--font-family-yumincho);
     font-size: 64px;
@@ -2445,10 +2621,10 @@ const salonJsonLd = {
     color: var(--color-black);
     text-align: left;
     margin-bottom: 56px;
-    line-height: 1.0;
+    line-height: 1;
   }
 
-  .news-title-sub{
+  .news-title-sub {
     font-size: 24px;
   }
 
@@ -2458,7 +2634,7 @@ const salonJsonLd = {
       font-size: 48px;
       margin-bottom: 40px;
     }
-    
+
     .news-title-sub {
       font-size: 20px;
     }
@@ -2470,7 +2646,7 @@ const salonJsonLd = {
       margin-bottom: 32px;
       width: 170px;
     }
-    
+
     .news-title-sub {
       font-size: 16px;
     }
@@ -2481,18 +2657,18 @@ const salonJsonLd = {
       font-size: 28px;
       margin-bottom: 24px;
     }
-    
+
     .news-title-sub {
       font-size: 14px;
     }
   }
-  
+
   .news-tabs {
     display: flex;
     gap: 8px;
     margin-bottom: 28px;
   }
-  
+
   .news-tab {
     background: none;
     border: none;
@@ -2507,9 +2683,9 @@ const salonJsonLd = {
     flex: 1;
     text-align: center;
   }
-  
+
   .news-tab::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -2517,13 +2693,13 @@ const salonJsonLd = {
     height: 4px;
     background-color: var(--color-grey-light);
   }
-  
+
   .news-tab.active {
     color: var(--color-text-black);
   }
-  
+
   .news-tab.active::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -2531,23 +2707,22 @@ const salonJsonLd = {
     height: 4px;
     background-color: var(--color-text-black);
   }
-  
+
   .news-tab-separator {
     display: none;
   }
-  
+
   .news-list {
     margin: 0 auto;
   }
-  
+
   .news-item {
     display: flex;
     gap: 1.5rem;
     padding: 32px 0;
     border-bottom: 1px solid var(--color-grey-light);
   }
-  
-  
+
   .news-image {
     width: 240px;
     height: 164px;
@@ -2555,37 +2730,37 @@ const salonJsonLd = {
     object-fit: cover;
     flex-shrink: 0;
   }
-  
+
   .news-content {
     flex: 1;
   }
-  
+
   .news-meta {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 0.75rem;
   }
-  
+
   .news-date {
     font-family: var(--font-family-zenkaku);
     font-size: 24px;
     color: var(--color-text-grey-medium);
   }
-  
+
   .news-separator {
     font-family: var(--font-family-zenkaku);
     font-size: 24px;
     color: var(--color-text-grey-medium);
   }
-  
+
   .news-category {
     font-family: var(--font-family-zenkaku);
     font-size: 24px;
     font-weight: var(--font-weight-regular);
     color: var(--color-text-grey-medium);
   }
-  
+
   .news-item-title {
     font-family: var(--font-family-zenkaku);
     font-size: 24px;
@@ -2599,7 +2774,7 @@ const salonJsonLd = {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  
+
   .news-description {
     font-family: var(--font-family-zenkaku);
     font-size: 16px;
@@ -2613,14 +2788,14 @@ const salonJsonLd = {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  
+
   .news-more {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 54px;
   }
-  
+
   .news-more-btn {
     display: flex;
     width: 178px;
@@ -2636,39 +2811,39 @@ const salonJsonLd = {
     text-decoration: none;
     transition: all 0.3s ease;
   }
-  
+
   .news-more-btn:hover {
     background-color: var(--color-brown);
     color: var(--color-white);
   }
-  
+
   .news-more-btn:hover .news-more-icon {
     filter: brightness(0) invert(1);
   }
-  
+
   .news-more-text {
     font-family: var(--font-family-zenkaku);
     font-size: 16px;
     font-weight: var(--font-weight-medium);
   }
-  
+
   .news-more-icon {
     width: 24px;
     height: 24px;
     transition: filter 0.3s ease;
   }
-  
+
   /* Instagramセクション */
   .instagram-section {
-    background-color: #D2CABB;
+    background-color: #d2cabb;
     padding: 80px 0;
   }
-  
+
   .instagram-container {
     max-width: 1040px;
     margin: 0 auto;
   }
-  
+
   .instagram-title {
     font-family: var(--font-family-yumincho);
     font-size: 32px;
@@ -2676,29 +2851,29 @@ const salonJsonLd = {
     color: var(--color-black);
     margin-bottom: 14px;
   }
-  
+
   .instagram-grid {
     /* グリッドスタイルは共通クラスで管理 */
     gap: 10px;
   }
-  
+
   .instagram-item {
     position: relative;
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.3s ease;
   }
-  
+
   .instagram-item:hover {
     transform: scale(1.02);
   }
-  
+
   .instagram-image {
     width: 100%;
     height: 454px;
     object-fit: cover;
   }
-  
+
   .instagram-overlay {
     position: absolute;
     top: 0;
@@ -2712,79 +2887,78 @@ const salonJsonLd = {
     opacity: 0;
     transition: opacity 0.3s ease;
   }
-  
+
   .instagram-item:hover .instagram-overlay {
     opacity: 1;
   }
-  
+
   .instagram-icon {
     width: 32px;
     height: 32px;
     color: var(--color-white);
   }
-  
-  
+
   /* レスポンシブ対応 */
-  
+
   /* タブレット対応 (768px - 1024px) */
   @media (min-width: 769px) and (max-width: 1024px) {
     .hero-text-overlay {
       top: 100px;
       max-height: 100px;
     }
-    
+
     .intro-content {
       gap: 2rem;
     }
-    
+
     .hairstyle-grid {
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
     }
-    
+
     .salon-content {
       gap: 2rem;
     }
-    
+
     .salon-regions {
       gap: 0.75rem;
     }
-    
+
     .salon-cards {
       grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .instagram-grid {
       grid-template-columns: repeat(3, 1fr);
     }
   }
-  
+
   /* モバイル対応 (768px以下) */
   @media (max-width: 768px) {
     /* ヘッダー */
     .header {
       padding: 1rem;
     }
-    
+
     .header-brand {
       font-size: 1.5rem;
     }
-    
+
     .header-menu-btn {
       width: 60px;
       height: 60px;
       font-size: 0.75rem;
     }
-    
+
     .header-menu-icon {
       width: 24px;
       height: 24px;
     }
-    
+
     /* ヒーローセクション */
     .hero-section {
     }
-    
+
     .hero-slide-content {
       left: 20px;
       right: 20px;
@@ -2794,7 +2968,7 @@ const salonJsonLd = {
     .intro-section {
       padding: 40px 0;
     }
-    
+
     .hero-catchphrase {
       font-size: 12px;
       margin-bottom: 8px;
@@ -2807,7 +2981,7 @@ const salonJsonLd = {
     .hero-logo {
       width: 144px;
     }
-    
+
     .intro-content {
       flex-direction: column;
       gap: 2rem;
@@ -2823,7 +2997,7 @@ const salonJsonLd = {
       flex-direction: column;
       gap: 36px;
     }
-    
+
     .intro-title {
       font-size: 20px;
       margin-bottom: 0;
@@ -2833,178 +3007,177 @@ const salonJsonLd = {
     .intro-image-content {
       height: 218px;
     }
-    
+
     /* ヘアスタイルセクション */
     .hairstyle-section {
       padding: 40px 0;
     }
-    
+
     .hairstyle-container {
       padding: 0 24px;
     }
-    
+
     .hairstyle-tabs {
       gap: 4px;
       margin-bottom: 24px;
       overflow-x: auto;
     }
-    
+
     .hairstyle-tab {
       font-size: 14px;
       padding: 8px 16px;
       flex: 1;
       min-width: 96px;
     }
-    
+
     .hairstyle-grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
     }
-    
+
     :global(.hairstyle-image) {
       height: 224px;
     }
-    
+
     /* ヘアメイクセクション */
     .hairmake-section {
       padding: 40px 0;
     }
-    
+
     .hairmake-container {
       padding: 0 24px;
     }
-    
+
     .hairmake-content {
       flex-direction: column;
       gap: 2rem;
     }
     .hairmake-description {
       font-size: 12px;
-      line-height: 2.0;
+      line-height: 2;
     }
 
     .pricing-title {
       font-size: 12px;
     }
-    
-  .pricing-table th {
-    font-size: 14px;
-  }
-  .pricing-table td {
-    font-size: 14px;
-  }
-    
+
+    .pricing-table th {
+      font-size: 14px;
+    }
+    .pricing-table td {
+      font-size: 14px;
+    }
+
     .hairmake-image {
       width: 100%;
       order: -1;
     }
-    
+
     .hairmake-image-content {
       width: 100%;
       height: 325px;
       object-fit: cover;
     }
-    
+
     /* サロンセクション */
     .salon-section {
       padding: 40px 0;
     }
-    
+
     .salon-container {
       padding: 0 24px;
     }
 
     .salon-description {
       font-size: 12px;
-      line-height: 2.0;
+      line-height: 2;
     }
 
     .salon-area-title h3 {
       font-size: 20px;
-      line-height: 1.0;
+      line-height: 1;
     }
 
-    
     /* モバイル用レイアウト */
     .salon-content-pc {
       display: none;
     }
-    
+
     .salon-content-sp {
       display: block;
     }
-    
+
     .salon-content-sp .salon-map {
       margin-bottom: 2rem;
     }
-    
+
     .salon-regions {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
     }
-    
+
     .region-btn {
       width: 100%;
       height: 40px;
       font-size: 14px;
       padding: 0;
     }
-    
+
     .salon-search {
       margin-bottom: 2rem;
     }
-    
+
     .salon-cards {
       grid-template-columns: 1fr;
       gap: 1rem;
     }
-    
+
     .salon-card {
     }
-    
+
     .salon-card-image {
       height: 150px;
     }
-    
+
     /* NEWSセクション */
     .news-section {
       padding: 40px 0;
     }
-    
+
     .news-container {
       padding: 0 24px;
     }
-    
+
     .news-tabs {
       flex-wrap: wrap;
       gap: 4px;
       margin-bottom: 0;
     }
-    
+
     .news-tab {
       font-size: 14px;
       padding: 8px 16px;
       flex: 1;
       min-width: 80px;
     }
-    
+
     .news-item {
       flex-direction: column;
       gap: 24px;
       padding: 32px 0;
     }
-    
+
     .news-image {
       width: 100%;
       height: 182px;
     }
-    
+
     .news-more-btn {
       width: 100%;
       max-width: 200px;
     }
-    
+
     /* Instagramセクション */
     .instagram-section {
       padding: 40px 0;
@@ -3013,27 +3186,25 @@ const salonJsonLd = {
     .instagram-title {
       font-size: 24px;
     }
-    
+
     .instagram-container {
       padding: 0 24px;
     }
-    
+
     .instagram-grid {
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
     }
-    
+
     .instagram-image {
       height: 154px;
     }
-    
-    
+
     .intro-description {
       font-size: 12px;
-      line-height: 2.0;
+      line-height: 2;
       word-break: auto-phrase;
     }
-    
   }
 
   @media (max-width: 480px) {
@@ -3070,32 +3241,32 @@ const salonJsonLd = {
 
 <script>
   // ヒーローセクションのスライドショー機能
-  document.addEventListener('DOMContentLoaded', function() {
-    const slides = document.querySelectorAll('.hero-slide');
-    const paginationDots = document.querySelectorAll('.pagination-stripe');
-    const searchBtn = document.querySelector('.hero-search-btn');
+  document.addEventListener("DOMContentLoaded", function () {
+    const slides = document.querySelectorAll(".hero-slide");
+    const paginationDots = document.querySelectorAll(".pagination-stripe");
+    const searchBtn = document.querySelector(".hero-search-btn");
     let currentSlide = 0;
     let slideInterval: ReturnType<typeof setInterval> | undefined;
 
     // デバッグ情報
-    console.log('スライド数:', slides.length);
-    console.log('ページネーションドット数:', paginationDots.length);
-    console.log('検索ボタン:', searchBtn);
+    console.log("スライド数:", slides.length);
+    console.log("ページネーションドット数:", paginationDots.length);
+    console.log("検索ボタン:", searchBtn);
 
     // スライドを切り替える関数
     function showSlide(index: number) {
       // すべてのスライドを非アクティブにする
-      slides.forEach(slide => slide.classList.remove('active'));
-      paginationDots.forEach(dot => dot.classList.remove('active'));
-      
+      slides.forEach((slide) => slide.classList.remove("active"));
+      paginationDots.forEach((dot) => dot.classList.remove("active"));
+
       // 指定されたスライドをアクティブにする
       if (slides[index]) {
-        slides[index].classList.add('active');
+        slides[index].classList.add("active");
       }
       if (paginationDots[index]) {
-        paginationDots[index].classList.add('active');
+        paginationDots[index].classList.add("active");
       }
-      
+
       currentSlide = index;
     }
 
@@ -3117,7 +3288,7 @@ const salonJsonLd = {
 
     // ページネーションストライプのクリックイベント
     paginationDots.forEach((stripe, index) => {
-      stripe.addEventListener('click', () => {
+      stripe.addEventListener("click", () => {
         showSlide(index);
         stopSlideShow();
         startSlideShow(); // 再開
@@ -3125,18 +3296,18 @@ const salonJsonLd = {
     });
 
     // 検索ボタンのクリックイベント
-    searchBtn?.addEventListener('click', () => {
+    searchBtn?.addEventListener("click", () => {
       // サロン一覧セクションにスクロール
-      const salonsSection = document.getElementById('salons');
+      const salonsSection = document.getElementById("salons");
       if (salonsSection) {
-        salonsSection.scrollIntoView({ behavior: 'smooth' });
+        salonsSection.scrollIntoView({ behavior: "smooth" });
       }
     });
 
     // マウスホバーで自動スライドを一時停止
-    const heroSection = document.querySelector('.hero-section');
-    heroSection?.addEventListener('mouseenter', stopSlideShow);
-    heroSection?.addEventListener('mouseleave', startSlideShow);
+    const heroSection = document.querySelector(".hero-section");
+    heroSection?.addEventListener("mouseenter", stopSlideShow);
+    heroSection?.addEventListener("mouseleave", startSlideShow);
 
     // 最初のスライドを表示
     if (slides.length > 0) {
@@ -3145,372 +3316,437 @@ const salonJsonLd = {
 
     // 自動スライド開始
     startSlideShow();
-    
+
     // ヘアカタログ: JSONを取得して描画 + タブフィルタ
-    type HairstyleItem = { id: number; hairType: string; imageUrl: string; alt: string };
+    type HairstyleItem = {
+      id: number;
+      hairType: string;
+      imageUrl: string;
+      alt: string;
+    };
     let hairstyleItems: HairstyleItem[] = [];
-    let currentCategory = 'all';
+    let currentCategory = "all";
     let currentDisplayCount = 12; // 初期表示件数
     const ITEMS_PER_LOAD = 12; // 追加読み込み件数
 
     function renderHairstyles(items: HairstyleItem[]) {
-      console.log('renderHairstyles呼び出し:', items.length, '件');
-      const grid = document.getElementById('hairstyle-grid');
+      console.log("renderHairstyles呼び出し:", items.length, "件");
+      const grid = document.getElementById("hairstyle-grid");
       if (!grid) {
-        console.error('hairstyle-grid要素が見つかりません');
+        console.error("hairstyle-grid要素が見つかりません");
         return;
       }
-      
-      grid.innerHTML = '';
+
+      grid.innerHTML = "";
       const frag = document.createDocumentFragment();
-      
+
       items.forEach((item, index) => {
         console.log(`アイテム${index}:`, item.hairType, item.imageUrl);
-        const wrapper = document.createElement('div');
-        wrapper.className = 'hairstyle-item';
-        wrapper.setAttribute('data-hair-type', item.hairType);
-        
-        const img = document.createElement('img');
+        const wrapper = document.createElement("div");
+        wrapper.className = "hairstyle-item";
+        wrapper.setAttribute("data-hair-type", item.hairType);
+
+        const img = document.createElement("img");
         img.src = item.imageUrl;
-        img.alt = item.alt || 'ヘアスタイル';
-        img.className = 'hairstyle-image';
-        
+        img.alt = item.alt || "ヘアスタイル";
+        img.className = "hairstyle-image";
+
         wrapper.appendChild(img);
         frag.appendChild(wrapper);
       });
-      
+
       grid.appendChild(frag);
-      console.log('ヘアスタイルグリッド更新完了:', grid.children.length, '個の要素');
+      console.log(
+        "ヘアスタイルグリッド更新完了:",
+        grid.children.length,
+        "個の要素"
+      );
     }
 
-    function applyHairstyleFilter(category: string, resetCount: boolean = true) {
-      console.log('ヘアスタイルフィルタ適用:', category);
+    function applyHairstyleFilter(
+      category: string,
+      resetCount: boolean = true
+    ) {
+      console.log("ヘアスタイルフィルタ適用:", category);
       currentCategory = category;
-      
+
       if (resetCount) {
         currentDisplayCount = 12; // タブ切り替え時はリセット
       }
-      
+
       let filteredItems: HairstyleItem[];
-      
-      if (category === 'all') {
+
+      if (category === "all") {
         filteredItems = hairstyleItems;
       } else {
-        filteredItems = hairstyleItems.filter(i => i.hairType === category);
+        filteredItems = hairstyleItems.filter((i) => i.hairType === category);
       }
-      
+
       // 表示件数を制限
       const displayItems = filteredItems.slice(0, currentDisplayCount);
-      
-      console.log(`フィルタ結果: ${displayItems.length}件表示 (全${filteredItems.length}件中)`);
+
+      console.log(
+        `フィルタ結果: ${displayItems.length}件表示 (全${filteredItems.length}件中)`
+      );
       renderHairstyles(displayItems);
-      
+
       // もっと見るボタンの表示制御
       updateMoreButton(filteredItems.length > currentDisplayCount);
     }
-    
+
     function updateMoreButton(hasMore: boolean) {
-      const moreBtn = document.querySelector('.hairstyle-more-btn') as HTMLElement;
+      const moreBtn = document.querySelector(
+        ".hairstyle-more-btn"
+      ) as HTMLElement;
       if (moreBtn) {
         if (hasMore) {
-          moreBtn.style.display = 'flex';
+          moreBtn.style.display = "flex";
         } else {
-          moreBtn.style.display = 'none';
+          moreBtn.style.display = "none";
         }
       }
     }
-    
+
     function loadMoreHairstyles() {
       currentDisplayCount += ITEMS_PER_LOAD;
       applyHairstyleFilter(currentCategory, false);
     }
 
-    fetch('/data/hairstyles.index.json')
-      .then(r => r.json())
+    fetch("/data/hairstyles.index.json")
+      .then((r) => r.json())
       .then((data: HairstyleItem[]) => {
         hairstyleItems = Array.isArray(data) ? data : [];
-        console.log('ヘアスタイルデータ読み込み完了:', hairstyleItems.length, '件');
+        console.log(
+          "ヘアスタイルデータ読み込み完了:",
+          hairstyleItems.length,
+          "件"
+        );
         // 初期表示はALLタブで表示
-        applyHairstyleFilter('all');
+        applyHairstyleFilter("all");
       })
-      .catch(err => {
-        console.error('ヘアスタイルJSON読込失敗', err);
+      .catch((err) => {
+        console.error("ヘアスタイルJSON読込失敗", err);
         // エラー時もALLタブで表示（空配列）
-        applyHairstyleFilter('all');
+        applyHairstyleFilter("all");
       });
 
-    const hairstyleTabs = document.querySelectorAll('.hairstyle-tab');
-    console.log('ヘアスタイルタブ数:', hairstyleTabs.length);
-    
+    const hairstyleTabs = document.querySelectorAll(".hairstyle-tab");
+    console.log("ヘアスタイルタブ数:", hairstyleTabs.length);
+
     hairstyleTabs.forEach((tab, index) => {
-      console.log(`タブ${index}:`, tab.textContent, 'data-category:', (tab as HTMLElement).dataset.category);
-      
-      tab.addEventListener('click', (e) => {
+      console.log(
+        `タブ${index}:`,
+        tab.textContent,
+        "data-category:",
+        (tab as HTMLElement).dataset.category
+      );
+
+      tab.addEventListener("click", (e) => {
         e.preventDefault();
-        console.log('タブクリックイベント発火:', tab.textContent);
-        
+        console.log("タブクリックイベント発火:", tab.textContent);
+
         // すべてのタブからactiveクラスを削除
-        hairstyleTabs.forEach(t => t.classList.remove('active'));
+        hairstyleTabs.forEach((t) => t.classList.remove("active"));
         // クリックされたタブにactiveクラスを追加
-        tab.classList.add('active');
-        
-        const category = (tab as HTMLElement).dataset.category || 'all';
-        console.log('選択されたカテゴリ:', category);
-        console.log('現在のヘアスタイルアイテム数:', hairstyleItems.length);
+        tab.classList.add("active");
+
+        const category = (tab as HTMLElement).dataset.category || "all";
+        console.log("選択されたカテゴリ:", category);
+        console.log("現在のヘアスタイルアイテム数:", hairstyleItems.length);
         applyHairstyleFilter(category, true); // タブ切り替え時はリセット
       });
     });
-    
+
     // もっと見るボタンのイベントリスナー
-    const moreBtn = document.querySelector('.hairstyle-more-btn');
+    const moreBtn = document.querySelector(".hairstyle-more-btn");
     if (moreBtn) {
-      moreBtn.addEventListener('click', (e) => {
+      moreBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        console.log('もっと見るボタンクリック');
+        console.log("もっと見るボタンクリック");
         loadMoreHairstyles();
       });
     }
-    
+
     // サロン検索機能
-    const salonSearchInput = document.querySelector('.salon-search-input');
-    const salonSearchBtn = document.querySelector('.salon-search-btn');
-    const regionBtns = document.querySelectorAll('.region-btn');
-    
+    const salonSearchInput = document.querySelector(".salon-search-input");
+    const salonSearchBtn = document.querySelector(".salon-search-btn");
+    const regionBtns = document.querySelectorAll(".region-btn");
+
     // 検索ボタンのクリックイベント
-    salonSearchBtn?.addEventListener('click', () => {
+    salonSearchBtn?.addEventListener("click", () => {
       const searchTerm = (salonSearchInput as HTMLInputElement)?.value.trim();
       if (searchTerm) {
-        console.log('検索キーワード:', searchTerm);
+        console.log("検索キーワード:", searchTerm);
         // 実際の実装では、ここでサロンの検索処理を実行
         filterSalons(searchTerm);
       }
     });
-    
+
     // エンターキーでの検索
-    salonSearchInput?.addEventListener('keydown', (e: Event) => {
+    salonSearchInput?.addEventListener("keydown", (e: Event) => {
       const keyboardEvent = e as KeyboardEvent;
-      if (keyboardEvent.key === 'Enter') {
+      if (keyboardEvent.key === "Enter") {
         (salonSearchBtn as HTMLButtonElement)?.click();
       }
     });
-    
+
     // 地域ボタンのクリックイベント
-    regionBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
+    regionBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
         // すべての地域ボタンからactiveクラスを削除
-        regionBtns.forEach(b => b.classList.remove('active'));
+        regionBtns.forEach((b) => b.classList.remove("active"));
         // クリックされたボタンにactiveクラスを追加
-        btn.classList.add('active');
-        
+        btn.classList.add("active");
+
         const region = btn.textContent;
-        console.log('選択された地域:', region);
+        console.log("選択された地域:", region);
         // 実際の実装では、ここで地域に応じたサロンのフィルタリングを実行
         filterSalonsByRegion(region);
       });
     });
-    
+
     // サロン検索関数
     function filterSalons(searchTerm: string) {
-      const salonCards = document.querySelectorAll('.salon-card');
-      salonCards.forEach(card => {
-        const salonName = card.querySelector('.salon-card-name')?.textContent || '';
-        const salonLocation = card.querySelector('.salon-card-location span')?.textContent || '';
-        const salonAccess = card.querySelector('.salon-card-access span')?.textContent || '';
-        
-        if (salonName.toLowerCase().includes(searchTerm.toLowerCase()) || 
-            salonLocation.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            salonAccess.toLowerCase().includes(searchTerm.toLowerCase())) {
-          (card as HTMLElement).style.display = 'block';
+      const salonCards = document.querySelectorAll(".salon-card");
+      salonCards.forEach((card) => {
+        const salonName =
+          card.querySelector(".salon-card-name")?.textContent || "";
+        const salonLocation =
+          card.querySelector(".salon-card-location span")?.textContent || "";
+        const salonAccess =
+          card.querySelector(".salon-card-access span")?.textContent || "";
+
+        if (
+          salonName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          salonLocation.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          salonAccess.toLowerCase().includes(searchTerm.toLowerCase())
+        ) {
+          (card as HTMLElement).style.display = "block";
         } else {
-          (card as HTMLElement).style.display = 'none';
+          (card as HTMLElement).style.display = "none";
         }
       });
     }
-    
+
     // 地域別サロン検索関数
     function filterSalonsByRegion(region: string) {
-      const salonCards = document.querySelectorAll('.salon-card');
-      salonCards.forEach(card => {
-        const salonLocation = card.querySelector('.salon-card-location span')?.textContent;
-        
+      const salonCards = document.querySelectorAll(".salon-card");
+      salonCards.forEach((card) => {
+        const salonLocation = card.querySelector(
+          ".salon-card-location span"
+        )?.textContent;
+
         if (salonLocation?.includes(region)) {
-          (card as HTMLElement).style.display = 'block';
+          (card as HTMLElement).style.display = "block";
         } else {
-          (card as HTMLElement).style.display = 'none';
+          (card as HTMLElement).style.display = "none";
         }
       });
     }
-    
+
     // ニュースタブ機能（.news-group の表示切替）
-    const newsTabs = document.querySelectorAll('.news-tab');
-    const newsGroups = document.querySelectorAll('.news-group');
-    newsTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
+    const newsTabs = document.querySelectorAll(".news-tab");
+    const newsGroups = document.querySelectorAll(".news-group");
+    newsTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
         // すべてのタブからactiveクラスを削除
-        newsTabs.forEach(t => t.classList.remove('active'));
+        newsTabs.forEach((t) => t.classList.remove("active"));
         // クリックされたタブにactiveクラスを追加
-        tab.classList.add('active');
+        tab.classList.add("active");
 
         const category = (tab as HTMLElement).dataset.category;
         // グループの表示切替
-        newsGroups.forEach(group => {
+        newsGroups.forEach((group) => {
           const groupCategory = (group as HTMLElement).dataset.category;
-          (group as HTMLElement).style.display = groupCategory === category ? 'block' : 'none';
+          (group as HTMLElement).style.display =
+            groupCategory === category ? "block" : "none";
         });
       });
     });
 
     // サロンフィルター機能
     let currentFilter = {
-      region: '',
-      searchTerm: ''
+      region: "",
+      searchTerm: "",
     };
 
     // サロンデータを取得（サーバーサイドで読み込まれたデータ）
     let salonData: any[] = [];
-    fetch('/data/salons.index.json')
-      .then(response => response.json())
-      .then(data => {
+    fetch("/data/salons.index.json")
+      .then((response) => response.json())
+      .then((data) => {
         salonData = data;
-        console.log('サロンデータを読み込みました:', salonData);
+        console.log("サロンデータを読み込みました:", salonData);
       })
-      .catch(error => {
-        console.error('サロンデータの読み込みに失敗しました:', error);
+      .catch((error) => {
+        console.error("サロンデータの読み込みに失敗しました:", error);
       });
 
     // 地域ボタンのクリックイベント
-    const regionButtons = document.querySelectorAll('.region-btn');
-    regionButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const clickedRegion = button.getAttribute('data-region') || '';
-        
+    const regionButtons = document.querySelectorAll(".region-btn");
+    regionButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const clickedRegion = button.getAttribute("data-region") || "";
+
         // 選択中のボタンを再度クリックした場合はリセット
         if (currentFilter.region === clickedRegion) {
           // すべてのボタンからactiveクラスを削除
-          regionButtons.forEach(btn => btn.classList.remove('active'));
+          regionButtons.forEach((btn) => btn.classList.remove("active"));
           // フィルターをリセット
-          currentFilter.region = '';
+          currentFilter.region = "";
         } else {
           // すべてのボタンからactiveクラスを削除
-          regionButtons.forEach(btn => btn.classList.remove('active'));
+          regionButtons.forEach((btn) => btn.classList.remove("active"));
           // クリックされたボタンにactiveクラスを追加
-          button.classList.add('active');
+          button.classList.add("active");
           // フィルターを更新
           currentFilter.region = clickedRegion;
         }
-        
+
         applyFilters();
       });
     });
 
     // 検索ボタンのクリックイベント（PC用）
-    const salonFilterSearchBtn = document.getElementById('salon-search-btn') as HTMLButtonElement;
-    const salonFilterSearchInput = document.getElementById('salon-search-input') as HTMLInputElement;
-    
-    salonFilterSearchBtn?.addEventListener('click', () => {
-      currentFilter.searchTerm = salonFilterSearchInput?.value || '';
+    const salonFilterSearchBtn = document.getElementById(
+      "salon-search-btn"
+    ) as HTMLButtonElement;
+    const salonFilterSearchInput = document.getElementById(
+      "salon-search-input"
+    ) as HTMLInputElement;
+
+    salonFilterSearchBtn?.addEventListener("click", () => {
+      currentFilter.searchTerm = salonFilterSearchInput?.value || "";
       applyFilters();
     });
 
     // 検索入力のEnterキーイベント（PC用）
-    salonFilterSearchInput?.addEventListener('keypress', (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
-        currentFilter.searchTerm = salonFilterSearchInput.value || '';
+    salonFilterSearchInput?.addEventListener("keypress", (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        currentFilter.searchTerm = salonFilterSearchInput.value || "";
         applyFilters();
       }
     });
 
     // 検索ボタンのクリックイベント（SP用）
-    const salonFilterSearchBtnSp = document.getElementById('salon-search-btn-sp') as HTMLButtonElement;
-    const salonFilterSearchInputSp = document.getElementById('salon-search-input-sp') as HTMLInputElement;
-    
-    salonFilterSearchBtnSp?.addEventListener('click', () => {
-      currentFilter.searchTerm = salonFilterSearchInputSp?.value || '';
+    const salonFilterSearchBtnSp = document.getElementById(
+      "salon-search-btn-sp"
+    ) as HTMLButtonElement;
+    const salonFilterSearchInputSp = document.getElementById(
+      "salon-search-input-sp"
+    ) as HTMLInputElement;
+
+    salonFilterSearchBtnSp?.addEventListener("click", () => {
+      currentFilter.searchTerm = salonFilterSearchInputSp?.value || "";
       applyFilters();
     });
 
     // 検索入力のEnterキーイベント（SP用）
-    salonFilterSearchInputSp?.addEventListener('keypress', (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
-        currentFilter.searchTerm = salonFilterSearchInputSp.value || '';
-        applyFilters();
+    salonFilterSearchInputSp?.addEventListener(
+      "keypress",
+      (e: KeyboardEvent) => {
+        if (e.key === "Enter") {
+          currentFilter.searchTerm = salonFilterSearchInputSp.value || "";
+          applyFilters();
+        }
       }
-    });
+    );
 
     // フィルターを適用する関数
     function applyFilters() {
-      const titleElement = document.getElementById('salon-filter-title');
-      
+      const titleElement = document.getElementById("salon-filter-title");
+
       // タイトルを更新
-      let filterText = '';
+      let filterText = "";
       if (currentFilter.searchTerm) {
         filterText = `「${currentFilter.searchTerm}」`;
       } else if (currentFilter.region) {
         const regionNames: { [key: string]: string } = {
-          'hokkaido': '北海道',
-          'tohoku': '東北',
-          'kanto': '関東',
-          'chubu': '中部',
-          'kinki': '近畿',
-          'shikoku': '四国',
-          'chugoku': '中国',
-          'kyushu-okinawa': '九州・沖縄'
+          hokkaido: "北海道",
+          tohoku: "東北",
+          kanto: "関東",
+          chubu: "中部",
+          kinki: "近畿",
+          shikoku: "四国",
+          chugoku: "中国",
+          "kyushu-okinawa": "九州・沖縄",
         };
         filterText = `「${regionNames[currentFilter.region] || currentFilter.region}」`;
       }
-      
+
       if (titleElement) {
         titleElement.textContent = `${filterText}店舗一覧`;
       }
 
       // サロンカードの表示/非表示を切り替え（地域ボタンは除外）
-      const salonCards = document.querySelectorAll('#salon-cards-container [data-region]');
-      salonCards.forEach(card => {
-        
-        const region = card.getAttribute('data-region') || '';
-        const name = card.getAttribute('data-name') || '';
-        const prefecture = card.getAttribute('data-prefecture') || '';
-        const prefectureName = card.getAttribute('data-prefecture-name') || '';
-        const city = card.getAttribute('data-city') || '';
-        const cityName = card.getAttribute('data-city-name') || '';
-        const access = card.getAttribute('data-access') || '';
-        const furigana = card.getAttribute('data-furigana') || '';
-        
+      const salonCards = document.querySelectorAll(
+        "#salon-cards-container [data-region]"
+      );
+      salonCards.forEach((card) => {
+        const region = card.getAttribute("data-region") || "";
+        const name = card.getAttribute("data-name") || "";
+        const prefecture = card.getAttribute("data-prefecture") || "";
+        const prefectureName = card.getAttribute("data-prefecture-name") || "";
+        const area = card.getAttribute("data-area") || "";
+        const areaName = card.getAttribute("data-area-name") || "";
+        const city = card.getAttribute("data-city") || "";
+        const cityName = card.getAttribute("data-city-name") || "";
+        const access = card.getAttribute("data-access") || "";
+        const furigana = card.getAttribute("data-furigana") || "";
+
         // 地域フィルター
         // 地域が選択されている場合: その地域のサロンのみ
         // 地域が未選択の場合: 検索キーワードがあれば全てのサロン、なければ非表示
-        const regionMatch = currentFilter.region 
-          ? region === currentFilter.region 
-          : (currentFilter.searchTerm ? true : false);
-        
+        const regionMatch = currentFilter.region
+          ? region === currentFilter.region
+          : currentFilter.searchTerm
+            ? true
+            : false;
+
         // デバッグ情報を追加
-        console.log(`サロン: ${name}, 地域: ${region}, フィルター: ${currentFilter.region}, マッチ: ${regionMatch}`);
-        
-        // 検索フィルター - すべてのデータで検索
-        const searchMatch = !currentFilter.searchTerm || 
+        console.log(
+          `サロン: ${name}, 地域: ${region}, フィルター: ${currentFilter.region}, マッチ: ${regionMatch}`
+        );
+
+        // 検索フィルター - すべてのデータで検索（親子関係を考慮）
+        const searchMatch =
+          !currentFilter.searchTerm ||
           name.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
-          prefectureName.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
-          cityName.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
-          access.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
-          furigana.toLowerCase().includes(currentFilter.searchTerm.toLowerCase());
-        
+          prefectureName
+            .toLowerCase()
+            .includes(currentFilter.searchTerm.toLowerCase()) ||
+          areaName
+            .toLowerCase()
+            .includes(currentFilter.searchTerm.toLowerCase()) ||
+          cityName
+            .toLowerCase()
+            .includes(currentFilter.searchTerm.toLowerCase()) ||
+          access
+            .toLowerCase()
+            .includes(currentFilter.searchTerm.toLowerCase()) ||
+          furigana
+            .toLowerCase()
+            .includes(currentFilter.searchTerm.toLowerCase());
+
         if (regionMatch && searchMatch) {
-          (card as HTMLElement).style.display = 'block';
+          (card as HTMLElement).style.display = "block";
         } else {
-          (card as HTMLElement).style.display = 'none';
+          (card as HTMLElement).style.display = "none";
         }
       });
 
       // フィルター結果のカウントを表示
-      const visibleCards = Array.from(salonCards).filter(card => 
-        (card as HTMLElement).style.display !== 'none'
+      const visibleCards = Array.from(salonCards).filter(
+        (card) => (card as HTMLElement).style.display !== "none"
       );
-      console.log(`フィルター結果: ${visibleCards.length}件のサロンが表示されています`);
+      console.log(
+        `フィルター結果: ${visibleCards.length}件のサロンが表示されています`
+      );
     }
 
     // 初期状態ではすべてのサロンを表示（ボタンはアクティブにしない）
     // 全ての地域ボタンからactiveクラスを削除して、未選択状態にする
-    regionButtons.forEach(btn => btn.classList.remove('active'));
+    regionButtons.forEach((btn) => btn.classList.remove("active"));
 
     // 初期フィルターを適用
     applyFilters();
