@@ -54,9 +54,28 @@
     "title": "de.札幌 北1条店",
     "furigana": "デイドット",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/10/IMG_8266-scaled.jpg",
-    "region": [],
-    "prefecture": [],
-    "city": [],
+    "region": [
+      {
+        "slug": "hokkaido",
+        "name": "北海道"
+      }
+    ],
+    "prefecture": [
+      {
+        "slug": "hokkaido",
+        "name": "北海道"
+      },
+      {
+        "slug": "%e6%9c%ad%e5%b9%8c",
+        "name": "札幌"
+      }
+    ],
+    "city": [
+      {
+        "slug": "%e6%9c%ad%e5%b9%8c%e5%b8%82",
+        "name": "札幌市"
+      }
+    ],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -77,6 +96,10 @@
     ],
     "prefecture": [
       {
+        "slug": "%e7%a6%8f%e5%b2%a1",
+        "name": "福岡"
+      },
+      {
         "slug": "fukuoka",
         "name": "福岡県"
       }
@@ -84,7 +107,7 @@
     "city": [],
     "job_role": [],
     "employment_type": [],
-    "is_hiring": false,
+    "is_hiring": true,
     "reservation_url": "https://beauty.hotpepper.jp/kr/slnH000596734/",
     "maps_url": "",
     "access": ""
@@ -104,6 +127,10 @@
       {
         "slug": "tokyo",
         "name": "東京都"
+      },
+      {
+        "slug": "%e6%b8%8b%e8%b0%b7",
+        "name": "渋谷"
       }
     ],
     "city": [],
@@ -204,6 +231,10 @@
       {
         "slug": "hokkaido",
         "name": "北海道"
+      },
+      {
+        "slug": "%e6%9c%ad%e5%b9%8c",
+        "name": "札幌"
       }
     ],
     "city": [],
@@ -1393,7 +1424,7 @@
     "id": 9183,
     "title": "little 川越",
     "furigana": "リトルカワゴエ",
-    "thumb": "https://anemone-salon.com/wp-content/uploads/2022/02/CFC133B5-274B-426F-A550-BB0F23EC2352.jpg",
+    "thumb": "/images/salon/salon-image-01.png",
     "region": [
       {
         "slug": "kanto",
