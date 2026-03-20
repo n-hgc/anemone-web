@@ -46,10 +46,10 @@
 ```
 
 ### タイポグラフィ
+フォントは `--font-sans` で ShinRetroMaruGothic に統一。個別の `font-family` 指定は不要。
 ```css
-@theme {
-  --font-family-yumincho: 'ShinRetroMaruGothic', sans-serif;
-  --font-family-zenkaku: 'ShinRetroMaruGothic', sans-serif;
+:root {
+  --font-sans: 'ShinRetroMaruGothic', sans-serif;
   --font-size-h2-pc: 64px;
   --font-size-h3-pc: 24px;
   --font-size-p-pc: 16px;
@@ -57,13 +57,13 @@
   --line-height-h3-pc: 150%;
   --line-height-p-pc: 150%;
   --font-weight-medium: 500;
-  --font-weight-regular: 400;
+  --font-weight-regular: 300;
 }
 ```
 
 ### ブレークポイント
 ```css
-@theme {
+:root {
   --breakpoint-pc: 768px;
 }
 ```
@@ -72,38 +72,26 @@
 
 ## 🛠️ カスタムクラス定義
 
-### フォントクラス
-```css
-.font-yumincho {
-  font-family: var(--font-family-yumincho) !important;
-}
-
-.font-zenkaku {
-  font-family: var(--font-family-zenkaku) !important;
-}
-```
-
 ### タイポグラフィクラス
 ```css
 .text-h2-pc {
   font-size: var(--font-size-h2-pc) !important;
   line-height: var(--line-height-h2-pc) !important;
-  font-weight: var(--font-weight-medium) !important;
-  font-family: var(--font-family-yumincho) !important;
+  font-weight: var(--font-weight-regular) !important;
+  color: var(--color-brown) !important;
 }
 
 .text-h3-pc {
   font-size: var(--font-size-h3-pc) !important;
   line-height: var(--line-height-h3-pc) !important;
-  font-weight: var(--font-weight-medium) !important;
-  font-family: var(--font-family-yumincho) !important;
+  font-weight: var(--font-weight-regular) !important;
+  color: var(--color-brown) !important;
 }
 
 .text-p-pc {
   font-size: var(--font-size-p-pc) !important;
   line-height: var(--line-height-p-pc) !important;
   font-weight: var(--font-weight-regular) !important;
-  font-family: var(--font-family-zenkaku) !important;
 }
 ```
 
@@ -125,8 +113,8 @@
   .pc\:text-h2-pc {
     font-size: var(--font-size-h2-pc) !important;
     line-height: var(--line-height-h2-pc) !important;
-    font-weight: var(--font-weight-medium) !important;
-    font-family: var(--font-family-yumincho) !important;
+    font-weight: var(--font-weight-regular) !important;
+    color: var(--color-brown) !important;
   }
 }
 ```

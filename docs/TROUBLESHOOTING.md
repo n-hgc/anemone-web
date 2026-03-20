@@ -22,10 +22,10 @@
 ### 2. 段階的なデバッグ
 ```bash
 # 1. HTMLの確認
-curl -s "http://localhost:4322/test" | grep "font-yumincho"
+curl -s "http://localhost:4321/" | grep "ShinRetroMaruGothic"
 
 # 2. CSSの確認
-curl -s "http://localhost:4322/src/styles/global.css" | grep "font-yumincho"
+curl -s "http://localhost:4321/" | grep "font-sans"
 
 # 3. ファイルの更新確認
 touch /path/to/global.css
@@ -75,17 +75,8 @@ npm run dev
 - フォント名の間違い
 
 #### 解決策
-```css
-.font-yumincho {
-  font-family: var(--font-family-yumincho) !important;
-}
-```
-
-```astro
-<!-- フォントの事前読み込み -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-```
+フォントは `--font-sans` で全体に適用されるため、個別の `font-family` 指定は不要。
+`global.css` の `@font-face` 定義と `:root` の `--font-sans` を確認。
 
 ### Tailwindクラスが効かない
 
@@ -145,7 +136,7 @@ rm tailwind.config.js
 curl -s "http://localhost:4322/test" | grep "class="
 
 # CSSの確認
-curl -s "http://localhost:4322/src/styles/global.css" | grep "font-yumincho"
+curl -s "http://localhost:4321/" | grep "ShinRetroMaruGothic"
 
 # ファイルの更新
 touch /path/to/file.css
@@ -164,8 +155,8 @@ touch /path/to/file.css
     <!-- フォントテスト -->
     <div class="mb-4">
       <h2 class="text-h3-pc text-black mb-2">フォントテスト</h2>
-      <div class="font-yumincho text-p-pc text-black">
-        これは.font-yuminchoクラスです
+      <div class="text-p-pc text-black">
+        フォントテスト（ShinRetroMaruGothic）
       </div>
     </div>
     

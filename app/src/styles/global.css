@@ -34,7 +34,7 @@
   --color-white: #FFFFFF;
   --color-brown: #69552E;
   --color-beige: #FAF4E8;
-  
+
   /* テキストカラー */
   --color-text-black: #3D3D3D;
   --color-text-grey-medium: #878C92;
@@ -42,11 +42,10 @@
   --color-text-brown-dark: #69552E;
   --color-text-brown-light: #B8AA8C;
   --color-text-white: #FFFFFF;
-  
-  /* フォントファミリー */
-  --font-family-yumincho: 'ShinRetroMaruGothic', sans-serif;
-  --font-family-zenkaku: 'ShinRetroMaruGothic', sans-serif;
-  
+
+  /* Tailwind v4 デフォルトフォントの上書き */
+  --font-sans: 'ShinRetroMaruGothic', sans-serif;
+
   /* フォントサイズ */
   --font-size-h2-pc: 64px;
   --font-size-h3-pc: 24px;
@@ -54,7 +53,7 @@
   --font-size-h2-sp: 36px;
   --font-size-h3-sp: 20px;
   --font-size-p-sp: 16px;
-  
+
   /* 行間 */
   --line-height-h2-pc: 100%;
   --line-height-h3-pc: 150%;
@@ -62,12 +61,12 @@
   --line-height-h2-sp: 100%;
   --line-height-h3-sp: 150%;
   --line-height-p-sp: 150%;
-  
+
   /* フォントウェイト */
   --font-weight-medium: 500;
-  --font-weight-regular: 400;
+  --font-weight-regular: 300;
   --font-weight-bold: 700;
-  
+
   /* ブレークポイント */
   --breakpoint-pc: 768px;
 }
@@ -84,7 +83,6 @@ html, body {
 }
 
 body {
-  font-family: var(--font-family-zenkaku);
   line-height: 1.6;
   color: var(--color-text-black);
 }
@@ -96,7 +94,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: inherit;
   font-size: inherit;
   line-height: inherit;
-  font-family: inherit;
 }
 
 p {
@@ -105,7 +102,6 @@ p {
   font-weight: inherit;
   font-size: inherit;
   line-height: inherit;
-  font-family: inherit;
 }
 
 /* カスタムユーティリティクラス */
@@ -132,56 +128,45 @@ p {
 .border-brown { border-color: var(--color-brown); }
 .border-grey-light { border-color: var(--color-grey-light); }
 
-/* フォントファミリークラス */
-.font-yumincho {
-  font-family: var(--font-family-yumincho) !important;
-}
-
-.font-zenkaku {
-  font-family: var(--font-family-zenkaku) !important;
-}
-
 /* タイポグラフィクラス */
 .text-h2-pc {
   font-size: var(--font-size-h2-pc) !important;
   line-height: var(--line-height-h2-pc) !important;
-  font-weight: var(--font-weight-medium) !important;
-  font-family: var(--font-family-yumincho) !important;
+  font-weight: var(--font-weight-regular) !important;
+  color: var(--color-brown) !important;
 }
 
 .text-h3-pc {
   font-size: var(--font-size-h3-pc) !important;
   line-height: var(--line-height-h3-pc) !important;
-  font-weight: var(--font-weight-medium) !important;
-  font-family: var(--font-family-yumincho) !important;
+  font-weight: var(--font-weight-regular) !important;
+  color: var(--color-brown) !important;
 }
 
 .text-p-pc {
   font-size: var(--font-size-p-pc) !important;
   line-height: var(--line-height-p-pc) !important;
   font-weight: var(--font-weight-regular) !important;
-  font-family: var(--font-family-zenkaku) !important;
 }
 
 .text-h2-sp {
   font-size: var(--font-size-h2-sp) !important;
   line-height: var(--line-height-h2-sp) !important;
-  font-weight: var(--font-weight-medium) !important;
-  font-family: var(--font-family-yumincho) !important;
+  font-weight: var(--font-weight-regular) !important;
+  color: var(--color-brown) !important;
 }
 
 .text-h3-sp {
   font-size: var(--font-size-h3-sp) !important;
   line-height: var(--line-height-h3-sp) !important;
-  font-weight: var(--font-weight-medium) !important;
-  font-family: var(--font-family-yumincho) !important;
+  font-weight: var(--font-weight-regular) !important;
+  color: var(--color-brown) !important;
 }
 
 .text-p-sp {
   font-size: var(--font-size-p-sp) !important;
   line-height: var(--line-height-p-sp) !important;
   font-weight: var(--font-weight-regular) !important;
-  font-family: var(--font-family-zenkaku) !important;
 }
 
 /* レスポンシブ対応 */
@@ -189,22 +174,21 @@ p {
   .pc\:text-h2-pc {
     font-size: var(--font-size-h2-pc) !important;
     line-height: var(--line-height-h2-pc) !important;
-    font-weight: var(--font-weight-medium) !important;
-    font-family: var(--font-family-yumincho) !important;
+    font-weight: var(--font-weight-regular) !important;
+    color: var(--color-brown) !important;
   }
-  
+
   .pc\:text-h3-pc {
     font-size: var(--font-size-h3-pc) !important;
     line-height: var(--line-height-h3-pc) !important;
-    font-weight: var(--font-weight-medium) !important;
-    font-family: var(--font-family-yumincho) !important;
+    font-weight: var(--font-weight-regular) !important;
+    color: var(--color-brown) !important;
   }
-  
+
   .pc\:text-p-pc {
     font-size: var(--font-size-p-pc) !important;
     line-height: var(--line-height-p-pc) !important;
     font-weight: var(--font-weight-regular) !important;
-    font-family: var(--font-family-zenkaku) !important;
   }
 }
 
@@ -213,21 +197,20 @@ p {
   .text-h2-sp {
     font-size: var(--font-size-h2-sp) !important;
     line-height: var(--line-height-h2-sp) !important;
-    font-weight: var(--font-weight-medium) !important;
-    font-family: var(--font-family-yumincho) !important;
+    font-weight: var(--font-weight-regular) !important;
+    color: var(--color-brown) !important;
   }
-  
+
   .text-h3-sp {
     font-size: var(--font-size-h3-sp) !important;
     line-height: var(--line-height-h3-sp) !important;
-    font-weight: var(--font-weight-medium) !important;
-    font-family: var(--font-family-yumincho) !important;
+    font-weight: var(--font-weight-regular) !important;
+    color: var(--color-brown) !important;
   }
-  
+
   .text-p-sp {
     font-size: var(--font-size-p-sp) !important;
     line-height: var(--line-height-p-sp) !important;
     font-weight: var(--font-weight-regular) !important;
-    font-family: var(--font-family-zenkaku) !important;
   }
 }

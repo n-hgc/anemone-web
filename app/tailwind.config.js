@@ -85,16 +85,6 @@ export default defineConfig({
           }
         ]
       },
-      fontFamily: {
-        yumincho: [
-          "ShinRetroMaruGothic",
-          "sans-serif"
-        ],
-        zenkaku: [
-          "ShinRetroMaruGothic",
-          "sans-serif"
-        ]
-      },
       screens: {
         pc: "768px",
         sp: "767px"

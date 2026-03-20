@@ -43,42 +43,36 @@ function generateTailwindClasses() {
         fontSize: designSystem.typography.fontSize.h2_pc,
         fontWeight: designSystem.typography.fontWeight.medium,
         lineHeight: designSystem.typography.lineHeight.tight,
-        fontFamily: designSystem.typography.fontFamily.yumincho,
         description: 'PC用H2見出し'
       },
       'h3-pc': {
         fontSize: designSystem.typography.fontSize.h3_pc,
         fontWeight: designSystem.typography.fontWeight.medium,
         lineHeight: designSystem.typography.lineHeight.normal,
-        fontFamily: designSystem.typography.fontFamily.yumincho,
         description: 'PC用H3見出し'
       },
       'p-pc': {
         fontSize: designSystem.typography.fontSize.p_pc,
         fontWeight: designSystem.typography.fontWeight.regular,
         lineHeight: designSystem.typography.lineHeight.normal,
-        fontFamily: designSystem.typography.fontFamily.zenkaku,
         description: 'PC用本文'
       },
       'h2-sp': {
         fontSize: designSystem.typography.fontSize.h2_sp,
         fontWeight: designSystem.typography.fontWeight.medium,
         lineHeight: designSystem.typography.lineHeight.tight,
-        fontFamily: designSystem.typography.fontFamily.yumincho,
         description: 'SP用H2見出し'
       },
       'h3-sp': {
         fontSize: designSystem.typography.fontSize.h3_sp,
         fontWeight: designSystem.typography.fontWeight.medium,
         lineHeight: designSystem.typography.lineHeight.normal,
-        fontFamily: designSystem.typography.fontFamily.yumincho,
         description: 'SP用H3見出し'
       },
       'p-sp': {
         fontSize: designSystem.typography.fontSize.p_sp,
         fontWeight: designSystem.typography.fontWeight.regular,
         lineHeight: designSystem.typography.lineHeight.normal,
-        fontFamily: designSystem.typography.fontFamily.zenkaku,
         description: 'SP用本文'
       }
     }
@@ -143,10 +137,6 @@ function updateTailwindConfig(classes) {
           'h3-sp': ['20px', { lineHeight: '150%', fontWeight: '500' }],
           'p-sp': ['16px', { lineHeight: '150%', fontWeight: '400' }]
         },
-        fontFamily: {
-          yumincho: ['ShinRetroMaruGothic', 'sans-serif'],
-          zenkaku: ['ShinRetroMaruGothic', 'sans-serif']
-        },
         screens: {
           'pc': '768px',
           'sp': '767px'
@@ -186,9 +176,9 @@ export const responsive = {
     '4': 'grid-cols-1 pc:grid-cols-2 lg:grid-cols-4'
   },
   text: {
-    'h2': 'text-4xl pc:text-6xl font-yumincho font-medium leading-tight',
-    'h3': 'text-xl pc:text-2xl font-yumincho font-medium leading-normal',
-    'p': 'text-base font-zenkaku font-normal leading-normal'
+    'h2': 'text-4xl pc:text-6xl font-medium leading-tight',
+    'h3': 'text-xl pc:text-2xl font-medium leading-normal',
+    'p': 'text-base font-normal leading-normal'
   },
   spacing: {
     'section': 'py-8 pc:py-16',

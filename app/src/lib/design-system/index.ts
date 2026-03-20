@@ -31,60 +31,36 @@ export const designTokens = {
     "fontSize": "64px",
     "fontWeight": "500",
     "lineHeight": "100%",
-    "fontFamily": [
-      "ShinRetroMaruGothic",
-      "sans-serif"
-    ],
     "description": "PC用H2見出し"
   },
   "h3-pc": {
     "fontSize": "24px",
     "fontWeight": "500",
     "lineHeight": "150%",
-    "fontFamily": [
-      "ShinRetroMaruGothic",
-      "sans-serif"
-    ],
     "description": "PC用H3見出し"
   },
   "p-pc": {
     "fontSize": "16px",
     "fontWeight": "400",
     "lineHeight": "150%",
-    "fontFamily": [
-      "ShinRetroMaruGothic",
-      "sans-serif"
-    ],
     "description": "PC用本文"
   },
   "h2-sp": {
     "fontSize": "36px",
     "fontWeight": "500",
     "lineHeight": "100%",
-    "fontFamily": [
-      "ShinRetroMaruGothic",
-      "sans-serif"
-    ],
     "description": "SP用H2見出し"
   },
   "h3-sp": {
     "fontSize": "20px",
     "fontWeight": "500",
     "lineHeight": "150%",
-    "fontFamily": [
-      "ShinRetroMaruGothic",
-      "sans-serif"
-    ],
     "description": "SP用H3見出し"
   },
   "p-sp": {
     "fontSize": "16px",
     "fontWeight": "400",
     "lineHeight": "150%",
-    "fontFamily": [
-      "ShinRetroMaruGothic",
-      "sans-serif"
-    ],
     "description": "SP用本文"
   }
 }
@@ -112,9 +88,9 @@ export const responsive = {
     '4': 'grid-cols-1 pc:grid-cols-2 lg:grid-cols-4'
   },
   text: {
-    'h2': 'text-h2-sp pc:text-h2-pc font-yumincho font-medium',
-    'h3': 'text-h3-sp pc:text-h3-pc font-yumincho font-medium',
-    'p': 'text-p-sp pc:text-p-pc font-zenkaku font-normal'
+    'h2': 'text-h2-sp pc:text-h2-pc font-medium',
+    'h3': 'text-h3-sp pc:text-h3-pc font-medium',
+    'p': 'text-p-sp pc:text-p-pc font-normal'
   },
   spacing: {
     'section': 'py-8 pc:py-16',

@@ -83,7 +83,7 @@ import Layout from '../layouts/Layout.astro';
 
 ### 利用可能なクラス
 - **タイポグラフィ**: `.text-h2-pc`, `.text-h3-pc`, `.text-p-pc`
-- **フォント**: `.font-yumincho`, `.font-zenkaku`
+- **フォント**: ShinRetroMaruGothic（`--font-sans` で全体適用）
 - **カラー**: `.text-black`, `.bg-beige`, `.text-brown`
 - **レスポンシブ**: `.pc:text-h2-pc`, `.pc:text-h3-pc`
 
