@@ -48,8 +48,8 @@
 ### タイポグラフィ
 ```css
 @theme {
-  --font-family-yumincho: 'Shippori Mincho', serif;
-  --font-family-zenkaku: 'Zen Kaku Gothic New', sans-serif;
+  --font-family-yumincho: 'ShinRetroMaruGothic', sans-serif;
+  --font-family-zenkaku: 'ShinRetroMaruGothic', sans-serif;
   --font-size-h2-pc: 64px;
   --font-size-h3-pc: 24px;
   --font-size-p-pc: 16px;

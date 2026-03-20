@@ -87,11 +87,11 @@ export default defineConfig({
       },
       fontFamily: {
         yumincho: [
-          "YuMincho",
-          "serif"
+          "ShinRetroMaruGothic",
+          "sans-serif"
         ],
         zenkaku: [
-          "ZenKakuGothicNew",
+          "ShinRetroMaruGothic",
           "sans-serif"
         ]
       },

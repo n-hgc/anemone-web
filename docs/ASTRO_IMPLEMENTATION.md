@@ -68,11 +68,8 @@ const { title, description, image, jsonLd } = Astro.props;
     <!-- グローバルCSSの読み込み（必須） -->
     <link rel="stylesheet" href="/src/styles/global.css">
     
-    <!-- フォントの読み込み -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <!-- フォントはglobal.cssの@font-faceで読み込み (ShinRetroMaruGothic) -->
+
     <title>{title}</title>
   </head>
   <body>
@@ -149,26 +146,15 @@ const { title, content, variant = 'primary' } = Astro.props;
 </style>
 ```
 
-### 外部CSSライブラリ
-```astro
-<!-- Layout.astro -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&display=swap">
-```
+### フォント
+ローカルフォント (ShinRetroMaruGothic) を `public/fonts/` に配置し、`global.css` の `@font-face` で読み込み。
 
 ---
 
 ## ⚡ パフォーマンス最適化
 
 ### フォント最適化
-```astro
-<!-- フォントの事前読み込み -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<!-- 重要フォントの優先読み込み -->
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&display=swap"></noscript>
-```
+ローカルフォントファイルを使用し、`font-display: swap` で読み込み遅延を最小化。
 
 ### CSS最適化
 - **不要なスタイルの削除**: 使用されていないCSSクラスを削除

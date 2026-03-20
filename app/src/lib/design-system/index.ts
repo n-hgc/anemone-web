@@ -32,8 +32,8 @@ export const designTokens = {
     "fontWeight": "500",
     "lineHeight": "100%",
     "fontFamily": [
-      "YuMincho",
-      "serif"
+      "ShinRetroMaruGothic",
+      "sans-serif"
     ],
     "description": "PC用H2見出し"
   },
@@ -42,8 +42,8 @@ export const designTokens = {
     "fontWeight": "500",
     "lineHeight": "150%",
     "fontFamily": [
-      "YuMincho",
-      "serif"
+      "ShinRetroMaruGothic",
+      "sans-serif"
     ],
     "description": "PC用H3見出し"
   },
@@ -52,7 +52,7 @@ export const designTokens = {
     "fontWeight": "400",
     "lineHeight": "150%",
     "fontFamily": [
-      "ZenKakuGothicNew",
+      "ShinRetroMaruGothic",
       "sans-serif"
     ],
     "description": "PC用本文"
@@ -62,8 +62,8 @@ export const designTokens = {
     "fontWeight": "500",
     "lineHeight": "100%",
     "fontFamily": [
-      "YuMincho",
-      "serif"
+      "ShinRetroMaruGothic",
+      "sans-serif"
     ],
     "description": "SP用H2見出し"
   },
@@ -72,8 +72,8 @@ export const designTokens = {
     "fontWeight": "500",
     "lineHeight": "150%",
     "fontFamily": [
-      "YuMincho",
-      "serif"
+      "ShinRetroMaruGothic",
+      "sans-serif"
     ],
     "description": "SP用H3見出し"
   },
@@ -82,7 +82,7 @@ export const designTokens = {
     "fontWeight": "400",
     "lineHeight": "150%",
     "fontFamily": [
-      "ZenKakuGothicNew",
+      "ShinRetroMaruGothic",
       "sans-serif"
     ],
     "description": "SP用本文"

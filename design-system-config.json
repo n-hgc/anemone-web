@@ -26,8 +26,8 @@
       },
       "typography": {
         "fontFamily": {
-          "yumincho": ["YuMincho", "serif"],
-          "zenkaku": ["ZenKakuGothicNew", "sans-serif"]
+          "yumincho": ["ShinRetroMaruGothic", "sans-serif"],
+          "zenkaku": ["ShinRetroMaruGothic", "sans-serif"]
         },
         "fontSize": {
           "h2_pc": "64px",

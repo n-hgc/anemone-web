@@ -1,6 +1,28 @@
 @import "tailwindcss/theme" layer(theme);
 @import "tailwindcss/utilities" layer(utilities);
 
+/* Shin Retro Maru Gothic フォント定義 */
+@font-face {
+  font-family: 'ShinRetroMaruGothic';
+  src: url('/fonts/ShinRetroMaruGothic-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ShinRetroMaruGothic';
+  src: url('/fonts/ShinRetroMaruGothic-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ShinRetroMaruGothic';
+  src: url('/fonts/ShinRetroMaruGothic-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
 :root {
   /* カラーパレット */
   --color-black: #3D3D3D;
@@ -22,8 +44,8 @@
   --color-text-white: #FFFFFF;
   
   /* フォントファミリー */
-  --font-family-yumincho: 'YuMincho', 'Yu Mincho', 'Shippori Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', 'HiraMinProN-W3', 'HiraMinProN-W6', serif;
-  --font-family-zenkaku: 'Zen Kaku Gothic New', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
+  --font-family-yumincho: 'ShinRetroMaruGothic', sans-serif;
+  --font-family-zenkaku: 'ShinRetroMaruGothic', sans-serif;
   
   /* フォントサイズ */
   --font-size-h2-pc: 64px;

@@ -203,7 +203,7 @@ app/
       "fontSize": "64px",
       "fontWeight": "500",
       "lineHeight": "100%",
-      "fontFamily": ["YuMincho", "serif"]
+      "fontFamily": ["ShinRetroMaruGothic", "sans-serif"]
     }
   }
 }

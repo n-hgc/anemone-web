@@ -144,8 +144,8 @@ function updateTailwindConfig(classes) {
           'p-sp': ['16px', { lineHeight: '150%', fontWeight: '400' }]
         },
         fontFamily: {
-          yumincho: ['YuMincho', 'serif'],
-          zenkaku: ['ZenKakuGothicNew', 'sans-serif']
+          yumincho: ['ShinRetroMaruGothic', 'sans-serif'],
+          zenkaku: ['ShinRetroMaruGothic', 'sans-serif']
         },
         screens: {
           'pc': '768px',
