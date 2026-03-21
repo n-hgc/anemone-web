@@ -18,11 +18,16 @@
         "name": "埼玉県"
       }
     ],
-    "prefecture_child": [],
+    "prefecture_child": [
+      {
+        "slug": "%e6%89%80%e6%b2%a2",
+        "name": "所沢"
+      }
+    ],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
-    "reservation_url": "",
+    "reservation_url": "https://beauty.hotpepper.jp/kr/slnH000734192/",
     "maps_url": "",
     "access": ""
   },
@@ -281,11 +286,16 @@
         "name": "神奈川県"
       }
     ],
-    "prefecture_child": [],
+    "prefecture_child": [
+      {
+        "slug": "%e8%8c%85%e3%83%b6%e5%b4%8e",
+        "name": "茅ヶ崎"
+      }
+    ],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
-    "reservation_url": "",
+    "reservation_url": "https://beauty.hotpepper.jp/slnH000720397/",
     "maps_url": "",
     "access": ""
   },
@@ -2441,7 +2451,12 @@
         "name": "東京都"
       }
     ],
-    "prefecture_child": [],
+    "prefecture_child": [
+      {
+        "slug": "%e6%b8%8b%e8%b0%b7",
+        "name": "渋谷"
+      }
+    ],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2522,7 +2537,12 @@
         "name": "東京都"
       }
     ],
-    "prefecture_child": [],
+    "prefecture_child": [
+      {
+        "slug": "%e6%b8%8b%e8%b0%b7",
+        "name": "渋谷"
+      }
+    ],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2576,7 +2596,12 @@
         "name": "東京都"
       }
     ],
-    "prefecture_child": [],
+    "prefecture_child": [
+      {
+        "slug": "shinjuku",
+        "name": "新宿"
+      }
+    ],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2657,7 +2682,12 @@
         "name": "東京都"
       }
     ],
-    "prefecture_child": [],
+    "prefecture_child": [
+      {
+        "slug": "shinjuku",
+        "name": "新宿"
+      }
+    ],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
