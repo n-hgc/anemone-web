@@ -24,14 +24,16 @@ async function fetchJson(url, init = {}) {
 
 async function fetchTaxonomyTerms(baseUrl, taxonomy, ids) {
   if (!ids || ids.length === 0) return [];
-  
+
   const terms = [];
   for (const id of ids) {
     try {
       const term = await fetchJson(`${baseUrl}/wp-json/wp/v2/${taxonomy}/${id}`);
       terms.push({
+        id: term.id,
         slug: term.slug,
-        name: term.name
+        name: term.name,
+        parent: term.parent || 0
       });
     } catch (e) {
       console.warn(`Failed to fetch ${taxonomy} term ${id}:`, e?.message || e);
@@ -100,10 +102,17 @@ async function main() {
 
       // タクソノミー情報を取得
       const region = await fetchTaxonomyTerms(WP_BASE, 'region', salon.region);
-      const prefecture = await fetchTaxonomyTerms(WP_BASE, 'prefecture', salon.prefecture);
-      const city = await fetchTaxonomyTerms(WP_BASE, 'city', salon.city);
+      const prefectureTerms = await fetchTaxonomyTerms(WP_BASE, 'prefecture', salon.prefecture);
       const jobRole = await fetchTaxonomyTerms(WP_BASE, 'job_role', salon.job_role);
       const employmentType = await fetchTaxonomyTerms(WP_BASE, 'employment_type', salon.employment_type);
+
+      // prefecture タクソノミーを親（都道府県）と子（市区町村等）に分離
+      const prefecture = prefectureTerms
+        .filter(t => t.parent === 0)
+        .map(({ id: _id, parent: _p, ...rest }) => rest);
+      const prefectureChild = prefectureTerms
+        .filter(t => t.parent !== 0)
+        .map(({ id: _id, parent: _p, ...rest }) => rest);
 
       items.push({
         id,
@@ -112,7 +121,7 @@ async function main() {
         thumb,
         region,
         prefecture,
-        city,
+        prefecture_child: prefectureChild,
         job_role: jobRole,
         employment_type: employmentType,
         is_hiring: isHiring,

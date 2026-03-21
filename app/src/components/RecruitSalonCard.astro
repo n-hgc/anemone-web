@@ -13,8 +13,8 @@ const { salon } = Astro.props;
   data-region={salon.region.map(r => r.slug).join(',')}
   data-prefecture={salon.prefecture.map(p => p.slug).join(',')}
   data-prefecture-name={salon.prefecture.map(p => p.name).join(',')}
-  data-city={salon.city.map(c => c.slug).join(',')}
-  data-city-name={salon.city.map(c => c.name).join(',')}
+  data-city={salon.prefecture_child.map(c => c.slug).join(',')}
+  data-city-name={salon.prefecture_child.map(c => c.name).join(',')}
   data-jobs={salon.job_role.map(j => j.slug).join(',')}
   data-jobs-name={salon.job_role.map(j => j.name).join(',')}
   data-employment={salon.employment_type.map(e => e.slug).join(',')}
@@ -55,8 +55,8 @@ const { salon } = Astro.props;
         <img src="/images/icons/icn_location_on.svg" alt="所在地" class="recruit-environment__salon-icon" />
         <span>
           {salon.prefecture && salon.prefecture.length > 0 ? salon.prefecture[0].name : ''}
-          {(salon.prefecture && salon.prefecture.length > 0) && (salon.city && salon.city.length > 0) ? '・' : ''}
-          {salon.city && salon.city.length > 0 ? salon.city[0].name : ''}
+          {(salon.prefecture && salon.prefecture.length > 0) && (salon.prefecture_child && salon.prefecture_child.length > 0) ? '・' : ''}
+          {salon.prefecture_child && salon.prefecture_child.length > 0 ? salon.prefecture_child[0].name : ''}
         </span>
       </div>
       <div class="recruit-environment__salon-access">

@@ -6,8 +6,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/10/C045824812.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -16,7 +18,7 @@
         "name": "埼玉県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -31,8 +33,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2025/01/de.shinjuku_64.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -41,7 +45,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -56,24 +60,22 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/10/IMG_8266-scaled.jpg",
     "region": [
       {
+        "id": 345,
         "slug": "hokkaido",
-        "name": "北海道"
+        "name": "北海道",
+        "parent": 0
       }
     ],
     "prefecture": [
       {
         "slug": "hokkaido",
         "name": "北海道"
-      },
+      }
+    ],
+    "prefecture_child": [
       {
         "slug": "%e6%9c%ad%e5%b9%8c",
         "name": "札幌"
-      }
-    ],
-    "city": [
-      {
-        "slug": "%e6%9c%ad%e5%b9%8c%e5%b8%82",
-        "name": "札幌市"
       }
     ],
     "job_role": [],
@@ -90,21 +92,24 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/10/MF4_5530.jpg",
     "region": [
       {
+        "id": 420,
         "slug": "kyushu",
-        "name": "九州・沖縄"
+        "name": "九州・沖縄",
+        "parent": 0
       }
     ],
     "prefecture": [
-      {
-        "slug": "%e7%a6%8f%e5%b2%a1",
-        "name": "福岡"
-      },
       {
         "slug": "fukuoka",
         "name": "福岡県"
       }
     ],
-    "city": [],
+    "prefecture_child": [
+      {
+        "slug": "%e7%a6%8f%e5%b2%a1",
+        "name": "福岡"
+      }
+    ],
     "job_role": [],
     "employment_type": [],
     "is_hiring": true,
@@ -119,21 +124,24 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/10/DSC_6261-2-scaled.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
       {
         "slug": "tokyo",
         "name": "東京都"
-      },
+      }
+    ],
+    "prefecture_child": [
       {
         "slug": "%e6%b8%8b%e8%b0%b7",
         "name": "渋谷"
       }
     ],
-    "city": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -148,8 +156,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/10/C039247317.png",
     "region": [
       {
+        "id": 345,
         "slug": "hokkaido",
-        "name": "北海道"
+        "name": "北海道",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -158,7 +168,7 @@
         "name": "北海道"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -173,8 +183,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2025/04/Screenshot_20250525-172701.png",
     "region": [
       {
+        "id": 348,
         "slug": "chubu",
-        "name": "中部"
+        "name": "中部",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -183,7 +195,7 @@
         "name": "愛知県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -198,8 +210,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/11/B219032355-1.jpg",
     "region": [
       {
+        "id": 348,
         "slug": "chubu",
-        "name": "中部"
+        "name": "中部",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -208,7 +222,7 @@
         "name": "愛知県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -223,21 +237,24 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/08/B212937463-3.jpg",
     "region": [
       {
+        "id": 345,
         "slug": "hokkaido",
-        "name": "北海道"
+        "name": "北海道",
+        "parent": 0
       }
     ],
     "prefecture": [
       {
         "slug": "hokkaido",
         "name": "北海道"
-      },
+      }
+    ],
+    "prefecture_child": [
       {
         "slug": "%e6%9c%ad%e5%b9%8c",
         "name": "札幌"
       }
     ],
-    "city": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -252,8 +269,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/03/B190122036.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -262,7 +281,7 @@
         "name": "神奈川県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -277,8 +296,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/09/B185731133.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -287,7 +308,7 @@
         "name": "茨城県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -302,8 +323,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/06/B179472042.jpg",
     "region": [
       {
+        "id": 348,
         "slug": "chubu",
-        "name": "中部"
+        "name": "中部",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -312,7 +335,7 @@
         "name": "愛知県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -327,8 +350,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/09/B186367074.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -337,7 +362,7 @@
         "name": "埼玉県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -352,8 +377,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/01/B178973728-2.jpg",
     "region": [
       {
+        "id": 420,
         "slug": "kyushu",
-        "name": "九州・沖縄"
+        "name": "九州・沖縄",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -362,7 +389,7 @@
         "name": "福岡県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -377,8 +404,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/B199628742.jpg",
     "region": [
       {
+        "id": 349,
         "slug": "kinki",
-        "name": "近畿"
+        "name": "近畿",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -387,7 +416,7 @@
         "name": "大阪府"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -402,8 +431,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/01/B086073177.jpg",
     "region": [
       {
+        "id": 351,
         "slug": "shikoku",
-        "name": "四国"
+        "name": "四国",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -412,7 +443,7 @@
         "name": "徳島県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -427,8 +458,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2022/07/B165649256.jpg",
     "region": [
       {
+        "id": 420,
         "slug": "kyushu",
-        "name": "九州・沖縄"
+        "name": "九州・沖縄",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -437,7 +470,7 @@
         "name": "福岡県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -452,8 +485,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2022/06/1663301169821.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -462,7 +497,7 @@
         "name": "神奈川県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -477,8 +512,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2022/02/B157958291.jpg",
     "region": [
       {
+        "id": 348,
         "slug": "chubu",
-        "name": "中部"
+        "name": "中部",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -487,7 +524,7 @@
         "name": "愛知県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -502,8 +539,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2022/02/PXL_20220401_100047393-scaled.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -512,7 +551,7 @@
         "name": "埼玉県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -527,8 +566,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2021/10/B141542514.jpg",
     "region": [
       {
+        "id": 351,
         "slug": "shikoku",
-        "name": "四国"
+        "name": "四国",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -537,7 +578,7 @@
         "name": "徳島県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -552,8 +593,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2021/08/☆NEW-OPEN☆.jpeg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -562,7 +605,7 @@
         "name": "茨城県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -577,8 +620,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2021/07/1546416848.jpeg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -587,7 +632,7 @@
         "name": "神奈川県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -602,8 +647,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2021/04/5.jpg",
     "region": [
       {
+        "id": 420,
         "slug": "kyushu",
-        "name": "九州・沖縄"
+        "name": "九州・沖縄",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -612,7 +659,7 @@
         "name": "福岡県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -627,8 +674,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2021/03/IMG_6505.jpeg",
     "region": [
       {
+        "id": 345,
         "slug": "hokkaido",
-        "name": "北海道"
+        "name": "北海道",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -637,7 +686,7 @@
         "name": "北海道"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -652,8 +701,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2021/03/店内画像01.jpg",
     "region": [
       {
+        "id": 348,
         "slug": "chubu",
-        "name": "中部"
+        "name": "中部",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -662,7 +713,7 @@
         "name": "愛知県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -677,8 +728,10 @@
     "thumb": "/images/salon/salon-image-01.png",
     "region": [
       {
+        "id": 351,
         "slug": "shikoku",
-        "name": "四国"
+        "name": "四国",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -687,7 +740,7 @@
         "name": "徳島県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -702,8 +755,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2020/08/B106075475.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -712,7 +767,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -727,8 +782,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/11.linette-yokohama-by-little.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -737,7 +794,7 @@
         "name": "神奈川県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -752,8 +809,10 @@
     "thumb": "/images/salon/salon-image-01.png",
     "region": [
       {
+        "id": 351,
         "slug": "shikoku",
-        "name": "四国"
+        "name": "四国",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -762,7 +821,7 @@
         "name": "徳島県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -777,8 +836,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/little-kamisu.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -787,7 +848,7 @@
         "name": "茨城県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -802,8 +863,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/Familia-by-little-平塚.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -812,7 +875,7 @@
         "name": "神奈川県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -827,8 +890,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/12/B093949310_419-314.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -837,7 +902,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -852,8 +917,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/Logos-by-little.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -862,7 +929,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -877,8 +944,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/LODAT-横浜-by-little.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -887,7 +956,7 @@
         "name": "神奈川県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -902,8 +971,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/Lilian-by-little.jpg",
     "region": [
       {
+        "id": 348,
         "slug": "chubu",
-        "name": "中部"
+        "name": "中部",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -912,7 +983,7 @@
         "name": "愛知県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -927,8 +998,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2020/04/F0501.jpg",
     "region": [
       {
+        "id": 420,
         "slug": "kyushu",
-        "name": "九州・沖縄"
+        "name": "九州・沖縄",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -937,7 +1010,7 @@
         "name": "福岡県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -952,8 +1025,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2022/01/IMG_4854-scaled.jpg",
     "region": [
       {
+        "id": 351,
         "slug": "shikoku",
-        "name": "四国"
+        "name": "四国",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -962,7 +1037,7 @@
         "name": "愛媛県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -977,8 +1052,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/little_kasukabe.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -987,7 +1064,7 @@
         "name": "埼玉県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1002,8 +1079,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/06/IMG_3073.png",
     "region": [
       {
+        "id": 349,
         "slug": "kinki",
-        "name": "近畿"
+        "name": "近畿",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1012,7 +1091,7 @@
         "name": "京都府"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1027,8 +1106,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/04/IMG_2294.jpg",
     "region": [
       {
+        "id": 420,
         "slug": "kyushu",
-        "name": "九州・沖縄"
+        "name": "九州・沖縄",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1037,7 +1118,7 @@
         "name": "大分県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1052,8 +1133,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/02/1-scaled.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1062,7 +1145,7 @@
         "name": "栃木県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1077,8 +1160,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/01/001.jpg",
     "region": [
       {
+        "id": 346,
         "slug": "tohoku",
-        "name": "東北"
+        "name": "東北",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1087,7 +1172,7 @@
         "name": "青森県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1102,8 +1187,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/09/little_meieki_07-scaled.jpg",
     "region": [
       {
+        "id": 348,
         "slug": "chubu",
-        "name": "中部"
+        "name": "中部",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1112,7 +1199,7 @@
         "name": "愛知県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1127,8 +1214,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/08/DSC5666-scaled.jpg",
     "region": [
       {
+        "id": 345,
         "slug": "hokkaido",
-        "name": "北海道"
+        "name": "北海道",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1137,7 +1226,7 @@
         "name": "北海道"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1152,8 +1241,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/09/B185057096-1.jpg",
     "region": [
       {
+        "id": 350,
         "slug": "chugoku",
-        "name": "中国"
+        "name": "中国",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1162,7 +1253,7 @@
         "name": "広島県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1177,8 +1268,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/08/little_10.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1187,7 +1280,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1202,8 +1295,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/09/B184835691.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1212,7 +1307,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1227,8 +1322,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/07/IMG1600.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1237,7 +1334,7 @@
         "name": "神奈川県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1252,8 +1349,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/07/1N6A0052.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1262,7 +1361,7 @@
         "name": "千葉県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1277,8 +1376,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/07/IMG_3528-scaled.jpg",
     "region": [
       {
+        "id": 420,
         "slug": "kyushu",
-        "name": "九州・沖縄"
+        "name": "九州・沖縄",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1287,7 +1388,7 @@
         "name": "鹿児島県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1302,8 +1403,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/05/IMG_0323b.jpg",
     "region": [
       {
+        "id": 349,
         "slug": "kinki",
-        "name": "近畿"
+        "name": "近畿",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1312,7 +1415,7 @@
         "name": "兵庫県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1327,8 +1430,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/04/0002-scaled.jpg",
     "region": [
       {
+        "id": 420,
         "slug": "kyushu",
-        "name": "九州・沖縄"
+        "name": "九州・沖縄",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1337,7 +1442,7 @@
         "name": "熊本県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1352,8 +1457,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/04/140A2325.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1362,7 +1469,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1377,8 +1484,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/03/IMG-49.jpg",
     "region": [
       {
+        "id": 346,
         "slug": "tohoku",
-        "name": "東北"
+        "name": "東北",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1387,7 +1496,7 @@
         "name": "青森県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1402,8 +1511,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2022/12/inside_3_2.jpg",
     "region": [
       {
+        "id": 346,
         "slug": "tohoku",
-        "name": "東北"
+        "name": "東北",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1412,7 +1523,7 @@
         "name": "岩手県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1427,8 +1538,10 @@
     "thumb": "/images/salon/salon-image-01.png",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1437,7 +1550,7 @@
         "name": "埼玉県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1452,8 +1565,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2022/05/B164145842.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1462,7 +1577,7 @@
         "name": "埼玉県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1477,8 +1592,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2022/01/setmen1-scaled.jpg",
     "region": [
       {
+        "id": 345,
         "slug": "hokkaido",
-        "name": "北海道"
+        "name": "北海道",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1487,7 +1604,7 @@
         "name": "北海道"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1502,8 +1619,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2021/10/DSC_6487-1.jpg",
     "region": [
       {
+        "id": 345,
         "slug": "hokkaido",
-        "name": "北海道"
+        "name": "北海道",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1512,7 +1631,7 @@
         "name": "北海道"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1527,8 +1646,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2021/08/8691.jpg",
     "region": [
       {
+        "id": 420,
         "slug": "kyushu",
-        "name": "九州・沖縄"
+        "name": "九州・沖縄",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1537,7 +1658,7 @@
         "name": "熊本県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1552,8 +1673,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2021/01/MS1_0003.jpg",
     "region": [
       {
+        "id": 345,
         "slug": "hokkaido",
-        "name": "北海道"
+        "name": "北海道",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1562,7 +1685,7 @@
         "name": "北海道"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1577,8 +1700,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2020/10/01.jpg",
     "region": [
       {
+        "id": 349,
         "slug": "kinki",
-        "name": "近畿"
+        "name": "近畿",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1587,7 +1712,7 @@
         "name": "大阪府"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1602,8 +1727,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2020/10/IMG_4732-2.jpg",
     "region": [
       {
+        "id": 345,
         "slug": "hokkaido",
-        "name": "北海道"
+        "name": "北海道",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1612,7 +1739,7 @@
         "name": "北海道"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1627,8 +1754,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2020/10/B111563339.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1637,7 +1766,7 @@
         "name": "千葉県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1652,8 +1781,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2020/03/B105085357.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1662,7 +1793,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1677,8 +1808,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/IMG_0381※-1.jpg",
     "region": [
       {
+        "id": 345,
         "slug": "hokkaido",
-        "name": "北海道"
+        "name": "北海道",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1687,7 +1820,7 @@
         "name": "北海道"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1702,8 +1835,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/space_11-scaled.jpg",
     "region": [
       {
+        "id": 350,
         "slug": "chugoku",
-        "name": "中国"
+        "name": "中国",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1712,7 +1847,7 @@
         "name": "広島県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1727,8 +1862,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/IMG_5280.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1737,7 +1874,7 @@
         "name": "千葉県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1752,8 +1889,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/41.little-Okinawa.jpg",
     "region": [
       {
+        "id": 420,
         "slug": "kyushu",
-        "name": "九州・沖縄"
+        "name": "九州・沖縄",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1762,7 +1901,7 @@
         "name": "沖縄県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1777,8 +1916,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/0O5A5396.jpg",
     "region": [
       {
+        "id": 349,
         "slug": "kinki",
-        "name": "近畿"
+        "name": "近畿",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1787,7 +1928,7 @@
         "name": "大阪府"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1802,8 +1943,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/IMG_6987.jpg",
     "region": [
       {
+        "id": 345,
         "slug": "hokkaido",
-        "name": "北海道"
+        "name": "北海道",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1812,7 +1955,7 @@
         "name": "北海道"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1827,8 +1970,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/A85I5985-1.jpg",
     "region": [
       {
+        "id": 420,
         "slug": "kyushu",
-        "name": "九州・沖縄"
+        "name": "九州・沖縄",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1837,7 +1982,7 @@
         "name": "福岡県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1852,8 +1997,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/0O5A0044.jpg",
     "region": [
       {
+        "id": 349,
         "slug": "kinki",
-        "name": "近畿"
+        "name": "近畿",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1862,7 +2009,7 @@
         "name": "兵庫県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1877,8 +2024,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/36.little-kumamoto.jpg",
     "region": [
       {
+        "id": 420,
         "slug": "kyushu",
-        "name": "九州・沖縄"
+        "name": "九州・沖縄",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1887,7 +2036,7 @@
         "name": "熊本県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1902,8 +2051,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/7043084-scaled.jpg",
     "region": [
       {
+        "id": 346,
         "slug": "tohoku",
-        "name": "東北"
+        "name": "東北",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1912,7 +2063,7 @@
         "name": "宮城県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1927,8 +2078,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/211025_0009.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1937,7 +2090,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1952,8 +2105,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/Z72_8407.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1962,7 +2117,7 @@
         "name": "千葉県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -1977,8 +2132,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2022/02/Z72_7961.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -1987,7 +2144,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2002,8 +2159,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/MS1_0014-scaled.jpg",
     "region": [
       {
+        "id": 345,
         "slug": "hokkaido",
-        "name": "北海道"
+        "name": "北海道",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2012,7 +2171,7 @@
         "name": "北海道"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2027,8 +2186,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/little_rinne_sakae_18.jpg",
     "region": [
       {
+        "id": 348,
         "slug": "chubu",
-        "name": "中部"
+        "name": "中部",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2037,7 +2198,7 @@
         "name": "愛知県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2052,8 +2213,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/RK5_0363-scaled.jpg",
     "region": [
       {
+        "id": 345,
         "slug": "hokkaido",
-        "name": "北海道"
+        "name": "北海道",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2062,7 +2225,7 @@
         "name": "北海道"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2077,8 +2240,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/ONE1345-scaled.jpg",
     "region": [
       {
+        "id": 420,
         "slug": "kyushu",
-        "name": "九州・沖縄"
+        "name": "九州・沖縄",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2087,7 +2252,7 @@
         "name": "福岡県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2102,8 +2267,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/1Z3A0008.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2112,7 +2279,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2127,8 +2294,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/MG_8116-scaled.jpg",
     "region": [
       {
+        "id": 346,
         "slug": "tohoku",
-        "name": "東北"
+        "name": "東北",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2137,7 +2306,7 @@
         "name": "宮城県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2152,8 +2321,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/NAZ_2795-scaled.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2162,7 +2333,7 @@
         "name": "埼玉県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2177,8 +2348,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/IMG_4351ｂ.jpg",
     "region": [
       {
+        "id": 349,
         "slug": "kinki",
-        "name": "近畿"
+        "name": "近畿",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2187,7 +2360,7 @@
         "name": "兵庫県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2202,8 +2375,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/2MN_8997.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2212,7 +2387,7 @@
         "name": "神奈川県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2227,8 +2402,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/IMG_5439.jpg",
     "region": [
       {
+        "id": 420,
         "slug": "kyushu",
-        "name": "九州・沖縄"
+        "name": "九州・沖縄",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2237,7 +2414,7 @@
         "name": "福岡県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2252,8 +2429,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/line_113379240055568.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2262,7 +2441,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2277,8 +2456,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2022/02/3R2A0638.jpg",
     "region": [
       {
+        "id": 420,
         "slug": "kyushu",
-        "name": "九州・沖縄"
+        "name": "九州・沖縄",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2287,7 +2468,7 @@
         "name": "福岡県"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2302,8 +2483,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2021/09/Z72_7633.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2312,7 +2495,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2327,8 +2510,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/1730013132537.png",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2337,7 +2522,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2352,8 +2537,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/DSC_0728.jpg",
     "region": [
       {
+        "id": 345,
         "slug": "hokkaido",
-        "name": "北海道"
+        "name": "北海道",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2362,7 +2549,7 @@
         "name": "北海道"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2377,8 +2564,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/little-galleria-Shinjuku_17.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2387,7 +2576,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2402,8 +2591,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/001-scaled.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2412,7 +2603,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2427,8 +2618,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/5J8A8195.jpg",
     "region": [
       {
+        "id": 345,
         "slug": "hokkaido",
-        "name": "北海道"
+        "name": "北海道",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2437,12 +2630,7 @@
         "name": "北海道"
       }
     ],
-    "city": [
-      {
-        "slug": "%e6%9c%ad%e5%b9%8c%e5%b8%82",
-        "name": "札幌市"
-      }
-    ],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,
@@ -2457,8 +2645,10 @@
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/025.jpg",
     "region": [
       {
+        "id": 347,
         "slug": "kanto",
-        "name": "関東"
+        "name": "関東",
+        "parent": 0
       }
     ],
     "prefecture": [
@@ -2467,7 +2657,7 @@
         "name": "東京都"
       }
     ],
-    "city": [],
+    "prefecture_child": [],
     "job_role": [],
     "employment_type": [],
     "is_hiring": false,

@@ -27,6 +27,59 @@ try {
 // サロンデータを直接使用（変換不要）
 const salons: SalonIndexData[] = salonData;
 
+// エリアセレクター用データ構造を構築
+const regionGroupDefs = [
+  { name: '北海道・東北エリア', slugs: ['hokkaido', 'tohoku'] },
+  { name: '関東エリア', slugs: ['kanto'] },
+  { name: '中部エリア', slugs: ['chubu'] },
+  { name: '近畿エリア', slugs: ['kinki'] },
+  { name: '中国・四国エリア', slugs: ['chugoku', 'shikoku'] },
+  { name: '九州・沖縄エリア', slugs: ['kyushu'] },
+];
+
+interface PrefectureGroup {
+  name: string;
+  slug: string;
+  salons: SalonIndexData[];
+  children: { name: string; slug: string; count: number }[];
+}
+
+interface RegionGroup {
+  name: string;
+  prefectures: PrefectureGroup[];
+}
+
+const regionGroups: RegionGroup[] = regionGroupDefs.map(def => {
+  const groupSalons = salons.filter(s => def.slugs.includes(s.region[0]?.slug));
+  const prefMap = new Map<string, PrefectureGroup>();
+
+  groupSalons.forEach(salon => {
+    const prefName = salon.prefecture[0]?.name;
+    const prefSlug = salon.prefecture[0]?.slug;
+    if (!prefName) return;
+
+    if (!prefMap.has(prefName)) {
+      prefMap.set(prefName, { name: prefName, slug: prefSlug, salons: [], children: [] });
+    }
+    const pref = prefMap.get(prefName)!;
+    pref.salons.push(salon);
+
+    salon.prefecture_child.forEach(child => {
+      const existing = pref.children.find(c => c.name === child.name);
+      if (existing) {
+        existing.count++;
+      } else {
+        pref.children.push({ name: child.name, slug: child.slug, count: 1 });
+      }
+    });
+  });
+
+  return {
+    name: def.name,
+    prefectures: Array.from(prefMap.values()),
+  };
+});
+
 // NEWSデータを取得（まとめて取得→クライアント側でカテゴリ分割）
 let newsByCategory: { [key: string]: News[] } = { information: [], blog: [], movie: [] };
 try {
@@ -349,8 +402,6 @@ const salonJsonLd = {
     <!-- サロン店舗セクション -->
     <section id="salons" class="salon-section">
       <div class="salon-container">
-        
-        <!-- メインコンテンツエリア -->
         <div class="salon-main-content">
           <!-- タイトルとテキスト -->
           <div class="salon-header">
@@ -361,116 +412,71 @@ const salonJsonLd = {
               littleは、全国に広がる"通いやすくて、頼れる"サロン。店舗ごとの雰囲気や得意なスタイルもぜひチェックしてみてください。
             </p>
           </div>
-          
-          <!-- PC用: 2列レイアウト -->
-          <div class="salon-content-pc">
-            <!-- 左側: フィルター -->
-            <div class="salon-filters">
-              <!-- 地域ナビゲーション -->
-              <div class="salon-regions">
-                <button class="region-btn" data-region="hokkaido">北海道</button>
-                <button class="region-btn" data-region="tohoku">東北</button>
-                <button class="region-btn" data-region="kanto">関東</button>
-                <button class="region-btn" data-region="chubu">中部</button>
-                <button class="region-btn" data-region="kinki">近畿</button>
-                <button class="region-btn" data-region="shikoku">四国</button>
-                <button class="region-btn" data-region="chugoku">中国</button>
-                <button class="region-btn" data-region="kyushu-okinawa">九州・沖縄</button>
-              </div>
-              
-              <!-- 検索バー -->
-              <div class="salon-search">
-                <input 
-                  type="text" 
-                  id="salon-search-input"
-                  placeholder="サロン名・地域名で検索" 
-                  class="salon-search-input"
-                />
-                <button class="salon-search-btn" id="salon-search-btn">
-                  <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            
-            <!-- 右側: 日本地図 -->
-            <div class="salon-map">
-              <div class="japan-map">
-                <img 
-                  src="/images/main/illust_japan.png" 
-                  alt="日本地図" 
-                  class="japan-map-image"
-                />
-              </div>
-            </div>
+
+          <!-- 検索バー -->
+          <div class="salon-search">
+            <input
+              type="text"
+              id="salon-search-input"
+              placeholder="サロン名・地域名で検索"
+              class="salon-search-input"
+            />
+            <button class="salon-search-btn" id="salon-search-btn">
+              <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </button>
           </div>
-          
-          <!-- SP用: 縦並びレイアウト -->
-          <div class="salon-content-sp">
-            <!-- 日本地図 -->
-            <!-- <div class="salon-map">
-              <div class="japan-map">
-                <img 
-                  src="/images/main/illust_japan.png" 
-                  alt="日本地図" 
-                  class="japan-map-image"
-                />
-              </div>
-            </div> -->
-            
-            <!-- フィルター -->
-            <div class="salon-filters">
-              <!-- 地域ナビゲーション -->
-              <div class="salon-regions">
-                <button class="region-btn" data-region="hokkaido">北海道</button>
-                <button class="region-btn" data-region="tohoku">東北</button>
-                <button class="region-btn" data-region="kanto">関東</button>
-                <button class="region-btn" data-region="chubu">中部</button>
-                <button class="region-btn" data-region="kinki">近畿</button>
-                <button class="region-btn" data-region="shikoku">四国</button>
-                <button class="region-btn" data-region="chugoku">中国</button>
-                <button class="region-btn" data-region="kyushu-okinawa">九州・沖縄</button>
-              </div>
-              
-              <!-- 検索バー -->
-              <div class="salon-search">
-                <input 
-                  type="text" 
-                  id="salon-search-input-sp"
-                  placeholder="サロン名・地域名で検索" 
-                  class="salon-search-input"
-                />
-                <button class="salon-search-btn" id="salon-search-btn-sp">
-                  <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- 店舗一覧 -->
-        <div class="salon-listings">
-          <div class="salon-area-title">
-            <h3 id="salon-filter-title">店舗一覧</h3>
-          </div>
-          <div class="salon-cards grid-3-cols" id="salon-cards-container">
-            {salons.map((salon, index) => (
-              <div 
-                data-region={salon.region[0]?.slug || ''} 
-                data-name={salon.title} 
-                data-prefecture={salon.prefecture[0]?.slug || ''} 
-                data-prefecture-name={salon.prefecture[0]?.name || ''}
-                data-city={salon.city[0]?.slug || ''}
-                data-city-name={salon.city[0]?.name || ''}
-                data-access={salon.access || ''}
-                data-furigana={salon.furigana || ''}
-              >
-                <SalonCard salon={salon} />
+
+          <!-- エリアセレクター -->
+          <div class="area-selector" id="area-selector">
+            {regionGroups.map(group => (
+              <div class="area-group">
+                <h4 class="area-group-title">{group.name}</h4>
+                <div class="area-prefectures">
+                  {group.prefectures.map(pref => (
+                    <div class="area-prefecture" data-prefecture-slug={pref.slug}>
+                      <button class="area-prefecture-btn" type="button">
+                        <span class="area-prefecture-name">{pref.name}</span>
+                        <span class="area-prefecture-arrow">▼</span>
+                      </button>
+                      <div class="area-prefecture-content">
+                        <div class="area-cities">
+                          {pref.children.map(child => (
+                            <button class="area-city" type="button" data-city-slug={child.slug} data-prefecture-slug={pref.slug}>
+                              {child.name} ({child.count})
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
+          </div>
+
+          <!-- サロン表示セクション -->
+          <div class="salon-results" id="salon-results" style="display: none;">
+            <div class="salon-results-header">
+              <h3 class="salon-results-title" id="salon-results-title">店舗一覧</h3>
+            </div>
+            <div class="salon-results-cards" id="salon-results-cards">
+              {salons.map(salon => (
+                <div
+                  class="salon-result-card"
+                  data-region={salon.region[0]?.slug || ''}
+                  data-prefecture={salon.prefecture[0]?.slug || ''}
+                  data-prefecture-child={salon.prefecture_child.map(c => c.slug).join(',')}
+                  data-name={salon.title}
+                  data-access={salon.access || ''}
+                  data-furigana={salon.furigana || ''}
+                  style="display: none;"
+                >
+                  <SalonCard salon={salon} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -1251,7 +1257,7 @@ const salonJsonLd = {
   
   /* 共通タイポグラフィ */
   .text-h1 {
-    font-size: 64px;
+    font-size: 56px;
     font-weight: var(--font-weight-regular);
     line-height: 100%;
   }
@@ -1396,7 +1402,7 @@ const salonJsonLd = {
   
   /* 共通セクションタイトル */
   .section-title {
-    color: var(--color-brown);
+    color: var(--color-black);
     text-align: left;
     height: 64px;
     margin-bottom: 40px;
@@ -1511,6 +1517,12 @@ const salonJsonLd = {
     font-size: 12px;
     line-height: 1.5;
     margin-bottom: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .intro-description {
+      font-size: 16px;
+    }
   }
   
   .intro-highlight {
@@ -1934,26 +1946,6 @@ const salonJsonLd = {
     margin-bottom: 2rem;
   }
   
-  /* PC用レイアウト */
-  .salon-content-pc {
-    display: flex;
-    align-items: flex-start;
-    gap: 2rem;
-  }
-  
-  .salon-filters {
-    flex: 1;
-  }
-  
-  .salon-map {
-    flex: 0 0 auto;
-  }
-  
-  /* SP用レイアウト（デフォルトで非表示） */
-  .salon-content-sp {
-    display: none;
-  }
-  
   .salon-description {
     font-size: 16px;
     line-height: 1.5;
@@ -1961,49 +1953,16 @@ const salonJsonLd = {
     text-align: left;
     margin-bottom: 40px;
   }
-  
-  .salon-regions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 3rem;
-  }
-  
-  .region-btn {
-    display: flex;
-    width: 172px;
-    height: 48px;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    border-radius: 5px;
-    border: 1px solid var(--color-black);
-    background-color: transparent;
-    color: var(--color-black);
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 0 1rem;
-  }
-  
-  .region-btn:hover {
-    background-color: #E6DDCA;
-  }
-  
-  .region-btn.active {
-    background-color: var(--color-black);
-    color: var(--color-white);
-  }
-  
+
   .salon-search {
     display: flex;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid #E0E0E0;
     background-color: var(--color-white);
   }
-  
+
   .salon-search-input {
     flex: 1;
     background-color: var(--color-white);
@@ -2012,11 +1971,11 @@ const salonJsonLd = {
     font-size: 1rem;
     outline: none;
   }
-  
+
   .salon-search-input::placeholder {
     color: #999999;
   }
-  
+
   .salon-search-btn {
     background-color: #666666;
     color: var(--color-white);
@@ -2029,58 +1988,142 @@ const salonJsonLd = {
     min-width: 60px;
     transition: background-color 0.3s ease;
   }
-  
+
   .salon-search-btn:hover {
     background-color: #555555;
   }
-  
+
   .search-icon {
     width: 20px;
     height: 20px;
   }
-  
-  .salon-map {
-    text-align: center;
+
+  /* エリアセレクター */
+  .area-group {
+    margin-bottom: 0;
   }
-  
-  .japan-map {
-    height: 472px;
-    border-radius: 8px;
+
+  .area-group-title {
+    font-size: 14px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+    background: none;
+    padding: 0 8px 8px 0;
+    margin: 0;
+    line-height: 1.4;
+    border-bottom: 2px solid var(--color-black);
+  }
+
+  /* PC: 都道府県グリッド */
+  .area-prefectures {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 16px 0;
+  }
+
+  .area-prefecture {
+    border: 1px solid #A7A7A7;
+  }
+
+  .area-prefecture-btn {
     display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background-color: var(--color-beige);
-  }
-  
-  .japan-map-image {
+    justify-content: space-between;
     width: 100%;
-    height: 100%;
-    object-fit: contain;
+    padding: 10px 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+    text-align: left;
+    transition: background-color 0.2s ease;
   }
-  
-  .salon-listings {
-    margin-top: 3rem;
+
+  .area-prefecture-btn:hover {
+    background-color: #F0EBE0;
   }
-  
-  .salon-area-title {
+
+  /* 三角アイコン */
+  .area-prefecture-arrow {
+    font-size: 10px;
+    color: var(--color-black);
+    transition: transform 0.2s ease;
+  }
+
+  .area-prefecture.is-open .area-prefecture-arrow {
+    transform: rotate(180deg);
+  }
+
+  /* コンテンツ（デフォルト非表示 = アコーディオン） */
+  .area-prefecture-content {
+    display: none;
+    padding: 0 16px 12px 24px;
+  }
+
+  .area-prefecture.is-open .area-prefecture-content {
+    display: block;
+  }
+
+  .area-cities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+  }
+
+  .area-city {
+    font-size: 13px;
+    color: var(--color-black);
+    font-weight: var(--font-weight-regular);
+    line-height: 1.8;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+  }
+
+  .area-city:hover {
+    color: var(--color-brown);
+  }
+
+  .area-city.is-active {
+    color: var(--color-black);
+    font-weight: var(--font-weight-regular);
+  }
+
+  /* サロン表示セクション */
+  .salon-results {
+    margin-top: 2rem;
+  }
+
+  .salon-results-header {
     display: flex;
     padding-bottom: 16px;
     justify-content: space-between;
     align-items: center;
-    align-self: stretch;
-    border-bottom: 0.5px solid var(--Text-black, #3D3D3D);
+    border-bottom: 0.5px solid var(--color-black);
     margin-bottom: 2rem;
   }
 
-  .salon-area-title h3 {
+  .salon-results-title {
     font-size: 1.5rem;
     font-weight: var(--font-weight-regular);
-    color: var(--color-brown);
+    color: var(--color-black);
     margin: 0;
     line-height: 1.0;
   }
-  
+
+  .salon-results-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
   .salon-cards {
     /* グリッドスタイルは共通クラスで管理 */
   }
@@ -2691,14 +2734,14 @@ const salonJsonLd = {
       gap: 1.5rem;
     }
     
-    .salon-content {
-      gap: 2rem;
+    .area-prefectures {
+      grid-template-columns: repeat(3, 1fr);
     }
-    
-    .salon-regions {
-      gap: 0.75rem;
+
+    .salon-results-cards {
+      grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .salon-cards {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -2858,7 +2901,7 @@ const salonJsonLd = {
     .salon-section {
       padding: 40px 0;
     }
-    
+
     .salon-container {
       padding: 0 24px;
     }
@@ -2868,50 +2911,43 @@ const salonJsonLd = {
       line-height: 2.0;
     }
 
-    .salon-area-title h3 {
-      font-size: 20px;
-      line-height: 1.0;
+    .salon-search {
+      margin-bottom: 1.5rem;
     }
 
-    
-    /* モバイル用レイアウト */
-    .salon-content-pc {
-      display: none;
-    }
-    
-    .salon-content-sp {
-      display: block;
-    }
-    
-    .salon-content-sp .salon-map {
-      margin-bottom: 2rem;
-    }
-    
-    .salon-regions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    /* SP: エリアセレクター */
+    .area-prefectures {
+      grid-template-columns: 1fr;
       gap: 8px;
+      padding: 12px 0;
     }
-    
-    .region-btn {
-      width: 100%;
-      height: 40px;
-      font-size: 14px;
-      padding: 0;
+
+    .area-prefecture {
+      border: 1px solid #A7A7A7;
     }
-    
-    .salon-search {
-      margin-bottom: 2rem;
+
+    .area-prefecture-btn {
+      padding: 14px 16px;
     }
-    
+
+    .area-prefecture-content {
+      padding: 0 16px 16px 32px;
+    }
+
+    .salon-results-cards {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .salon-results-title {
+      font-size: 20px;
+    }
+
     .salon-cards {
       grid-template-columns: 1fr;
       gap: 1rem;
     }
-    
-    .salon-card {
-    }
-    
+
     .salon-card-image {
       height: 150px;
     }
@@ -3220,76 +3256,96 @@ const salonJsonLd = {
       });
     }
     
-    // サロン検索機能
-    const salonSearchInput = document.querySelector('.salon-search-input');
-    const salonSearchBtn = document.querySelector('.salon-search-btn');
-    const regionBtns = document.querySelectorAll('.region-btn');
-    
-    // 検索ボタンのクリックイベント
-    salonSearchBtn?.addEventListener('click', () => {
-      const searchTerm = (salonSearchInput as HTMLInputElement)?.value.trim();
-      if (searchTerm) {
-        console.log('検索キーワード:', searchTerm);
-        // 実際の実装では、ここでサロンの検索処理を実行
-        filterSalons(searchTerm);
-      }
-    });
-    
-    // エンターキーでの検索
-    salonSearchInput?.addEventListener('keydown', (e: Event) => {
-      const keyboardEvent = e as KeyboardEvent;
-      if (keyboardEvent.key === 'Enter') {
-        (salonSearchBtn as HTMLButtonElement)?.click();
-      }
-    });
-    
-    // 地域ボタンのクリックイベント
-    regionBtns.forEach(btn => {
+    // エリアセレクター：アコーディオン機能（PC/SP共通）
+    const prefectureButtons = document.querySelectorAll('.area-prefecture-btn');
+    prefectureButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        // すべての地域ボタンからactiveクラスを削除
-        regionBtns.forEach(b => b.classList.remove('active'));
-        // クリックされたボタンにactiveクラスを追加
-        btn.classList.add('active');
-        
-        const region = btn.textContent;
-        console.log('選択された地域:', region);
-        // 実際の実装では、ここで地域に応じたサロンのフィルタリングを実行
-        filterSalonsByRegion(region);
+        const prefecture = btn.closest('.area-prefecture');
+        if (!prefecture) return;
+        prefecture.classList.toggle('is-open');
       });
     });
-    
-    // サロン検索関数
-    function filterSalons(searchTerm: string) {
-      const salonCards = document.querySelectorAll('.salon-card');
-      salonCards.forEach(card => {
-        const salonName = card.querySelector('.salon-card-name')?.textContent || '';
-        const salonLocation = card.querySelector('.salon-card-location span')?.textContent || '';
-        const salonAccess = card.querySelector('.salon-card-access span')?.textContent || '';
-        
-        if (salonName.toLowerCase().includes(searchTerm.toLowerCase()) || 
-            salonLocation.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            salonAccess.toLowerCase().includes(searchTerm.toLowerCase())) {
-          (card as HTMLElement).style.display = 'block';
-        } else {
-          (card as HTMLElement).style.display = 'none';
-        }
+
+    // 市区町村クリックでフィルタ表示
+    const cityButtons = document.querySelectorAll('.area-city');
+    cityButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // activeクラスの切り替え
+        cityButtons.forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+
+        const citySlug = (btn as HTMLElement).dataset.citySlug || '';
+        const prefSlug = (btn as HTMLElement).dataset.prefectureSlug || '';
+        showSalonsByCity(prefSlug, citySlug);
       });
-    }
-    
-    // 地域別サロン検索関数
-    function filterSalonsByRegion(region: string) {
-      const salonCards = document.querySelectorAll('.salon-card');
-      salonCards.forEach(card => {
-        const salonLocation = card.querySelector('.salon-card-location span')?.textContent;
-        
-        if (salonLocation?.includes(region)) {
-          (card as HTMLElement).style.display = 'block';
-        } else {
-          (card as HTMLElement).style.display = 'none';
-        }
+    });
+
+    // サロン表示関数
+    const resultsSection = document.getElementById('salon-results');
+    const resultsTitle = document.getElementById('salon-results-title');
+    const allResultCards = document.querySelectorAll('.salon-result-card');
+
+    function showSalonsByCity(prefSlug: string, citySlug: string) {
+      if (!resultsSection) return;
+      resultsSection.style.display = 'block';
+
+      // タイトル更新
+      const cityBtn = document.querySelector(`[data-city-slug="${citySlug}"][data-prefecture-slug="${prefSlug}"]`);
+      const cityName = cityBtn?.textContent?.replace(/\s*\(\d+\)/, '') || '';
+      if (resultsTitle) {
+        resultsTitle.textContent = `「${cityName}」店舗一覧`;
+      }
+
+      // カード表示切り替え
+      allResultCards.forEach(card => {
+        const cardPref = (card as HTMLElement).dataset.prefecture || '';
+        const cardChildren = (card as HTMLElement).dataset.prefectureChild || '';
+        const childSlugs = cardChildren.split(',');
+        const match = cardPref === prefSlug && childSlugs.includes(citySlug);
+        (card as HTMLElement).style.display = match ? '' : 'none';
       });
+
+      resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    
+
+    // サロン検索機能
+    const salonSearchField = document.getElementById('salon-search-input') as HTMLInputElement;
+    const salonSearchButton = document.getElementById('salon-search-btn') as HTMLButtonElement;
+
+    function searchSalons() {
+      const term = salonSearchField?.value.trim().toLowerCase();
+      if (!term) {
+        // 検索クリア
+        if (resultsSection) resultsSection.style.display = 'none';
+        allResultCards.forEach(card => { (card as HTMLElement).style.display = 'none'; });
+        return;
+      }
+
+      if (!resultsSection) return;
+      resultsSection.style.display = 'block';
+      if (resultsTitle) {
+        resultsTitle.textContent = `「${salonSearchField.value.trim()}」店舗一覧`;
+      }
+
+      allResultCards.forEach(card => {
+        const name = (card as HTMLElement).dataset.name?.toLowerCase() || '';
+        const access = (card as HTMLElement).dataset.access?.toLowerCase() || '';
+        const furigana = (card as HTMLElement).dataset.furigana?.toLowerCase() || '';
+        const prefSlug = (card as HTMLElement).dataset.prefecture || '';
+        const prefEl = document.querySelector(`[data-prefecture-slug="${prefSlug}"] .area-prefecture-name`);
+        const prefName = prefEl?.textContent?.toLowerCase() || '';
+        const match = name.includes(term) || access.includes(term) || furigana.includes(term) || prefName.includes(term);
+        (card as HTMLElement).style.display = match ? '' : 'none';
+      });
+
+      resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    salonSearchButton?.addEventListener('click', searchSalons);
+    salonSearchField?.addEventListener('keypress', (e: KeyboardEvent) => {
+      if (e.key === 'Enter') searchSalons();
+    });
+
     // ニュースタブ機能（.news-group の表示切替）
     const newsTabs = document.querySelectorAll('.news-tab');
     const newsGroups = document.querySelectorAll('.news-group');
@@ -3309,159 +3365,5 @@ const salonJsonLd = {
       });
     });
 
-    // サロンフィルター機能
-    let currentFilter = {
-      region: '',
-      searchTerm: ''
-    };
-
-    // サロンデータを取得（サーバーサイドで読み込まれたデータ）
-    let salonData: any[] = [];
-    fetch('/data/salons.index.json')
-      .then(response => response.json())
-      .then(data => {
-        salonData = data;
-        console.log('サロンデータを読み込みました:', salonData);
-      })
-      .catch(error => {
-        console.error('サロンデータの読み込みに失敗しました:', error);
-      });
-
-    // 地域ボタンのクリックイベント
-    const regionButtons = document.querySelectorAll('.region-btn');
-    regionButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const clickedRegion = button.getAttribute('data-region') || '';
-        
-        // 選択中のボタンを再度クリックした場合はリセット
-        if (currentFilter.region === clickedRegion) {
-          // すべてのボタンからactiveクラスを削除
-          regionButtons.forEach(btn => btn.classList.remove('active'));
-          // フィルターをリセット
-          currentFilter.region = '';
-        } else {
-          // すべてのボタンからactiveクラスを削除
-          regionButtons.forEach(btn => btn.classList.remove('active'));
-          // クリックされたボタンにactiveクラスを追加
-          button.classList.add('active');
-          // フィルターを更新
-          currentFilter.region = clickedRegion;
-        }
-        
-        applyFilters();
-      });
-    });
-
-    // 検索ボタンのクリックイベント（PC用）
-    const salonFilterSearchBtn = document.getElementById('salon-search-btn') as HTMLButtonElement;
-    const salonFilterSearchInput = document.getElementById('salon-search-input') as HTMLInputElement;
-    
-    salonFilterSearchBtn?.addEventListener('click', () => {
-      currentFilter.searchTerm = salonFilterSearchInput?.value || '';
-      applyFilters();
-    });
-
-    // 検索入力のEnterキーイベント（PC用）
-    salonFilterSearchInput?.addEventListener('keypress', (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
-        currentFilter.searchTerm = salonFilterSearchInput.value || '';
-        applyFilters();
-      }
-    });
-
-    // 検索ボタンのクリックイベント（SP用）
-    const salonFilterSearchBtnSp = document.getElementById('salon-search-btn-sp') as HTMLButtonElement;
-    const salonFilterSearchInputSp = document.getElementById('salon-search-input-sp') as HTMLInputElement;
-    
-    salonFilterSearchBtnSp?.addEventListener('click', () => {
-      currentFilter.searchTerm = salonFilterSearchInputSp?.value || '';
-      applyFilters();
-    });
-
-    // 検索入力のEnterキーイベント（SP用）
-    salonFilterSearchInputSp?.addEventListener('keypress', (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
-        currentFilter.searchTerm = salonFilterSearchInputSp.value || '';
-        applyFilters();
-      }
-    });
-
-    // フィルターを適用する関数
-    function applyFilters() {
-      const titleElement = document.getElementById('salon-filter-title');
-      
-      // タイトルを更新
-      let filterText = '';
-      if (currentFilter.searchTerm) {
-        filterText = `「${currentFilter.searchTerm}」`;
-      } else if (currentFilter.region) {
-        const regionNames: { [key: string]: string } = {
-          'hokkaido': '北海道',
-          'tohoku': '東北',
-          'kanto': '関東',
-          'chubu': '中部',
-          'kinki': '近畿',
-          'shikoku': '四国',
-          'chugoku': '中国',
-          'kyushu-okinawa': '九州・沖縄'
-        };
-        filterText = `「${regionNames[currentFilter.region] || currentFilter.region}」`;
-      }
-      
-      if (titleElement) {
-        titleElement.textContent = `${filterText}店舗一覧`;
-      }
-
-      // サロンカードの表示/非表示を切り替え（地域ボタンは除外）
-      const salonCards = document.querySelectorAll('#salon-cards-container [data-region]');
-      salonCards.forEach(card => {
-        
-        const region = card.getAttribute('data-region') || '';
-        const name = card.getAttribute('data-name') || '';
-        const prefecture = card.getAttribute('data-prefecture') || '';
-        const prefectureName = card.getAttribute('data-prefecture-name') || '';
-        const city = card.getAttribute('data-city') || '';
-        const cityName = card.getAttribute('data-city-name') || '';
-        const access = card.getAttribute('data-access') || '';
-        const furigana = card.getAttribute('data-furigana') || '';
-        
-        // 地域フィルター
-        // 地域が選択されている場合: その地域のサロンのみ
-        // 地域が未選択の場合: 検索キーワードがあれば全てのサロン、なければ非表示
-        const regionMatch = currentFilter.region 
-          ? region === currentFilter.region 
-          : (currentFilter.searchTerm ? true : false);
-        
-        // デバッグ情報を追加
-        console.log(`サロン: ${name}, 地域: ${region}, フィルター: ${currentFilter.region}, マッチ: ${regionMatch}`);
-        
-        // 検索フィルター - すべてのデータで検索
-        const searchMatch = !currentFilter.searchTerm || 
-          name.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
-          prefectureName.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
-          cityName.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
-          access.toLowerCase().includes(currentFilter.searchTerm.toLowerCase()) ||
-          furigana.toLowerCase().includes(currentFilter.searchTerm.toLowerCase());
-        
-        if (regionMatch && searchMatch) {
-          (card as HTMLElement).style.display = 'block';
-        } else {
-          (card as HTMLElement).style.display = 'none';
-        }
-      });
-
-      // フィルター結果のカウントを表示
-      const visibleCards = Array.from(salonCards).filter(card => 
-        (card as HTMLElement).style.display !== 'none'
-      );
-      console.log(`フィルター結果: ${visibleCards.length}件のサロンが表示されています`);
-    }
-
-    // 初期状態ではすべてのサロンを表示（ボタンはアクティブにしない）
-    // 全ての地域ボタンからactiveクラスを削除して、未選択状態にする
-    regionButtons.forEach(btn => btn.classList.remove('active'));
-
-    // 初期フィルターを適用
-    applyFilters();
   });
 </script>

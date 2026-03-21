@@ -199,7 +199,7 @@ export interface SalonIndexData {
   thumb: string;
   region: Array<{ slug: string; name: string }>;
   prefecture: Array<{ slug: string; name: string }>;
-  city: Array<{ slug: string; name: string }>;
+  prefecture_child: Array<{ slug: string; name: string }>;
   job_role: Array<{ slug: string; name: string }>;
   employment_type: Array<{ slug: string; name: string }>;
   is_hiring: boolean;

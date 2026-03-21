@@ -110,8 +110,8 @@ const { salon } = Astro.props;
         <img src="/images/icons/icn_location_on.svg" alt="住所" class="salon-card-icon" />
         <span>
           {salon.prefecture && salon.prefecture.length > 0 ? salon.prefecture[0].name : ''}
-          {(salon.prefecture && salon.prefecture.length > 0) && (salon.city && salon.city.length > 0) ? '・' : ''}
-          {salon.city && salon.city.length > 0 ? salon.city[0].name : ''}
+          {(salon.prefecture && salon.prefecture.length > 0) && (salon.prefecture_child && salon.prefecture_child.length > 0) ? '・' : ''}
+          {salon.prefecture_child && salon.prefecture_child.length > 0 ? salon.prefecture_child[0].name : ''}
         </span>
       </div>
       
