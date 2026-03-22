@@ -287,7 +287,19 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
         </div>
           <div class="recruit-appeal__text">
             <p>
-              全国に広がるlittleは、どこでも変わらず、安心して働けるサロン。<br>指名がなくても安定した集客があり、SNSや独立支援も充実。働き方も、場所も、キャリアも、自分で選んでいい。未来をひらくすべての美容師さんへ。
+              littleが本気で目指しているのは、<br>給料・報酬 日本一のサロン。
+            </p>
+            <p>
+              高単価メニューを提案しやすい環境と、<br>安定した集客基盤があるから、<br>売上を伸ばし、その成果がそのまま報酬に反映される仕組みがあります。
+            </p>
+            <p>
+              また、働き方は自由出勤制。<br>時間や休日を自分で選べるため、<br>プライベートを大切にしながら、無理なく美容師を続けられます。
+            </p>
+            <p>
+              人間関係に縛られることなく、<br>それぞれが自分のペースで技術とお客さまに向き合える距離感。
+            </p>
+            <p>
+              ここは、「"頑張りたい"を、安心して続けられる」サロンです。
             </p>
           </div>
       </div>
@@ -1185,13 +1197,12 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   .recruit-appeal__content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
     align-items: center;
   }
 
   .recruit-appeal__image {
-    width: 100%;
-    height: 424px;
+    width: 460px;
+    height: auto;
     border-radius: 12px;
     overflow: hidden;
   }
@@ -1203,10 +1214,14 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
   }
 
   .recruit-appeal__text {
-    font-size: 24px;
-    line-height: 1.5;
-    font-weight: 300;
+    font-size: 16px;
+    line-height: 150%;
+    font-weight: var(--font-weight-regular);
     color: var(--color-black);
+  }
+
+  .recruit-appeal__text p + p {
+    margin-top: 1.5em;
   }
 
 
@@ -2183,8 +2198,8 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
 
     .recruit-appeal__text {
       font-size: 16px;
-      line-height: 1.5;
-      font-weight: 300;
+      line-height: 150%;
+      font-weight: var(--font-weight-regular);
     }
 
     .recruit-appeal__image {
