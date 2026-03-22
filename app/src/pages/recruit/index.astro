@@ -156,8 +156,14 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
                   <br>お客様に新しい体験を届けながら、自身も成長できる場所として、心地良さと自由な働き方を叶えられるサロンが little です。
                 </p>
               </div>
+              <div class="recruit-about__promo">
+                <img
+                  src="/images/recruit/top_promo.png"
+                  alt="高単価 × 高集客 × 高歩合 美容業界No.1実績"
+                />
+              </div>
             </div>
-            
+
             <!-- 右側：画像コンテンツ -->
             <div class="recruit-about__images-container">
               <div class="recruit-about__images-section">
@@ -210,6 +216,12 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
                 <br>お客様に新しい体験を届けながら、自身も成長できる場所として、心地良さと自由な働き方を叶えられるサロンが little です。
               </p>
             </div>
+            <div class="recruit-about__promo">
+              <img
+                src="/images/recruit/top_promo.png"
+                alt="高単価 × 高集客 × 高歩合 美容業界No.1実績"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -219,6 +231,10 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     <section class="recruit-cta-top">
       <div class="recruit-cta-top__container">
         <h2 class="recruit-cta-top__title">応募やサロン見学はこちらから</h2>
+        <div class="recruit-cta-top__tags">
+          <span class="recruit-cta-top__tag">✓  LINEで相談OK</span>
+          <span class="recruit-cta-top__tag">✓  履歴書不要</span>
+        </div>
         <div class="recruit-cta-top__content">
           <!-- メール -->
           <div class="recruit-cta-top__column">
@@ -527,6 +543,10 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     <section class="recruit-cta-top">
       <div class="recruit-cta-top__container">
         <h2 class="recruit-cta-top__title">応募やサロン見学はこちらから</h2>
+        <div class="recruit-cta-top__tags">
+          <span class="recruit-cta-top__tag">✓  LINEで相談OK</span>
+          <span class="recruit-cta-top__tag">✓  履歴書不要</span>
+        </div>
         <div class="recruit-cta-top__content">
           <!-- メール -->
           <div class="recruit-cta-top__column">
@@ -957,6 +977,17 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     object-fit: cover;
   }
 
+  /* プロモ画像 */
+  .recruit-about__promo {
+    margin-top: 30px;
+    max-width: 470px;
+  }
+
+  .recruit-about__promo img {
+    width: 100%;
+    height: auto;
+  }
+
   /* CTA（上部） */
   .recruit-cta-top {
     padding: 80px 0;
@@ -977,6 +1008,23 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     text-align: center;
     line-height: 1.0;
     margin-bottom: 24px;
+  }
+
+  .recruit-cta-top__tags {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .recruit-cta-top__tag {
+    background-color: #FAF4E8;
+    color: var(--color-dark-brown);
+    font-size: 20px;
+    font-weight: var(--font-weight-regular);
+    padding: 8px 24px;
+    margin: 0 8px;
+    border-radius: 50px;
   }
 
   .recruit-cta-top__content {
@@ -2062,6 +2110,12 @@ const image = "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=12
     .recruit-cta-top__title {
       font-size: 20px;
       margin-bottom: 30px;
+    }
+
+    .recruit-cta-top__tag {
+      font-size: 14px;
+      padding: 6px 16px;
+      margin: 0 4px;
     }
 
     .recruit-cta-top__content {
