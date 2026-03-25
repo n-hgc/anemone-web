@@ -75,6 +75,8 @@ const image =
     <title>{title}</title>
 
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Oooh+Baby&display=swap");
+
       /* ヘッダー固定とメインコンテンツのマージン調整 */
       .main-content {
         margin-top: 80px; /* PC版のヘッダー高さ */
@@ -331,7 +333,7 @@ const image =
       <section id="appeal" class="recruit-appeal">
         <div class="recruit-appeal__container">
           <h2 class="recruit-appeal__title">littleで働く魅力</h2>
-          <div class="recruit-appeal__content">
+          <div class="recruit-appeal__content !mb-[80px]">
             <div class="recruit-appeal__image">
               <img
                 src="/images/recruit/appeal-01.jpg"
@@ -364,7 +366,12 @@ const image =
         <div
           class="work-style-section max-w-[1440px] w-full !mx-auto !pl-[200px]"
         >
-          <h2 class="work-style-section__title w-fit">業務委託の働き方</h2>
+          <h2 class="work-style-section__title w-fit flex items-baseline gap-2">
+            <span class="font-['Oooh_Baby'] text-[3rem] leading-none pr-1"
+              >1.</span
+            >
+            業務委託の働き方
+          </h2>
           <div
             class="work-style-section__content flex flex-row w-fit items-center !mx-auto"
           >
