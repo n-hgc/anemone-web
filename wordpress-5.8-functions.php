@@ -110,17 +110,59 @@ function register_salon_taxonomies() {
 }
 add_action('init', 'register_salon_taxonomies');
 
-// ACFフィールドをREST APIで公開（WordPress 5.8対応）
-function add_salon_meta_to_rest() {
-    register_rest_field('salon', 'acf', array(
-        'get_callback' => function($post) {
-            return get_fields($post['id']);
-        },
-        'update_callback' => null,
-        'schema' => null
+// カスタム投稿タイプ「リクルート動画」の登録
+function register_recruit_video_post_type() {
+    $args = array(
+        'public' => true,
+        'show_in_rest' => true, // REST APIでアクセス可能
+        'supports' => array('title', 'thumbnail', 'custom-fields'),
+        'has_archive' => false,
+        'rewrite' => array('slug' => 'recruit-video'),
+        'labels' => array(
+            'name' => 'リクルート動画',
+            'singular_name' => 'リクルート動画',
+            'add_new' => '新規追加',
+            'add_new_item' => '新しい動画を追加',
+            'edit_item' => '動画を編集',
+            'search_items' => '動画を検索',
+            'not_found' => '見つかりません'
+        ),
+        'menu_icon' => 'dashicons-video-alt3',
+        'menu_position' => 6
+    );
+    register_post_type('recruit_video', $args);
+}
+add_action('init', 'register_recruit_video_post_type');
+
+// リクルート動画用タクソノミー（表示用フラグなど）の登録
+function register_recruit_video_taxonomies() {
+    register_taxonomy('recruit_video_category', 'recruit_video', array(
+        'hierarchical' => true,
+        'show_in_rest' => true,
+        'labels' => array(
+            'name' => '動画カテゴリ',
+            'singular_name' => '動画カテゴリ',
+            'menu_name' => '動画カテゴリ'
+        ),
+        'rewrite' => array('slug' => 'recruit-video-category')
     ));
 }
-add_action('rest_api_init', 'add_salon_meta_to_rest');
+add_action('init', 'register_recruit_video_taxonomies');
+
+// ACFフィールドをREST APIで公開（WordPress 5.8対応）
+function add_acf_meta_to_rest() {
+    $post_types = array('salon', 'recruit_video');
+    foreach ($post_types as $post_type) {
+        register_rest_field($post_type, 'acf', array(
+            'get_callback' => function($post) {
+                return get_fields($post['id']);
+            },
+            'update_callback' => null,
+            'schema' => null
+        ));
+    }
+}
+add_action('rest_api_init', 'add_acf_meta_to_rest');
 
 // CORS設定（フロントエンドからのアクセス許可）
 function add_cors_http_header(){
@@ -132,25 +174,31 @@ add_action('init','add_cors_http_header');
 
 // REST APIのレスポンスにカスタムフィールドを含める
 function add_custom_fields_to_rest() {
-    register_rest_field('salon', 'meta', array(
-        'get_callback' => function($post) {
-            return get_post_meta($post['id']);
-        },
-        'update_callback' => null,
-        'schema' => null
-    ));
+    $post_types = array('salon', 'recruit_video');
+    foreach ($post_types as $post_type) {
+        register_rest_field($post_type, 'meta', array(
+            'get_callback' => function($post) {
+                return get_post_meta($post['id']);
+            },
+            'update_callback' => null,
+            'schema' => null
+        ));
+    }
 }
 add_action('rest_api_init', 'add_custom_fields_to_rest');
 
 // カスタム投稿タイプのスラッグをREST APIで使用
-function add_salon_slug_to_rest() {
-    register_rest_field('salon', 'slug', array(
-        'get_callback' => function($post) {
-            return get_post_field('post_name', $post['id']);
-        },
-        'update_callback' => null,
-        'schema' => null
-    ));
+function add_slug_to_rest() {
+    $post_types = array('salon', 'recruit_video');
+    foreach ($post_types as $post_type) {
+        register_rest_field($post_type, 'slug', array(
+            'get_callback' => function($post) {
+                return get_post_field('post_name', $post['id']);
+            },
+            'update_callback' => null,
+            'schema' => null
+        ));
+    }
 }
-add_action('rest_api_init', 'add_salon_slug_to_rest');
+add_action('rest_api_init', 'add_slug_to_rest');
 ?>

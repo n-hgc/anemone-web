@@ -5,6 +5,7 @@ import RecruitSalonCard from "../../components/RecruitSalonCard.astro";
 import RecruitStaffCard from "../../components/RecruitStaffCard.astro";
 import RecruitJobCard from "../../components/RecruitJobCard.astro";
 import RecruitFaqItem from "../../components/RecruitFaqItem.astro";
+import RecruitVideos from "../../components/RecruitVideos.astro";
 import { generateRecruitJsonLd } from "../../lib/seo/jsonld";
 import recruitStaffData from "../../data/recruit-staff.json";
 import recruitJobsData from "../../data/recruit-jobs.json";
@@ -34,6 +35,27 @@ try {
 
 // サロンデータを直接使用（変換不要）
 const salons: SalonIndexData[] = salonData;
+
+// リクルート動画データを読み込む (Server-side)
+let recruitVideos: any[] = [];
+try {
+  const fs = await import("fs");
+  const path = await import("path");
+  const recruitVideosPath = path.join(
+    process.cwd(),
+    "public",
+    "data",
+    "recruit-videos.json",
+  );
+  if (fs.existsSync(recruitVideosPath)) {
+    const recruitVideosContent = fs.readFileSync(recruitVideosPath, "utf-8");
+    recruitVideos = JSON.parse(recruitVideosContent);
+  }
+} catch (error) {
+  console.error("リクルート動画データの読み込みに失敗しました:", error);
+  recruitVideos = [];
+}
+
 const { staff } = recruitStaffData;
 const { jobs, applicationProcess } = recruitJobsData;
 const { faqs } = recruitFaqData;
@@ -771,6 +793,8 @@ const image =
       </section>
 
       <!-- 働くスタッフの声セクション -->
+      {recruitVideos.length > 0 && <RecruitVideos videos={recruitVideos} />}
+
       <section class="recruit-staff-voices">
         <div class="recruit-staff-voices__container">
           <h2 class="recruit-staff-voices__title">働くスタッフの声</h2>
