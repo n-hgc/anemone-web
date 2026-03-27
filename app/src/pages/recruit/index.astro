@@ -38,6 +38,80 @@ const { staff } = recruitStaffData;
 const { jobs, applicationProcess } = recruitJobsData;
 const { faqs } = recruitFaqData;
 
+const workStyles = [
+  {
+    number: "1.",
+    themeColor: "text-[#E8A390]",
+    title: "業務委託の働き方",
+    titleClass: "",
+    isReverse: false,
+    wrapperOffset: "xl:!pl-[160px] max-xl:!px-[24px]",
+    illustration: "/images/recruit/appeal-topic-01.png",
+    cardWidth: "lg:w-[254px]",
+    cardOverlap: "md:!-ml-[48px]",
+    cards: [
+      {
+        pc: "/images/recruit/appeal-topic-no1-01.jpg",
+        sp: "/images/recruit/appeal-topic-no1-01-sp.jpg",
+      },
+      {
+        pc: "/images/recruit/appeal-topic-no1-02.jpg",
+        sp: "/images/recruit/appeal-topic-no1-02-sp.jpg",
+      },
+      {
+        pc: "/images/recruit/appeal-topic-no1-03.jpg",
+        sp: "/images/recruit/appeal-topic-no1-03-sp.jpg",
+      },
+    ],
+  },
+  {
+    number: "2.",
+    themeColor: "text-[#95B6C4]",
+    title: "正社員の働き方",
+    titleClass: "xl:!pl-[420px]",
+    isReverse: true,
+    wrapperOffset: "max-xl:!px-[24px]",
+    illustration: "/images/recruit/appeal-topic-02.png",
+    cardWidth: "lg:w-[254px]",
+    cardOverlap: "md:!-mr-[48px]",
+    cards: [
+      {
+        pc: "/images/recruit/appeal-topic-no2-01.jpg",
+        sp: "/images/recruit/appeal-topic-no2-01-sp.jpg",
+      },
+      {
+        pc: "/images/recruit/appeal-topic-no2-02.jpg",
+        sp: "/images/recruit/appeal-topic-no2-02-sp.jpg",
+      },
+      {
+        pc: "/images/recruit/appeal-topic-no2-03.jpg",
+        sp: "/images/recruit/appeal-topic-no2-03-sp.jpg",
+      },
+    ],
+  },
+  {
+    number: "3.",
+    themeColor: "text-[#E6C37F]",
+    title: "新卒・<br class='sm:hidden' />中途アシスタントの働き方",
+    titleClass: "",
+    isReverse: false,
+    wrapperOffset: "xl:!pl-[160px] max-xl:!px-[24px]",
+    illustration: "/images/recruit/appeal-topic-03.png",
+    cardWidth: "lg:w-[392px]",
+    cardOverlap: "md:!-ml-[48px]",
+    cards: [
+      {
+        pc: "/images/recruit/appeal-topic-no3-01.jpg",
+        sp: "/images/recruit/appeal-topic-no3-01-sp.jpg",
+      },
+      {
+        pc: "/images/recruit/appeal-topic-no3-02.jpg",
+        sp: "/images/recruit/appeal-topic-no3-02-sp.jpg",
+      },
+    ],
+  },
+];
+
 const title = "採用情報 - little";
 const description =
   "littleでは美容師・スタイリストを募集しています。お客様に喜んでいただけるサービスを一緒に提供しませんか？";
@@ -363,210 +437,59 @@ const image =
             </div>
           </div>
         </div>
-        <div
-          class="work-style-section max-w-[1440px] w-fit !mx-auto xl:!pl-[160px] max-xl:!px-[24px] !mb-[40px]"
-        >
-          <h2
-            class="work-style-section__title w-fit flex items-baseline gap-2 lg:!text-[32px] !text-[20px] text-[#69552E] !mb-4"
-          >
-            <span
-              class="font-['Oooh_Baby'] lg:!text-[70px] text-[50px] leading-none text-[#E8A390]"
-              >1.</span
+        {
+          workStyles.map((style) => (
+            <div
+              class={`work-style-section max-w-[1440px] w-fit !mx-auto !mb-[40px] ${style.wrapperOffset}`}
             >
-            業務委託の働き方
-          </h2>
-          <div
-            class="work-style-section__content flex md:flex-row flex-col gap-y-4 w-fit items-center"
-          >
-            <div class="flex md:flex-row flex-col gap-x-4 gap-y-4 z-10">
-              <div
-                class="work-style-section__image w-fit !rounded-md lg:w-[254px]"
+              <h2
+                class={`work-style-section__title w-fit flex md:items-baseline ${style.number === "3." ? "items-end" : "items-baseline"} gap-2 lg:!text-[32px] !text-[20px] text-[#69552E] !mb-4 ${style.titleClass}`}
               >
-                <picture>
-                  <source
-                    media="(min-width: 768px)"
-                    srcset="/images/recruit/appeal-topic-no1-01.jpg"
-                  />
-                  <img
-                    src="/images/recruit/appeal-topic-no1-01-sp.jpg"
-                    alt="littleサロンで働くスタッフの様子"
-                    class="rounded-md"
-                  />
-                </picture>
-              </div>
-              <div class="work-style-section__image w-fit lg:w-[254px]">
-                <picture>
-                  <source
-                    media="(min-width: 768px)"
-                    srcset="/images/recruit/appeal-topic-no1-02.jpg"
-                  />
-                  <img
-                    src="/images/recruit/appeal-topic-no1-02-sp.jpg"
-                    alt="littleサロンで働くスタッフの様子"
-                    class="rounded-md"
-                  />
-                </picture>
-              </div>
-              <div class="work-style-section__image w-fit lg:w-[254px]">
-                <picture>
-                  <source
-                    media="(min-width: 768px)"
-                    srcset="/images/recruit/appeal-topic-no1-03.jpg"
-                  />
-                  <img
-                    src="/images/recruit/appeal-topic-no1-03-sp.jpg"
-                    alt="littleサロンで働くスタッフの様子"
-                    class="rounded-md"
-                  />
-                </picture>
-              </div>
-            </div>
-            <div class="w-fit lg:w-[450px] md:!-ml-[48px]">
-              <picture>
-                <source
-                  media="(min-width: 768px)"
-                  srcset="/images/recruit/appeal-topic-01.png"
-                />
-                <img
-                  src="/images/recruit/appeal-topic-01.png"
-                  alt="littleサロンで働くスタッフの様子"
-                  class="rounded-md"
-                />
-              </picture>
-            </div>
-          </div>
-        </div>
-        <div
-          class="work-style-section max-w-[1440px] w-fit !mx-auto max-xl:!px-[24px] !mb-[40px]"
-        >
-          <h2
-            class="work-style-section__title w-fit flex items-baseline gap-2 xl:!pl-[420px] lg:!text-[32px] !text-[20px] text-[#69552E] !mb-4"
-          >
-            <span
-              class="font-['Oooh_Baby'] lg:!text-[70px] text-[50px] leading-none text-[#95B6C4]"
-              >2.</span
-            >
-            正社員の働き方
-          </h2>
-          <div class="work-style-section__content gap-y-4 w-fit items-center">
-            <div class="flex md:flex-row flex-col-reverse gap-x-4 gap-y-4 z-10">
-              <div class="w-fit lg:w-[450px] md:!-mr-[48px]">
-                <picture>
-                  <source
-                    media="(min-width: 768px)"
-                    srcset="/images/recruit/appeal-topic-02.png"
-                  />
-                  <img
-                    src="/images/recruit/appeal-topic-02.png"
-                    alt="littleサロンで働くスタッフの様子"
-                    class="rounded-md"
-                  />
-                </picture>
-              </div>
+                <span
+                  class={`font-['Oooh_Baby'] lg:!text-[70px] text-[50px] leading-none ${style.themeColor}`}
+                >
+                  {style.number}
+                </span>
+                <span set:html={style.title} />
+              </h2>
+
               <div
-                class="work-style-section__image w-fit !rounded-md lg:w-[254px]"
+                class={`work-style-section__content flex flex-col gap-y-4 w-fit items-center ${style.isReverse ? "md:flex-row-reverse" : "md:flex-row"}`}
               >
-                <picture>
-                  <source
-                    media="(min-width: 768px)"
-                    srcset="/images/recruit/appeal-topic-no2-01.jpg"
-                  />
-                  <img
-                    src="/images/recruit/appeal-topic-no2-01-sp.jpg"
-                    alt="littleサロンで働くスタッフの様子"
-                    class="rounded-md"
-                  />
-                </picture>
-              </div>
-              <div class="work-style-section__image w-fit lg:w-[254px]">
-                <picture>
-                  <source
-                    media="(min-width: 768px)"
-                    srcset="/images/recruit/appeal-topic-no2-02.jpg"
-                  />
-                  <img
-                    src="/images/recruit/appeal-topic-no2-02-sp.jpg"
-                    alt="littleサロンで働くスタッフの様子"
-                    class="rounded-md"
-                  />
-                </picture>
-              </div>
-              <div class="work-style-section__image w-fit lg:w-[254px]">
-                <picture>
-                  <source
-                    media="(min-width: 768px)"
-                    srcset="/images/recruit/appeal-topic-no2-03.jpg"
-                  />
-                  <img
-                    src="/images/recruit/appeal-topic-no2-03-sp.jpg"
-                    alt="littleサロンで働くスタッフの様子"
-                    class="rounded-md"
-                  />
-                </picture>
+                <div class="flex flex-col md:flex-row gap-x-4 gap-y-4 z-10">
+                  {style.cards.map((card) => (
+                    <div
+                      class={`work-style-section__image w-fit !rounded-md ${style.cardWidth}`}
+                    >
+                      <picture>
+                        <source media="(min-width: 768px)" srcset={card.pc} />
+                        <img
+                          src={card.sp}
+                          alt="サロンスタッフの様子"
+                          class="rounded-md"
+                        />
+                      </picture>
+                    </div>
+                  ))}
+                </div>
+
+                <div class={`w-fit lg:w-[450px] ${style.cardOverlap}`}>
+                  <picture>
+                    <source
+                      media="(min-width: 768px)"
+                      srcset={style.illustration}
+                    />
+                    <img
+                      src={style.illustration}
+                      alt="働き方イラスト"
+                      class="rounded-md"
+                    />
+                  </picture>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div
-          class="work-style-section max-w-[1440px] w-fit !mx-auto xl:!pl-[160px] max-xl:!px-[24px] !mb-[40px]"
-        >
-          <h2
-            class="work-style-section__title w-fit flex md:items-baseline items-end gap-2 lg:!text-[32px] !text-[20px] text-[#69552E] !mb-4"
-          >
-            <span
-              class="font-['Oooh_Baby'] lg:!text-[70px] text-[50px] leading-none text-[#E6C37F]"
-              >3.</span
-            >
-            新卒・<br class="sm:hidden" />中途アシスタントの働き方
-          </h2>
-          <div
-            class="work-style-section__content flex md:flex-row flex-col gap-y-4 w-fit items-center"
-          >
-            <div class="flex md:flex-row flex-col gap-x-4 gap-y-4 z-10">
-              <div
-                class="work-style-section__image w-fit !rounded-md lg:w-[392px]"
-              >
-                <picture>
-                  <source
-                    media="(min-width: 768px)"
-                    srcset="/images/recruit/appeal-topic-no3-01.jpg"
-                  />
-                  <img
-                    src="/images/recruit/appeal-topic-no3-01-sp.jpg"
-                    alt="littleサロンで働くスタッフの様子"
-                    class="rounded-md"
-                  />
-                </picture>
-              </div>
-              <div class="work-style-section__image w-fit lg:w-[392px]">
-                <picture>
-                  <source
-                    media="(min-width: 768px)"
-                    srcset="/images/recruit/appeal-topic-no3-02.jpg"
-                  />
-                  <img
-                    src="/images/recruit/appeal-topic-no3-02-sp.jpg"
-                    alt="littleサロンで働くスタッフの様子"
-                    class="rounded-md"
-                  />
-                </picture>
-              </div>
-            </div>
-            <div class="w-fit lg:w-[450px] md:!-ml-[48px]">
-              <picture>
-                <source
-                  media="(min-width: 768px)"
-                  srcset="/images/recruit/appeal-topic-03.png"
-                />
-                <img
-                  src="/images/recruit/appeal-topic-03.png"
-                  alt="littleサロンで働くスタッフの様子"
-                  class="rounded-md"
-                />
-              </picture>
-            </div>
-          </div>
-        </div>
+          ))
+        }
       </section>
 
       <!-- 働く環境・サロン紹介セクション -->
