@@ -795,19 +795,6 @@ const image =
       <!-- 働くスタッフの声セクション -->
       {recruitVideos.length > 0 && <RecruitVideos videos={recruitVideos} />}
 
-      <section class="recruit-staff-voices">
-        <div class="recruit-staff-voices__container">
-          <h2 class="recruit-staff-voices__title">働くスタッフの声</h2>
-          <div class="recruit-staff-voices__grid">
-            {
-              staff.map((staffMember) => (
-                <RecruitStaffCard staff={staffMember} />
-              ))
-            }
-          </div>
-        </div>
-      </section>
-
       <!-- 募集職種セクション -->
       <section class="recruit-jobs">
         <div class="recruit-jobs__container">
@@ -853,6 +840,18 @@ const image =
         </div>
       </section>
       <!-- 募集要項セクション -->
+      <section class="recruit-staff-voices">
+        <div class="recruit-staff-voices__container">
+          <h2 class="recruit-staff-voices__title">働くスタッフの声</h2>
+          <div class="recruit-staff-voices__grid">
+            {
+              staff.map((staffMember) => (
+                <RecruitStaffCard staff={staffMember} />
+              ))
+            }
+          </div>
+        </div>
+      </section>
 
       <!-- よくある質問セクション -->
       <section id="faq" class="recruit-faq">
@@ -2531,10 +2530,13 @@ const image =
     .recruit-appeal,
     .recruit-environment,
     .recruit-staff-voices,
-    .recruit-jobs,
     .recruit-application-process,
     .recruit-faq {
       padding: 32px 0;
+    }
+
+    .recruit-jobs {
+      padding: 64px 0 32px 0;
     }
 
     .recruit-cta-top {
