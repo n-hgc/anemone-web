@@ -1113,6 +1113,34 @@ const image =
           },
         );
 
+        $$(".js-job-filter-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            const jobId = btn.getAttribute("data-job-id");
+            if (jobId) {
+              const desktopSelect = $("#jobSelect");
+              if (desktopSelect) desktopSelect.value = jobId;
+
+              const mobileSelect = $("#mobile-jobSelect");
+              if (mobileSelect) mobileSelect.value = jobId;
+
+              let targetSection = $("#salonList");
+              if (
+                targetSection &&
+                window.getComputedStyle(targetSection).display === "none"
+              ) {
+                targetSection =
+                  $(".recruit-environment__desktop-layout") || $("#salon");
+              }
+              if (targetSection) {
+                targetSection.scrollIntoView({ behavior: "smooth" });
+              }
+
+              onSearch("");
+            }
+          });
+        });
+
         initFromURL();
       });
     })();
