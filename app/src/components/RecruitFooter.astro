@@ -1,5 +1,21 @@
 ---
 // リクルートページ専用フッターコンポーネント
+const mailSubject = "【採用・見学お問い合わせ】";
+const mailBody = `以下の項目をご記入の上、送信してください。
+
+■お問い合わせ内容：
+（ 採用エントリー / サロン見学・面談 ）※該当する方を残してください
+
+■お名前：
+■フリガナ：
+■お電話番号：
+■ご希望の店舗（特定の店舗の求人をご覧になった方はこちらにご記入ください）：
+■ご希望の職種（スタイリスト/アシスタント等）：
+■美容師免許（有・無・取得予定）：
+■現在のご状況（在職中/離職中/学生等）：
+■その他ご質問・ご要望事項等：
+`;
+const mailtoLink = `mailto:recruit@anemone-salon.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
 ---
 
 <footer class="footer">
@@ -143,7 +159,8 @@
 <div class="recruit-fixed-actions">
   <div class="recruit-fixed-actions__container">
     <a
-      href="#entry"
+      id="mail-entry-btn"
+      href={mailtoLink}
       class="recruit-fixed-actions__btn recruit-fixed-actions__btn--form"
     >
       <span
@@ -178,6 +195,60 @@
     </a>
   </div>
 </div>
+
+<script>
+  // URLパラメータに応じてメーラーの件名・本文を動的に書き換える
+  const initMailBtn = () => {
+    const btn = document.getElementById('mail-entry-btn') as HTMLAnchorElement;
+    if (!btn) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const store = params.get('store');
+    const type = params.get('type');
+
+    if (store || type) {
+      let subject = "【採用・見学お問い合わせ】";
+      let inquiryText = "（ 採用エントリー / サロン見学・面談 ）※該当する方を残してください";
+      
+      if (type === 'entry') {
+        subject = "【採用エントリー】";
+        inquiryText = "採用エントリー";
+      } else if (type === 'tour') {
+        subject = "【サロン見学・面談お問い合わせ】";
+        inquiryText = "サロン見学・面談";
+      }
+
+      const storeText = store ? store : "（特定の店舗の求人をご覧になった方はこちらにご記入ください）";
+
+      const mailBody = `以下の項目をご記入の上、送信してください。
+
+■お問い合わせ内容：
+${inquiryText}
+
+■お名前：
+■フリガナ：
+■お電話番号：
+■ご希望の店舗（特定の店舗の求人をご覧になった方はこちらにご記入ください）：
+${storeText !== "（特定の店舗の求人をご覧になった方はこちらにご記入ください）" ? storeText : ""}
+■ご希望の職種（スタイリスト/アシスタント等）：
+■美容師免許（有・無・取得予定）：
+■現在のご状況（在職中/離職中/学生等）：
+■その他ご質問・ご要望事項等：
+`;
+// AstroデフォルトのencodeURIComponentによるリンク生成と同じ方法で上書き
+      btn.href = `mailto:recruit@anemone-salon.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailBody)}`;
+    }
+  };
+
+  // AstroのView Transitions対応のためにastro:page-loadでも実行
+  document.addEventListener('astro:page-load', initMailBtn);
+  // 初回ロード用
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMailBtn);
+  } else {
+    initMailBtn();
+  }
+</script>
 
 <style>
   @import "tailwindcss";
