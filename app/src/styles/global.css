@@ -1,6 +1,12 @@
 @import "tailwindcss/theme" layer(theme);
 @import "tailwindcss/utilities" layer(utilities);
 
+/* tel:リンクのブラウザデフォルト青色を防止 */
+a[href^="tel:"] {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 /* Shin Retro Maru Gothic フォント定義 */
 @font-face {
   font-family: 'ShinRetroMaruGothic';
