@@ -8,18 +8,26 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-async function fetchJson(url, init = {}) {
-  const res = await fetch(url, { 
-    headers: { 
-      'Accept': 'application/json',
-      'Accept-Encoding': 'gzip, deflate, br'
-    }, 
-    ...init 
-  });
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status} for ${url}`);
+async function fetchJson(url, init = {}, retries = 3) {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(url, {
+        headers: {
+          'Accept': 'application/json',
+          'Accept-Encoding': 'gzip, deflate, br'
+        },
+        ...init
+      });
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status} for ${url}`);
+      }
+      return res.json();
+    } catch (e) {
+      if (attempt === retries) throw e;
+      console.warn(`Fetch attempt ${attempt}/${retries} failed for ${url}: ${e?.message || e}. Retrying...`);
+      await new Promise(r => setTimeout(r, 1000 * attempt));
+    }
   }
-  return res.json();
 }
 
 async function fetchMediaUrl(baseUrl, mediaId) {
@@ -132,6 +140,12 @@ async function main() {
 }
 
 main().catch(err => {
-  console.error(err);
-  process.exit(1);
+  const outFile = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'app', 'public', 'data', 'interviews.index.json');
+  if (fs.existsSync(outFile)) {
+    console.warn(`Failed to fetch interview data: ${err?.message || err}`);
+    console.warn(`Using existing ${outFile} as fallback.`);
+  } else {
+    console.error(err);
+    process.exit(1);
+  }
 });

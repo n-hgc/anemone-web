@@ -5,15 +5,23 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-async function fetchJson(url, init = {}) {
-  const res = await fetch(url, { 
-    headers: { 'Accept': 'application/json' }, 
-    ...init 
-  });
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status} for ${url}`);
+async function fetchJson(url, init = {}, retries = 3) {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(url, {
+        headers: { 'Accept': 'application/json' },
+        ...init
+      });
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status} for ${url}`);
+      }
+      return res.json();
+    } catch (e) {
+      if (attempt === retries) throw e;
+      console.warn(`Fetch attempt ${attempt}/${retries} failed for ${url}: ${e?.message || e}. Retrying...`);
+      await new Promise(r => setTimeout(r, 1000 * attempt));
+    }
   }
-  return res.json();
 }
 
 async function main() {
