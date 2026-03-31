@@ -11,6 +11,7 @@ import recruitStaffData from "../../data/recruit-staff.json";
 import recruitJobsData from "../../data/recruit-jobs.json";
 import recruitFaqData from "../../data/recruit-faq.json";
 import type { SalonIndexData } from "../../types";
+import "../../styles/global.css";
 
 // 採用ページのJSON-LDを生成
 const jsonLd = generateRecruitJsonLd();
@@ -150,8 +151,7 @@ const image =
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- グローバルCSSの読み込み -->
-    <link rel="stylesheet" href="/src/styles/global.css" />
+    <!-- グローバルCSSはfrontmatterでimport済み -->
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
