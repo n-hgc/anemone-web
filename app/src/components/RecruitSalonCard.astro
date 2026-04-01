@@ -39,7 +39,9 @@ const { salon } = Astro.props;
             ? 'mid-career' 
             : emp.slug === 'new' 
               ? 'new-graduate' 
-              : emp.slug}`}>{emp.name}</span>
+              : emp.slug === 'contract'
+                ? 'contract'
+                : emp.slug}`}>{emp.name}</span>
     ))}
   </div>
   <div class="recruit-environment__salon-content">
@@ -146,6 +148,10 @@ const { salon } = Astro.props;
 
   .recruit-environment__salon-tag--part-time {
     background-color: #EFFAE8;
+  }
+
+  .recruit-environment__salon-tag--contract {
+    background-color: #F4F0EE;
   }
 
   .recruit-environment__salon-tag--job {
