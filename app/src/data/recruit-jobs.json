@@ -5,16 +5,28 @@
       "number": "01",
       "title": "アシスタント",
       "tags": [
-        {"type": "new-graduate", "label": "新卒"},
-        {"type": "mid-career", "label": "中途"},
-        {"type": "full-time", "label": "正社員"},
-        {"type": "part-time", "label": "パート"}
+        {
+          "type": "new-graduate",
+          "label": "新卒"
+        },
+        {
+          "type": "mid-career",
+          "label": "中途"
+        },
+        {
+          "type": "full-time",
+          "label": "正社員"
+        },
+        {
+          "type": "part-time",
+          "label": "パート"
+        }
       ],
       "jobDescription": "スタイリストのサポート業務全般 (シャンプー、カラー、ブロー等)。基礎から丁寧に学べる教育制度あり。",
       "requirements": "美容師免許をお持ちの方 (取得予定含む)",
       "salary": {
-        "fullTime": "月給220,000円~+手当",
-        "partTime": "時給1,250円~ (地域により異なる)"
+        "fullTime": "月給240,000円~+手当",
+        "partTime": "時給~1,250円 (地域により異なる)"
       },
       "buttonText": "募集中の店舗を探す",
       "buttonLink": "#"
@@ -24,17 +36,24 @@
       "number": "02",
       "title": "スタイリスト",
       "tags": [
-        {"type": "mid-career", "label": "中途"},
-        {"type": "full-time", "label": "正社員"},
-        {"type": "part-time", "label": "パート"},
-        {"type": "contractor", "label": "業務委託"}
+        {
+          "type": "mid-career",
+          "label": "中途"
+        },
+        {
+          "type": "part-time",
+          "label": "パート"
+        },
+        {
+          "type": "contractor",
+          "label": "業務委託"
+        }
       ],
-      "jobDescription": "カット・カラー・パーマなどの施術全般。SNS活用や集客支援あり。指名なしでも安定収入。",
+      "jobDescription": "カット・カラー・パーマなどの施術全般。指名なしでも安定収入。",
       "requirements": "美容師免許をお持ちの方/実務経験者優遇",
       "salary": {
-        "fullTime": "月給230,000円~+手当・歩合",
-        "contractor": "完全歩合 (フリー40%~/指名50%~75%)",
-        "partTime": "時給1,250円~ (地域により異なる)"
+        "contractor": "完全歩合 (フリー40%~/指名50%~80%)",
+        "partTime": "時給~1,250円 (地域により異なる)"
       },
       "buttonText": "募集中の店舗を探す",
       "buttonLink": "#"
@@ -44,15 +63,24 @@
       "number": "03",
       "title": "アイリスト/アイブロウリスト",
       "tags": [
-        {"type": "mid-career", "label": "中途"},
-        {"type": "part-time", "label": "パート"},
-        {"type": "contractor", "label": "業務委託"}
+        {
+          "type": "mid-career",
+          "label": "中途"
+        },
+        {
+          "type": "part-time",
+          "label": "パート"
+        },
+        {
+          "type": "contractor",
+          "label": "業務委託"
+        }
       ],
       "jobDescription": "まつげエクステ・パーマ、アイブロウ施術。トレンド技術を学びながらキャリアアップ可能。",
       "requirements": "美容師免許をお持ちの方/未経験OK(研修あり)",
       "salary": {
-        "contractor": "完全歩合 (フリー40%指名50%~75%)",
-        "partTime": "時給1,250円~ (地域により異なる)"
+        "contractor": "完全歩合 (フリー40%/指名50%)",
+        "partTime": "時給 ~1,250円 (地域により異なる)"
       },
       "buttonText": "募集中の店舗を探す",
       "buttonLink": "#"
