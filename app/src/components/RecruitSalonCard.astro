@@ -6,6 +6,18 @@ export interface Props {
 }
 
 const { salon } = Astro.props;
+
+const unescapeHtml = (str: string) => {
+  if (!str) return '';
+  return str
+    .replace(/&amp;/g, '&')
+    .replace(/&#038;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'");
+};
+const decodedTitle = unescapeHtml(salon.title);
 ---
 
 <div 
@@ -20,13 +32,13 @@ const { salon } = Astro.props;
   data-employment={salon.employment_type.map(e => e.slug).join(',')}
   data-employment-name={salon.employment_type.map(e => e.name).join(',')}
   data-hiring={salon.is_hiring ? '1' : '0'}
-  data-title={salon.title}
+  data-title={decodedTitle}
   data-furigana={salon.furigana}
   data-access={salon.access}
 >
   <img 
     src={salon.thumb} 
-    alt={salon.title} 
+    alt={decodedTitle} 
     class="recruit-environment__salon-image"
   />
   <div class="recruit-environment__salon-tags">
@@ -46,7 +58,7 @@ const { salon } = Astro.props;
   </div>
   <div class="recruit-environment__salon-content">
     <h4 class="recruit-environment__salon-name">
-      {salon.title} 【{salon.furigana}】
+      {decodedTitle} 【{salon.furigana}】
     </h4>
     <div class="recruit-environment__salon-info">
       <div class="recruit-environment__salon-job">
