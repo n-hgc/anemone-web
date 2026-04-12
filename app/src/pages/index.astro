@@ -210,7 +210,7 @@ const unescapeHtml = (str: string) => {
           <div class="hero-slideshow">
             <div class="hero-slide active">
               <img
-                src="/images/hero/slide-1.png"
+                src="/images/hero/slide-1.jpg"
                 alt="アネモネサロンのスタイリング"
                 class="hero-slide-image"
               />
@@ -230,7 +230,7 @@ const unescapeHtml = (str: string) => {
 
             <div class="hero-slide">
               <img
-                src="/images/hero/slide-2.png"
+                src="/images/hero/slide-2.jpg"
                 alt="アネモネサロンの店内"
                 class="hero-slide-image"
               />
@@ -250,7 +250,7 @@ const unescapeHtml = (str: string) => {
 
             <div class="hero-slide">
               <img
-                src="/images/hero/slide-3.png"
+                src="/images/hero/slide-3.jpg"
                 alt="アネモネサロンのスタイリング"
                 class="hero-slide-image"
               />
@@ -482,7 +482,7 @@ const unescapeHtml = (str: string) => {
 
         <div class="hairmake-image">
           <img
-            src="/images/main/hairmake.png"
+            src="/images/main/hairmake.jpg"
             alt="ヘアメイクサービス"
             class="hairmake-image-content"
           />
@@ -910,6 +910,7 @@ const unescapeHtml = (str: string) => {
     left: 0;
     right: 0;
     bottom: 0;
+    background: linear-gradient(to right, #79684F33 0%, #FFFFFF33 100%);
   }
 
   .hero-slide-content {
@@ -2012,7 +2013,7 @@ const unescapeHtml = (str: string) => {
 
   .mail-form {
     position: relative;
-    background-image: url("/images/hero/slide-2.png");
+    background-image: url("/images/hero/slide-2.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -2038,6 +2039,19 @@ const unescapeHtml = (str: string) => {
 
   .hairmake-image {
     width: 460px;
+    position: relative;
+  }
+
+  .hairmake-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, #79684F33 0%, #FFFFFF33 100%);
+    border-radius: 12px;
+    pointer-events: none;
   }
 
   .hairmake-image-content {
@@ -2410,7 +2424,7 @@ const unescapeHtml = (str: string) => {
   /* 採用情報セクション */
   .recruit-section {
     position: relative;
-    background-image: url("/images/hero/slide-1.png");
+    background-image: url("/images/hero/slide-1.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
