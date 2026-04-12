@@ -116,7 +116,20 @@
       }
     ],
     "job_role": [],
-    "employment_type": [],
+    "employment_type": [
+      {
+        "id": 411,
+        "slug": "parttime",
+        "name": "パート",
+        "parent": 0
+      },
+      {
+        "id": 431,
+        "slug": "contract",
+        "name": "業務委託",
+        "parent": 0
+      }
+    ],
     "is_hiring": true,
     "reservation_url": "https://beauty.hotpepper.jp/kr/slnH000596734/",
     "maps_url": "",

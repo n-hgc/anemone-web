@@ -31,9 +31,9 @@ if (!interview) {
   throw new Error('Interview not found');
 }
 
-const title = interview.title || "社員インタビュー - little";
+const title = interview.title ? `Little（リトル）気軽にいける美容室│${interview.title}` : "Little（リトル）気軽にいける美容室│社員インタビュー";
 const description = "littleで働くスタッフのインタビュー記事をご紹介します。";
-const image = interview.heroImageUrl || "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200&h=630&fit=crop";
+const image = interview.heroImageUrl || `${Astro.site}images/ogp-image.jpg`;
 
 // 採用ページのJSON-LDを生成
 const jsonLd = generateRecruitJsonLd();

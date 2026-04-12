@@ -24,8 +24,8 @@ const jsonLd = generateSalonJsonLd(salon);
 ---
 
 <Layout 
-  title={`${salon.name} - アネモネサロン`}
-  description={`アネモネサロン${salon.name}の詳細情報。住所：${salon.address}、電話：${salon.tel}、営業時間：${salon.hours}`}
+  title={`Little（リトル）気軽にいける美容室│${salon.name}`}
+  description={`${salon.name}の詳細情報。住所：${salon.address}、電話：${salon.tel}、営業時間：${salon.hours}`}
   image={salon.photos[0]}
   jsonLd={JSON.stringify(jsonLd)}
 >

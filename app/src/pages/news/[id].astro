@@ -29,7 +29,11 @@ export async function getStaticPaths() {
 const { article } = Astro.props;
 ---
 
-<Layout title={`${article.title} | little - Hair salon -`}>
+<Layout
+  title={`Little（リトル）気軽にいける美容室│${article.title}`}
+  description={article.excerpt || 'littleの最新ニュースやお知らせをお届けします。'}
+  image={article.featured_image || `${Astro.site}images/ogp-image.jpg`}
+>
 
   <!-- パンくずリスト -->
   <div class="breadcrumb">
