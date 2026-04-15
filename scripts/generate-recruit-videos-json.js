@@ -44,38 +44,9 @@ async function main() {
        });
     }
   } catch (error) {
-    console.warn('API error, using fallback mock data:', error.message);
-    // まだバックエンドに設定が反映されていない場合はモックデータを使用（Astroビルドが落ちないようにする）
-    videos = [
-      {
-         id: 1,
-         title: "littleは正社員or業務委託 1",
-         video_url: "https://www.w3schools.com/html/mov_bbb.mp4",
-         thumbnail_url: "",
-         link_url: "/news"
-      },
-      {
-         id: 2,
-         title: "littleは正社員or業務委託 2",
-         video_url: "https://www.w3schools.com/html/mov_bbb.mp4",
-         thumbnail_url: "",
-         link_url: ""
-      },
-      {
-         id: 3,
-         title: "littleは正社員or業務委託 3",
-         video_url: "https://www.w3schools.com/html/mov_bbb.mp4",
-         thumbnail_url: "",
-         link_url: "https://google.com"
-      },
-      {
-         id: 4,
-         title: "littleは正社員or業務委託 4",
-         video_url: "https://www.w3schools.com/html/mov_bbb.mp4",
-         thumbnail_url: "",
-         link_url: ""
-      }
-    ];
+    console.warn('API error, hiding videos section:', error.message);
+    // API 失敗時は空配列にしてセクション自体を非表示にする（ダミー動画が本番に出ないように）
+    videos = [];
   }
 
   const outDir = path.join(__dirname, '..', 'app', 'public', 'data');
