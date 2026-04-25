@@ -933,11 +933,19 @@ export const api = {
 function decodeHtml(html: string): string {
   if (!html) return '';
   return html
-    .replace(/&amp;/g, '&')
+    .replace(/&#x([0-9a-fA-F]+);/g, (m, hex) => {
+      const cp = parseInt(hex, 16);
+      return Number.isFinite(cp) ? String.fromCodePoint(cp) : m;
+    })
+    .replace(/&#(\d+);/g, (m, dec) => {
+      const cp = parseInt(dec, 10);
+      return Number.isFinite(cp) ? String.fromCodePoint(cp) : m;
+    })
+    .replace(/&nbsp;/g, ' ')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, "'");
+    .replace(/&amp;/g, '&');
 }
 
 function toPlainText(html: string): string {
@@ -977,7 +985,7 @@ function mapBlogToNews(p: WpBlog): LegacyNews {
     date: p.date_gmt,
     categories: categories.length > 0 ? categories : ['INFORMATION'],
     featured_image: media || undefined,
-    excerpt: toPlainText(p.content?.rendered ?? '').slice(0, 120),
+    excerpt: decodeHtml(toPlainText(p.content?.rendered ?? '')).slice(0, 120),
     content: content, // <p>タグで囲まれたコンテンツ
     tags: [],
     slug: p.slug,
