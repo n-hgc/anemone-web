@@ -422,7 +422,7 @@
         "parent": 0
       }
     ],
-    "is_hiring": false,
+    "is_hiring": true,
     "reservation_url": "https://beauty.hotpepper.jp/kr/slnH000734192/",
     "maps_url": "",
     "access": "所沢駅徒歩6分"
@@ -526,7 +526,7 @@
         "parent": 0
       }
     ],
-    "is_hiring": false,
+    "is_hiring": true,
     "reservation_url": "https://beauty.hotpepper.jp/kr/slnH000693318/",
     "maps_url": "",
     "access": "札幌駅徒歩10分/大通駅徒歩3分/さっぽろ駅徒歩4分"
@@ -578,7 +578,7 @@
         "parent": 0
       }
     ],
-    "is_hiring": false,
+    "is_hiring": true,
     "reservation_url": "https://beauty.hotpepper.jp/kr/slnH000592773/",
     "maps_url": "",
     "access": "渋谷駅徒歩3分"
