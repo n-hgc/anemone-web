@@ -336,7 +336,7 @@ const unescapeHtml = (str: string) => {
   </section>
 
   <!-- ヘアカタログセクション -->
-  <section class="hairstyle-section">
+  <section id="hairstyle-section" class="hairstyle-section">
     <div class="hairstyle-container">
       <h2 class="hairstyle-title section-title text-h1">
         HAIRSTYLE<img
@@ -374,7 +374,7 @@ const unescapeHtml = (str: string) => {
   </section>
 
   <!-- 企業様向けヘアメイクセクション -->
-  <section class="hairmake-section">
+  <section id="hairmake-section" class="hairmake-section">
     <div class="hairmake-container">
       <h2 class="hairmake-title section-title text-h1">
         HAIRMAKE<img
@@ -466,7 +466,7 @@ const unescapeHtml = (str: string) => {
   </section>
 
   <!-- サロン店舗セクション -->
-  <section id="salons" class="salon-section">
+  <section id="salon-section" class="salon-section">
     <div class="salon-container">
       <div class="salon-main-content">
         <!-- タイトルとテキスト -->
@@ -621,7 +621,7 @@ const unescapeHtml = (str: string) => {
   </section>
 
   <!-- ニュースセクション -->
-  <section class="news-section">
+  <section id="news-section" class="news-section">
     <div class="news-container">
       <h2 class="news-title section-title text-h0">
         NEWS<img
@@ -805,6 +805,32 @@ const unescapeHtml = (str: string) => {
 
 <style>
   @import "tailwindcss";
+
+  /* 固定ヘッダー分のスクロールマージン */
+  #hairstyle-section,
+  #hairmake-section,
+  #salon-section,
+  #news-section {
+    scroll-margin-top: 80px;
+  }
+
+  @media (max-width: 1023px) {
+    #hairstyle-section,
+    #hairmake-section,
+    #salon-section,
+    #news-section {
+      scroll-margin-top: 75px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    #hairstyle-section,
+    #hairmake-section,
+    #salon-section,
+    #news-section {
+      scroll-margin-top: 64px;
+    }
+  }
 
   /* ヒーローセクションのスタイル */
   .hero-section {
