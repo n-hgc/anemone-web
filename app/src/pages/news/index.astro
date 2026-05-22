@@ -3,11 +3,20 @@ import Layout from '../../layouts/Layout.astro';
 import NewsCard from '../../components/NewsCard.astro';
 import Footer from '../../components/Footer.astro';
 import type { News } from '../../types';
-import { api } from '../../lib/api';
+import fs from 'fs';
+import path from 'path';
 
-// ビルド時に全データ取得
-const result = await api.getNewsList({ page: 1, per_page: 100 });
-const allNews: News[] = result.success ? result.data.items : [];
+// ビルド時に prebuild 生成済みの news.index.json を読み込む
+let allNews: News[] = [];
+try {
+  const newsDataPath = path.join(process.cwd(), 'public', 'data', 'news.index.json');
+  const raw = fs.readFileSync(newsDataPath, 'utf-8');
+  // 一覧表示では content を持ち回らない（HTML 埋め込みサイズ抑制）
+  allNews = (JSON.parse(raw) as News[]).map(({ content, ...rest }) => rest as News);
+} catch (error) {
+  console.error('news.index.json の読み込みに失敗しました:', error);
+  allNews = [];
+}
 
 // カテゴリ別に分類
 const newsByCategory = {

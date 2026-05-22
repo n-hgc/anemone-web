@@ -1,29 +1,27 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Footer from '../../components/Footer.astro';
-import { api } from '../../lib/api';
 import type { News } from '../../types';
+import fs from 'fs';
+import path from 'path';
 
 export async function getStaticPaths() {
-  // WordPressから動的にパスを生成するか、既存のモックデータを使用
   try {
-    const result = await api.getNewsList({ per_page: 100 }); // 全記事を取得
-    if (result.success) {
-      return result.data.items.map((article) => ({
-        params: { id: article.id.toString() },
-        props: { article },
-      }));
-    }
+    const newsDataPath = path.join(process.cwd(), 'public', 'data', 'news.index.json');
+    const raw = fs.readFileSync(newsDataPath, 'utf-8');
+    const items = JSON.parse(raw) as News[];
+    return items.map((article) => ({
+      params: { id: article.id.toString() },
+      props: { article },
+    }));
   } catch (error) {
-    console.error('静的パス生成エラー:', error);
+    console.error('news.index.json の読み込みに失敗しました:', error);
+    const newsData = await import('../../data/news.json');
+    return newsData.default.map((article) => ({
+      params: { id: article.id.toString() },
+      props: { article },
+    }));
   }
-  
-  // フォールバック: モックデータを使用
-  const newsData = await import('../../data/news.json');
-  return newsData.default.map((article) => ({
-    params: { id: article.id.toString() },
-    props: { article },
-  }));
 }
 
 const { article } = Astro.props;

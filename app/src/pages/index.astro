@@ -92,15 +92,25 @@ const regionGroups: RegionGroup[] = regionGroupDefs.map((def) => {
   };
 });
 
-// NEWSデータを取得（まとめて取得→クライアント側でカテゴリ分割）
+// NEWSデータを prebuild 生成済み JSON から読み込み、カテゴリ別に分割
 let newsByCategory: { [key: string]: News[] } = {
   information: [],
   blog: [],
   movie: [],
 };
 try {
-  const result = await api.getNewsList({ per_page: 24 }); // 3カテゴリ×各4件を想定し多めに取得
-  const items = result.success ? result.data.items : [];
+  const fs = await import("fs");
+  const path = await import("path");
+  const newsDataPath = path.join(
+    process.cwd(),
+    "public",
+    "data",
+    "news.index.json",
+  );
+  const raw = fs.readFileSync(newsDataPath, "utf-8");
+  const items = (JSON.parse(raw) as News[]).map(
+    ({ content, ...rest }) => rest as News,
+  );
   const info: News[] = [];
   const blog: News[] = [];
   const movie: News[] = [];
@@ -109,12 +119,11 @@ try {
     if (cat === "information" && info.length < 4) info.push(n);
     else if (cat === "blog" && blog.length < 4) blog.push(n);
     else if (cat === "movie" && movie.length < 4) movie.push(n);
-    // 全カテゴリが4件揃ったら打ち切り
     if (info.length === 4 && blog.length === 4 && movie.length === 4) break;
   }
   newsByCategory = { information: info, blog, movie };
 } catch (error) {
-  console.error("NEWS取得エラー:", error);
+  console.error("NEWS読み込みエラー:", error);
 }
 
 // Instagramデータを取得
