@@ -27,26 +27,19 @@ async function fetchJson(url, init = {}, retries = 3) {
 async function main() {
   const WP_BASE = process.env.WP_BASE_URL || 'https://anemone-salon.com';
   console.log('Fetching recruit videos from WordPress...');
-  
-  let videos = [];
-  try {
-    const videoUrl = `${WP_BASE}/wp-json/wp/v2/recruit_video?per_page=100`;
-    const rawVideos = await fetchJson(videoUrl);
-    
-    for (const v of rawVideos) {
-       // taxonomy 'recruit_video_category' で「表示」カテゴリかどうかを判定することも可能
-       videos.push({
-         id: v.id,
-         title: v.title?.rendered || '',
-         video_url: v.acf?.video_file || '',
-         thumbnail_url: v.acf?.thumbnail || '',
-         link_url: v.acf?.link_url || '', // 任意の遷移先URLを追加
-       });
-    }
-  } catch (error) {
-    console.warn('API error, hiding videos section:', error.message);
-    // API 失敗時は空配列にしてセクション自体を非表示にする（ダミー動画が本番に出ないように）
-    videos = [];
+
+  const videoUrl = `${WP_BASE}/wp-json/wp/v2/recruit_video?per_page=100`;
+  const rawVideos = await fetchJson(videoUrl);
+
+  const videos = [];
+  for (const v of rawVideos) {
+    videos.push({
+      id: v.id,
+      title: v.title?.rendered || '',
+      video_url: v.acf?.video_file || '',
+      thumbnail_url: v.acf?.thumbnail || '',
+      link_url: v.acf?.link_url || '',
+    });
   }
 
   const outDir = path.join(__dirname, '..', 'app', 'public', 'data');
@@ -57,6 +50,12 @@ async function main() {
 }
 
 main().catch(err => {
-  console.error(err);
-  process.exit(1);
+  const outFile = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'app', 'public', 'data', 'recruit-videos.json');
+  if (fs.existsSync(outFile)) {
+    console.warn(`Failed to fetch recruit videos: ${err?.message || err}`);
+    console.warn(`Using existing ${outFile} as fallback.`);
+  } else {
+    console.error(err);
+    process.exit(1);
+  }
 });
