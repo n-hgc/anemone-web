@@ -34,4 +34,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy app/dist --project-name=anemone-web --branch=main
+          wranglerVersion: '4'
+          command: pages deploy app/dist --project-name=anemone-web --branch=main --commit-dirty=true --commit-hash=${{ github.sha }} --commit-message="Deployed from GitHub Actions"
