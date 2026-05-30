@@ -251,7 +251,14 @@
     "title": "little 飯塚",
     "furigana": "リトル　イイヅカ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2026/05/B234496151.jpg",
-    "region": [],
+    "region": [
+      {
+        "id": 420,
+        "slug": "kyushu-okinawa",
+        "name": "九州・沖縄",
+        "parent": 0
+      }
+    ],
     "prefecture": [
       {
         "slug": "fukuoka",
@@ -1134,7 +1141,7 @@
     "region": [
       {
         "id": 420,
-        "slug": "kyushu",
+        "slug": "kyushu-okinawa",
         "name": "九州・沖縄",
         "parent": 0
       }
@@ -1368,7 +1375,7 @@
     "region": [
       {
         "id": 420,
-        "slug": "kyushu",
+        "slug": "kyushu-okinawa",
         "name": "九州・沖縄",
         "parent": 0
       }
@@ -1836,7 +1843,7 @@
     "region": [
       {
         "id": 420,
-        "slug": "kyushu",
+        "slug": "kyushu-okinawa",
         "name": "九州・沖縄",
         "parent": 0
       }
@@ -2850,7 +2857,7 @@
     "region": [
       {
         "id": 420,
-        "slug": "kyushu",
+        "slug": "kyushu-okinawa",
         "name": "九州・沖縄",
         "parent": 0
       }
@@ -3161,7 +3168,7 @@
     "region": [
       {
         "id": 420,
-        "slug": "kyushu",
+        "slug": "kyushu-okinawa",
         "name": "九州・沖縄",
         "parent": 0
       }
@@ -3923,7 +3930,7 @@
     "region": [
       {
         "id": 420,
-        "slug": "kyushu",
+        "slug": "kyushu-okinawa",
         "name": "九州・沖縄",
         "parent": 0
       }
@@ -4079,7 +4086,7 @@
     "region": [
       {
         "id": 420,
-        "slug": "kyushu",
+        "slug": "kyushu-okinawa",
         "name": "九州・沖縄",
         "parent": 0
       }
@@ -4703,7 +4710,7 @@
     "region": [
       {
         "id": 420,
-        "slug": "kyushu",
+        "slug": "kyushu-okinawa",
         "name": "九州・沖縄",
         "parent": 0
       }
@@ -5327,7 +5334,7 @@
     "region": [
       {
         "id": 420,
-        "slug": "kyushu",
+        "slug": "kyushu-okinawa",
         "name": "九州・沖縄",
         "parent": 0
       }
@@ -5483,7 +5490,7 @@
     "region": [
       {
         "id": 420,
-        "slug": "kyushu",
+        "slug": "kyushu-okinawa",
         "name": "九州・沖縄",
         "parent": 0
       }
@@ -5639,7 +5646,7 @@
     "region": [
       {
         "id": 420,
-        "slug": "kyushu",
+        "slug": "kyushu-okinawa",
         "name": "九州・沖縄",
         "parent": 0
       }
@@ -6263,7 +6270,7 @@
     "region": [
       {
         "id": 420,
-        "slug": "kyushu",
+        "slug": "kyushu-okinawa",
         "name": "九州・沖縄",
         "parent": 0
       }
@@ -6507,14 +6514,15 @@
         "slug": "saitama",
         "name": "埼玉県",
         "order": 0
-      },
+      }
+    ],
+    "prefecture_child": [
       {
         "slug": "%e5%a4%a7%e5%ae%ae",
         "name": "大宮",
         "order": 0
       }
     ],
-    "prefecture_child": [],
     "job_role": [
       {
         "id": 408,
@@ -6730,7 +6738,7 @@
     "region": [
       {
         "id": 420,
-        "slug": "kyushu",
+        "slug": "kyushu-okinawa",
         "name": "九州・沖縄",
         "parent": 0
       }
@@ -6886,7 +6894,7 @@
     "region": [
       {
         "id": 420,
-        "slug": "kyushu",
+        "slug": "kyushu-okinawa",
         "name": "九州・沖縄",
         "parent": 0
       }
