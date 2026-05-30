@@ -46,13 +46,24 @@ interface PrefectureGroup {
   name: string;
   slug: string;
   salons: SalonIndexData[];
-  children: { name: string; slug: string; count: number }[];
+  children: { name: string; slug: string; count: number; order: number }[];
 }
 
 interface RegionGroup {
   name: string;
   prefectures: PrefectureGroup[];
 }
+
+// display_order 昇順、0 は末尾扱い
+const sortChildrenByOrder = (
+  a: { order: number },
+  b: { order: number },
+) => {
+  if (a.order === 0 && b.order === 0) return 0;
+  if (a.order === 0) return 1;
+  if (b.order === 0) return -1;
+  return a.order - b.order;
+};
 
 const regionGroups: RegionGroup[] = regionGroupDefs.map((def) => {
   const groupSalons = salons.filter((s) =>
@@ -81,10 +92,17 @@ const regionGroups: RegionGroup[] = regionGroupDefs.map((def) => {
       if (existing) {
         existing.count++;
       } else {
-        pref.children.push({ name: child.name, slug: child.slug, count: 1 });
+        pref.children.push({
+          name: child.name,
+          slug: child.slug,
+          count: 1,
+          order: child.order ?? 0,
+        });
       }
     });
   });
+
+  prefMap.forEach((pref) => pref.children.sort(sortChildrenByOrder));
 
   return {
     name: def.name,

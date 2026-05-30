@@ -48,12 +48,17 @@ async function fetchTaxonomyMap(baseUrl, taxonomy) {
       throw new Error(`Invalid ${taxonomy} data format`);
     }
     for (const t of data) {
-      map.set(t.id, {
+      const entry = {
         id: t.id,
         slug: t.slug,
         name: t.name,
         parent: t.parent || 0
-      });
+      };
+      // prefecture タクソノミーのみ display_order が REST に露出している
+      if (typeof t.display_order === 'number') {
+        entry.order = t.display_order;
+      }
+      map.set(t.id, entry);
     }
     totalPages = Number(headers.get('X-WP-TotalPages') || headers.get('x-wp-totalpages') || 1);
     page++;
