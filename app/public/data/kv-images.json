@@ -1,1 +1,79 @@
-[]
+[
+  {
+    "id": 9634,
+    "title": "ヘアメイクKV",
+    "image": "https://anemone-salon.com/wp-content/uploads/2026/06/hairmake.jpg",
+    "alt": "ヘアメイクKV",
+    "caption": "",
+    "locations": [
+      "top-hairmake"
+    ],
+    "order": 0
+  },
+  {
+    "id": 9636,
+    "title": "トップ1枚目",
+    "image": "https://anemone-salon.com/wp-content/uploads/2026/06/slide-1.jpg",
+    "alt": "トップ1枚目",
+    "caption": "",
+    "locations": [
+      "top-hero"
+    ],
+    "order": 0
+  },
+  {
+    "id": 9642,
+    "title": "採用トップ1枚目",
+    "image": "https://anemone-salon.com/wp-content/uploads/2026/06/hero-image-1-scaled.png",
+    "alt": "採用トップ1枚目",
+    "caption": "",
+    "locations": [
+      "recruit-hero"
+    ],
+    "order": 0
+  },
+  {
+    "id": 9640,
+    "title": "トップ2枚目",
+    "image": "https://anemone-salon.com/wp-content/uploads/2026/06/slide-2.jpg",
+    "alt": "トップ2枚目",
+    "caption": "",
+    "locations": [
+      "top-hero"
+    ],
+    "order": 1
+  },
+  {
+    "id": 9646,
+    "title": "採用トップ2枚目",
+    "image": "https://anemone-salon.com/wp-content/uploads/2026/06/hero-image-1-2-scaled.jpg",
+    "alt": "採用トップ2枚目",
+    "caption": "",
+    "locations": [
+      "recruit-hero"
+    ],
+    "order": 1
+  },
+  {
+    "id": 9641,
+    "title": "トップ3枚目",
+    "image": "https://anemone-salon.com/wp-content/uploads/2026/06/slide-3.jpg",
+    "alt": "トップ3枚目",
+    "caption": "",
+    "locations": [
+      "top-hero"
+    ],
+    "order": 2
+  },
+  {
+    "id": 9647,
+    "title": "採用トップ3枚目",
+    "image": "https://anemone-salon.com/wp-content/uploads/2026/06/hero-image-1-3.jpg",
+    "alt": "採用トップ3枚目",
+    "caption": "",
+    "locations": [
+      "recruit-hero"
+    ],
+    "order": 2
+  }
+]
