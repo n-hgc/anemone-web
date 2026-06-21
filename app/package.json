@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "echo '=== Network diagnostics ===' && (curl -s --max-time 5 https://ifconfig.me; echo) && (curl -sI --max-time 15 https://anemone-salon.com/wp-json/ 2>&1 | head -3 || echo 'WP unreachable') && echo '=== End diagnostics ===' && node ../scripts/generate-hairstyles-json.js && node ../scripts/generate-salons-json.js && node ../scripts/generate-interviews-json.js && node ../scripts/generate-recruit-videos-json.js && node ../scripts/generate-news-json.js",
+    "prebuild": "echo '=== Network diagnostics ===' && (curl -s --max-time 5 https://ifconfig.me; echo) && (curl -sI --max-time 15 https://anemone-salon.com/wp-json/ 2>&1 | head -3 || echo 'WP unreachable') && echo '=== End diagnostics ===' && node ../scripts/generate-hairstyles-json.js && node ../scripts/generate-salons-json.js && node ../scripts/generate-interviews-json.js && node ../scripts/generate-recruit-videos-json.js && node ../scripts/generate-news-json.js && node ../scripts/generate-kv-images-json.js",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",

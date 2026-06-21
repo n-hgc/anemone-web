@@ -274,6 +274,17 @@ export interface InstagramApiItem {
   };
 }
 
+// KV (キービジュアル) 画像の型定義 — kv-images.json の各エントリ
+export interface KvImage {
+  id: number;
+  title: string;
+  image: string;
+  alt: string;
+  caption: string;
+  locations: string[];
+  order: number;
+}
+
 // Instagram用の変換後型定義
 export interface InstagramItem {
   id: number;

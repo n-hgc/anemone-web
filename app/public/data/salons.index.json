@@ -2,9 +2,16 @@
   {
     "id": 9480,
     "title": "個室ネイルサロン Liane",
-    "furigana": "コシツネイルサロン リアネ",
+    "furigana": "リアネ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2026/05/2025-12-21R-1.jpg",
-    "region": [],
+    "region": [
+      {
+        "id": 345,
+        "slug": "hokkaido",
+        "name": "北海道",
+        "parent": 0
+      }
+    ],
     "prefecture": [
       {
         "slug": "hokkaido",
@@ -42,9 +49,16 @@
   {
     "id": 9478,
     "title": "個室ヘアサロン muu",
-    "furigana": "コシツヘアサロン　ムー",
+    "furigana": "ムー",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2026/05/IMG_6313.jpg",
-    "region": [],
+    "region": [
+      {
+        "id": 420,
+        "slug": "kyushu-okinawa",
+        "name": "九州・沖縄",
+        "parent": 0
+      }
+    ],
     "prefecture": [
       {
         "slug": "okinawa",
@@ -113,9 +127,16 @@
   {
     "id": 9476,
     "title": "個室ヘアサロン little 光の森",
-    "furigana": "コシツヘアサロン　リトル　ヒカリノモリ",
+    "furigana": "リトル ヒカリノモリ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2026/05/naikan5_01-scaled.jpg",
-    "region": [],
+    "region": [
+      {
+        "id": 420,
+        "slug": "kyushu-okinawa",
+        "name": "九州・沖縄",
+        "parent": 0
+      }
+    ],
     "prefecture": [
       {
         "slug": "kumamoto",
@@ -183,11 +204,24 @@
   },
   {
     "id": 9474,
-    "title": "little 久留米",
-    "furigana": "リトル　クルメ",
+    "title": "個室ヘアサロン little 久留米",
+    "furigana": "リトルクルメ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2026/05/B235040153.jpg",
-    "region": [],
-    "prefecture": [],
+    "region": [
+      {
+        "id": 420,
+        "slug": "kyushu-okinawa",
+        "name": "九州・沖縄",
+        "parent": 0
+      }
+    ],
+    "prefecture": [
+      {
+        "slug": "fukuoka",
+        "name": "福岡県",
+        "order": 0
+      }
+    ],
     "prefecture_child": [
       {
         "slug": "%e4%b9%85%e7%95%99%e7%b1%b3",
@@ -248,8 +282,8 @@
   },
   {
     "id": 9472,
-    "title": "little 飯塚",
-    "furigana": "リトル　イイヅカ",
+    "title": "個室ヘアサロン little 飯塚",
+    "furigana": "リトルイイヅカ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2026/05/B234496151.jpg",
     "region": [
       {
@@ -326,8 +360,8 @@
   },
   {
     "id": 9470,
-    "title": "個室hair salon Alea by little（旧：Alea by little 横浜）",
-    "furigana": "コシツヘアサロン　アーレア　バイ　リトル",
+    "title": "個室hair salon Alea by little",
+    "furigana": "アーレアバイリトル",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2026/05/1Z3A3525.jpg",
     "region": [],
     "prefecture": [
@@ -452,7 +486,7 @@
   {
     "id": 9246,
     "title": "完全個室 アイラッシュ&#038;アイブロウ de.shinjuku",
-    "furigana": "カンゼンコシツ　アイラッシュ　アンド　アイブロウ　デイドットシンジュク ",
+    "furigana": "デイドットシンジュク ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2025/01/de.shinjuku_64.jpg",
     "region": [
       {
@@ -506,7 +540,7 @@
   {
     "id": 9245,
     "title": "完全個室 アイラッシュ&#038;アイブロウ de.札幌北1条店",
-    "furigana": "デイドット　サッポロ　キタイチジョウテン",
+    "furigana": "デイドット サッポロキタイチジョウテン",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/10/IMG_8266-scaled.jpg",
     "region": [
       {
@@ -1370,7 +1404,7 @@
   {
     "id": 9231,
     "title": "Tii. by little",
-    "furigana": "ティーバイリトル",
+    "furigana": "ティー.バイリトル",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2022/07/B165649256.jpg",
     "region": [
       {
@@ -1391,7 +1425,7 @@
       {
         "slug": "%e5%a4%a9%e7%a5%9e",
         "name": "天神",
-        "order": 0
+        "order": 1
       }
     ],
     "job_role": [
@@ -1682,8 +1716,8 @@
   {
     "id": 9227,
     "title": "little kitasako by BIVRE",
-    "furigana": "リトルキタサコバイヴィーブル",
-    "thumb": "https://anemone-salon.com/wp-content/uploads/2021/10/B141542514.jpg",
+    "furigana": "リトル キタサコ バイ ヴィーヴル",
+    "thumb": "https://anemone-salon.com/wp-content/uploads/2025/10/B203810718.jpg",
     "region": [
       {
         "id": 351,
@@ -1760,7 +1794,7 @@
   {
     "id": 9226,
     "title": "little ひたちなか",
-    "furigana": "リトルヒタチナカ",
+    "furigana": "リトル ヒタチナカ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2021/08/☆NEW-OPEN☆.jpeg",
     "region": [
       {
@@ -1838,7 +1872,7 @@
   {
     "id": 9222,
     "title": "Rosy by little",
-    "furigana": "ロージィーバイリトル",
+    "furigana": "ロージィー バイ リトル",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2021/04/5.jpg",
     "region": [
       {
@@ -1859,7 +1893,7 @@
       {
         "slug": "%e5%a4%a9%e7%a5%9e",
         "name": "天神",
-        "order": 0
+        "order": 1
       }
     ],
     "job_role": [
@@ -2072,7 +2106,7 @@
   {
     "id": 9219,
     "title": "little kitajima by BIVRE",
-    "furigana": "リトルキタジマバイヴィーヴィル",
+    "furigana": "リトル キタジマ バイ ヴィーヴル",
     "thumb": "/images/salon/salon-image-01.png",
     "region": [
       {
@@ -2227,8 +2261,8 @@
   },
   {
     "id": 9215,
-    "title": "linette 横浜 by little",
-    "furigana": "リネットバイリトル",
+    "title": "linette yokohama by little",
+    "furigana": "リネット ヨコハマ バイ リトル",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/11.linette-yokohama-by-little.jpg",
     "region": [
       {
@@ -2540,7 +2574,7 @@
   {
     "id": 9209,
     "title": "manarino by little",
-    "furigana": "マナリノバイリトル",
+    "furigana": "マナリノ バイ リトル",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/12/B093949310_419-314.jpg",
     "region": [
       {
@@ -2873,7 +2907,7 @@
       {
         "slug": "%e5%a4%a9%e7%a5%9e",
         "name": "天神",
-        "order": 0
+        "order": 1
       }
     ],
     "job_role": [
@@ -3007,8 +3041,8 @@
   },
   {
     "id": 9201,
-    "title": "little 春日部",
-    "furigana": "リトルカスカベ",
+    "title": "little kasukabe",
+    "furigana": "リトル カスカベ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2025/10/615519352027873336.jpg",
     "region": [
       {
@@ -3023,14 +3057,15 @@
         "slug": "saitama",
         "name": "埼玉県",
         "order": 0
-      },
+      }
+    ],
+    "prefecture_child": [
       {
-        "slug": "%e6%98%a5%e6%97%a5%e9%83%a8",
+        "slug": "%e6%98%a5%e6%97%a5%e9%83%a8-saitama",
         "name": "春日部",
         "order": 0
       }
     ],
-    "prefecture_child": [],
     "job_role": [
       {
         "id": 408,
@@ -3084,8 +3119,8 @@
   },
   {
     "id": 9200,
-    "title": "little 京都四条",
-    "furigana": "リトルキョウトシジョウ",
+    "title": "little 京都四条店",
+    "furigana": "リトル キョウトシジョウテン",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/06/IMG_3073.png",
     "region": [
       {
@@ -3163,7 +3198,7 @@
   {
     "id": 9199,
     "title": "little 日田",
-    "furigana": "リトルヒタ",
+    "furigana": "リトル ヒタ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/04/IMG_2294.jpg",
     "region": [
       {
@@ -3222,8 +3257,8 @@
   },
   {
     "id": 9198,
-    "title": "little 足利",
-    "furigana": "リトルアシカガ",
+    "title": "個室ヘアサロン little 足利",
+    "furigana": "リトル アシカガ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2024/02/1-scaled.jpg",
     "region": [
       {
@@ -3379,7 +3414,7 @@
   {
     "id": 9196,
     "title": "little 名駅",
-    "furigana": "リトル名駅",
+    "furigana": "リトル メイエキ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/09/little_meieki_07-scaled.jpg",
     "region": [
       {
@@ -3457,7 +3492,7 @@
   {
     "id": 9195,
     "title": "little 旭川",
-    "furigana": "リトルアサヒカワ",
+    "furigana": "リトル アサヒカワ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/08/DSC5666-scaled.jpg",
     "region": [
       {
@@ -3613,7 +3648,7 @@
   {
     "id": 9193,
     "title": "little 中野",
-    "furigana": "リトルナカノ",
+    "furigana": "リトル ナカノ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/08/little_10.jpg",
     "region": [
       {
@@ -3691,7 +3726,7 @@
   {
     "id": 9192,
     "title": "little×nene 池袋西口",
-    "furigana": "リトルネネイケブクロニシグチ",
+    "furigana": "リトル ネネ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/09/B184835691.jpg",
     "region": [
       {
@@ -3769,7 +3804,7 @@
   {
     "id": 9191,
     "title": "little 藤沢",
-    "furigana": "リトルフジサワ",
+    "furigana": "リトル フジサワ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/07/IMG1600.jpg",
     "region": [
       {
@@ -4003,7 +4038,7 @@
   {
     "id": 9188,
     "title": "QOL×cast MEN&#8217;S SALON 神戸三宮",
-    "furigana": "クオル　キャスト　メンズサロン　コウベサンノミヤ",
+    "furigana": "クオル キャスト メンズサロン コウベサンノミヤ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/05/IMG_0323b.jpg",
     "region": [
       {
@@ -4159,7 +4194,7 @@
   {
     "id": 9186,
     "title": "little 仙川",
-    "furigana": "(リトルセンガワ)",
+    "furigana": "リトルセンガワ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/04/140A2325.jpg",
     "region": [
       {
@@ -4236,7 +4271,7 @@
   },
   {
     "id": 9185,
-    "title": "little 八戸",
+    "title": "個室ヘアサロン little八戸",
     "furigana": "リトルハチノヘ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2023/03/IMG-49.jpg",
     "region": [
@@ -4548,8 +4583,8 @@
   },
   {
     "id": 9181,
-    "title": "QOL mens salon 札幌駅前 (旧：QOL mens salon 円山)",
-    "furigana": "クオル　メンズサロン　",
+    "title": "QOL mens salon 札幌駅前",
+    "furigana": "クオル メンズサロン",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2025/10/IMG_2518.jpg",
     "region": [
       {
@@ -4620,14 +4655,14 @@
       }
     ],
     "is_hiring": true,
-    "reservation_url": "https://lin.ee/TQZiHM5",
+    "reservation_url": "https://lin.ee/UAEvhEp",
     "maps_url": "https://www.google.com/maps/dir//%E5%8C%97%E6%B5%B7%E9%81%93%E6%9C%AD%E5%B9%8C%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%8D%97%EF%BC%91%E6%9D%A1%E8%A5%BF%EF%BC%92%EF%BC%96%E4%B8%81%E7%9B%AE%EF%BC%91+%E3%83%9B%E3%83%AF%E3%82%A4%E3%83%88%E3%83%8F%E3%82%A6%E3%82%B9%E5%86%86%E5%B1%B1+%EF%BC%92F+lico+%E5%86%86%E5%B1%B1+%E3%80%90%E3%83%AA%E3%82%B3+%E3%83%9E%E3%83%AB%E3%83%A4%E3%83%9E%E3%80%91/@43.0553853,141.2835527,13z/data=!3m2!4b1!5s0x5f0b29ea04853015:0x99238bdaa4032d8b!4m9!4m8!1m0!1m5!1m1!1s0x5f0b2963080a1f6f:0xd5251c3dfaa90fd3!2m2!1d141.3185721!2d43.0553906!3e2",
     "access": "円山公園駅徒歩30秒"
   },
   {
     "id": 9180,
     "title": "lico 新札幌",
-    "furigana": "リコシンサッポロ",
+    "furigana": "リコ　シンサッポロ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2021/10/DSC_6487-1.jpg",
     "region": [
       {
@@ -4704,8 +4739,8 @@
   },
   {
     "id": 9179,
-    "title": "QOL×cast MEN&#8217;S SALON 熊本【クオル キャスト メンズサロン 】（旧：cast by leap）",
-    "furigana": "クオル　キャスト　メンズサロン　クマモト",
+    "title": "QOL×cast MEN&#8217;S SALON 熊本",
+    "furigana": "クオル キャスト メンズサロン クマモト",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2021/08/8691.jpg",
     "region": [
       {
@@ -4782,7 +4817,7 @@
   },
   {
     "id": 9178,
-    "title": "mito 札幌",
+    "title": "mito",
     "furigana": "ミト",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2021/01/MS1_0003.jpg",
     "region": [
@@ -5250,7 +5285,7 @@
   },
   {
     "id": 9170,
-    "title": "little 柏",
+    "title": "個室ヘアサロン little 柏",
     "furigana": "リトルカシワ",
     "thumb": "https://anemone-salon.com/wp-content/uploads/2019/11/IMG_5280.jpg",
     "region": [
@@ -6286,7 +6321,7 @@
       {
         "slug": "%e5%a4%a9%e7%a5%9e",
         "name": "天神",
-        "order": 0
+        "order": 1
       }
     ],
     "job_role": [
@@ -6754,7 +6789,7 @@
       {
         "slug": "%e5%a4%a9%e7%a5%9e",
         "name": "天神",
-        "order": 0
+        "order": 1
       }
     ],
     "job_role": [
@@ -6910,7 +6945,7 @@
       {
         "slug": "%e5%a4%a9%e7%a5%9e",
         "name": "天神",
-        "order": 0
+        "order": 1
       }
     ],
     "job_role": [

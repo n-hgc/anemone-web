@@ -10,6 +10,11 @@ import type { SalonIndexData, News, Prefecture, InstagramItem } from "../types";
 // モックデータをインポート
 import prefecturesData from "../data/prefectures.json";
 import { api } from "../lib/api";
+import { getKvSlides } from "../lib/kv-images";
+
+const topHeroSlides = await getKvSlides("top-hero");
+const hairmakeSlides = await getKvSlides("top-hairmake");
+const hairmakeImage = hairmakeSlides[0];
 
 // サロンデータを読み込む
 let salonData: any[] = [];
@@ -200,72 +205,37 @@ const unescapeHtml = (str: string) => {
         <div class="hero-main">
           <!-- スライドショー -->
           <div class="hero-slideshow">
-            <div class="hero-slide active">
-              <img
-                src="/images/hero/slide-1.jpg"
-                alt="アネモネサロンのスタイリング"
-                class="hero-slide-image"
-              />
-              <div class="hero-slide-overlay">
-                <div class="hero-slide-content">
-                  <div class="hero-catchphrase">
-                    煌めく<br class="hero-catchphrase-br" />髪へのこだわり。
+            {topHeroSlides.map((slide, i) => (
+              <div class={`hero-slide${i === 0 ? " active" : ""}`}>
+                <img
+                  src={slide.image}
+                  alt={slide.alt}
+                  class="hero-slide-image"
+                />
+                <div class="hero-slide-overlay">
+                  <div class="hero-slide-content">
+                    <div class="hero-catchphrase">
+                      煌めく<br class="hero-catchphrase-br" />髪へのこだわり。
+                    </div>
+                    <img
+                      src="/images/header/logo.png"
+                      alt="little"
+                      class="hero-logo"
+                    />
                   </div>
-                  <img
-                    src="/images/header/logo.png"
-                    alt="little"
-                    class="hero-logo"
-                  />
                 </div>
               </div>
-            </div>
-
-            <div class="hero-slide">
-              <img
-                src="/images/hero/slide-2.jpg"
-                alt="アネモネサロンの店内"
-                class="hero-slide-image"
-              />
-              <div class="hero-slide-overlay">
-                <div class="hero-slide-content">
-                  <div class="hero-catchphrase">
-                    煌めく<br class="hero-catchphrase-br" />髪へのこだわり。
-                  </div>
-                  <img
-                    src="/images/header/logo.png"
-                    alt="little"
-                    class="hero-logo"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div class="hero-slide">
-              <img
-                src="/images/hero/slide-3.jpg"
-                alt="アネモネサロンのスタイリング"
-                class="hero-slide-image"
-              />
-              <div class="hero-slide-overlay">
-                <div class="hero-slide-content">
-                  <div class="hero-catchphrase">
-                    煌めく<br class="hero-catchphrase-br" />髪へのこだわり。
-                  </div>
-                  <img
-                    src="/images/header/logo.png"
-                    alt="little"
-                    class="hero-logo"
-                  />
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
 
           <!-- ページネーション（右側に独立配置） -->
           <div class="hero-slide-pagination">
-            <div class="pagination-stripe active" data-slide="0"></div>
-            <div class="pagination-stripe" data-slide="1"></div>
-            <div class="pagination-stripe" data-slide="2"></div>
+            {topHeroSlides.map((_, i) => (
+              <div
+                class={`pagination-stripe${i === 0 ? " active" : ""}`}
+                data-slide={i}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -474,8 +444,8 @@ const unescapeHtml = (str: string) => {
 
         <div class="hairmake-image">
           <img
-            src="/images/main/hairmake.jpg"
-            alt="ヘアメイクサービス"
+            src={hairmakeImage.image}
+            alt={hairmakeImage.alt}
             class="hairmake-image-content"
           />
         </div>

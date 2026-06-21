@@ -1,63 +1,159 @@
 [
   {
-    "id": 9062,
+    "id": 9557,
     "hairType": "long",
-    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2025/06/2.17-1852.png",
-    "alt": "2.17-1852"
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/0216little-009_0061-scaled.jpg",
+    "alt": "0216little-009_0061"
   },
   {
-    "id": 9061,
+    "id": 9558,
     "hairType": "medium",
-    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2025/06/2.17-1669.png",
-    "alt": "2.17-1669"
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/0216little-016_0046-scaled.jpg",
+    "alt": "0216little-016_0046"
   },
   {
-    "id": 9055,
-    "hairType": "medium",
-    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2025/06/2.17-0360-scaled.jpg",
-    "alt": "2.17-0360"
-  },
-  {
-    "id": 9047,
-    "hairType": "medium",
-    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2025/06/2.17-0720-scaled.jpg",
-    "alt": "2.17-0720"
-  },
-  {
-    "id": 8666,
-    "hairType": "long",
-    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2025/01/11.11-0032-2-scaled.jpg",
-    "alt": "11.11-0032-2"
-  },
-  {
-    "id": 8665,
-    "hairType": "long",
-    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2025/01/11.11-1495-2-scaled.jpg",
-    "alt": "11.11-1495-2"
-  },
-  {
-    "id": 8664,
+    "id": 9559,
     "hairType": "short",
-    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2025/01/11.11-0403-2-scaled.jpg",
-    "alt": "11.11-0403-2"
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/0216little-012_0011-scaled.jpg",
+    "alt": "0216little-012_0011"
   },
   {
-    "id": 8663,
-    "hairType": "medium",
-    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2025/01/11.11-1331-2-scaled.jpg",
-    "alt": "11.11-1331-2"
-  },
-  {
-    "id": 8655,
-    "hairType": "short",
-    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2025/01/11.11-1917-2-scaled.jpg",
-    "alt": "11.11-1917-2"
-  },
-  {
-    "id": 8661,
+    "id": 9555,
     "hairType": "long",
-    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2025/01/11.11-0176-2-scaled.jpg",
-    "alt": "11.11-0176-2"
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/0216little-013_0077-scaled.jpg",
+    "alt": "0216little-013_0077"
+  },
+  {
+    "id": 9560,
+    "hairType": "medium",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/0216little-006_0012-scaled.jpg",
+    "alt": "0216little-006_0012"
+  },
+  {
+    "id": 9561,
+    "hairType": "short",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/0216little-017_0010-scaled.jpg",
+    "alt": "0216little-017_0010"
+  },
+  {
+    "id": 9571,
+    "hairType": "long",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/0216little-004_0054-scaled.jpg",
+    "alt": "0216little-004_0054"
+  },
+  {
+    "id": 9572,
+    "hairType": "medium",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/0216little-010_0081-scaled.jpg",
+    "alt": "0216little-010_0081"
+  },
+  {
+    "id": 9568,
+    "hairType": "short",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2025/10/20260402-011_0006-scaled.jpg",
+    "alt": "20260402-011_0006"
+  },
+  {
+    "id": 9574,
+    "hairType": "long",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/0216little-003_0114-scaled.jpg",
+    "alt": "0216little-003_0114"
+  },
+  {
+    "id": 9576,
+    "hairType": "medium",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/20260402-008_0070-scaled.jpg",
+    "alt": "20260402-008_0070"
+  },
+  {
+    "id": 9577,
+    "hairType": "short",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/20260402-006_0017-scaled.jpg",
+    "alt": "20260402-006_0017"
+  },
+  {
+    "id": 9579,
+    "hairType": "long",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/0216little-007_0031-scaled.jpg",
+    "alt": "0216little-007_0031"
+  },
+  {
+    "id": 9587,
+    "hairType": "medium",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/20260402-012_0002-scaled.jpg",
+    "alt": "20260402-012_0002"
+  },
+  {
+    "id": 9586,
+    "hairType": "short",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/20260402-007_0060-scaled.jpg",
+    "alt": "20260402-007_0060"
+  },
+  {
+    "id": 9566,
+    "hairType": "long",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2025/10/20260402-001_0045-scaled.jpg",
+    "alt": "20260402-001_0045"
+  },
+  {
+    "id": 9588,
+    "hairType": "short",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/20260402-004_0022-scaled.jpg",
+    "alt": "20260402-004_0022"
+  },
+  {
+    "id": 9590,
+    "hairType": "mens",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/7.14-0994-scaled.jpg",
+    "alt": "7.14-0994"
+  },
+  {
+    "id": 9591,
+    "hairType": "mens",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/7.14-1091-scaled.jpg",
+    "alt": "7.14-1091"
+  },
+  {
+    "id": 9592,
+    "hairType": "mens",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/7.14-0233-scaled.jpg",
+    "alt": "7.14-0233"
+  },
+  {
+    "id": 9595,
+    "hairType": "mens",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/7.14-1764-scaled.jpg",
+    "alt": "7.14-1764"
+  },
+  {
+    "id": 9594,
+    "hairType": "mens",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/7.14-0337-scaled.jpg",
+    "alt": "7.14-0337"
+  },
+  {
+    "id": 9596,
+    "hairType": "mens",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/7.14-0109-scaled.jpg",
+    "alt": "7.14-0109"
+  },
+  {
+    "id": 9597,
+    "hairType": "mens",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/7.14-1331-scaled.jpg",
+    "alt": "7.14-1331"
+  },
+  {
+    "id": 9598,
+    "hairType": "mens",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/7.14-0564-scaled.jpg",
+    "alt": "7.14-0564"
+  },
+  {
+    "id": 9599,
+    "hairType": "mens",
+    "imageUrl": "https://anemone-salon.com/wp-content/uploads/2026/06/7.14-1441-scaled.jpg",
+    "alt": "7.14-1441"
   },
   {
     "id": 8660,
@@ -91,7 +187,7 @@
   },
   {
     "id": 8582,
-    "hairType": "medium",
+    "hairType": "long",
     "imageUrl": "https://anemone-salon.com/wp-content/uploads/2024/10/92-1067.jpg",
     "alt": "92-1067"
   },
@@ -151,7 +247,7 @@
   },
   {
     "id": 8572,
-    "hairType": "medium",
+    "hairType": "long",
     "imageUrl": "https://anemone-salon.com/wp-content/uploads/2024/10/92-1516.jpg",
     "alt": "92-1516"
   },
@@ -175,7 +271,7 @@
   },
   {
     "id": 8367,
-    "hairType": "short",
+    "hairType": "long",
     "imageUrl": "https://anemone-salon.com/wp-content/uploads/2024/06/2.19-0340-3-scaled.jpg",
     "alt": "2.19-0340-3"
   },
@@ -187,13 +283,13 @@
   },
   {
     "id": 8365,
-    "hairType": "medium",
+    "hairType": "long",
     "imageUrl": "https://anemone-salon.com/wp-content/uploads/2024/06/2.19-1565-scaled.jpg",
     "alt": "2.19-1565"
   },
   {
     "id": 8364,
-    "hairType": "medium",
+    "hairType": "long",
     "imageUrl": "https://anemone-salon.com/wp-content/uploads/2024/06/2.19-1655-3-scaled.jpg",
     "alt": "2.19-1655-3"
   },
@@ -301,13 +397,13 @@
   },
   {
     "id": 8007,
-    "hairType": "medium",
+    "hairType": "long",
     "imageUrl": "https://anemone-salon.com/wp-content/uploads/2024/02/823-0349-2-scaled.jpg",
     "alt": "823-0349-2"
   },
   {
     "id": 8006,
-    "hairType": "medium",
+    "hairType": "long",
     "imageUrl": "https://anemone-salon.com/wp-content/uploads/2024/02/823-0229-scaled.jpg",
     "alt": "823-0229"
   },
